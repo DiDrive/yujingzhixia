@@ -26,6 +26,10 @@ public struct ItemStack
 /// </summary>
 public class InventoryService : MonoBehaviour
 {
+    [PropertyTooltip("是否启用网格背包后端。启用后 Add/Consume/Count 将委托给 GridInventoryService。")]
+    [SerializeField] private bool useGridInventoryBackend;
+    [PropertyTooltip("网格背包服务引用。")]
+    [SerializeField] private GridInventoryService gridInventoryService;
     [PropertyTooltip("背包最大格子数。达到上限后无法新增新堆叠。")]
     [SerializeField] private int maxSlots = 20;
     [PropertyTooltip("单个堆叠的数量上限。")]
@@ -35,11 +39,22 @@ public class InventoryService : MonoBehaviour
 
     public IReadOnlyList<ItemStack> Stacks => stacks;
 
+    public void BindGridBackend(GridInventoryService service, bool enableBackend)
+    {
+        gridInventoryService = service;
+        useGridInventoryBackend = enableBackend && gridInventoryService != null;
+    }
+
     /// <summary>
     /// 向背包添加物品，返回是否完全添加成功。
     /// </summary>
     public bool AddItem(string itemId, int amount)
     {
+        if (useGridInventoryBackend && gridInventoryService != null)
+        {
+            return gridInventoryService.AddItem(itemId, amount);
+        }
+
         if (string.IsNullOrWhiteSpace(itemId) || amount <= 0) return false;
 
         for (var i = 0; i < stacks.Count; i++)
@@ -68,6 +83,11 @@ public class InventoryService : MonoBehaviour
     /// </summary>
     public bool ConsumeItem(string itemId, int amount)
     {
+        if (useGridInventoryBackend && gridInventoryService != null)
+        {
+            return gridInventoryService.ConsumeItem(itemId, amount);
+        }
+
         if (string.IsNullOrWhiteSpace(itemId) || amount <= 0) return false;
         var left = amount;
 
@@ -92,6 +112,11 @@ public class InventoryService : MonoBehaviour
     /// </summary>
     public int CountItem(string itemId)
     {
+        if (useGridInventoryBackend && gridInventoryService != null)
+        {
+            return gridInventoryService.CountItem(itemId);
+        }
+
         var total = 0;
         for (var i = 0; i < stacks.Count; i++)
         {

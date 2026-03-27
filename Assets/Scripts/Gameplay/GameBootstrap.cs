@@ -1,28 +1,45 @@
 using UnityEngine;
-using Sirenix.OdinInspector;
 
 /// <summary>
 /// 场景启动入口，提供联调阶段的调试调用方法。
 /// </summary>
 public class GameBootstrap : MonoBehaviour
 {
-    [PropertyTooltip("主流程状态机引用。")]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    private static void AutoCreateBootstrap()
+    {
+        if (FindObjectOfType<GameBootstrap>() != null) return;
+        var bootstrapObject = new GameObject("GameBootstrap");
+        bootstrapObject.AddComponent<GameBootstrap>();
+    }
+
+    [Tooltip("主流程状态机引用。")]
     [SerializeField] private GameStateMachine gameStateMachine;
-    [PropertyTooltip("生存数值系统引用。")]
+    [Tooltip("生存数值系统引用。")]
     [SerializeField] private SurvivalSystem survivalSystem;
-    [PropertyTooltip("背包系统引用。")]
+    [Tooltip("背包系统引用。")]
     [SerializeField] private InventoryService inventoryService;
-    [PropertyTooltip("掉落生成器引用。")]
+    [Tooltip("掉落生成器引用。")]
     [SerializeField] private LootSpawner lootSpawner;
-    [PropertyTooltip("工作台服务引用。")]
+    [Tooltip("工作台服务引用。")]
     [SerializeField] private WorkbenchService workbenchService;
-    [PropertyTooltip("庇护所模块服务引用。")]
+    [Tooltip("庇护所模块服务引用。")]
     [SerializeField] private ShelterModuleService shelterModuleService;
-    [PropertyTooltip("夜袭系统引用。")]
+    [Tooltip("夜袭系统引用。")]
     [SerializeField] private NightAssaultSystem nightAssaultSystem;
-    [PropertyTooltip("启动时是否自动创建运行时调试面板。")]
+    [Tooltip("网格背包服务引用。为空时自动查找或自动创建。")]
+    [SerializeField] private GridInventoryService gridInventoryService;
+    [Tooltip("网格背包预览引用。为空时可自动创建。")]
+    [SerializeField] private GridInventoryRuntimePreview gridInventoryRuntimePreview;
+    [Tooltip("网格背包UnityUI引用。为空时可自动创建。")]
+    [SerializeField] private GridInventoryUnityUI gridInventoryUnityUI;
+    [Tooltip("启动时是否自动创建运行时调试面板。")]
     [SerializeField] private bool autoCreateRuntimeDebugPanel = true;
-    [PropertyTooltip("运行时调试面板引用。为空时可自动查找或自动创建。")]
+    [Tooltip("启动时是否自动创建网格背包预览窗口。")]
+    [SerializeField] private bool autoCreateGridInventoryPreview = false;
+    [Tooltip("启动时是否自动创建网格背包UnityUI。")]
+    [SerializeField] private bool autoCreateGridInventoryUnityUI = false;
+    [Tooltip("运行时调试面板引用。为空时可自动查找或自动创建。")]
     [SerializeField] private RuntimeDebugPanel runtimeDebugPanel;
 
     /// <summary>
@@ -37,7 +54,11 @@ public class GameBootstrap : MonoBehaviour
         if (workbenchService == null) workbenchService = FindObjectOfType<WorkbenchService>();
         if (shelterModuleService == null) shelterModuleService = FindObjectOfType<ShelterModuleService>();
         if (nightAssaultSystem == null) nightAssaultSystem = FindObjectOfType<NightAssaultSystem>();
+        if (gridInventoryService == null) gridInventoryService = FindObjectOfType<GridInventoryService>();
+        if (gridInventoryRuntimePreview == null) gridInventoryRuntimePreview = FindObjectOfType<GridInventoryRuntimePreview>();
+        if (gridInventoryUnityUI == null) gridInventoryUnityUI = FindObjectOfType<GridInventoryUnityUI>();
         if (runtimeDebugPanel == null) runtimeDebugPanel = FindObjectOfType<RuntimeDebugPanel>();
+        EnsureGridInventorySystems();
         if (autoCreateRuntimeDebugPanel) EnsureRuntimeDebugPanel();
         BindRuntimeDebugPanel();
     }
@@ -131,6 +152,31 @@ public class GameBootstrap : MonoBehaviour
         if (runtimeDebugPanel != null) return;
         var panelObject = new GameObject("RuntimeDebugPanel");
         runtimeDebugPanel = panelObject.AddComponent<RuntimeDebugPanel>();
+    }
+
+    private void EnsureGridInventorySystems()
+    {
+        if (gridInventoryService == null)
+        {
+            var serviceObject = new GameObject("GridInventoryService");
+            gridInventoryService = serviceObject.AddComponent<GridInventoryService>();
+        }
+
+        if (inventoryService != null) inventoryService.BindGridBackend(gridInventoryService, true);
+
+        if (autoCreateGridInventoryUnityUI && gridInventoryUnityUI == null)
+        {
+            var uiObject = new GameObject("GridInventoryUnityUI");
+            gridInventoryUnityUI = uiObject.AddComponent<GridInventoryUnityUI>();
+        }
+
+        if (!autoCreateGridInventoryPreview) return;
+
+        if (gridInventoryRuntimePreview == null)
+        {
+            var previewObject = new GameObject("GridInventoryRuntimePreview");
+            gridInventoryRuntimePreview = previewObject.AddComponent<GridInventoryRuntimePreview>();
+        }
     }
 
     private void BindRuntimeDebugPanel()

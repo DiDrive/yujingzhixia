@@ -61,17 +61,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Core\EventBus.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Grid\Runtime\GridInventoryRuntimePreview.cs" />
     <Compile Include="Assets\Scripts\Gameplay\RuntimeDebugPanel.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridItemRotation.cs" />
     <Compile Include="Assets\Scripts\Core\GameplayRuntimeEvents.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Grid\Runtime\GridInventoryService.cs" />
     <Compile Include="Assets\Scripts\Survival\SurvivalSystem.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Workbench\WorkbenchService.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Loot\LootSpawner.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Night\NightAssaultSystem.cs" />
     <Compile Include="Assets\Scripts\Gameplay\GameBootstrap.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Grid\Runtime\GridInventoryUnityUI.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridOccupancyMap.cs" />
     <Compile Include="Assets\Scripts\Inventory\InventoryService.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridItemInstance.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridPlacementSolver.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridAutoSortResult.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridItemDefinition.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Shelter\ShelterModuleService.cs" />
     <Compile Include="Assets\Scripts\Core\GamePhase.cs" />
     <Compile Include="Assets\Scripts\Core\GameStateMachine.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridContainerDefinition.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
