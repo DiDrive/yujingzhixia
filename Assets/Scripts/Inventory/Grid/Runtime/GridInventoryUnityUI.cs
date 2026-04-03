@@ -18,6 +18,8 @@ public class GridInventoryUnityUI : MonoBehaviour
     [SerializeField] private GridInventoryService gridInventoryService;
     [Tooltip("是否运行时自动搭建UI结构。关闭后可手动拖拽绑定下方Root引用。")]
     [SerializeField] private bool buildRuntimeLayout = true;
+    [Tooltip("严格手动模式。开启且关闭自动布局时，不再回退为自动创建结构与按钮。")]
+    [SerializeField] private bool strictManualMode = true;
     [Tooltip("自动布局模式下是否自动对齐工具栏与网格。关闭后可直接在Inspector调整各子节点位置。")]
     [SerializeField] private bool autoAlignToolbarWithGrid = true;
     [Tooltip("网格尺寸变化时是否自动调整面板背景尺寸。")]
@@ -92,6 +94,8 @@ public class GridInventoryUnityUI : MonoBehaviour
     [SerializeField] private RectTransform itemLayerRootOverride;
     [Tooltip("手动布局模式下的预览层Root。")]
     [SerializeField] private RectTransform ghostRootOverride;
+    [Tooltip("优先绑定你手动创建的按钮。开启后，toolbar/spawn/action 下已有 Button 时不会再自动生成。")]
+    [SerializeField] private bool preferExistingButtons = true;
 
     private Canvas canvas;
     private RectTransform panelRoot;
@@ -119,6 +123,7 @@ public class GridInventoryUnityUI : MonoBehaviour
     private readonly Dictionary<string, GridInventoryUnityUIItem> itemViewByInstanceId = new();
     private readonly List<GameObject> toolbarButtons = new();
     private readonly List<GameObject> spawnButtons = new();
+    private readonly List<GameObject> actionButtons = new();
     private Image[,] cellImages;
     private RectTransform previewGhostRect;
     private Image previewGhostImage;
@@ -200,7 +205,15 @@ public class GridInventoryUnityUI : MonoBehaviour
 
     private void EnsureLayout()
     {
-        if (!buildRuntimeLayout && TryBindManualLayout()) return;
+        if (!buildRuntimeLayout)
+        {
+            if (TryBindManualLayout()) return;
+            if (strictManualMode)
+            {
+                Debug.LogError("GridInventoryUnityUI: 手动布局绑定失败。请检查所有 Override Root 是否已正确挂载。", this);
+                return;
+            }
+        }
 
         canvas = GetComponent<Canvas>();
         if (canvas == null) canvas = gameObject.AddComponent<Canvas>();
@@ -279,55 +292,73 @@ public class GridInventoryUnityUI : MonoBehaviour
         if (toolbarRoot == null || spawnRoot == null || actionRoot == null) return;
         ClearButtonObjects(toolbarButtons);
         ClearButtonObjects(spawnButtons);
+        ClearButtonObjects(actionButtons);
 
-        var containerX = 0f;
-        foreach (var containerId in gridInventoryService.ContainerIds)
+        var toolbarHandled = preferExistingButtons && TryBindToolbarButtonsFromExisting();
+        var spawnHandled = preferExistingButtons && TryBindSpawnButtonsFromExisting();
+        var actionHandled = preferExistingButtons && TryBindActionButtonsFromExisting();
+
+        if (!buildRuntimeLayout && strictManualMode)
         {
-            var capturedContainer = containerId;
-            var button = CreateButton(toolbarRoot, containerId, new Vector2(120f, 34f), new Vector2(containerX, -2f), () =>
+            if (!toolbarHandled) Debug.LogWarning("GridInventoryUnityUI: 严格手动模式下未在 ToolbarRoot 绑定到任何容器按钮。", this);
+            if (!spawnHandled) Debug.LogWarning("GridInventoryUnityUI: 严格手动模式下未在 SpawnRoot 绑定到任何生成按钮。", this);
+            if (!actionHandled) Debug.LogWarning("GridInventoryUnityUI: 严格手动模式下未在 ActionRoot 绑定到任何动作按钮。", this);
+            return;
+        }
+
+        if (!toolbarHandled)
+        {
+            var containerX = 0f;
+            foreach (var containerId in gridInventoryService.ContainerIds)
             {
-                currentContainerId = capturedContainer;
-                selectedInstanceId = null;
-                RebuildGrid();
-                RefreshItems();
-            });
-            toolbarButtons.Add(button.gameObject);
-            containerX += 126f;
+                var capturedContainer = containerId;
+                var button = CreateButton(toolbarRoot, containerId, new Vector2(120f, 34f), new Vector2(containerX, -2f), () =>
+                {
+                    SwitchToContainer(capturedContainer);
+                });
+                toolbarButtons.Add(button.gameObject);
+                containerX += 126f;
+            }
         }
 
-        var spawnX = 0f;
-        for (var i = 0; i < spawnItemIds.Count; i++)
+        if (!spawnHandled)
         {
-            var itemId = spawnItemIds[i];
-            if (string.IsNullOrWhiteSpace(itemId)) continue;
-            var entry = CreateSpawnEntry(spawnRoot, itemId, new Vector2(150f, 34f), new Vector2(spawnX, -2f));
-            spawnButtons.Add(entry);
-            spawnX += 156f;
+            var spawnX = 0f;
+            for (var i = 0; i < spawnItemIds.Count; i++)
+            {
+                var itemId = spawnItemIds[i];
+                if (string.IsNullOrWhiteSpace(itemId)) continue;
+                var entry = CreateSpawnEntry(spawnRoot, itemId, new Vector2(150f, 34f), new Vector2(spawnX, -2f));
+                spawnButtons.Add(entry);
+                spawnX += 156f;
+            }
         }
 
-        CreateButton(actionRoot, "Auto Sort", new Vector2(130f, 34f), new Vector2(0f, -2f), () =>
-        {
-            if (string.IsNullOrWhiteSpace(currentContainerId)) return;
-            gridInventoryService.AutoSort(currentContainerId);
-        });
+        if (actionHandled) return;
 
-        CreateButton(actionRoot, "Rotate", new Vector2(130f, 34f), new Vector2(136f, -2f), () =>
+        var autoSortButton = CreateButton(actionRoot, "Auto Sort", new Vector2(130f, 34f), new Vector2(0f, -2f), () =>
         {
-            if (string.IsNullOrWhiteSpace(selectedInstanceId)) return;
-            gridInventoryService.TryRotate(selectedInstanceId);
+            ExecuteAutoSort();
         });
+        actionButtons.Add(autoSortButton.gameObject);
 
-        CreateButton(actionRoot, "Remove", new Vector2(130f, 34f), new Vector2(272f, -2f), () =>
+        var rotateButton = CreateButton(actionRoot, "Rotate", new Vector2(130f, 34f), new Vector2(136f, -2f), () =>
         {
-            if (string.IsNullOrWhiteSpace(selectedInstanceId)) return;
-            if (gridInventoryService.TryRemoveInstance(selectedInstanceId)) selectedInstanceId = null;
+            ExecuteRotateSelected();
         });
+        actionButtons.Add(rotateButton.gameObject);
 
-        CreateButton(actionRoot, "Split 1", new Vector2(130f, 34f), new Vector2(408f, -2f), () =>
+        var removeButton = CreateButton(actionRoot, "Remove", new Vector2(130f, 34f), new Vector2(272f, -2f), () =>
         {
-            if (string.IsNullOrWhiteSpace(selectedInstanceId)) return;
-            gridInventoryService.TrySplitStack(selectedInstanceId, 1, out _);
+            ExecuteRemoveSelected();
         });
+        actionButtons.Add(removeButton.gameObject);
+
+        var splitButton = CreateButton(actionRoot, "Split 1", new Vector2(130f, 34f), new Vector2(408f, -2f), () =>
+        {
+            ExecuteSplitOne();
+        });
+        actionButtons.Add(splitButton.gameObject);
     }
 
     private void RebuildGrid()
@@ -805,6 +836,178 @@ public class GridInventoryUnityUI : MonoBehaviour
     {
         if (string.IsNullOrWhiteSpace(instanceId)) return "None";
         return instanceId.Length <= 8 ? instanceId : instanceId.Substring(0, 8);
+    }
+
+    private bool TryBindToolbarButtonsFromExisting()
+    {
+        var buttons = toolbarRoot.GetComponentsInChildren<Button>(true);
+        if (buttons == null || buttons.Length == 0) return false;
+        var boundCount = 0;
+        foreach (var button in buttons)
+        {
+            var containerId = FindContainerIdForButton(button);
+            if (string.IsNullOrWhiteSpace(containerId)) continue;
+            var capturedContainer = containerId;
+            button.onClick.AddListener(() => SwitchToContainer(capturedContainer));
+            boundCount++;
+        }
+        return boundCount > 0;
+    }
+
+    private bool TryBindSpawnButtonsFromExisting()
+    {
+        var buttons = spawnRoot.GetComponentsInChildren<Button>(true);
+        if (buttons == null || buttons.Length == 0) return false;
+        var boundCount = 0;
+        var sequentialIndex = 0;
+        foreach (var button in buttons)
+        {
+            var itemId = FindSpawnItemIdForButton(button);
+            if (string.IsNullOrWhiteSpace(itemId) && sequentialIndex < spawnItemIds.Count)
+            {
+                itemId = spawnItemIds[sequentialIndex];
+                sequentialIndex++;
+            }
+            if (string.IsNullOrWhiteSpace(itemId)) continue;
+            if (!gridInventoryService.TryGetItemDefinition(itemId, out _)) continue;
+            var handler = button.GetComponent<GridInventoryUnityUISpawnItem>();
+            if (handler == null) handler = button.gameObject.AddComponent<GridInventoryUnityUISpawnItem>();
+            handler.Bind(this, itemId);
+            boundCount++;
+        }
+        return boundCount > 0;
+    }
+
+    private bool TryBindActionButtonsFromExisting()
+    {
+        var buttons = actionRoot.GetComponentsInChildren<Button>(true);
+        if (buttons == null || buttons.Length == 0) return false;
+        var boundCount = 0;
+        foreach (var button in buttons)
+        {
+            var token = BuildButtonToken(button);
+            if (string.IsNullOrWhiteSpace(token)) continue;
+            if (IsAutoSortToken(token))
+            {
+                button.onClick.AddListener(ExecuteAutoSort);
+                boundCount++;
+                continue;
+            }
+            if (IsRotateToken(token))
+            {
+                button.onClick.AddListener(ExecuteRotateSelected);
+                boundCount++;
+                continue;
+            }
+            if (IsRemoveToken(token))
+            {
+                button.onClick.AddListener(ExecuteRemoveSelected);
+                boundCount++;
+                continue;
+            }
+            if (IsSplitToken(token))
+            {
+                button.onClick.AddListener(ExecuteSplitOne);
+                boundCount++;
+            }
+        }
+        return boundCount > 0;
+    }
+
+    private string FindContainerIdForButton(Button button)
+    {
+        if (button == null) return null;
+        var token = BuildButtonToken(button);
+        foreach (var containerId in gridInventoryService.ContainerIds)
+        {
+            if (string.IsNullOrWhiteSpace(containerId)) continue;
+            var normalized = NormalizeToken(containerId);
+            if (token == normalized) return containerId;
+            if (token.Contains(normalized)) return containerId;
+        }
+        return null;
+    }
+
+    private string FindSpawnItemIdForButton(Button button)
+    {
+        if (button == null) return null;
+        var token = BuildButtonToken(button);
+        for (var i = 0; i < spawnItemIds.Count; i++)
+        {
+            var itemId = spawnItemIds[i];
+            if (string.IsNullOrWhiteSpace(itemId)) continue;
+            var normalized = NormalizeToken(itemId);
+            if (token == normalized) return itemId;
+            if (token.Contains(normalized)) return itemId;
+        }
+        return null;
+    }
+
+    private string BuildButtonToken(Button button)
+    {
+        if (button == null) return string.Empty;
+        var textComponent = button.GetComponentInChildren<Text>(true);
+        var label = textComponent != null ? textComponent.text : string.Empty;
+        return NormalizeToken($"{button.gameObject.name} {label}");
+    }
+
+    private string NormalizeToken(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value)) return string.Empty;
+        return value.Replace(" ", string.Empty).Replace("_", string.Empty).Replace("-", string.Empty).ToLowerInvariant();
+    }
+
+    private bool IsAutoSortToken(string token)
+    {
+        return token.Contains("autosort") || token.Contains("sort") || token.Contains("整理");
+    }
+
+    private bool IsRotateToken(string token)
+    {
+        return token.Contains("rotate") || token.Contains("旋转");
+    }
+
+    private bool IsRemoveToken(string token)
+    {
+        return token.Contains("remove") || token.Contains("delete") || token.Contains("删除");
+    }
+
+    private bool IsSplitToken(string token)
+    {
+        return token.Contains("split") || token.Contains("拆分");
+    }
+
+    private void SwitchToContainer(string containerId)
+    {
+        if (string.IsNullOrWhiteSpace(containerId)) return;
+        currentContainerId = containerId;
+        selectedInstanceId = null;
+        RebuildGrid();
+        RefreshItems();
+    }
+
+    private void ExecuteAutoSort()
+    {
+        if (string.IsNullOrWhiteSpace(currentContainerId)) return;
+        gridInventoryService.AutoSort(currentContainerId);
+    }
+
+    private void ExecuteRotateSelected()
+    {
+        if (string.IsNullOrWhiteSpace(selectedInstanceId)) return;
+        gridInventoryService.TryRotate(selectedInstanceId);
+    }
+
+    private void ExecuteRemoveSelected()
+    {
+        if (string.IsNullOrWhiteSpace(selectedInstanceId)) return;
+        if (gridInventoryService.TryRemoveInstance(selectedInstanceId)) selectedInstanceId = null;
+    }
+
+    private void ExecuteSplitOne()
+    {
+        if (string.IsNullOrWhiteSpace(selectedInstanceId)) return;
+        gridInventoryService.TrySplitStack(selectedInstanceId, 1, out _);
     }
 
     private RectTransform CreateRect(string objectName, Transform parent, Vector2 size, Vector2 anchorMin, Vector2 anchorMax, Vector2 pivot, Vector2 anchoredPosition)

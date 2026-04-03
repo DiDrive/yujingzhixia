@@ -342,6 +342,9 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.EditorCoroutines.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Performance.Profile-Analyzer.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.PlasticSCM.Editor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Recorder.Base.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Recorder.Editor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Recorder.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Rider.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Settings.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.ref.dll"
@@ -386,6 +389,7 @@
 "Assets/Scripts/Inventory/Grid/Runtime/GridInventoryService.cs"
 "Assets/Scripts/Inventory/Grid/Runtime/GridInventoryUnityUI.cs"
 "Assets/Scripts/Inventory/InventoryService.cs"
+"Assets/Scripts/LoadAssetBundles/LoadFromFile.cs"
 "Assets/Scripts/Survival/SurvivalSystem.cs"
 -langversion:9.0
 /deterministic
