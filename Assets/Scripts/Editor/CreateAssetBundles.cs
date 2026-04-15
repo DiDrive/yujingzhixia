@@ -10,5 +10,6 @@ public class CreateAssetBundles
         }
 
         BuildPipeline.BuildAssetBundles(dir, BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows64);
+        
     }
 }
