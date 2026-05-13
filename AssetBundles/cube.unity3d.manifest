@@ -1,0 +1,33 @@
+ManifestFileVersion: 0
+CRC: 256456560
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: a1d632c357f0d4377865bcd33366a8b5
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 48f9e47804cc6149eb45c38c55466448
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: a1d632c357f0d4377865bcd33366a8b5
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Prefabs/Cube.prefab
+Dependencies:
+- "D:/unity_project/\u4F59\u70EC\u4E4B\u4E0B/AssetBundles/share.unity3d"

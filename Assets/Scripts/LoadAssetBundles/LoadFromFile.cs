@@ -27,7 +27,20 @@ public class LoadFromFile : MonoBehaviour
         public Vector3 eulerAngles;
     }
 
-    [Tooltip("AssetBundle 输出目录名，最终会拼成：Application.dataPath/bundleFolderName")]
+    [Serializable]
+    private class BundleCrcEntry
+    {
+        public string bundleName;
+        public uint crc;
+    }
+
+    [Serializable]
+    private class BundleCrcTable
+    {
+        public List<BundleCrcEntry> items = new List<BundleCrcEntry>();
+    }
+
+    [Tooltip("本地模式下的 AssetBundle 目录名（相对项目根目录），默认：AssetBundles")]
     [SerializeField] private string bundleFolderName = "AssetBundles";
 
     [Tooltip("资源来源：本地文件或服务器 URL。")]
@@ -35,6 +48,15 @@ public class LoadFromFile : MonoBehaviour
 
     [Tooltip("服务器根地址（RemoteUrl 模式使用），例如：http://127.0.0.1:8080/AssetBundles")]
     [SerializeField] private string remoteBaseUrl = "http://127.0.0.1:8080/AssetBundles";
+
+    [Tooltip("RemoteUrl 模式下启用 Hash 校验（依赖已加载的 AssetBundleManifest）。")]
+    [SerializeField] private bool verifyRemoteBundleByManifestHash = true;
+
+    [Tooltip("RemoteUrl 模式下是否启用 CRC 校验（CRC 会从 crc_map.json 自动读取）。")]
+    [SerializeField] private bool useRemoteBundleCrc = true;
+
+    [Tooltip("CRC 映射文件名（由打包脚本自动生成）。")]
+    [SerializeField] private string crcMapFileName = "crc_map.json";
     
     [Tooltip("将包内资源名汇总到 Inspector 文本框，方便查看和复制。")]
     [SerializeField] private bool showAssetNamesInInspector = true;
@@ -68,8 +90,8 @@ public class LoadFromFile : MonoBehaviour
 
     private System.Collections.IEnumerator LoadAndInstantiateAll()
     {
-        // 绝对路径根目录，例如：D:/project/Assets/AssetBundles
-        var bundleRoot = Path.Combine(Application.dataPath, bundleFolderName);
+        // 本地模式：项目根目录 + bundleFolderName；远端模式：该值仅用于统一传参，不参与 URL 拼接。
+        var bundleRoot = ResolveLocalBundleRoot();
         // 记录本轮已加载的 bundle 实例，最后统一 Unload(false) 释放文件句柄。
         var loadedBundles = new List<AssetBundle>();
         // 以 key 去重缓存（本地用路径，远端用 URL），避免同一个 bundle 被重复加载。
@@ -84,6 +106,8 @@ public class LoadFromFile : MonoBehaviour
                 cachedManifest = manifestResult;
             });
 
+            yield return TryLoadRemoteCrcMapIfNeeded(bundleRoot);
+
             // 按配置逐条执行加载与实例化。
             for (var i = 0; i < prefabLoadRequests.Count; i++)
             {
@@ -97,7 +121,17 @@ public class LoadFromFile : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 解析本地模式下的 AssetBundle 目录路径。
+    /// </summary>
+    private string ResolveLocalBundleRoot()
+    {
+        var projectRoot = Path.GetFullPath(Path.Combine(Application.dataPath, ".."));
+        return Path.Combine(projectRoot, bundleFolderName);
+    }
+
     private AssetBundleManifest cachedManifest;
+    private readonly Dictionary<string, uint> cachedBundleCrcByName = new Dictionary<string, uint>(StringComparer.OrdinalIgnoreCase);
 
     /// <summary>
     /// 尝试实例化指定加载请求。
@@ -161,7 +195,7 @@ public class LoadFromFile : MonoBehaviour
         // BuildPipeline.BuildAssetBundles 默认会生成一个“总清单包”，名称通常为输出目录同名文件。
         var manifestBundleRef = ResolveBundleRef(bundleRoot, "AssetBundles");
         AssetBundle manifestBundle = null;
-        yield return TryLoadBundleByRef(manifestBundleRef, loadedBundles, loadedBundleByKey, loaded =>
+        yield return TryLoadBundleByRef(manifestBundleRef, null, null, loadedBundles, loadedBundleByKey, loaded =>
         {
             manifestBundle = loaded;
         });
@@ -198,7 +232,7 @@ public class LoadFromFile : MonoBehaviour
             {
                 var dependencyRef = ResolveBundleRef(bundleRoot, dependencies[i]);
                 var dependencyLoaded = false;
-                yield return TryLoadBundleByRef(dependencyRef, loadedBundles, loadedBundleByKey, _ =>
+                yield return TryLoadBundleByRef(dependencyRef, dependencies[i], manifest, loadedBundles, loadedBundleByKey, _ =>
                 {
                     dependencyLoaded = true;
                 });
@@ -211,7 +245,7 @@ public class LoadFromFile : MonoBehaviour
 
         // 最后加载目标包本体。
         AssetBundle bundle = null;
-        yield return TryLoadBundleByRef(resolvedBundleRef, loadedBundles, loadedBundleByKey, loaded =>
+        yield return TryLoadBundleByRef(resolvedBundleRef, resolvedBundleName, manifest, loadedBundles, loadedBundleByKey, loaded =>
         {
             bundle = loaded;
         });
@@ -272,6 +306,8 @@ public class LoadFromFile : MonoBehaviour
     /// </summary>
     private System.Collections.IEnumerator TryLoadBundleByRef(
         string bundleRef,
+        string bundleNameForHash,
+        AssetBundleManifest manifest,
         List<AssetBundle> loadedBundles,
         Dictionary<string, AssetBundle> loadedBundleByKey,
         Action<AssetBundle> onDone)
@@ -296,7 +332,8 @@ public class LoadFromFile : MonoBehaviour
         }
         else
         {
-            using (var request = UnityWebRequestAssetBundle.GetAssetBundle(bundleRef))
+            var request = BuildRemoteBundleRequest(bundleRef, bundleNameForHash, manifest);
+            using (request)
             {
                 yield return request.SendWebRequest();
                 if (request.result != UnityWebRequest.Result.Success)
@@ -315,6 +352,100 @@ public class LoadFromFile : MonoBehaviour
         loadedBundles.Add(bundle);
         LogBundleAssetNames(bundleRef, bundle);
         onDone?.Invoke(bundle);
+    }
+
+    private UnityWebRequest BuildRemoteBundleRequest(string bundleRef, string bundleNameForHash, AssetBundleManifest manifest)
+    {
+        var crc = ResolveBundleCrc(bundleNameForHash);
+        if (!verifyRemoteBundleByManifestHash || manifest == null || string.IsNullOrWhiteSpace(bundleNameForHash))
+        {
+            return UnityWebRequestAssetBundle.GetAssetBundle(bundleRef, crc);
+        }
+
+        var hash = manifest.GetAssetBundleHash(bundleNameForHash);
+        if (!IsValidHash(hash))
+        {
+            Debug.LogWarning($"No valid manifest hash for bundle '{bundleNameForHash}', fallback to non-hash request.");
+            return UnityWebRequestAssetBundle.GetAssetBundle(bundleRef, crc);
+        }
+
+        return UnityWebRequestAssetBundle.GetAssetBundle(bundleRef, hash, crc);
+    }
+
+    private static bool IsValidHash(Hash128 hash)
+    {
+        return !hash.Equals(default(Hash128));
+    }
+
+    private System.Collections.IEnumerator TryLoadRemoteCrcMapIfNeeded(string bundleRoot)
+    {
+        cachedBundleCrcByName.Clear();
+        if (loadSource != BundleLoadSource.RemoteUrl || !useRemoteBundleCrc)
+        {
+            yield break;
+        }
+
+        var mapRef = ResolveCrcMapRef(bundleRoot);
+        using (var request = UnityWebRequest.Get(mapRef))
+        {
+            yield return request.SendWebRequest();
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogWarning($"Failed to download CRC map: {mapRef}. Error: {request.error}. CRC check will be skipped.");
+                yield break;
+            }
+
+            var json = request.downloadHandler.text;
+            if (string.IsNullOrWhiteSpace(json))
+            {
+                Debug.LogWarning($"CRC map is empty: {mapRef}. CRC check will be skipped.");
+                yield break;
+            }
+
+            var table = JsonUtility.FromJson<BundleCrcTable>(json);
+            if (table == null || table.items == null || table.items.Count == 0)
+            {
+                Debug.LogWarning($"CRC map parse failed or no items: {mapRef}. CRC check will be skipped.");
+                yield break;
+            }
+
+            for (var i = 0; i < table.items.Count; i++)
+            {
+                var item = table.items[i];
+                if (item == null || string.IsNullOrWhiteSpace(item.bundleName)) continue;
+                cachedBundleCrcByName[item.bundleName] = item.crc;
+            }
+        }
+    }
+
+    private uint ResolveBundleCrc(string bundleName)
+    {
+        if (!useRemoteBundleCrc || loadSource != BundleLoadSource.RemoteUrl) return 0;
+        if (string.IsNullOrWhiteSpace(bundleName)) return 0;
+
+        if (cachedBundleCrcByName.TryGetValue(bundleName, out var crc))
+        {
+            return crc;
+        }
+
+        var fileName = Path.GetFileName(bundleName);
+        if (!string.IsNullOrWhiteSpace(fileName) && cachedBundleCrcByName.TryGetValue(fileName, out crc))
+        {
+            return crc;
+        }
+
+        return 0;
+    }
+
+    private string ResolveCrcMapRef(string bundleRoot)
+    {
+        if (loadSource == BundleLoadSource.LocalFile)
+        {
+            return Path.Combine(bundleRoot, crcMapFileName);
+        }
+
+        var baseUrl = remoteBaseUrl?.TrimEnd('/');
+        return $"{baseUrl}/{crcMapFileName}";
     }
 
     private string ResolveBundleRef(string bundleRoot, string bundleName)

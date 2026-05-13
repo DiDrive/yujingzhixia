@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b452920641f6339488d7ac9be53db63b, type: 3}
+  m_Name: gun_1
+  m_EditorClassIdentifier: 
+  weaponId: gun_1
+  type: 1
+  pose: 3
+  animatorController: {fileID: 0}
+  melee:
+    damage: 0
+    cooldown: 0
+    range: 0
+    radius: 0
+    hitMask:
+      serializedVersion: 2
+      m_Bits: 0
+  ranged:
+    damage: 15
+    cooldown: 0.1
+    projectilePrefab: {fileID: 8518989892743783351, guid: bda084f9348186c41b0dd7a4876b3392, type: 3}
+    projectileSpeed: 5
+    projectileLifetime: 5
+    hitMask:
+      serializedVersion: 2
+      m_Bits: 24576
+    spawnOnAnimationEvent: 1
