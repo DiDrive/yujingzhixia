@@ -61,9 +61,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Core\EventBus.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Zombie\ZombieController2D.cs" />
     <Compile Include="Assets\Scripts\LoadAssetBundles\LoadFromFile.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Runtime\GridInventoryRuntimePreview.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Combat\Projectile2D.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Zombie\EnemyMovement2D.cs" />
     <Compile Include="Assets\Scripts\Gameplay\RuntimeDebugPanel.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Player\PlayerCombatController2D.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridItemRotation.cs" />
@@ -73,6 +75,8 @@
     <Compile Include="Assets\Scripts\Gameplay\Workbench\WorkbenchService.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Loot\LootSpawner.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Night\NightAssaultSystem.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Zombie\EnemyMeleeAttack2D.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Zombie\EnemyChaseMovement2D.cs" />
     <Compile Include="Assets\Scripts\Gameplay\GameBootstrap.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Runtime\GridInventoryUnityUI.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridOccupancyMap.cs" />
@@ -82,10 +86,13 @@
     <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridAutoSortResult.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Combat\WeaponDefinition.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridItemDefinition.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Zombie\EnemyHealth2D.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Shelter\ShelterModuleService.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Zombie\AnimatorParamUtil2D.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Combat\DebugDamageableTarget.cs" />
     <Compile Include="Assets\Scripts\Core\GamePhase.cs" />
     <Compile Include="Assets\Scripts\Core\GameStateMachine.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Zombie\EnemyAttack2D.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridContainerDefinition.cs" />
   </ItemGroup>
   <ItemGroup>

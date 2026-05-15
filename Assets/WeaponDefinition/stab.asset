@@ -18,15 +18,17 @@ MonoBehaviour:
   animatorController: {fileID: 0}
   melee:
     damage: 10
-    cooldown: 0.5
-    range: 0.1
-    radius: 0.15
+    cooldown: 0.2
+    knockback: 0.5
+    range: 0.4
+    radius: 0.4
     hitMask:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 8192
   ranged:
     damage: 0
     cooldown: 0
+    knockback: 0
     projectilePrefab: {fileID: 0}
     projectileSpeed: 0
     projectileLifetime: 0

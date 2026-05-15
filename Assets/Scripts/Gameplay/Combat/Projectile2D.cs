@@ -29,6 +29,8 @@ namespace Gameplay.Combat
         [Header("Hit")]
         [Tooltip("命中时是否播放受击/破碎动画。")]
         [SerializeField] private bool playHitAnimation = false;
+        [Tooltip("命中时对目标施加的击退强度（由目标自己解释：可能是距离或冲量）。如果发射该投射物的 WeaponDefinition.ranged.knockback > 0，则会覆盖此默认值。")]
+        [SerializeField] private float knockback = 0.4f;
         [Tooltip("命中时触发的动画 Trigger 名称。")]
         [SerializeField] private string hitTrigger = "Hit";
         [Tooltip("命中动画播放时长（秒），到时间后销毁投射物。")]
@@ -43,12 +45,14 @@ namespace Gameplay.Combat
         private Transform ownerRoot;
         private Collider2D[] ownerColliders;
 
-        public void Initialize(Vector2 directionNormalized, float speedUnitsPerSecond, float lifetimeSeconds, float damageAmount, LayerMask hitMaskValue)
+        public void Initialize(Vector2 directionNormalized, float speedUnitsPerSecond, float lifetimeSeconds, float damageAmount, float knockbackOverride, LayerMask hitMaskValue)
         {
             direction = directionNormalized.sqrMagnitude > 0.0001f ? directionNormalized.normalized : Vector2.right;
             speed = speedUnitsPerSecond;
             lifetime = lifetimeSeconds;
             damage = damageAmount;
+            // 击退优先级：WeaponDefinition.ranged.knockback > 0 时覆盖 Projectile2D 预制体上的 knockback；否则使用 Projectile2D 的默认 knockback。
+            if (knockbackOverride > 0f) knockback = knockbackOverride;
             hitMask = hitMaskValue;
 
             projectileAnimator = GetComponentInChildren<Animator>(true);
@@ -119,7 +123,11 @@ namespace Gameplay.Combat
             }
 
             var damageable = other.GetComponentInParent<IDamageable>();
-            if (damageable != null)
+            if (global::HitReceiverUtil.TryGet(other, out var hitReceiver))
+            {
+                hitReceiver.ApplyHit(new global::DamageInfo(damage, transform.position, direction, knockback));
+            }
+            else if (damageable != null)
             {
                 damageable.ApplyDamage(damage);
             }

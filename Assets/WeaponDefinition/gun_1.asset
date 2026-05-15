@@ -19,6 +19,7 @@ MonoBehaviour:
   melee:
     damage: 0
     cooldown: 0
+    knockback: 0
     range: 0
     radius: 0
     hitMask:
@@ -26,7 +27,8 @@ MonoBehaviour:
       m_Bits: 0
   ranged:
     damage: 15
-    cooldown: 0.1
+    cooldown: 0.3
+    knockback: 0
     projectilePrefab: {fileID: 8518989892743783351, guid: bda084f9348186c41b0dd7a4876b3392, type: 3}
     projectileSpeed: 5
     projectileLifetime: 5

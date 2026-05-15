@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Gameplay.Combat
@@ -39,9 +40,11 @@ namespace Gameplay.Combat
         public float damage;
         [Tooltip("攻击冷却（秒）。")]
         public float cooldown;
-        [Tooltip("判定中心距离（沿朝向偏移的距离，单位：世界单位）。")]
+        [Tooltip("命中时施加给目标的击退强度（由目标自己解释：可能是距离或冲量）。为 0 时：不覆盖默认击退（当前默认值在 PlayerCombatController2D 里）。")]
+        public float knockback;
+        [Tooltip("判定中心距离（沿朝向偏移的距离，单位：世界单位）。计算方式：origin = playerPos + lookDir * range。range 越大，命中圆心离角色越远。")]
         public float range;
-        [Tooltip("判定半径（OverlapCircle 半径，单位：世界单位）。")]
+        [Tooltip("判定半径（OverlapCircle 半径，单位：世界单位）。以 origin 为圆心、radius 为半径做命中检测。radius 越大，命中范围越大。")]
         public float radius;
         [Tooltip("可命中的层（建议只包含敌人/可破坏物）。")]
         public LayerMask hitMask;
@@ -54,6 +57,8 @@ namespace Gameplay.Combat
         public float damage;
         [Tooltip("攻击冷却（秒）。")]
         public float cooldown;
+        [Tooltip("命中时施加给目标的击退强度（由目标自己解释：可能是距离或冲量）。优先级：>0 时覆盖 Projectile2D 预制体上的 knockback；为 0 时使用 Projectile2D 的默认 knockback。")]
+        public float knockback;
         [Tooltip("要发射的投射物预制体（子弹/箭矢）。")]
         public Projectile2D projectilePrefab;
         [Tooltip("投射物飞行速度（单位：世界单位/秒）。")]
@@ -90,5 +95,156 @@ namespace Gameplay.Combat
         public MeleeAttackSettings melee;
         [Tooltip("远程参数（type = Ranged 时使用）。")]
         public RangedAttackSettings ranged;
+    }
+}
+
+public readonly struct DamageInfo
+{
+    public readonly float Damage;
+    public readonly Vector2 SourcePosition;
+    public readonly Vector2 Direction;
+    public readonly float Knockback;
+
+    public DamageInfo(float damage, Vector2 sourcePosition, Vector2 direction, float knockback)
+    {
+        Damage = Mathf.Max(0f, damage);
+        SourcePosition = sourcePosition;
+        Direction = direction.sqrMagnitude > 0.0001f ? direction.normalized : Vector2.zero;
+        Knockback = Mathf.Max(0f, knockback);
+    }
+}
+
+public interface IHitReceiver
+{
+    void ApplyHit(DamageInfo hit);
+}
+
+public static class HitReceiverUtil
+{
+    public static bool TryGet(Component from, out IHitReceiver receiver)
+    {
+        receiver = null;
+        if (from == null) return false;
+        var behaviours = from.GetComponentsInParent<MonoBehaviour>(true);
+        for (var i = 0; i < behaviours.Length; i++)
+        {
+            var b = behaviours[i];
+            if (b is IHitReceiver r)
+            {
+                receiver = r;
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+public class HitFeedbackSystem2D : MonoBehaviour
+{
+    [Header("Hitstop")]
+    [SerializeField] private bool enableHitstop = true;
+    [SerializeField] private float hitstopTimeScale = 0.05f;
+
+    [Header("Camera Shake")]
+    [SerializeField] private bool enableCameraShake = true;
+    [SerializeField] private float shakeFrequency = 28f;
+
+    private static HitFeedbackSystem2D instance;
+    private Coroutine hitstopRoutine;
+    private Coroutine shakeRoutine;
+
+    public static void TriggerHitstop(float durationSeconds)
+    {
+        var inst = EnsureInstance();
+        if (inst == null) return;
+        inst.StartHitstop(durationSeconds);
+    }
+
+    public static void TriggerCameraShake(float durationSeconds, float magnitude)
+    {
+        var inst = EnsureInstance();
+        if (inst == null) return;
+        inst.StartCameraShake(durationSeconds, magnitude);
+    }
+
+    private static HitFeedbackSystem2D EnsureInstance()
+    {
+        if (instance != null) return instance;
+        instance = FindObjectOfType<HitFeedbackSystem2D>(true);
+        if (instance != null) return instance;
+
+        var go = new GameObject(nameof(HitFeedbackSystem2D));
+        DontDestroyOnLoad(go);
+        instance = go.AddComponent<HitFeedbackSystem2D>();
+        return instance;
+    }
+
+    private void OnDestroy()
+    {
+        if (instance == this) instance = null;
+    }
+
+    private void StartHitstop(float durationSeconds)
+    {
+        if (!enableHitstop) return;
+        var duration = Mathf.Max(0f, durationSeconds);
+        if (duration <= 0f) return;
+        if (hitstopRoutine != null) StopCoroutine(hitstopRoutine);
+        hitstopRoutine = StartCoroutine(HitstopCoroutine(duration));
+    }
+
+    private IEnumerator HitstopCoroutine(float durationSeconds)
+    {
+        var prevTimeScale = Time.timeScale;
+        var prevFixedDelta = Time.fixedDeltaTime;
+        var scale = Mathf.Clamp(hitstopTimeScale, 0f, 1f);
+        Time.timeScale = scale;
+        Time.fixedDeltaTime = prevFixedDelta * scale;
+
+        var end = Time.unscaledTime + durationSeconds;
+        while (Time.unscaledTime < end) yield return null;
+
+        Time.timeScale = prevTimeScale;
+        Time.fixedDeltaTime = prevFixedDelta;
+        hitstopRoutine = null;
+    }
+
+    private void StartCameraShake(float durationSeconds, float magnitude)
+    {
+        if (!enableCameraShake) return;
+        var duration = Mathf.Max(0f, durationSeconds);
+        if (duration <= 0f) return;
+        if (magnitude <= 0f) return;
+        if (shakeRoutine != null) StopCoroutine(shakeRoutine);
+        shakeRoutine = StartCoroutine(CameraShakeCoroutine(duration, magnitude));
+    }
+
+    private IEnumerator CameraShakeCoroutine(float durationSeconds, float magnitude)
+    {
+        var cam = Camera.main;
+        if (cam == null)
+        {
+            shakeRoutine = null;
+            yield break;
+        }
+
+        var t = 0f;
+        var seed = Random.value * 1000f;
+        var tf = cam.transform;
+        var basePos = tf.localPosition;
+        var freq = Mathf.Max(1f, shakeFrequency);
+
+        while (t < durationSeconds)
+        {
+            t += Time.unscaledDeltaTime;
+            var k = 1f - Mathf.Clamp01(t / Mathf.Max(0.01f, durationSeconds));
+            var nx = Mathf.PerlinNoise(seed, Time.unscaledTime * freq) * 2f - 1f;
+            var ny = Mathf.PerlinNoise(seed + 11.3f, Time.unscaledTime * freq) * 2f - 1f;
+            tf.localPosition = basePos + new Vector3(nx, ny, 0f) * (magnitude * k);
+            yield return null;
+        }
+
+        tf.localPosition = basePos;
+        shakeRoutine = null;
     }
 }

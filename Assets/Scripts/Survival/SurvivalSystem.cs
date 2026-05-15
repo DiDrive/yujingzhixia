@@ -1,10 +1,11 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Gameplay.Combat;
 
 /// <summary>
 /// 生存指标系统：负责饥饿、口渴、疲劳、感染与属性惩罚计算。
 /// </summary>
-public class SurvivalSystem : MonoBehaviour
+public class SurvivalSystem : MonoBehaviour, IDamageable
 {
     [Header("Runtime Stats")]
     [PropertyTooltip("当前饥饿值。越低惩罚越重。")]
@@ -98,6 +99,11 @@ public class SurvivalSystem : MonoBehaviour
     public void CureInfection()
     {
         infected = false;
+    }
+
+    public void ApplyDamage(float amount)
+    {
+        hp = Mathf.Clamp(hp - Mathf.Max(0f, amount), 0f, 100f);
     }
 
     private void TickDecay(float dt)

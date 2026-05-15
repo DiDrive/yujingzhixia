@@ -199,6 +199,7 @@ MonoBehaviour:
   dirYParam: MoveY
   snapDirectionTo4WayForAnimation: 1
   playHitAnimation: 1
+  knockback: 0.3
   hitTrigger: Hit
   hitDespawnDelay: 0.12
   hitBackoffDistance: 0.02

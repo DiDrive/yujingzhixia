@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using Gameplay.Combat;
 
@@ -6,7 +7,7 @@ using Gameplay.Combat;
 /// 2D 角色控制：WASD 移动、鼠标朝向、左键轻击、右键蓄力重击。
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerCombatController2D : MonoBehaviour
+public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHitReceiver
 {
     [Header("Movement")]
     [Tooltip("基础移动速度。")]
@@ -35,6 +36,38 @@ public class PlayerCombatController2D : MonoBehaviour
     [SerializeField] private bool pixelSnapEnabled = false;
     [Tooltip("每单位像素数（与贴图 Pixels Per Unit 保持一致）。")]
     [SerializeField] private int pixelsPerUnit = 16;
+
+    [Header("Physics")]
+    [Tooltip("为 true 时：使用 Kinematic 移动并在移动前做 Cast，避免与敌人/墙体产生推挤。")]
+    [SerializeField] private bool useKinematicMotor = true;
+    [Tooltip("移动时参与碰撞检测的层。")]
+    [SerializeField] private LayerMask movementCollisionMask = ~0;
+    [Tooltip("移动时与碰撞体保持的最小间隙，避免卡进碰撞体导致抖动。")]
+    [SerializeField] private float movementSkin = 0.02f;
+
+    [Header("Hit Feedback")]
+    [Tooltip("被攻击时的击退距离（单位）。当攻击方传入 DamageInfo.Knockback > 0 时会覆盖该值。")]
+    [SerializeField] private float hitKnockbackDistance = 0.8f;
+    [Tooltip("被攻击时击退持续时间（秒）。")]
+    [SerializeField] private float hitKnockbackDurationSeconds = 0.12f;
+    [Tooltip("击退速度上限（单位/秒）。")]
+    [SerializeField] private float maxHitKnockbackSpeed = 12f;
+    [Tooltip("是否启用受击闪白。")]
+    [SerializeField] private bool enableHitFlash = true;
+    [Tooltip("受击闪白颜色。")]
+    [SerializeField] private Color hitFlashColor = new Color(1f, 0.45f, 0.45f, 1f);
+    [Tooltip("受击闪白持续时间（秒）。")]
+    [SerializeField] private float hitFlashDurationSeconds = 0.08f;
+    [Tooltip("命中时是否触发 Hitstop。")]
+    [SerializeField] private bool enableHitstop = true;
+    [Tooltip("Hitstop 时长（秒）。")]
+    [SerializeField] private float hitstopDurationSeconds = 0.05f;
+    [Tooltip("命中时是否触发相机震动。")]
+    [SerializeField] private bool enableCameraShake = true;
+    [Tooltip("相机震动时长（秒）。")]
+    [SerializeField] private float cameraShakeDurationSeconds = 0.08f;
+    [Tooltip("相机震动强度。")]
+    [SerializeField] private float cameraShakeMagnitude = 0.12f;
 
     [Header("Attack")]
     [Tooltip("当前装备武器定义（为空时使用脚本内置默认攻击参数）。")]
@@ -83,6 +116,14 @@ public class PlayerCombatController2D : MonoBehaviour
     [SerializeField] private float deathHpThreshold = 0f;
     [Tooltip("死亡动画播放完成后是否禁用角色控制脚本。")]
     [SerializeField] private bool disableControllerAfterDeathAnimation = false;
+    [Tooltip("死亡动画播放完成后是否让尸体逐渐隐去。")]
+    [SerializeField] private bool fadeCorpseAfterDeath = true;
+    [Tooltip("死亡动画结束事件触发后，延迟多少秒开始淡出。")]
+    [SerializeField] private float corpseFadeDelaySeconds = 0f;
+    [Tooltip("淡出持续时间（秒）。")]
+    [SerializeField] private float corpseFadeDurationSeconds = 1.2f;
+    [Tooltip("淡出结束后是否销毁物体。为 false 时仅隐藏 SpriteRenderer。")]
+    [SerializeField] private bool destroyAfterFade = false;
 
     [Header("Animation")]
     [Tooltip("角色动画器（为空时自动从当前物体获取）。")]
@@ -91,6 +132,8 @@ public class PlayerCombatController2D : MonoBehaviour
     [SerializeField] private bool keepLastMoveDirectionForAnimation = true;
     [Tooltip("动画方向平滑时间（秒）。")]
     [SerializeField] private float animatorDirectionDamp = 0.08f;
+    [Tooltip("受击动画触发器参数名（Trigger）。为空则不触发受击动画。")]
+    [SerializeField] private string hitTriggerParam = "Hit";
 
     private Rigidbody2D rb;
     private Camera mainCamera;
@@ -98,6 +141,10 @@ public class PlayerCombatController2D : MonoBehaviour
     private Vector2 moveInputRaw;
     private Vector2 lookDirection = Vector2.right;
     private Vector2 lastMoveDirection = Vector2.down;
+    private Vector2 currentMoveVelocity;
+    private Vector2 hitKnockbackVelocity;
+    private float hitKnockbackEndTime;
+    private Coroutine hitFlashRoutine;
     private float nextLightAttackTime;
     private bool isChargingHeavy;
     private float heavyChargeStartTime;
@@ -105,6 +152,10 @@ public class PlayerCombatController2D : MonoBehaviour
     private bool pendingProjectileShot;
     private bool isDead;
     private bool isDeathAnimationFinished;
+    private bool corpseFadeStarted;
+    private bool hasHitTrigger;
+
+    public bool IsDead => isDead;
 
     public event Action<float, bool> OnAttackPerformed;
 
@@ -132,7 +183,16 @@ public class PlayerCombatController2D : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         mainCamera = Camera.main;
+        if (rb != null && useKinematicMotor)
+        {
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.useFullKinematicContacts = true;
+        }
         if (characterAnimator == null) characterAnimator = GetComponent<Animator>();
+        if (characterAnimator != null && !string.IsNullOrWhiteSpace(hitTriggerParam))
+        {
+            hasHitTrigger = AnimatorParamUtil2D.HasParameter(characterAnimator, hitTriggerParam, AnimatorControllerParameterType.Trigger);
+        }
         if (survivalSystem == null) survivalSystem = FindObjectOfType<SurvivalSystem>();
         if (startingWeapon != null) EquipWeapon(startingWeapon);
     }
@@ -184,9 +244,47 @@ public class PlayerCombatController2D : MonoBehaviour
 
     private void MoveCharacter()
     {
+        if (rb == null) return;
         var velocity = moveInput * moveSpeed * Mathf.Max(0f, moveMultiplier);
-        rb.velocity = velocity;
+        if (Time.time < hitKnockbackEndTime) velocity += hitKnockbackVelocity;
+        if (!useKinematicMotor || rb.bodyType != RigidbodyType2D.Kinematic)
+        {
+            rb.velocity = velocity;
+            currentMoveVelocity = rb.velocity;
+            return;
+        }
+
+        var desiredMove = velocity * Time.fixedDeltaTime;
+        if (desiredMove.sqrMagnitude <= 0.0000001f)
+        {
+            rb.velocity = Vector2.zero;
+            currentMoveVelocity = Vector2.zero;
+            return;
+        }
+
+        var dir = desiredMove.normalized;
+        var moveDistance = desiredMove.magnitude;
+        var filter = new ContactFilter2D();
+        filter.useTriggers = false;
+        filter.useLayerMask = true;
+        filter.layerMask = movementCollisionMask;
+
+        var hitCount = rb.Cast(dir, filter, castResults, moveDistance + Mathf.Max(0f, movementSkin));
+        var allowedDistance = moveDistance;
+        for (var i = 0; i < hitCount; i++)
+        {
+            var hit = castResults[i];
+            if (hit.collider == null) continue;
+            allowedDistance = Mathf.Min(allowedDistance, Mathf.Max(0f, hit.distance - Mathf.Max(0f, movementSkin)));
+        }
+
+        var appliedMove = dir * allowedDistance;
+        rb.MovePosition(rb.position + appliedMove);
+        rb.velocity = Vector2.zero;
+        currentMoveVelocity = appliedMove / Time.fixedDeltaTime;
     }
+
+    private readonly RaycastHit2D[] castResults = new RaycastHit2D[8];
 
     private Vector2 ConvertMoveInput(Vector2 inputRaw)
     {
@@ -306,7 +404,7 @@ public class PlayerCombatController2D : MonoBehaviour
 
         characterAnimator.SetFloat("MoveX", moveDir.x, animatorDirectionDamp, Time.deltaTime);
         characterAnimator.SetFloat("MoveY", moveDir.y, animatorDirectionDamp, Time.deltaTime);
-        characterAnimator.SetFloat("Speed", rb != null ? rb.velocity.magnitude : moveInput.magnitude);
+        characterAnimator.SetFloat("Speed", currentMoveVelocity.magnitude);
         characterAnimator.SetFloat("FacingX", lookDirection.x, animatorDirectionDamp, Time.deltaTime);
         characterAnimator.SetFloat("FacingY", lookDirection.y, animatorDirectionDamp, Time.deltaTime);
         characterAnimator.SetBool("IsMoving", moveInput.sqrMagnitude > 0.0001f);
@@ -361,6 +459,13 @@ public class PlayerCombatController2D : MonoBehaviour
         var range = CurrentAttackRange;
         var radius = CurrentAttackRadius;
         var hitMask = CurrentHitMask;
+        var knockback = 0.9f;
+        if (currentWeapon != null && currentWeapon.type == WeaponType.Melee && currentWeapon.melee.knockback > 0f)
+        {
+            knockback = currentWeapon.melee.knockback;
+        }
+        // 击退优先级：WeaponDefinition.melee.knockback > 0 时覆盖默认值；否则使用默认值（当前为 0.9）。
+        // 近战命中判定：以 origin 为圆心做 OverlapCircle，origin = playerPos + lookDir * range；radius 为判定半径。
         var origin = (Vector2)transform.position + lookDirection * range;
         var hitCount = 0;
         var hits = Physics2D.OverlapCircleAll(origin, radius, hitMask);
@@ -370,6 +475,13 @@ public class PlayerCombatController2D : MonoBehaviour
             if (col == null) continue;
             if (col.attachedRigidbody != null && col.attachedRigidbody.gameObject == gameObject) continue;
             hitCount++;
+
+            if (global::HitReceiverUtil.TryGet(col, out var hitReceiver))
+            {
+                var dir = (Vector2)(col.transform.position - transform.position);
+                hitReceiver.ApplyHit(new global::DamageInfo(damage, transform.position, dir, knockback));
+                continue;
+            }
 
             var damageable = col.GetComponentInParent<IDamageable>();
             if (damageable != null) damageable.ApplyDamage(damage);
@@ -396,6 +508,7 @@ public class PlayerCombatController2D : MonoBehaviour
             Mathf.Max(0.01f, ranged.projectileSpeed),
             Mathf.Max(0.01f, ranged.projectileLifetime),
             Mathf.Max(0f, ranged.damage),
+            Mathf.Max(0f, ranged.knockback),
             ranged.hitMask.value == 0 ? defaultHitMask : ranged.hitMask);
     }
 
@@ -504,11 +617,123 @@ public class PlayerCombatController2D : MonoBehaviour
         return true;
     }
 
+    public void ApplyDamage(float amount)
+    {
+        if (survivalSystem == null) return;
+        survivalSystem.ApplyDamage(amount);
+    }
+
+    public void ApplyHit(global::DamageInfo hit)
+    {
+        if (isDead) return;
+        ApplyDamage(hit.Damage);
+        if (isDead) return;
+
+        if (characterAnimator != null && hasHitTrigger) characterAnimator.SetTrigger(hitTriggerParam);
+
+        var dir = hit.Direction.sqrMagnitude > 0.0001f
+            ? hit.Direction.normalized
+            : ((Vector2)transform.position - hit.SourcePosition).normalized;
+
+        var distance = hitKnockbackDistance;
+        if (hit.Knockback > 0f) distance = hit.Knockback;
+
+        var duration = Mathf.Max(0.01f, hitKnockbackDurationSeconds);
+        var speed = Mathf.Min(maxHitKnockbackSpeed, distance / duration);
+        hitKnockbackVelocity = dir * Mathf.Max(0f, speed);
+        hitKnockbackEndTime = Time.time + duration;
+
+        if (enableHitFlash) StartHitFlash();
+        if (enableHitstop) global::HitFeedbackSystem2D.TriggerHitstop(hitstopDurationSeconds);
+        if (enableCameraShake) global::HitFeedbackSystem2D.TriggerCameraShake(cameraShakeDurationSeconds, cameraShakeMagnitude);
+    }
+
+    private void StartHitFlash()
+    {
+        if (hitFlashRoutine != null) StopCoroutine(hitFlashRoutine);
+        hitFlashRoutine = StartCoroutine(HitFlashCoroutine());
+    }
+
+    private IEnumerator HitFlashCoroutine()
+    {
+        var sprites = GetComponentsInChildren<SpriteRenderer>(true);
+        if (sprites == null || sprites.Length == 0) yield break;
+
+        var colors = new Color[sprites.Length];
+        for (var i = 0; i < sprites.Length; i++)
+        {
+            colors[i] = sprites[i] != null ? sprites[i].color : Color.white;
+        }
+
+        for (var i = 0; i < sprites.Length; i++)
+        {
+            if (sprites[i] != null) sprites[i].color = hitFlashColor;
+        }
+
+        yield return new WaitForSeconds(Mathf.Max(0.01f, hitFlashDurationSeconds));
+
+        for (var i = 0; i < sprites.Length; i++)
+        {
+            if (sprites[i] != null) sprites[i].color = colors[i];
+        }
+    }
+
     public void AnimationEvent_DeathFinished()
     {
         if (!isDead) return;
         if (isDeathAnimationFinished) return;
         isDeathAnimationFinished = true;
-        if (disableControllerAfterDeathAnimation) enabled = false;
+        StartCorpseFadeIfNeeded();
+        if (disableControllerAfterDeathAnimation && !fadeCorpseAfterDeath) enabled = false;
+    }
+
+    private void StartCorpseFadeIfNeeded()
+    {
+        if (!fadeCorpseAfterDeath) return;
+        if (corpseFadeStarted) return;
+        corpseFadeStarted = true;
+        StartCoroutine(FadeOutSpritesCoroutine());
+    }
+
+    private IEnumerator FadeOutSpritesCoroutine()
+    {
+        if (corpseFadeDelaySeconds > 0f) yield return new WaitForSeconds(corpseFadeDelaySeconds);
+
+        var sprites = GetComponentsInChildren<SpriteRenderer>(true);
+        if (sprites == null || sprites.Length == 0) yield break;
+
+        var colors = new Color[sprites.Length];
+        for (var i = 0; i < sprites.Length; i++)
+        {
+            colors[i] = sprites[i] != null ? sprites[i].color : Color.white;
+        }
+
+        var duration = Mathf.Max(0.01f, corpseFadeDurationSeconds);
+        var t = 0f;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            var k = 1f - Mathf.Clamp01(t / duration);
+            for (var i = 0; i < sprites.Length; i++)
+            {
+                var sr = sprites[i];
+                if (sr == null) continue;
+                var c = colors[i];
+                c.a *= k;
+                sr.color = c;
+            }
+            yield return null;
+        }
+
+        if (destroyAfterFade)
+        {
+            Destroy(gameObject);
+            yield break;
+        }
+
+        for (var i = 0; i < sprites.Length; i++)
+        {
+            if (sprites[i] != null) sprites[i].enabled = false;
+        }
     }
 }
