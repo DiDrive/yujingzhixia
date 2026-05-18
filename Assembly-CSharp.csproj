@@ -67,6 +67,11 @@
     <Compile Include="Assets\Scripts\Gameplay\Combat\Projectile2D.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Zombie\EnemyMovement2D.cs" />
     <Compile Include="Assets\Scripts\Gameplay\RuntimeDebugPanel.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Map\MapSpawnPoint.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Map\LootPoint.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Map\ExtractionPoint.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Map\ShelterEntrance.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Map\MapRegionTrigger.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Player\PlayerCombatController2D.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridItemRotation.cs" />
     <Compile Include="Assets\Scripts\Core\GameplayRuntimeEvents.cs" />
