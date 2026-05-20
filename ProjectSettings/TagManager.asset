@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: MapBack
+    uniqueID: 1759609739
+    locked: 0
+  - name: Actor
+    uniqueID: 1535939025
+    locked: 0
+  - name: MapFront
+    uniqueID: 2633162357
+    locked: 0
