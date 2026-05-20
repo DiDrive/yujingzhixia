@@ -223,10 +223,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9e09bd2b921ba4d9d9694515182de8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sortPoint: {fileID: 56493312799260268}
+  sortPoint: {fileID: 6281716996673130218}
   targetSortingGroup: {fileID: 581080908778306230}
   targetSpriteRenderer: {fileID: 3603964222704591087}
-  autoAddSortingGroup: 0
+  autoAddSortingGroup: 1
   orderPerUnit: 100
   orderOffset: 0
   updateContinuously: 1
@@ -262,7 +262,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.01}
+  m_Offset: {x: 0.009687424, y: -0.06812525}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -273,7 +273,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.32}
+  m_Size: {x: 0.44218826, y: 0.85281277}
   m_EdgeRadius: 0
 --- !u!210 &581080908778306230
 SortingGroup:
@@ -283,9 +283,9 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1524712216701060628}
   m_Enabled: 1
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1273009695
   m_SortingLayer: 0
-  m_SortingOrder: -1463
+  m_SortingOrder: -1421
   m_SortAtRoot: 0
 --- !u!1 &5570916327065903465
 GameObject:
@@ -312,7 +312,7 @@ Transform:
   m_GameObject: {fileID: 5570916327065903465}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.125, y: -0.029000044, z: 0}
+  m_LocalPosition: {x: 0.125, y: -0.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
