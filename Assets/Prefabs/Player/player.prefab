@@ -13,8 +13,10 @@ GameObject:
   - component: {fileID: 7541589034779524834}
   - component: {fileID: 648053311255314853}
   - component: {fileID: 3760738025344962437}
+  - component: {fileID: 5606460242431959165}
   - component: {fileID: 8588796625371517164}
-  m_Layer: 0
+  - component: {fileID: 581080908778306230}
+  m_Layer: 12
   m_Name: player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -31,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.498406, y: 14.628, z: -0.08519437}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6281716996673130218}
@@ -83,7 +85,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -157,9 +159,25 @@ MonoBehaviour:
   aimWithMouse: 0
   aimWithMoveDirectionWhenNoMouse: 1
   rotateTransformToAim: 0
-  pixelSnapVisualRoot: {fileID: 0}
+  pixelSnapVisualRoot: {fileID: 56493312799260268}
   pixelSnapEnabled: 0
   pixelsPerUnit: 100
+  useKinematicMotor: 1
+  movementCollisionMask:
+    serializedVersion: 2
+    m_Bits: 24577
+  movementSkin: 0.02
+  hitKnockbackDistance: 0.2
+  hitKnockbackDurationSeconds: 0.12
+  maxHitKnockbackSpeed: 2
+  enableHitFlash: 1
+  hitFlashColor: {r: 1, g: 0.45, b: 0.45, a: 1}
+  hitFlashDurationSeconds: 0.1
+  enableHitstop: 1
+  hitstopDurationSeconds: 0.05
+  enableCameraShake: 1
+  cameraShakeDurationSeconds: 0.08
+  cameraShakeMagnitude: 0.12
   startingWeapon: {fileID: 11400000, guid: e8365aa5a3a42df47a30eaf97fcdb226, type: 2}
   projectileSpawnPoint: {fileID: 6281716996673130218}
   autoMoveProjectileSpawnPoint: 1
@@ -182,9 +200,36 @@ MonoBehaviour:
   enableQuickSwitch: 1
   debugLogWeaponSwitch: 1
   debugLogAttack: 1
+  survivalSystem: {fileID: 0}
+  deathHpThreshold: 0
+  disableControllerAfterDeathAnimation: 0
+  fadeCorpseAfterDeath: 1
+  corpseFadeDelaySeconds: 0
+  corpseFadeDurationSeconds: 1.2
+  destroyAfterFade: 0
   characterAnimator: {fileID: 7541589034779524834}
   keepLastMoveDirectionForAnimation: 1
   animatorDirectionDamp: 0.08
+  hitTriggerParam: Hit
+--- !u!114 &5606460242431959165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524712216701060628}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d9e09bd2b921ba4d9d9694515182de8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sortPoint: {fileID: 56493312799260268}
+  targetSortingGroup: {fileID: 581080908778306230}
+  targetSpriteRenderer: {fileID: 3603964222704591087}
+  autoAddSortingGroup: 0
+  orderPerUnit: 100
+  orderOffset: 0
+  updateContinuously: 1
 --- !u!61 &8588796625371517164
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -221,8 +266,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
-    newSize: {x: 1, y: 2}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -230,6 +275,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.32}
   m_EdgeRadius: 0
+--- !u!210 &581080908778306230
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524712216701060628}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -1463
+  m_SortAtRoot: 0
 --- !u!1 &5570916327065903465
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,7 +296,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6281716996673130218}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: shoot_point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
