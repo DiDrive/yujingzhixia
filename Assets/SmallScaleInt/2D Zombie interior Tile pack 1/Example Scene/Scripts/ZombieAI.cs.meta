@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 18557f46f5dc03b48ad855acc2a30b32
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 312874
+  packageName: Zombie Rural - HD Isometric Tileset
+  packageVersion: 1.1
+  assetPath: Assets/SmallScaleInt/2D Zombie Rural Tile pack 1/Example Scene/Scripts/ZombieAI.cs
+  uploadId: 742232

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: b8859411d3237c042b8bd97f5c9f1b01
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 312874
+  packageName: Zombie Rural - HD Isometric Tileset
+  packageVersion: 1.1
+  assetPath: Assets/SmallScaleInt/2D Zombie Rural Tile pack 1/Example Scene/Scripts/RoofVisibility.cs
+  uploadId: 742232

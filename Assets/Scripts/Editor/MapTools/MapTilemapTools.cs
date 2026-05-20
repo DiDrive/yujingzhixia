@@ -8,83 +8,119 @@ public static class MapTilemapTools
 {
     private const string GridName = "Grid";
     private const string MarkersRootName = "MapMarkers";
+    private const string SortingLayerMapBack = "MapBack";
+    private const string SortingLayerActor = "Actor";
+    private const string SortingLayerMapFront = "MapFront";
+    private const string WallPhysicsLayerName = "Wall";
+    private const GridLayout.CellLayout TargetCellLayout = GridLayout.CellLayout.IsometricZAsY;
+    private const TilemapRenderer.SortOrder TargetSortOrder = TilemapRenderer.SortOrder.TopRight;
+    private static readonly Vector3 TargetCellSize = new(1f, 0.5f, 1f);
+    private static readonly LegacyLayerRenameDefinition[] LegacyLayerRenames =
+    {
+        new("Ground", "GroundBase"),
+        new("Deco", "LowDeco"),
+        new("Wall", "WallBack")
+    };
 
     private static readonly TilemapLayerDefinition[] LayerDefinitions =
     {
-        new("Ground", 0, false),
-        new("Wall", 10, true),
-        new("Deco", 20, false),
-        new("Collision", 30, true),
-        new("Foreground", 40, false),
-        new("Interactable", 50, false)
+        new("GroundBase", SortingLayerMapBack, 0, false, false),
+        new("GroundDetail", SortingLayerMapBack, 10, false, false),
+        new("LowDeco", SortingLayerMapBack, 20, false, false),
+        new("WallBack", SortingLayerMapBack, 30, false, false),
+        new("Collision", SortingLayerMapBack, 40, true, true),
+        new("WallFront", SortingLayerMapFront, 50, false, false),
+        new("RoofOrCover", SortingLayerMapFront, 60, false, false),
+        new("Foreground", SortingLayerMapFront, 70, false, false),
+        new("Interactable", SortingLayerMapFront, 80, false, false)
     };
+
+    [MenuItem("Tools/Map/Setup Map (Rendering + Collision)")]
+    public static void SetupMap()
+    {
+        EnsureSortingLayersExist();
+        var grid = FindOrCreateGrid();
+        var renameLogs = new List<string>();
+        TryAutoUpgradeLegacyLayers(grid, renameLogs);
+        EnsureStandardTilemapLayers(grid);
+        EnsureCollisionComponents(grid);
+
+        EditorSceneManager.MarkSceneDirty(grid.gameObject.scene);
+        Selection.activeGameObject = grid.gameObject;
+        Debug.Log("Map setup finished.\n" + string.Join("\n", renameLogs));
+    }
 
     /// <summary>
     /// 创建或补齐当前场景的标准瓦片地图层级。
-    /// 会确保场景里存在 Grid，并在 Grid 下创建 Ground、Wall、Deco、Collision、Foreground、Interactable 六个 Tilemap。
+    /// 会确保场景里存在 Grid，并将其配置为 Isometric Z as Y，
+    /// 然后在 Grid 下创建适合室内地图的标准 Tilemap 层：
+    /// GroundBase、GroundDetail、LowDeco、WallBack、Collision、WallFront、RoofOrCover、Foreground、Interactable。
     /// 已存在的同名层不会重复创建，只会补齐缺失的 Tilemap / TilemapRenderer，并设置建议的排序顺序。
     /// </summary>
     [MenuItem("Tools/Map/Create Standard Tilemap Layers")]
     public static void CreateStandardTilemapLayers()
     {
+        EnsureSortingLayersExist();
         var grid = FindOrCreateGrid();
-
-        foreach (var definition in LayerDefinitions)
-        {
-            var layer = FindDirectChild(grid.transform, definition.Name);
-            if (layer == null)
-            {
-                layer = new GameObject(definition.Name);
-                Undo.RegisterCreatedObjectUndo(layer, $"Create {definition.Name} Tilemap");
-                layer.transform.SetParent(grid.transform);
-                layer.transform.localPosition = Vector3.zero;
-                layer.transform.localRotation = Quaternion.identity;
-                layer.transform.localScale = Vector3.one;
-            }
-
-            // 每个地图层都必须有 Tilemap 和 TilemapRenderer，才能在 Scene 里绘制并渲染瓦片。
-            EnsureComponent<Tilemap>(layer);
-            var renderer = EnsureComponent<TilemapRenderer>(layer);
-            renderer.sortingOrder = definition.SortingOrder;
-        }
+        var renameLogs = new List<string>();
+        TryAutoUpgradeLegacyLayers(grid, renameLogs);
+        EnsureStandardTilemapLayers(grid);
+        EnsureCollisionComponents(grid);
 
         EditorSceneManager.MarkSceneDirty(grid.gameObject.scene);
         Selection.activeGameObject = grid.gameObject;
-        Debug.Log("Standard Tilemap layers are ready.");
+        Debug.Log("Standard indoor tilemap layers are ready.\n" + string.Join("\n", renameLogs));
+    }
+
+    /// <summary>
+    /// 将旧版地图层级升级到当前的室内地图层级结构。
+    /// 当前会尝试把 Ground 重命名为 GroundBase、Deco 重命名为 LowDeco、Wall 重命名为 WallBack，
+    /// 然后自动补齐 GroundDetail、Collision、WallFront、RoofOrCover、Foreground、Interactable 等缺失层。
+    /// 同时会把 Grid 配置为 Isometric Z as Y，便于等距瓦片正确对位。
+    /// 不会删除任何已有层，避免误删已经画好的 Tile。
+    /// </summary>
+    [MenuItem("Tools/Map/Upgrade Legacy Tilemap Layers")]
+    public static void UpgradeLegacyTilemapLayers()
+    {
+        EnsureSortingLayersExist();
+        var grid = FindOrCreateGrid();
+        var logs = new List<string>();
+        TryAutoUpgradeLegacyLayers(grid, logs);
+
+        EnsureStandardTilemapLayers(grid);
+        EnsureCollisionComponents(grid);
+
+        EditorSceneManager.MarkSceneDirty(grid.gameObject.scene);
+        Selection.activeGameObject = grid.gameObject;
+        Debug.Log("Legacy tilemap upgrade finished.\n" + string.Join("\n", logs));
     }
 
     /// <summary>
     /// 给需要阻挡移动的瓦片层补齐 2D 碰撞组件。
-    /// 当前会处理 Wall 和 Collision 两层：添加 Static Rigidbody2D、TilemapCollider2D、CompositeCollider2D。
+    /// 当前只处理 Collision 层：添加 Static Rigidbody2D、TilemapCollider2D、CompositeCollider2D。
     /// CompositeCollider2D 用于合并相邻格子的碰撞边界，减少角色贴墙抖动和碰撞体数量。
     /// </summary>
     [MenuItem("Tools/Map/Add Collision Components")]
     public static void AddCollisionComponents()
     {
+        EnsureSortingLayersExist();
         var grid = FindOrCreateGrid();
-        foreach (var definition in LayerDefinitions)
-        {
-            if (!definition.NeedsCollider) continue;
-
-            var layer = FindDirectChild(grid.transform, definition.Name);
-            if (layer == null)
-            {
-                Debug.LogWarning($"Tilemap layer missing: {definition.Name}. Run Create Standard Tilemap Layers first.");
-                continue;
-            }
-
-            // CompositeCollider2D 需要 Rigidbody2D；地图碰撞不移动，所以固定为 Static。
-            var rigidbody2D = EnsureComponent<Rigidbody2D>(layer);
-            rigidbody2D.bodyType = RigidbodyType2D.Static;
-
-            var tilemapCollider = EnsureComponent<TilemapCollider2D>(layer);
-            tilemapCollider.usedByComposite = true;
-
-            EnsureComponent<CompositeCollider2D>(layer);
-        }
+        EnsureCollisionComponents(grid);
 
         EditorSceneManager.MarkSceneDirty(grid.gameObject.scene);
-        Debug.Log("Collision components are ready on Wall and Collision tilemaps.");
+        Debug.Log("Collision components are ready on Collision tilemap.");
+    }
+
+    [MenuItem("Tools/Map/Show Collision Layer")]
+    public static void ShowCollisionLayer()
+    {
+        ToggleCollisionLayerVisibility(true);
+    }
+
+    [MenuItem("Tools/Map/Hide Collision Layer")]
+    public static void HideCollisionLayer()
+    {
+        ToggleCollisionLayerVisibility(false);
     }
 
     /// <summary>
@@ -122,6 +158,7 @@ public static class MapTilemapTools
     [MenuItem("Tools/Map/Validate Current Map")]
     public static void ValidateCurrentMap()
     {
+        EnsureSortingLayersExist();
         var warnings = new List<string>();
         var grid = GameObject.Find(GridName)?.GetComponent<Grid>();
         if (grid == null)
@@ -130,6 +167,11 @@ public static class MapTilemapTools
         }
         else
         {
+            if (grid.cellLayout != TargetCellLayout)
+            {
+                warnings.Add($"Grid cellLayout is {grid.cellLayout}, expected {TargetCellLayout}.");
+            }
+
             foreach (var definition in LayerDefinitions)
             {
                 var layer = FindDirectChild(grid.transform, definition.Name);
@@ -140,13 +182,33 @@ public static class MapTilemapTools
                 }
 
                 if (layer.GetComponent<Tilemap>() == null) warnings.Add($"{definition.Name} is missing Tilemap.");
-                if (layer.GetComponent<TilemapRenderer>() == null) warnings.Add($"{definition.Name} is missing TilemapRenderer.");
+                var renderer = layer.GetComponent<TilemapRenderer>();
+                if (renderer == null)
+                {
+                    warnings.Add($"{definition.Name} is missing TilemapRenderer.");
+                }
+                else if (!string.IsNullOrEmpty(definition.SortingLayerName) && renderer.sortingLayerName != definition.SortingLayerName)
+                {
+                    warnings.Add($"{definition.Name} sorting layer is {renderer.sortingLayerName}, expected {definition.SortingLayerName}.");
+                }
 
                 if (definition.NeedsCollider)
                 {
+                    var wallLayer = LayerMask.NameToLayer(WallPhysicsLayerName);
+                    if (wallLayer >= 0 && layer.layer != wallLayer)
+                    {
+                        warnings.Add($"{definition.Name} GameObject layer is {LayerMask.LayerToName(layer.layer)}, expected {WallPhysicsLayerName}.");
+                    }
+
                     if (layer.GetComponent<TilemapCollider2D>() == null) warnings.Add($"{definition.Name} is missing TilemapCollider2D.");
                     if (layer.GetComponent<CompositeCollider2D>() == null) warnings.Add($"{definition.Name} is missing CompositeCollider2D.");
                     if (layer.GetComponent<Rigidbody2D>() == null) warnings.Add($"{definition.Name} is missing Rigidbody2D.");
+
+                    var tilemap = layer.GetComponent<Tilemap>();
+                    if (tilemap != null && !HasAnyTile(tilemap))
+                    {
+                        warnings.Add($"{definition.Name} has no tiles. Paint blocking tiles here (then you can hide this layer).");
+                    }
                 }
             }
         }
@@ -176,13 +238,129 @@ public static class MapTilemapTools
     private static Grid FindOrCreateGrid()
     {
         var grid = GameObject.Find(GridName)?.GetComponent<Grid>();
-        if (grid != null) return grid;
+        if (grid != null)
+        {
+            ConfigureGrid(grid);
+            return grid;
+        }
 
         var gridObject = new GameObject(GridName);
         Undo.RegisterCreatedObjectUndo(gridObject, "Create Grid");
         grid = gridObject.AddComponent<Grid>();
-        grid.cellSize = Vector3.one;
+        ConfigureGrid(grid);
         return grid;
+    }
+
+    private static void EnsureStandardTilemapLayers(Grid grid)
+    {
+        ConfigureGrid(grid);
+        EnsureSortingLayersExist();
+        var ensureOrder = 0;
+        foreach (var definition in LayerDefinitions)
+        {
+            var layer = FindDirectChild(grid.transform, definition.Name);
+            if (layer == null)
+            {
+                layer = new GameObject(definition.Name);
+                Undo.RegisterCreatedObjectUndo(layer, $"Create {definition.Name} Tilemap");
+                layer.transform.SetParent(grid.transform);
+                layer.transform.localPosition = Vector3.zero;
+                layer.transform.localRotation = Quaternion.identity;
+                layer.transform.localScale = Vector3.one;
+            }
+
+            if (definition.NeedsCollider)
+            {
+                var wallLayer = LayerMask.NameToLayer(WallPhysicsLayerName);
+                if (wallLayer >= 0) layer.layer = wallLayer;
+            }
+
+            // 每个地图层都必须有 Tilemap 和 TilemapRenderer，才能在 Scene 里绘制并渲染瓦片。
+            EnsureComponent<Tilemap>(layer);
+            var renderer = EnsureComponent<TilemapRenderer>(layer);
+            if (!string.IsNullOrEmpty(definition.SortingLayerName))
+            {
+                renderer.sortingLayerName = definition.SortingLayerName;
+            }
+
+            renderer.sortingOrder = definition.SortingOrder;
+            renderer.sortOrder = TargetSortOrder;
+            if (definition.HideRendererByDefault) renderer.enabled = false;
+            layer.transform.SetSiblingIndex(ensureOrder++);
+        }
+    }
+
+    private static void ConfigureGrid(Grid grid)
+    {
+        Undo.RecordObject(grid, "Configure Isometric Grid");
+        grid.cellLayout = TargetCellLayout;
+        grid.cellGap = Vector3.zero;
+        if (grid.cellSize == Vector3.one) grid.cellSize = TargetCellSize;
+    }
+
+    private static void EnsureCollisionComponents(Grid grid)
+    {
+        foreach (var definition in LayerDefinitions)
+        {
+            if (!definition.NeedsCollider) continue;
+
+            var layer = FindDirectChild(grid.transform, definition.Name);
+            if (layer == null) continue;
+
+            var rigidbody2D = EnsureComponent<Rigidbody2D>(layer);
+            rigidbody2D.bodyType = RigidbodyType2D.Static;
+
+            var tilemapCollider = EnsureComponent<TilemapCollider2D>(layer);
+            tilemapCollider.usedByComposite = true;
+
+            EnsureComponent<CompositeCollider2D>(layer);
+        }
+    }
+
+    private static void ToggleCollisionLayerVisibility(bool visible)
+    {
+        var grid = GameObject.Find(GridName)?.GetComponent<Grid>();
+        if (grid == null) return;
+        var layer = FindDirectChild(grid.transform, "Collision");
+        if (layer == null) return;
+        var renderer = layer.GetComponent<TilemapRenderer>();
+        if (renderer == null) return;
+        Undo.RecordObject(renderer, "Toggle Collision Layer Visibility");
+        renderer.enabled = visible;
+        EditorSceneManager.MarkSceneDirty(layer.scene);
+        Selection.activeGameObject = layer;
+    }
+
+    private static bool HasAnyTile(Tilemap tilemap)
+    {
+        var bounds = tilemap.cellBounds;
+        foreach (var pos in bounds.allPositionsWithin)
+        {
+            if (tilemap.GetTile(pos) != null) return true;
+        }
+
+        return false;
+    }
+
+    private static void TryAutoUpgradeLegacyLayers(Grid grid, List<string> logs)
+    {
+        for (var i = 0; i < LegacyLayerRenames.Length; i++)
+        {
+            var rename = LegacyLayerRenames[i];
+            var legacyLayer = FindDirectChild(grid.transform, rename.LegacyName);
+            if (legacyLayer == null) continue;
+
+            var targetLayer = FindDirectChild(grid.transform, rename.NewName);
+            if (targetLayer != null)
+            {
+                logs.Add($"Skip rename: {rename.LegacyName} -> {rename.NewName} (target already exists).");
+                continue;
+            }
+
+            Undo.RecordObject(legacyLayer, $"Rename {rename.LegacyName} to {rename.NewName}");
+            legacyLayer.name = rename.NewName;
+            logs.Add($"Renamed {rename.LegacyName} -> {rename.NewName}.");
+        }
     }
 
     private static GameObject FindDirectChild(Transform parent, string childName)
@@ -203,6 +381,61 @@ public static class MapTilemapTools
         return Undo.AddComponent<T>(target);
     }
 
+    private static void EnsureSortingLayersExist()
+    {
+        var tagManager = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset");
+        if (tagManager == null || tagManager.Length == 0) return;
+        var serialized = new SerializedObject(tagManager[0]);
+        var layersProp = serialized.FindProperty("m_SortingLayers");
+        if (layersProp == null || !layersProp.isArray) return;
+
+        EnsureSortingLayer(layersProp, SortingLayerMapBack);
+        EnsureSortingLayer(layersProp, SortingLayerActor);
+        EnsureSortingLayer(layersProp, SortingLayerMapFront);
+
+        serialized.ApplyModifiedProperties();
+    }
+
+    private static void EnsureSortingLayer(SerializedProperty sortingLayers, string name)
+    {
+        for (var i = 0; i < sortingLayers.arraySize; i++)
+        {
+            var entry = sortingLayers.GetArrayElementAtIndex(i);
+            var entryName = entry.FindPropertyRelative("name");
+            if (entryName != null && entryName.stringValue == name) return;
+        }
+
+        var ids = new HashSet<int>();
+        for (var i = 0; i < sortingLayers.arraySize; i++)
+        {
+            var entry = sortingLayers.GetArrayElementAtIndex(i);
+            var idProp = entry.FindPropertyRelative("uniqueID");
+            if (idProp != null) ids.Add(idProp.intValue);
+        }
+
+        var newId = MakeStableId(name);
+        while (newId == 0 || ids.Contains(newId)) newId++;
+
+        sortingLayers.InsertArrayElementAtIndex(sortingLayers.arraySize);
+        var newEntry = sortingLayers.GetArrayElementAtIndex(sortingLayers.arraySize - 1);
+        var newName = newEntry.FindPropertyRelative("name");
+        var newUniqueId = newEntry.FindPropertyRelative("uniqueID");
+        var newLocked = newEntry.FindPropertyRelative("locked");
+        if (newName != null) newName.stringValue = name;
+        if (newUniqueId != null) newUniqueId.intValue = newId;
+        if (newLocked != null) newLocked.intValue = 0;
+    }
+
+    private static int MakeStableId(string value)
+    {
+        unchecked
+        {
+            var hash = value.GetHashCode();
+            if (hash == 0) hash = 1;
+            return hash;
+        }
+    }
+
     private static void EnsureMarkerGroup(Transform root, string groupName)
     {
         if (FindDirectChild(root, groupName) != null) return;
@@ -218,14 +451,30 @@ public static class MapTilemapTools
     private readonly struct TilemapLayerDefinition
     {
         public readonly string Name;
+        public readonly string SortingLayerName;
         public readonly int SortingOrder;
         public readonly bool NeedsCollider;
+        public readonly bool HideRendererByDefault;
 
-        public TilemapLayerDefinition(string name, int sortingOrder, bool needsCollider)
+        public TilemapLayerDefinition(string name, string sortingLayerName, int sortingOrder, bool needsCollider, bool hideRendererByDefault)
         {
             Name = name;
+            SortingLayerName = sortingLayerName;
             SortingOrder = sortingOrder;
             NeedsCollider = needsCollider;
+            HideRendererByDefault = hideRendererByDefault;
+        }
+    }
+
+    private readonly struct LegacyLayerRenameDefinition
+    {
+        public readonly string LegacyName;
+        public readonly string NewName;
+
+        public LegacyLayerRenameDefinition(string legacyName, string newName)
+        {
+            LegacyName = legacyName;
+            NewName = newName;
         }
     }
 }

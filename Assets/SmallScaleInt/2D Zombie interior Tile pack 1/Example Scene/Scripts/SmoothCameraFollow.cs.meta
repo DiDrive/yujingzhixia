@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 1ff4d4ba6f6e06e46970a95c9a7ddc9f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 312874
+  packageName: Zombie Rural - HD Isometric Tileset
+  packageVersion: 1.1
+  assetPath: Assets/SmallScaleInt/2D Zombie Rural Tile pack 1/Example Scene/Scripts/SmoothCameraFollow.cs
+  uploadId: 742232

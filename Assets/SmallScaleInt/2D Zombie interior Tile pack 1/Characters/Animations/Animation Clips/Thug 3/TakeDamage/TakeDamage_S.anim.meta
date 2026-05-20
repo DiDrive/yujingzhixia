@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3446198535c6e9e4ab899a97e73a41b1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 312874
+  packageName: Zombie Rural - HD Isometric Tileset
+  packageVersion: 1.1
+  assetPath: Assets/SmallScaleInt/2D Zombie Rural Tile pack 1/Characters/Animations/Animation
+    Clips/CityZombie 3/TakeDamage/TakeDamage_S.anim
+  uploadId: 742232
