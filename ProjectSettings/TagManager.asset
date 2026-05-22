@@ -50,6 +50,9 @@ TagManager:
   - name: Actor
     uniqueID: 1535939025
     locked: 0
+  - name: stair
+    uniqueID: 1052182825
+    locked: 0
   - name: MapFront
     uniqueID: 2633162357
     locked: 0
