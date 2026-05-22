@@ -93,11 +93,14 @@
     <Compile Include="Assets\Scripts\Gameplay\Map\MapRegionTrigger.cs" />
     <Compile Include="Assets\Scripts\Inventory\InventoryService.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridItemInstance.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Rendering\FloorSortingState.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridPlacementSolver.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Rendering\SpriteSortByY.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Map\FloorTransitionTrigger2D.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridAutoSortResult.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Combat\WeaponDefinition.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridItemDefinition.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Map\FloorRenderOverrideTrigger2D.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Zombie\EnemyHealth2D.cs" />
     <Compile Include="Assets\SmallScaleInt\2D Zombie interior Tile pack 1\Example Scene\Scripts\RoofVisibility.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Shelter\ShelterModuleService.cs" />

@@ -20,6 +20,14 @@ public class SpriteSortByY : MonoBehaviour
     [Tooltip("为 true 时：运行时如果没有 SortingGroup，会自动补一个到当前物体，方便多 Sprite 对象统一排序。")]
     [SerializeField] private bool autoAddSortingGroup = true;
 
+    [Header("Floor")]
+    [Tooltip("用于决定 Sorting Layer 的楼层状态组件。为空时自动从当前物体或父物体查找。")]
+    [SerializeField] private FloorSortingState floorSortingState;
+    [Tooltip("为 true 时：同步驱动 Sorting Layer。为 false 时只驱动 sortingOrder。")]
+    [SerializeField] private bool controlSortingLayer = true;
+    [Tooltip("楼层渲染使用的 Sorting Layer 前缀。例如 Actor_F0/Actor_F1，则前缀为 Actor_F。")]
+    [SerializeField] private string sortingLayerPrefix = "Actor_F";
+
     [Header("Rule")]
     [Tooltip("每 1 个世界单位对应多少 sortingOrder。值越大，前后层级越细。")]
     [SerializeField] private int orderPerUnit = 100;
@@ -29,6 +37,7 @@ public class SpriteSortByY : MonoBehaviour
     [SerializeField] private bool updateContinuously = true;
 
     private int lastAppliedOrder = int.MinValue;
+    private string lastAppliedSortingLayerName;
 
     private void Reset()
     {
@@ -83,13 +92,27 @@ public class SpriteSortByY : MonoBehaviour
         }
 
         if (targetSpriteRenderer == null) targetSpriteRenderer = GetComponent<SpriteRenderer>();
+        if (floorSortingState == null) floorSortingState = GetComponentInParent<FloorSortingState>();
     }
 
     private void ApplySorting(bool force)
     {
         var anchor = sortPoint != null ? sortPoint.position : transform.position;
         var order = orderOffset - Mathf.RoundToInt(anchor.y * orderPerUnit);
-        if (!force && order == lastAppliedOrder) return;
+        var desiredLayer = ResolveSortingLayerName();
+        if (!force && order == lastAppliedOrder && desiredLayer == lastAppliedSortingLayerName) return;
+
+        if (controlSortingLayer && !string.IsNullOrWhiteSpace(desiredLayer))
+        {
+            if (targetSortingGroup != null)
+            {
+                targetSortingGroup.sortingLayerName = desiredLayer;
+            }
+            else if (targetSpriteRenderer != null)
+            {
+                targetSpriteRenderer.sortingLayerName = desiredLayer;
+            }
+        }
 
         if (targetSortingGroup != null)
         {
@@ -101,5 +124,20 @@ public class SpriteSortByY : MonoBehaviour
         }
 
         lastAppliedOrder = order;
+        lastAppliedSortingLayerName = desiredLayer;
+    }
+
+    private string ResolveSortingLayerName()
+    {
+        if (!controlSortingLayer) return null;
+        if (string.IsNullOrWhiteSpace(sortingLayerPrefix)) return null;
+
+        var floor = 0;
+        if (floorSortingState != null)
+        {
+            floor = floorSortingState.RenderFloorIndex;
+        }
+
+        return $"{sortingLayerPrefix}{floor}";
     }
 }

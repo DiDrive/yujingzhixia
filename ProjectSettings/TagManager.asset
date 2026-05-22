@@ -41,18 +41,42 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: MapBack
+  - name: MapBack_F0
     uniqueID: 1759609739
     locked: 0
   - name: fly
     uniqueID: 1576672137
     locked: 0
-  - name: Actor
+  - name: Actor_F0
     uniqueID: 1535939025
     locked: 0
-  - name: stair
+  - name: Stair_F0
     uniqueID: 1052182825
     locked: 0
-  - name: MapFront
+  - name: MapFront_F0
     uniqueID: 2633162357
+    locked: 0
+  - name: MapBack_F1
+    uniqueID: 2597283927
+    locked: 0
+  - name: Actor_F1
+    uniqueID: 1070984957
+    locked: 0
+  - name: Stair_F1
+    uniqueID: 1966288825
+    locked: 0
+  - name: MapFront_F1
+    uniqueID: 1199018085
+    locked: 0
+  - name: MapBack_F2
+    uniqueID: 2016945275
+    locked: 0
+  - name: Actor_F2
+    uniqueID: 3821765221
+    locked: 0
+  - name: Stair_F2
+    uniqueID: 1976564107
+    locked: 0
+  - name: MapFront_F2
+    uniqueID: 1709935353
     locked: 0
