@@ -267,7 +267,7 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
         var filter = new ContactFilter2D();
         filter.useTriggers = false;
         filter.useLayerMask = true;
-        filter.layerMask = movementCollisionMask;
+        filter.layerMask = FloorLayerUtility.GetMovementCollisionMaskForCurrentFloor(transform, movementCollisionMask);
 
         var hitCount = rb.Cast(dir, filter, castResults, moveDistance + Mathf.Max(0f, movementSkin));
         var allowedDistance = moveDistance;
@@ -458,7 +458,7 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
         if (isDead) return;
         var range = CurrentAttackRange;
         var radius = CurrentAttackRadius;
-        var hitMask = CurrentHitMask;
+        var hitMask = FloorLayerUtility.GetActorHitMaskForCurrentFloor(transform, CurrentHitMask);
         var knockback = 0.9f;
         if (currentWeapon != null && currentWeapon.type == WeaponType.Melee && currentWeapon.melee.knockback > 0f)
         {
@@ -474,6 +474,8 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
             var col = hits[i];
             if (col == null) continue;
             if (col.attachedRigidbody != null && col.attachedRigidbody.gameObject == gameObject) continue;
+            if (!FloorLayerUtility.AreOnSameFloor(transform, col.transform)) continue;
+            if (!FloorLayerUtility.AreHostile(transform, col.transform)) continue;
             hitCount++;
 
             if (global::HitReceiverUtil.TryGet(col, out var hitReceiver))
@@ -509,7 +511,9 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
             Mathf.Max(0.01f, ranged.projectileLifetime),
             Mathf.Max(0f, ranged.damage),
             Mathf.Max(0f, ranged.knockback),
-            ranged.hitMask.value == 0 ? defaultHitMask : ranged.hitMask);
+            FloorLayerUtility.GetProjectileHitMaskForCurrentFloor(
+                transform,
+                ranged.hitMask.value == 0 ? defaultHitMask : ranged.hitMask));
     }
 
     private void UpdateProjectileSpawnPoint()

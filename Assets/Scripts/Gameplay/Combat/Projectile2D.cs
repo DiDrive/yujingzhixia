@@ -111,6 +111,8 @@ namespace Gameplay.Combat
             if (other == null) return;
             if (ownerRoot != null && other.transform != null && other.transform.IsChildOf(ownerRoot)) return;
             if (((1 << other.gameObject.layer) & hitMask.value) == 0) return;
+            if (ownerRoot != null && !FloorLayerUtility.AreOnSameFloor(ownerRoot, other.transform)) return;
+            if (ownerRoot != null && IsActorTarget(other.transform) && !FloorLayerUtility.AreHostile(ownerRoot, other.transform)) return;
 
             var closest = other.ClosestPoint(transform.position);
             if (hitBackoffDistance > 0f)
@@ -180,6 +182,13 @@ namespace Gameplay.Combat
             return Mathf.Abs(dir.x) >= Mathf.Abs(dir.y)
                 ? new Vector2(Mathf.Sign(dir.x), 0f)
                 : new Vector2(0f, Mathf.Sign(dir.y));
+        }
+
+        private static bool IsActorTarget(Transform target)
+        {
+            if (target == null) return false;
+            return target.GetComponentInParent<PlayerCombatController2D>() != null ||
+                   target.GetComponentInParent<ZombieController2D>() != null;
         }
     }
 }

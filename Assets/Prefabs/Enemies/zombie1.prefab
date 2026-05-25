@@ -14,12 +14,14 @@ GameObject:
   - component: {fileID: 707123207456330441}
   - component: {fileID: 7529190307762511673}
   - component: {fileID: 288709995018925734}
+  - component: {fileID: 1378220393210217693}
   - component: {fileID: 8700294322270730734}
   - component: {fileID: 99858534299292226}
   - component: {fileID: 5019216550485316495}
-  m_Layer: 13
+  - component: {fileID: 6552564501584395773}
+  m_Layer: 17
   m_Name: zombie1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,7 +36,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.935196, y: 15.31553, z: -0.09219828}
-  m_LocalScale: {x: 3.125, y: 3.125, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,8 +79,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1535939025
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -832179286, guid: 25594018f87d85b46aa672ec093a4b35, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -144,18 +146,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0050326064, y: -0.028519064}
+  m_Offset: {x: -0.02198553, y: -0.103597164}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.17572756, y: 0.29651368}
+  m_Size: {x: 0.4421339, y: 0.79541874}
   m_EdgeRadius: 0
 --- !u!50 &7529190307762511673
 Rigidbody2D:
@@ -209,6 +211,44 @@ MonoBehaviour:
   movement: {fileID: 5019216550485316495}
   attack: {fileID: 8700294322270730734}
   health: {fileID: 99858534299292226}
+  fadeCorpseAfterDeath: 1
+  corpseFadeDelaySeconds: 0.8
+  corpseFadeDurationSeconds: 1.2
+  destroyAfterFade: 0
+  stopImmediatelyWhenNotChasing: 1
+  enableKnockback: 1
+  knockbackImpulseScale: 6
+  hitStunSeconds: 0.2
+  enableHitFlash: 1
+  hitFlashColor: {r: 1, g: 0.45, b: 0.45, a: 1}
+  hitFlashDurationSeconds: 0.08
+  enableHitstop: 0
+  hitstopDurationSeconds: 0.05
+  enableCameraShake: 0
+  cameraShakeDurationSeconds: 0.08
+  cameraShakeMagnitude: 0.12
+--- !u!114 &1378220393210217693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5219986704337617594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d9e09bd2b921ba4d9d9694515182de8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sortPoint: {fileID: 2356790052268135674}
+  targetSortingGroup: {fileID: 6552564501584395773}
+  targetSpriteRenderer: {fileID: 1431673916007094404}
+  autoAddSortingGroup: 1
+  floorSortingState: {fileID: 0}
+  controlSortingLayer: 1
+  sortingLayerPrefix: Actor_F
+  orderPerUnit: 100
+  orderOffset: 0
+  updateContinuously: 1
 --- !u!114 &8700294322270730734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,12 +261,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bbdd2b46fc352b4fa8a3805424cbec0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 1.1
+  attackRange: 1
   attackDamage: 10
-  attackCooldownSeconds: 0.9
+  attackCooldownSeconds: 1.3
+  knockback: 0.7
   dealDamageOnAnimationEvent: 1
   animator: {fileID: 6158292804187558653}
   attackTrigger: Attack
+  fallbackHitDelaySeconds: 0.2
+  attackLockSeconds: 1.3
 --- !u!114 &99858534299292226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,8 +282,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3875c1e5b354b514e8a8804098781472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 60
-  currentHp: 60
+  maxHp: 600
+  currentHp: 600
 --- !u!114 &5019216550485316495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,4 +296,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32f31b8f9a66d3c47987a88865dd9dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1.8
+  moveSpeed: 1
+  stopDistance: 1
+--- !u!210 &6552564501584395773
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5219986704337617594}
+  m_Enabled: 1
+  m_SortingLayerID: 1535939025
+  m_SortingLayer: 3
+  m_SortingOrder: -1767
+  m_SortAtRoot: 0

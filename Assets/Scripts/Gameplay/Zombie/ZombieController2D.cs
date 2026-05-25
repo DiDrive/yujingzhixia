@@ -170,6 +170,12 @@ public class ZombieController2D : MonoBehaviour, IDamageable, global::IHitReceiv
             return;
         }
 
+        if (!FloorLayerUtility.AreOnSameFloor(transform, target))
+        {
+            State = ZombieState.Idle;
+            return;
+        }
+
         var dist = Vector2.Distance(transform.position, target.position);
         if (dist > detectRange)
         {

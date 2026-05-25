@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -22,11 +23,11 @@ TagManager:
   - Wall
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Actor_F0
+  - Actor_F1
+  - Wall_F0
+  - Wall_F1
+  - Wall_F2
   - 
   - 
   - 
@@ -79,4 +80,13 @@ TagManager:
     locked: 0
   - name: MapFront_F2
     uniqueID: 1709935353
+    locked: 0
+  - name: MapBack
+    uniqueID: 1759609740
+    locked: 0
+  - name: Actor
+    uniqueID: 0
+    locked: 0
+  - name: MapFront
+    uniqueID: 0
     locked: 0

@@ -104,6 +104,7 @@
     <Compile Include="Assets\Scripts\Gameplay\Zombie\EnemyHealth2D.cs" />
     <Compile Include="Assets\SmallScaleInt\2D Zombie interior Tile pack 1\Example Scene\Scripts\RoofVisibility.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Shelter\ShelterModuleService.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Map\FloorLayerUtility.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Zombie\AnimatorParamUtil2D.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Combat\DebugDamageableTarget.cs" />
     <Compile Include="Assets\Scripts\Core\GamePhase.cs" />
