@@ -44,6 +44,12 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
     [SerializeField] private LayerMask movementCollisionMask = ~0;
     [Tooltip("移动时与碰撞体保持的最小间隙，避免卡进碰撞体导致抖动。")]
     [SerializeField] private float movementSkin = 0.02f;
+    [Tooltip("为 true 时：每次移动后检查是否与墙体重叠，若重叠则自动推出去。用于楼梯切层、斜向通道等边界情况下的保底防卡墙。")]
+    [SerializeField] private bool resolveWallOverlaps = true;
+    [Tooltip("单次 FixedUpdate 最多执行多少次重叠推出迭代。值越大越稳，但也会多做几次碰撞计算。")]
+    [SerializeField] private int maxOverlapResolveIterations = 4;
+    [Tooltip("推出墙体时额外补的安全间隙，避免刚分离又立刻再次轻微重叠。")]
+    [SerializeField] private float overlapResolvePadding = 0.01f;
 
     [Header("Hit Feedback")]
     [Tooltip("被攻击时的击退距离（单位）。当攻击方传入 DamageInfo.Knockback > 0 时会覆盖该值。")]
@@ -136,6 +142,7 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
     [SerializeField] private string hitTriggerParam = "Hit";
 
     private Rigidbody2D rb;
+    private Collider2D primaryCollider;
     private Camera mainCamera;
     private Vector2 moveInput;
     private Vector2 moveInputRaw;
@@ -182,6 +189,7 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        primaryCollider = GetComponent<Collider2D>();
         mainCamera = Camera.main;
         if (rb != null && useKinematicMotor)
         {
@@ -251,6 +259,7 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
         {
             rb.velocity = velocity;
             currentMoveVelocity = rb.velocity;
+            if (resolveWallOverlaps) ResolveWallOverlaps();
             return;
         }
 
@@ -280,11 +289,13 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
 
         var appliedMove = dir * allowedDistance;
         rb.MovePosition(rb.position + appliedMove);
+        if (resolveWallOverlaps) ResolveWallOverlaps();
         rb.velocity = Vector2.zero;
         currentMoveVelocity = appliedMove / Time.fixedDeltaTime;
     }
 
     private readonly RaycastHit2D[] castResults = new RaycastHit2D[8];
+    private readonly Collider2D[] overlapResults = new Collider2D[8];
 
     private Vector2 ConvertMoveInput(Vector2 inputRaw)
     {
@@ -297,6 +308,39 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
         var right = obliqueRightAxis.sqrMagnitude <= 0.0001f ? new Vector2(1f, -1f) : obliqueRightAxis.normalized;
         var mapped = right * inputRaw.x + up * inputRaw.y;
         return mapped.sqrMagnitude > 1f ? mapped.normalized : mapped;
+    }
+
+    private void ResolveWallOverlaps()
+    {
+        if (rb == null || primaryCollider == null) return;
+
+        var filter = new ContactFilter2D();
+        filter.useLayerMask = true;
+        filter.useTriggers = false;
+        filter.layerMask = FloorLayerUtility.GetWallOnlyMaskForCurrentFloor(transform);
+
+        var iterations = Mathf.Max(1, maxOverlapResolveIterations);
+        for (var iteration = 0; iteration < iterations; iteration++)
+        {
+            var overlapCount = primaryCollider.OverlapCollider(filter, overlapResults);
+            var totalSeparation = Vector2.zero;
+            var overlapFound = false;
+
+            for (var i = 0; i < overlapCount; i++)
+            {
+                var other = overlapResults[i];
+                if (other == null || other == primaryCollider) continue;
+
+                var distance = primaryCollider.Distance(other);
+                if (!distance.isOverlapped) continue;
+
+                overlapFound = true;
+                totalSeparation += distance.normal * (distance.distance - Mathf.Max(0f, overlapResolvePadding));
+            }
+
+            if (!overlapFound || totalSeparation.sqrMagnitude <= 0.0000001f) return;
+            rb.position += totalSeparation;
+        }
     }
 
     private void UpdateLookDirection()

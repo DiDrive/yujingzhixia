@@ -12,9 +12,14 @@ public static class FloorLayerUtility
     public const string ActorLayerPrefix = "Actor_F";
     public const string WallLayerPrefix = "Wall_F";
 
-    public static string GetActorLayerName(int floorIndex)
+    public static string GetActorSortingLayerName(int floorIndex)
     {
         return $"{ActorLayerPrefix}{Mathf.Max(0, floorIndex)}";
+    }
+
+    public static string GetActorLayerName(int floorIndex)
+    {
+        return GetActorSortingLayerName(floorIndex);
     }
 
     public static string GetWallLayerName(int floorIndex)
@@ -69,6 +74,33 @@ public static class FloorLayerUtility
         return value;
     }
 
+    public static LayerMask GetSightBlockMaskForCurrentFloor(Transform source, LayerMask baseMask)
+    {
+        var value = baseMask.value;
+        var floorIndex = GetFloorIndex(source);
+        if (floorIndex < 0) return value;
+
+        var wallLayer = GetWallLayer(floorIndex);
+        if (wallLayer >= 0) value |= 1 << wallLayer;
+        return value;
+    }
+
+    public static LayerMask GetWallOnlyMaskForCurrentFloor(Transform source)
+    {
+        var value = 0;
+        var legacyWallLayer = LayerMask.NameToLayer("Wall");
+        if (legacyWallLayer >= 0) value |= 1 << legacyWallLayer;
+
+        var floorIndex = GetFloorIndex(source);
+        if (floorIndex >= 0)
+        {
+            var wallLayer = GetWallLayer(floorIndex);
+            if (wallLayer >= 0) value |= 1 << wallLayer;
+        }
+
+        return value;
+    }
+
     public static LayerMask GetProjectileHitMaskForCurrentFloor(Transform source, LayerMask baseMask)
     {
         var value = GetActorHitMaskForCurrentFloor(source, baseMask).value;
@@ -92,5 +124,12 @@ public static class FloorLayerUtility
         if (sourceIsPlayer && targetIsZombie) return true;
         if (sourceIsZombie && targetIsPlayer) return true;
         return false;
+    }
+
+    public static bool IsWallLayer(int layer)
+    {
+        if (layer < 0) return false;
+        var layerName = LayerMask.LayerToName(layer);
+        return layerName == "Wall" || layerName.StartsWith(WallLayerPrefix);
     }
 }

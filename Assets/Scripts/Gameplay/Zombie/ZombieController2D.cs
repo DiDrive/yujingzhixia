@@ -23,6 +23,10 @@ public class ZombieController2D : MonoBehaviour, IDamageable, global::IHitReceiv
     [SerializeField] private float detectRange = 6f;
     [Tooltip("为 true 时：target 为空会自动查找场景中的 PlayerCombatController2D 作为目标。")]
     [SerializeField] private bool autoFindPlayerTarget = true;
+    [Tooltip("为 true 时：只有与目标之间没有墙体遮挡时，僵尸才会锁定、追击和攻击。")]
+    [SerializeField] private bool requireLineOfSight = true;
+    [Tooltip("阻挡视线的基础层。运行时会自动补当前楼层的 Wall_Fx。建议至少勾选 Wall。")]
+    [SerializeField] private LayerMask lineOfSightBlockMask = ~0;
 
     [Header("Animation")]
     [Tooltip("角色 Animator。为空时会自动从子物体中查找。")]
@@ -176,6 +180,12 @@ public class ZombieController2D : MonoBehaviour, IDamageable, global::IHitReceiv
             return;
         }
 
+        if (requireLineOfSight && !HasLineOfSight(target))
+        {
+            State = ZombieState.Idle;
+            return;
+        }
+
         var dist = Vector2.Distance(transform.position, target.position);
         if (dist > detectRange)
         {
@@ -196,6 +206,28 @@ public class ZombieController2D : MonoBehaviour, IDamageable, global::IHitReceiv
         }
 
         State = ZombieState.Chase;
+    }
+
+    private bool HasLineOfSight(Transform targetTransform)
+    {
+        if (targetTransform == null) return false;
+
+        var blockerMask = FloorLayerUtility.GetSightBlockMaskForCurrentFloor(transform, lineOfSightBlockMask);
+        if (blockerMask.value == 0) return true;
+
+        var origin = (Vector2)transform.position;
+        var destination = (Vector2)targetTransform.position;
+        var hits = Physics2D.LinecastAll(origin, destination, blockerMask);
+        for (var i = 0; i < hits.Length; i++)
+        {
+            if (hits[i].collider == null) continue;
+            if (hits[i].transform == null) continue;
+            if (hits[i].transform.IsChildOf(transform)) continue;
+            if (hits[i].transform.IsChildOf(targetTransform)) continue;
+            return false;
+        }
+
+        return true;
     }
 
     private void ApplyMovement()

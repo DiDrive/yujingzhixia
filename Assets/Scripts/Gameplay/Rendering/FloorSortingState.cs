@@ -14,6 +14,8 @@ public class FloorSortingState : MonoBehaviour
     [Header("Stair")]
     [Tooltip("逻辑楼层的临时覆盖值。-1 表示不覆盖，使用 FloorIndex。适用于楼梯过渡段提前切到高一层碰撞。")]
     [SerializeField] private int temporaryFloorOverride = -1;
+    [Tooltip("楼层显示的临时覆盖值。-1 表示不覆盖，使用 FloorIndex。适用于楼梯入口已提前切碰撞，但画面仍保持在原楼层，直到走到楼梯平台再切显示。")]
+    [SerializeField] private int visibilityFloorOverride = -1;
 
     [Header("Physics")]
     [Tooltip("为 true 时：在正式切换 FloorIndex 时，同步把当前对象的 Unity Layer 切到 Actor_Fx。建议挂在玩家/僵尸根节点上。")]
@@ -36,6 +38,9 @@ public class FloorSortingState : MonoBehaviour
 
     [Tooltip("最终用于渲染的楼层索引。优先使用 RenderFloorOverride，否则使用 FloorIndex。")]
     public int RenderFloorIndex => renderFloorOverride >= 0 ? renderFloorOverride : ActiveFloorIndex;
+
+    [Tooltip("最终用于楼层显示控制的楼层索引。优先使用 visibilityFloorOverride，否则使用 FloorIndex。")]
+    public int VisibilityFloorIndex => visibilityFloorOverride >= 0 ? visibilityFloorOverride : floorIndex;
 
     private void Awake()
     {
@@ -81,6 +86,18 @@ public class FloorSortingState : MonoBehaviour
     {
         temporaryFloorOverride = -1;
         ApplyUnityLayerForCurrentFloor();
+    }
+
+    [Tooltip("设置楼层显示的临时覆盖。常用于楼梯入口已切到高一层碰撞，但显示仍保持在进入前楼层。")]
+    public void SetVisibilityOverride(int newFloorIndex)
+    {
+        visibilityFloorOverride = Mathf.Max(0, newFloorIndex);
+    }
+
+    [Tooltip("清除楼层显示的临时覆盖。显示会回到 FloorIndex 对应的楼层。")]
+    public void ClearVisibilityOverride()
+    {
+        visibilityFloorOverride = -1;
     }
 
     private void ApplyUnityLayerForCurrentFloor()

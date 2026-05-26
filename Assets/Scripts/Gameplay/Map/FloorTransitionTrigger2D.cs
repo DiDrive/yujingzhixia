@@ -44,7 +44,14 @@ public class FloorTransitionTrigger2D : MonoBehaviour
     [Tooltip("进入触发器后要切换到的目标逻辑楼层（FloorIndex）。用于楼梯顶端/底端平台的正式切层。")]
     [SerializeField] private int targetFloorIndex;
 
+    [Header("Collision Switch")]
+    [Tooltip("正式切层成功后要启用碰撞的对象。脚本会自动启用这些对象及其子物体上的 Collider2D。推荐直接拖 Floor_1/Collision 这类 Tilemap 根对象。")]
+    [SerializeField] private GameObject[] collisionObjectsToEnableOnActivate;
+    [Tooltip("正式切层成功后要禁用碰撞的对象。脚本会自动禁用这些对象及其子物体上的 Collider2D。推荐直接拖楼梯辅助碰撞对象。")]
+    [SerializeField] private GameObject[] collisionObjectsToDisableOnActivate;
+
     private readonly Dictionary<FloorSortingState, EntryState> trackedEntries = new();
+    private readonly Dictionary<FloorSortingState, bool> activatedStates = new();
     private BoxCollider2D triggerCollider;
 
     private void Reset()
@@ -72,7 +79,12 @@ public class FloorTransitionTrigger2D : MonoBehaviour
         if (!trackedEntries.TryGetValue(state, out var entryState)) return;
         if (!MatchesRequiredEntrySide(entryState.EntrySide)) return;
         if (GetProgressFromEntrySide(other, entryState.EntrySide) < Mathf.Clamp01(activationProgress)) return;
+        if (!activatedStates.TryAdd(state, true)) return;
+
         state.SetFloor(targetFloorIndex);
+        state.ClearVisibilityOverride();
+        ApplyCollisionObjectState(collisionObjectsToEnableOnActivate, true);
+        ApplyCollisionObjectState(collisionObjectsToDisableOnActivate, false);
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -80,6 +92,7 @@ public class FloorTransitionTrigger2D : MonoBehaviour
         var state = other.GetComponentInParent<FloorSortingState>();
         if (state == null) return;
         trackedEntries.Remove(state);
+        activatedStates.Remove(state);
     }
 
     private EntrySideMode GetEntrySide(Collider2D other)
@@ -131,5 +144,22 @@ public class FloorTransitionTrigger2D : MonoBehaviour
         var actorPoint = (Vector2)other.bounds.center;
         progress = Mathf.Clamp01(Vector2.Dot(actorPoint - start, axis) / lengthSqr);
         return true;
+    }
+
+    private static void ApplyCollisionObjectState(GameObject[] objects, bool enabled)
+    {
+        if (objects == null) return;
+        for (var i = 0; i < objects.Length; i++)
+        {
+            var obj = objects[i];
+            if (obj == null) continue;
+
+            var colliders = obj.GetComponentsInChildren<Collider2D>(true);
+            for (var j = 0; j < colliders.Length; j++)
+            {
+                if (colliders[j] == null) continue;
+                colliders[j].enabled = enabled;
+            }
+        }
     }
 }

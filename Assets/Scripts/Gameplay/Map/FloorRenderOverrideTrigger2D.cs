@@ -45,13 +45,26 @@ public class FloorRenderOverrideTrigger2D : MonoBehaviour
     [Header("Effect")]
     [Tooltip("进入触发器后临时设置的 RenderFloorIndex。常用于楼梯过渡段：FloorIndex 还没变，但渲染先抬到高一层的 Actor_Fx。")]
     [SerializeField] private int toRenderFloorIndex;
+    [Tooltip("为 true 时：达到触发阈值后直接正式切换到目标楼层，不再依赖离开触发区时回退。适合楼梯入口一进入就切到高一层。")]
+    [SerializeField] private bool commitFloorImmediately = true;
+    [Tooltip("为 true 时：即使入口触发器已经正式切换了碰撞楼层，楼层显示仍暂时保持在进入前楼层，直到平台触发器再清除覆盖。")]
+    [SerializeField] private bool keepVisibilityOnSourceFloorUntilTransition = true;
     [Tooltip("为 true 时：进入触发器后，同时临时把逻辑楼层切到 toRenderFloorIndex。这样角色能提前与高一层的 Wall_Fx 碰撞，不会被当前层挡住上楼。")]
     [SerializeField] private bool syncTemporaryFloorOverride = true;
 
     [Tooltip("为 true 时：只有当进入者 FloorIndex == fromFloorIndex 才会应用覆盖；退出时也只在 FloorIndex 仍等于 fromFloorIndex 时清除覆盖。")]
     [SerializeField] private bool onlyApplyWhenFromFloorMatches = true;
 
+    [Header("Collision Switch")]
+    [Tooltip("触发成功时要启用碰撞的对象。脚本会自动启用这些对象及其子物体上的 Collider2D。推荐直接拖楼梯辅助碰撞对象。")]
+    [SerializeField] private GameObject[] collisionObjectsToEnableOnActivate;
+    [Tooltip("触发成功时要禁用碰撞的对象。脚本会自动禁用这些对象及其子物体上的 Collider2D。推荐直接拖 Floor_1/Collision 这类 Tilemap 根对象。")]
+    [SerializeField] private GameObject[] collisionObjectsToDisableOnActivate;
+    [Tooltip("只有在非 commit 模式下才有意义。为 true 时：离开触发区会把上面启停的组件恢复到进入前的状态。")]
+    [SerializeField] private bool restoreBehaviourStateOnExit = true;
+
     private readonly Dictionary<FloorSortingState, EntryState> trackedEntries = new();
+    private readonly Dictionary<FloorSortingState, bool> activatedStates = new();
     private BoxCollider2D triggerCollider;
 
     private void Reset()
@@ -81,6 +94,21 @@ public class FloorRenderOverrideTrigger2D : MonoBehaviour
         if (onlyApplyWhenFromFloorMatches && state.FloorIndex != fromFloorIndex) return;
         if (!MatchesRequiredEntrySide(entryState.EntrySide)) return;
         if (GetProgressFromEntrySide(other, entryState.EntrySide) < Mathf.Clamp01(activationProgress)) return;
+        if (!activatedStates.TryAdd(state, true)) return;
+
+        ApplyCollisionObjectState(collisionObjectsToEnableOnActivate, true);
+        ApplyCollisionObjectState(collisionObjectsToDisableOnActivate, false);
+
+        if (commitFloorImmediately)
+        {
+            state.SetFloor(toRenderFloorIndex);
+            if (keepVisibilityOnSourceFloorUntilTransition)
+            {
+                state.SetVisibilityOverride(fromFloorIndex);
+            }
+            trackedEntries.Remove(state);
+            return;
+        }
 
         state.SetRenderOverride(toRenderFloorIndex);
         if (syncTemporaryFloorOverride) state.SetTemporaryFloorOverride(toRenderFloorIndex);
@@ -91,6 +119,14 @@ public class FloorRenderOverrideTrigger2D : MonoBehaviour
         var state = other.GetComponentInParent<FloorSortingState>();
         if (state == null) return;
         trackedEntries.Remove(state);
+        var wasActivated = activatedStates.Remove(state);
+        if (commitFloorImmediately) return;
+
+        if (wasActivated && restoreBehaviourStateOnExit)
+        {
+            ApplyCollisionObjectState(collisionObjectsToEnableOnActivate, false);
+            ApplyCollisionObjectState(collisionObjectsToDisableOnActivate, true);
+        }
 
         if (onlyApplyWhenFromFloorMatches && state.FloorIndex == fromFloorIndex)
         {
@@ -152,5 +188,22 @@ public class FloorRenderOverrideTrigger2D : MonoBehaviour
         var actorPoint = (Vector2)other.bounds.center;
         progress = Mathf.Clamp01(Vector2.Dot(actorPoint - start, axis) / lengthSqr);
         return true;
+    }
+
+    private static void ApplyCollisionObjectState(GameObject[] objects, bool enabled)
+    {
+        if (objects == null) return;
+        for (var i = 0; i < objects.Length; i++)
+        {
+            var obj = objects[i];
+            if (obj == null) continue;
+
+            var colliders = obj.GetComponentsInChildren<Collider2D>(true);
+            for (var j = 0; j < colliders.Length; j++)
+            {
+                if (colliders[j] == null) continue;
+                colliders[j].enabled = enabled;
+            }
+        }
     }
 }
