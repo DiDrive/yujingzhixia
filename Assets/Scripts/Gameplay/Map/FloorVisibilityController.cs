@@ -223,31 +223,7 @@ public class FloorVisibilityController : MonoBehaviour
         var root = floorsRoot != null ? floorsRoot : transform;
         if (root == null) return;
 
-        for (var i = 0; i < root.childCount; i++)
-        {
-            var floorRoot = root.GetChild(i);
-            if (!TryGetFloorIndex(floorRoot.name, out var floorIndex)) continue;
-
-            var renderers = floorRoot.GetComponentsInChildren<Renderer>(true);
-            for (var rendererIndex = 0; rendererIndex < renderers.Length; rendererIndex++)
-            {
-                var renderer = renderers[rendererIndex];
-                if (renderer == null) continue;
-
-                floorRenderers.Add(new FloorRendererEntry
-                {
-                    Renderer = renderer,
-                    SpriteRenderer = renderer as SpriteRenderer,
-                    Tilemap = renderer.GetComponent<Tilemap>(),
-                    InitialEnabled = renderer.enabled,
-                    InitialAlpha = GetInitialAlpha(renderer),
-                    CurrentAlpha = renderer.enabled ? GetInitialAlpha(renderer) : 0f,
-                    TargetAlpha = renderer.enabled ? GetInitialAlpha(renderer) : 0f,
-                    FloorIndex = floorIndex,
-                    GroupName = GetFloorGroupName(floorRoot, renderer.transform)
-                });
-            }
-        }
+        CollectFloorRenderersRecursive(root);
     }
 
     private void RefreshActorRendererCache()
@@ -291,6 +267,41 @@ public class FloorVisibilityController : MonoBehaviour
         var root = floorsRoot != null ? floorsRoot : transform;
         if (root == null || target == null) return false;
         return target.IsChildOf(root);
+    }
+
+    private void CollectFloorRenderersRecursive(Transform current)
+    {
+        if (current == null) return;
+
+        if (TryGetFloorIndex(current.name, out var floorIndex))
+        {
+            var renderers = current.GetComponentsInChildren<Renderer>(true);
+            for (var rendererIndex = 0; rendererIndex < renderers.Length; rendererIndex++)
+            {
+                var renderer = renderers[rendererIndex];
+                if (renderer == null) continue;
+
+                floorRenderers.Add(new FloorRendererEntry
+                {
+                    Renderer = renderer,
+                    SpriteRenderer = renderer as SpriteRenderer,
+                    Tilemap = renderer.GetComponent<Tilemap>(),
+                    InitialEnabled = renderer.enabled,
+                    InitialAlpha = GetInitialAlpha(renderer),
+                    CurrentAlpha = renderer.enabled ? GetInitialAlpha(renderer) : 0f,
+                    TargetAlpha = renderer.enabled ? GetInitialAlpha(renderer) : 0f,
+                    FloorIndex = floorIndex,
+                    GroupName = GetFloorGroupName(current, renderer.transform)
+                });
+            }
+
+            return;
+        }
+
+        for (var i = 0; i < current.childCount; i++)
+        {
+            CollectFloorRenderersRecursive(current.GetChild(i));
+        }
     }
 
     private static string GetFloorGroupName(Transform floorRoot, Transform rendererTransform)
