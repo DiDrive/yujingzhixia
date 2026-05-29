@@ -27,6 +27,8 @@ public class FloorVisibilityController : MonoBehaviour
     [Header("Visibility Rule")]
     [Tooltip("当前建筑显示模式。IndoorFocus 表示按当前楼层隐藏更高楼层；OutdoorShowAll 表示室外整楼显示。")]
     [SerializeField] private VisibilityMode visibilityMode = VisibilityMode.IndoorFocus;
+    [Tooltip("没有任何室内区激活时使用的默认模式。多栋楼/分楼层室内区时，通常应设为 OutdoorShowAll。")]
+    [SerializeField] private VisibilityMode defaultModeWhenNoIndoorZone = VisibilityMode.OutdoorShowAll;
     [Tooltip("为 true 时：隐藏所有高于当前楼层的楼层显示。")]
     [SerializeField] private bool hideFloorsAboveCurrent = true;
     [Tooltip("为 true 时：当前楼层会额外隐藏指定名称的构件组。当前建议用于 RoofOrCover。")]
@@ -168,7 +170,7 @@ public class FloorVisibilityController : MonoBehaviour
     private void ApplyVisibilityTargets(bool force)
     {
         var currentFloor = targetFloorState != null ? targetFloorState.VisibilityFloorIndex : 0;
-        var resolvedVisibilityMode = activeIndoorZoneIds.Count > 0 ? VisibilityMode.IndoorFocus : visibilityMode;
+        var resolvedVisibilityMode = activeIndoorZoneIds.Count > 0 ? visibilityMode : defaultModeWhenNoIndoorZone;
         if (!force && currentFloor == appliedFloorIndex && resolvedVisibilityMode == appliedVisibilityMode) return;
 
         appliedFloorIndex = currentFloor;
