@@ -69,6 +69,7 @@ public class FloorVisibilityController : MonoBehaviour
 
     private readonly List<FloorRendererEntry> floorRenderers = new();
     private readonly List<ActorRendererEntry> actorRenderers = new();
+    private readonly HashSet<int> activeIndoorZoneIds = new();
     private int appliedFloorIndex = -1;
     private VisibilityMode appliedVisibilityMode;
     private float nextActorRefreshTime;
@@ -146,14 +147,33 @@ public class FloorVisibilityController : MonoBehaviour
         SetVisibilityMode(VisibilityMode.OutdoorShowAll);
     }
 
+    public void SetIndoorZoneActive(int zoneId, bool active)
+    {
+        if (active)
+        {
+            if (activeIndoorZoneIds.Add(zoneId))
+            {
+                ApplyVisibilityTargets(force: true);
+            }
+
+            return;
+        }
+
+        if (activeIndoorZoneIds.Remove(zoneId))
+        {
+            ApplyVisibilityTargets(force: true);
+        }
+    }
+
     private void ApplyVisibilityTargets(bool force)
     {
         var currentFloor = targetFloorState != null ? targetFloorState.VisibilityFloorIndex : 0;
-        if (!force && currentFloor == appliedFloorIndex && visibilityMode == appliedVisibilityMode) return;
+        var resolvedVisibilityMode = activeIndoorZoneIds.Count > 0 ? VisibilityMode.IndoorFocus : visibilityMode;
+        if (!force && currentFloor == appliedFloorIndex && resolvedVisibilityMode == appliedVisibilityMode) return;
 
         appliedFloorIndex = currentFloor;
-        appliedVisibilityMode = visibilityMode;
-        var isOutdoor = visibilityMode == VisibilityMode.OutdoorShowAll;
+        appliedVisibilityMode = resolvedVisibilityMode;
+        var isOutdoor = resolvedVisibilityMode == VisibilityMode.OutdoorShowAll;
 
         for (var i = 0; i < floorRenderers.Count; i++)
         {
