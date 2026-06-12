@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Editor\CreateAssetBundles.cs" />
     <Compile Include="Assets\Scripts\Editor\MapTools\MapTilemapTools.cs" />
+    <Compile Include="Assets\Scripts\Editor\MapTools\TileSpriteDepthSplitterWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
