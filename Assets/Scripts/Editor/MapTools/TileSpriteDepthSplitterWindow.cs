@@ -24,6 +24,7 @@ public sealed class TileSpriteDepthSplitterWindow : EditorWindow
     [SerializeField] private string outputFolder = DefaultOutputFolder;
     [SerializeField] private bool createTileAssets = true;
     [SerializeField] private bool overwriteExisting = false;
+    private int draggingLineEndpoint = -1;
 
     [MenuItem("Tools/Map/Split Selected Sprite For Depth")]
     public static void SplitSelectedSpriteForDepth()
@@ -36,7 +37,7 @@ public sealed class TileSpriteDepthSplitterWindow : EditorWindow
     [MenuItem("Tools/Map/Split Selected Sprite For Depth", true)]
     public static bool ValidateSplitSelectedSpriteForDepth()
     {
-        return Selection.activeObject is Texture2D || Selection.activeObject is Sprite;
+        return CanSplit(Selection.activeObject);
     }
 
     private void OnGUI()
@@ -63,6 +64,8 @@ public sealed class TileSpriteDepthSplitterWindow : EditorWindow
         outputFolder = EditorGUILayout.TextField("Output Folder", outputFolder);
         createTileAssets = EditorGUILayout.Toggle("Create Tile Assets", createTileAssets);
         overwriteExisting = EditorGUILayout.Toggle("Overwrite Existing", overwriteExisting);
+
+        DrawManualSplitPreview();
 
         using (new EditorGUI.DisabledScope(!CanSplit(sourceObject)))
         {
@@ -264,7 +267,8 @@ public sealed class TileSpriteDepthSplitterWindow : EditorWindow
 
     private static bool CanSplit(Object target)
     {
-        return target is Texture2D || target is Sprite;
+        if (target is Texture2D || target is Sprite) return true;
+        return target is Tile tile && tile.sprite != null;
     }
 
     private static bool TryResolveSource(
@@ -285,13 +289,12 @@ public sealed class TileSpriteDepthSplitterWindow : EditorWindow
 
         if (target is Sprite sprite)
         {
-            texture = sprite.texture;
-            rect = sprite.rect;
-            assetPath = AssetDatabase.GetAssetPath(texture);
-            sourceName = SanitizeFileName(sprite.name);
-            pixelsPerUnit = sprite.pixelsPerUnit;
-            pivot = new Vector2(sprite.pivot.x / sprite.rect.width, sprite.pivot.y / sprite.rect.height);
-            return texture != null && !string.IsNullOrEmpty(assetPath);
+            return TryResolveSprite(sprite, out texture, out rect, out assetPath, out sourceName, out pixelsPerUnit, out pivot);
+        }
+
+        if (target is Tile tile && tile.sprite != null)
+        {
+            return TryResolveSprite(tile.sprite, out texture, out rect, out assetPath, out sourceName, out pixelsPerUnit, out pivot);
         }
 
         if (target is Texture2D texture2D)
@@ -311,6 +314,24 @@ public sealed class TileSpriteDepthSplitterWindow : EditorWindow
         }
 
         return false;
+    }
+
+    private static bool TryResolveSprite(
+        Sprite sprite,
+        out Texture2D texture,
+        out Rect rect,
+        out string assetPath,
+        out string sourceName,
+        out float pixelsPerUnit,
+        out Vector2 pivot)
+    {
+        texture = sprite.texture;
+        rect = sprite.rect;
+        assetPath = AssetDatabase.GetAssetPath(texture);
+        sourceName = SanitizeFileName(sprite.name);
+        pixelsPerUnit = sprite.pixelsPerUnit;
+        pivot = new Vector2(sprite.pivot.x / sprite.rect.width, sprite.pivot.y / sprite.rect.height);
+        return texture != null && !string.IsNullOrEmpty(assetPath);
     }
 
     private static void WritePng(string assetPath, int width, int height, IReadOnlyList<Color> pixels)
@@ -334,6 +355,11 @@ public sealed class TileSpriteDepthSplitterWindow : EditorWindow
         importer.spriteImportMode = SpriteImportMode.Single;
         importer.spritePixelsPerUnit = pixelsPerUnit;
         importer.spritePivot = pivot;
+        var textureSettings = new TextureImporterSettings();
+        importer.ReadTextureSettings(textureSettings);
+        textureSettings.spriteAlignment = (int)SpriteAlignment.Custom;
+        textureSettings.spritePivot = pivot;
+        importer.SetTextureSettings(textureSettings);
         importer.alphaIsTransparency = true;
         importer.mipmapEnabled = false;
         importer.textureCompression = TextureImporterCompression.Uncompressed;
@@ -405,5 +431,110 @@ public sealed class TileSpriteDepthSplitterWindow : EditorWindow
         }
 
         return value;
+    }
+
+    private void DrawManualSplitPreview()
+    {
+        if (!TryResolveSource(sourceObject, out var texture, out var rect, out _, out _, out _, out var pivot))
+        {
+            EditorGUILayout.HelpBox("Select a Sprite, Texture2D, or Tile asset to draw the split line.", MessageType.None);
+            return;
+        }
+
+        var width = Mathf.RoundToInt(rect.width);
+        var height = Mathf.RoundToInt(rect.height);
+        if (width <= 0 || height <= 0) return;
+
+        EditorGUILayout.Space(6f);
+        EditorGUILayout.LabelField("Manual Split Preview", EditorStyles.boldLabel);
+
+        var maxPreviewWidth = Mathf.Min(position.width - 24f, 420f);
+        var previewWidth = Mathf.Max(96f, maxPreviewWidth);
+        var previewHeight = Mathf.Clamp(previewWidth * height / width, 96f, 360f);
+        var previewRect = GUILayoutUtility.GetRect(previewWidth, previewHeight, GUILayout.ExpandWidth(false));
+        previewRect.x = Mathf.Max(previewRect.x, (position.width - previewRect.width) * 0.5f);
+
+        var texCoords = new Rect(
+            rect.x / texture.width,
+            rect.y / texture.height,
+            rect.width / texture.width,
+            rect.height / texture.height);
+
+        EditorGUI.DrawRect(previewRect, new Color(0.09f, 0.09f, 0.09f, 1f));
+        GUI.DrawTextureWithTexCoords(previewRect, texture, texCoords, true);
+
+        var splitYLeft = Mathf.Clamp(splitMode == SplitMode.Horizontal ? splitYFromBottom : splitYLeftFromBottom, 1, height - 1);
+        var splitYRight = Mathf.Clamp(splitMode == SplitMode.Horizontal ? splitYFromBottom : splitYRightFromBottom, 1, height - 1);
+        var leftPoint = PixelToPreviewPoint(previewRect, 0f, splitYLeft, width, height);
+        var rightPoint = PixelToPreviewPoint(previewRect, width - 1f, splitYRight, width, height);
+        var pivotPoint = PixelToPreviewPoint(previewRect, pivot.x * width, pivot.y * height, width, height);
+
+        Handles.BeginGUI();
+        Handles.color = new Color(1f, 0.45f, 0f, 1f);
+        Handles.DrawAAPolyLine(4f, leftPoint, rightPoint);
+        Handles.DrawSolidDisc(leftPoint, Vector3.forward, 5f);
+        Handles.DrawSolidDisc(rightPoint, Vector3.forward, 5f);
+        Handles.color = new Color(0.2f, 0.8f, 1f, 1f);
+        Handles.DrawAAPolyLine(2f, pivotPoint + Vector2.left * 6f, pivotPoint + Vector2.right * 6f);
+        Handles.DrawAAPolyLine(2f, pivotPoint + Vector2.down * 6f, pivotPoint + Vector2.up * 6f);
+        Handles.EndGUI();
+
+        EditorGUILayout.LabelField("Preview: drag orange handles to draw the split line. Blue cross is the copied pivot.");
+        HandlePreviewInput(previewRect, width, height, leftPoint, rightPoint);
+    }
+
+    private void HandlePreviewInput(Rect previewRect, int width, int height, Vector2 leftPoint, Vector2 rightPoint)
+    {
+        var currentEvent = Event.current;
+        if (currentEvent == null) return;
+
+        if (currentEvent.type == EventType.MouseDown && currentEvent.button == 0 && previewRect.Contains(currentEvent.mousePosition))
+        {
+            draggingLineEndpoint = Vector2.Distance(currentEvent.mousePosition, leftPoint) <= Vector2.Distance(currentEvent.mousePosition, rightPoint) ? 0 : 1;
+            currentEvent.Use();
+        }
+
+        if (currentEvent.type == EventType.MouseDrag && draggingLineEndpoint >= 0)
+        {
+            var y = PreviewPointToPixelY(previewRect, currentEvent.mousePosition.y, height);
+            if (splitMode == SplitMode.Horizontal)
+            {
+                splitYFromBottom = y;
+                splitYLeftFromBottom = y;
+                splitYRightFromBottom = y;
+            }
+            else if (draggingLineEndpoint == 0)
+            {
+                splitYLeftFromBottom = y;
+            }
+            else
+            {
+                splitYRightFromBottom = y;
+            }
+
+            Repaint();
+            currentEvent.Use();
+        }
+
+        if (currentEvent.type == EventType.MouseUp && draggingLineEndpoint >= 0)
+        {
+            draggingLineEndpoint = -1;
+            currentEvent.Use();
+        }
+    }
+
+    private static Vector2 PixelToPreviewPoint(Rect previewRect, float x, float yFromBottom, int width, int height)
+    {
+        var normalizedX = width <= 1 ? 0f : x / (width - 1f);
+        var normalizedY = height <= 1 ? 0f : yFromBottom / (height - 1f);
+        return new Vector2(
+            previewRect.xMin + normalizedX * previewRect.width,
+            previewRect.yMax - normalizedY * previewRect.height);
+    }
+
+    private static int PreviewPointToPixelY(Rect previewRect, float guiY, int height)
+    {
+        var normalizedY = Mathf.InverseLerp(previewRect.yMax, previewRect.yMin, guiY);
+        return Mathf.Clamp(Mathf.RoundToInt(normalizedY * (height - 1)), 1, height - 1);
     }
 }

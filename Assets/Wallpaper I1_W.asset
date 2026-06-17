@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: KitchenObject2_W_Back
+  m_Name: Wallpaper I1_W
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 3cfe0b8f99994834ea18e111182254fb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7affcdb055d85704e916899af2672d90, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
