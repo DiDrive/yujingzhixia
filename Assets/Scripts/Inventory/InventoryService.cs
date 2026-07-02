@@ -42,7 +42,14 @@ public class InventoryService : MonoBehaviour
     public void BindGridBackend(GridInventoryService service, bool enableBackend)
     {
         gridInventoryService = service;
-        useGridInventoryBackend = enableBackend && gridInventoryService != null;
+        var shouldUseGridBackend = enableBackend && gridInventoryService != null;
+        if (shouldUseGridBackend && !useGridInventoryBackend && stacks.Count > 0)
+        {
+            gridInventoryService.EnsureInitialized();
+            MigrateStacksToGridBackend();
+        }
+
+        useGridInventoryBackend = shouldUseGridBackend;
     }
 
     /// <summary>
@@ -123,5 +130,23 @@ public class InventoryService : MonoBehaviour
             if (stacks[i].itemId == itemId) total += stacks[i].quantity;
         }
         return total;
+    }
+
+    private void MigrateStacksToGridBackend()
+    {
+        if (gridInventoryService == null) return;
+
+        var remainingStacks = new List<ItemStack>();
+        for (var i = 0; i < stacks.Count; i++)
+        {
+            var stack = stacks[i];
+            if (string.IsNullOrWhiteSpace(stack.itemId) || stack.quantity <= 0) continue;
+            if (!gridInventoryService.AddItem(stack.itemId, stack.quantity))
+            {
+                remainingStacks.Add(stack);
+            }
+        }
+
+        stacks = remainingStacks;
     }
 }

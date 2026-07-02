@@ -38,7 +38,7 @@ public class GameBootstrap : MonoBehaviour
     [Tooltip("启动时是否自动创建网格背包预览窗口。")]
     [SerializeField] private bool autoCreateGridInventoryPreview = false;
     [Tooltip("启动时是否自动创建网格背包UnityUI。")]
-    [SerializeField] private bool autoCreateGridInventoryUnityUI = false;
+    [SerializeField] private bool autoCreateGridInventoryUnityUI = true;
     [Tooltip("运行时调试面板引用。为空时可自动查找或自动创建。")]
     [SerializeField] private RuntimeDebugPanel runtimeDebugPanel;
 
@@ -47,17 +47,17 @@ public class GameBootstrap : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        if (gameStateMachine == null) gameStateMachine = FindObjectOfType<GameStateMachine>();
-        if (survivalSystem == null) survivalSystem = FindObjectOfType<SurvivalSystem>();
-        if (inventoryService == null) inventoryService = FindObjectOfType<InventoryService>();
-        if (lootSpawner == null) lootSpawner = FindObjectOfType<LootSpawner>();
-        if (workbenchService == null) workbenchService = FindObjectOfType<WorkbenchService>();
-        if (shelterModuleService == null) shelterModuleService = FindObjectOfType<ShelterModuleService>();
-        if (nightAssaultSystem == null) nightAssaultSystem = FindObjectOfType<NightAssaultSystem>();
-        if (gridInventoryService == null) gridInventoryService = FindObjectOfType<GridInventoryService>();
-        if (gridInventoryRuntimePreview == null) gridInventoryRuntimePreview = FindObjectOfType<GridInventoryRuntimePreview>();
-        if (gridInventoryUnityUI == null) gridInventoryUnityUI = FindObjectOfType<GridInventoryUnityUI>();
-        if (runtimeDebugPanel == null) runtimeDebugPanel = FindObjectOfType<RuntimeDebugPanel>();
+        if (gameStateMachine == null) gameStateMachine = FindSceneObjectOfType<GameStateMachine>();
+        if (survivalSystem == null) survivalSystem = FindSceneObjectOfType<SurvivalSystem>();
+        if (inventoryService == null) inventoryService = FindSceneObjectOfType<InventoryService>();
+        if (lootSpawner == null) lootSpawner = FindSceneObjectOfType<LootSpawner>();
+        if (workbenchService == null) workbenchService = FindSceneObjectOfType<WorkbenchService>();
+        if (shelterModuleService == null) shelterModuleService = FindSceneObjectOfType<ShelterModuleService>();
+        if (nightAssaultSystem == null) nightAssaultSystem = FindSceneObjectOfType<NightAssaultSystem>();
+        if (gridInventoryService == null) gridInventoryService = FindSceneObjectOfType<GridInventoryService>();
+        if (gridInventoryRuntimePreview == null) gridInventoryRuntimePreview = FindSceneObjectOfType<GridInventoryRuntimePreview>();
+        if (gridInventoryUnityUI == null) gridInventoryUnityUI = FindSceneObjectOfType<GridInventoryUnityUI>();
+        if (runtimeDebugPanel == null) runtimeDebugPanel = FindSceneObjectOfType<RuntimeDebugPanel>();
         EnsureGridInventorySystems();
         if (autoCreateRuntimeDebugPanel) EnsureRuntimeDebugPanel();
         BindRuntimeDebugPanel();
@@ -162,12 +162,20 @@ public class GameBootstrap : MonoBehaviour
             gridInventoryService = serviceObject.AddComponent<GridInventoryService>();
         }
 
+        gridInventoryService.EnsureInitialized();
         if (inventoryService != null) inventoryService.BindGridBackend(gridInventoryService, true);
 
         if (autoCreateGridInventoryUnityUI && gridInventoryUnityUI == null)
         {
             var uiObject = new GameObject("GridInventoryUnityUI");
             gridInventoryUnityUI = uiObject.AddComponent<GridInventoryUnityUI>();
+        }
+
+        if (gridInventoryUnityUI != null)
+        {
+            if (!gridInventoryUnityUI.gameObject.activeSelf) gridInventoryUnityUI.gameObject.SetActive(true);
+            gridInventoryUnityUI.Bind(gridInventoryService);
+            gridInventoryUnityUI.SetOpen(false);
         }
 
         if (!autoCreateGridInventoryPreview) return;
@@ -183,5 +191,22 @@ public class GameBootstrap : MonoBehaviour
     {
         if (runtimeDebugPanel == null) return;
         runtimeDebugPanel.Bind(this, survivalSystem, inventoryService, gameStateMachine, nightAssaultSystem);
+    }
+
+    private static T FindSceneObjectOfType<T>() where T : Component
+    {
+        var activeObject = FindObjectOfType<T>();
+        if (activeObject != null) return activeObject;
+
+        var objects = Resources.FindObjectsOfTypeAll<T>();
+        for (var i = 0; i < objects.Length; i++)
+        {
+            var candidate = objects[i];
+            if (candidate == null) continue;
+            if (!candidate.gameObject.scene.IsValid()) continue;
+            return candidate;
+        }
+
+        return null;
     }
 }

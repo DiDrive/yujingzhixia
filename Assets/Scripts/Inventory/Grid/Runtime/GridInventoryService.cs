@@ -23,6 +23,12 @@ public class GridInventoryService : MonoBehaviour
 
     private void Awake()
     {
+        EnsureInitialized();
+    }
+
+    public void EnsureInitialized()
+    {
+        if (containerDefinitionById.Count > 0 && itemDefinitionById.Count > 0) return;
         EnsureDemoData();
         RebuildRuntime();
     }
@@ -359,11 +365,13 @@ public class GridInventoryService : MonoBehaviour
         if (!containerItemInstanceIds.TryGetValue(containerId, out var ids)) return new GridAutoSortResult(false, Array.Empty<string>());
         if (!occupancyByContainerId.TryGetValue(containerId, out var occupancy)) return new GridAutoSortResult(false, Array.Empty<string>());
 
-        var sortable = ids
+        var sortable = BuildCompactedStacksForSort(containerId, ids)
             .Select(id => itemInstanceById.TryGetValue(id, out var instance) ? instance : default)
             .Where(instance => !string.IsNullOrWhiteSpace(instance.instanceId))
             .Where(instance => itemDefinitionById.ContainsKey(instance.itemId))
-            .OrderByDescending(instance => GetArea(itemDefinitionById[instance.itemId]))
+            .OrderBy(instance => GetItemTypeSortKey(containerId, instance.itemId))
+            .ThenBy(instance => instance.itemId)
+            .ThenByDescending(instance => GetArea(itemDefinitionById[instance.itemId]))
             .ThenByDescending(instance => instance.stackCount)
             .ToList();
 
@@ -403,6 +411,66 @@ public class GridInventoryService : MonoBehaviour
         }
 
         return new GridAutoSortResult(failedIds.Count == 0, failedIds);
+    }
+
+    private List<string> BuildCompactedStacksForSort(string containerId, List<string> ids)
+    {
+        var result = new List<string>();
+        var sourceInstances = ids
+            .Select(id => itemInstanceById.TryGetValue(id, out var instance) ? instance : default)
+            .Where(instance => !string.IsNullOrWhiteSpace(instance.instanceId))
+            .Where(instance => instance.containerId == containerId)
+            .Where(instance => itemDefinitionById.ContainsKey(instance.itemId))
+            .ToList();
+
+        var groups = sourceInstances
+            .GroupBy(instance => instance.itemId)
+            .OrderBy(group => GetItemTypeSortKey(containerId, group.Key))
+            .ThenBy(group => group.Key);
+
+        foreach (var group in groups)
+        {
+            var definition = itemDefinitionById[group.Key];
+            var stackLimit = definition.maxStack > 0 ? definition.maxStack : int.MaxValue;
+            var pending = group.Sum(instance => instance.stackCount);
+            var reusable = group
+                .OrderBy(instance => instance.originRow < 0 ? int.MaxValue : instance.originRow)
+                .ThenBy(instance => instance.originColumn < 0 ? int.MaxValue : instance.originColumn)
+                .ThenByDescending(instance => instance.stackCount)
+                .ToList();
+            var reusableIndex = 0;
+
+            while (pending > 0)
+            {
+                var stackCount = stackLimit == int.MaxValue ? pending : Mathf.Min(stackLimit, pending);
+                GridItemInstance instance;
+                if (reusableIndex < reusable.Count)
+                {
+                    instance = reusable[reusableIndex++];
+                }
+                else if (!TryCreateItemInstance(group.Key, stackCount, out var newInstanceId) ||
+                         !itemInstanceById.TryGetValue(newInstanceId, out instance))
+                {
+                    break;
+                }
+
+                instance.stackCount = stackCount;
+                instance.containerId = null;
+                instance.originRow = -1;
+                instance.originColumn = -1;
+                instance.rotation = GridItemRotation.Deg0;
+                itemInstanceById[instance.instanceId] = instance;
+                result.Add(instance.instanceId);
+                pending -= stackCount;
+            }
+
+            for (var i = reusableIndex; i < reusable.Count; i++)
+            {
+                RemoveInstanceInternal(reusable[i].instanceId);
+            }
+        }
+
+        return result;
     }
 
     /// <summary>
@@ -715,6 +783,24 @@ public class GridInventoryService : MonoBehaviour
     private int GetArea(GridItemDefinition definition)
     {
         return Mathf.Max(1, definition.width) * Mathf.Max(1, definition.height);
+    }
+
+    private int GetItemTypeSortKey(string containerId, string itemId)
+    {
+        if (string.IsNullOrWhiteSpace(containerId) || string.IsNullOrWhiteSpace(itemId)) return int.MaxValue;
+        if (!occupancyByContainerId.TryGetValue(containerId, out var occupancy)) return int.MaxValue;
+
+        var best = int.MaxValue;
+        foreach (var instance in itemInstanceById.Values)
+        {
+            if (instance.itemId != itemId) continue;
+            if (instance.containerId != containerId) continue;
+            if (instance.originRow < 0 || instance.originColumn < 0) continue;
+            var score = instance.originRow * Mathf.Max(1, occupancy.Columns) + instance.originColumn;
+            if (score < best) best = score;
+        }
+
+        return best;
     }
     /// <summary>
     /// 从物品实例字典中移除指定实例ID的物品实例。
