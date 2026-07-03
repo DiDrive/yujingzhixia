@@ -175,6 +175,10 @@ public class GridInventoryUnityUI : MonoBehaviour
     private readonly List<GameObject> toolbarButtons = new();
     private readonly List<GameObject> spawnButtons = new();
     private readonly List<GameObject> actionButtons = new();
+    private Dropdown spawnDropdown;
+    private GridInventoryUnityUISpawnItem spawnDragHandler;
+    private Text spawnDragLabel;
+    private Image spawnDragImage;
     private bool hasAutoSortActionButton;
     private Image[,] cellImages;
     private RectTransform previewGhostRect;
@@ -571,6 +575,10 @@ public class GridInventoryUnityUI : MonoBehaviour
         ClearButtonObjects(toolbarButtons);
         ClearButtonObjects(spawnButtons);
         ClearButtonObjects(actionButtons);
+        spawnDropdown = null;
+        spawnDragHandler = null;
+        spawnDragLabel = null;
+        spawnDragImage = null;
         hasAutoSortActionButton = false;
 
         if (toolbarRoot != null) toolbarRoot.gameObject.SetActive(showContainerToolbar);
@@ -578,7 +586,7 @@ public class GridInventoryUnityUI : MonoBehaviour
         if (actionRoot != null) actionRoot.gameObject.SetActive(showActionToolbar);
 
         var toolbarHandled = !showContainerToolbar || preferExistingButtons && TryBindToolbarButtonsFromExisting();
-        var spawnHandled = showSpawnTools && preferExistingButtons && TryBindSpawnButtonsFromExisting();
+        var spawnHandled = !showSpawnTools || preferExistingButtons && TryBindSpawnButtonsFromExisting() || CreateSpawnSelector();
         var actionHandled = !showActionToolbar || preferExistingButtons && TryBindActionButtonsFromExisting();
 
         if (!buildRuntimeLayout && strictManualMode)
@@ -605,19 +613,6 @@ public class GridInventoryUnityUI : MonoBehaviour
                 });
                 toolbarButtons.Add(button.gameObject);
                 containerX += 126f;
-            }
-        }
-
-        if (showSpawnTools && !spawnHandled)
-        {
-            var spawnX = 0f;
-            for (var i = 0; i < spawnItemIds.Count; i++)
-            {
-                var itemId = spawnItemIds[i];
-                if (string.IsNullOrWhiteSpace(itemId)) continue;
-                var entry = CreateSpawnEntry(spawnRoot, itemId, new Vector2(150f, 34f), new Vector2(spawnX, -2f));
-                spawnButtons.Add(entry);
-                spawnX += 156f;
             }
         }
 
@@ -1347,6 +1342,16 @@ public class GridInventoryUnityUI : MonoBehaviour
         selectedSpawnItemId = itemId;
     }
 
+    public string GetSpawnItemTitle(string itemId)
+    {
+        return GetItemTitle(itemId);
+    }
+
+    public bool TryGetSpawnItemVisual(string itemId, out Sprite icon, out Color tint)
+    {
+        return TryGetVisual(itemId, out icon, out tint);
+    }
+
     public void HandleSpawnBeginDrag(string itemId, Vector2 screenPosition)
     {
         if (!showSpawnTools) return;
@@ -1508,7 +1513,7 @@ public class GridInventoryUnityUI : MonoBehaviour
         tint = new Color(0.31f, 0.48f, 0.72f, 0.95f);
         if (!visualByItemId.TryGetValue(itemId, out var visual)) return false;
         icon = visual.icon;
-        tint = visual.tint.a <= 0f ? tint : visual.tint;
+        tint = visual.tint.a <= 0f ? Color.white : visual.tint;
         return true;
     }
 
@@ -1565,6 +1570,8 @@ public class GridInventoryUnityUI : MonoBehaviour
 
     private bool TryBindSpawnButtonsFromExisting()
     {
+        if (TryBindSpawnSelectorFromExisting()) return true;
+
         var buttons = spawnRoot.GetComponentsInChildren<Button>(true);
         if (buttons == null || buttons.Length == 0) return false;
         var boundCount = 0;
@@ -1585,6 +1592,54 @@ public class GridInventoryUnityUI : MonoBehaviour
             boundCount++;
         }
         return boundCount > 0;
+    }
+
+    private bool TryBindSpawnSelectorFromExisting()
+    {
+        if (spawnRoot == null || gridInventoryService == null) return false;
+        var dropdown = spawnRoot.GetComponentInChildren<Dropdown>(true);
+        if (dropdown == null) return false;
+
+        var validItemIds = GetValidSpawnItemIds();
+        if (validItemIds.Count == 0) return false;
+        if (string.IsNullOrWhiteSpace(selectedSpawnItemId) || !validItemIds.Contains(selectedSpawnItemId))
+        {
+            selectedSpawnItemId = validItemIds[0];
+        }
+
+        spawnDropdown = dropdown;
+        spawnDropdown.onValueChanged.RemoveAllListeners();
+        spawnDropdown.ClearOptions();
+        spawnDropdown.AddOptions(validItemIds.Select(GetItemTitle).ToList());
+        spawnDropdown.value = Mathf.Max(0, validItemIds.IndexOf(selectedSpawnItemId));
+        spawnDropdown.RefreshShownValue();
+        spawnDropdown.onValueChanged.AddListener(index =>
+        {
+            if (index < 0 || index >= validItemIds.Count) return;
+            selectedSpawnItemId = validItemIds[index];
+            UpdateSpawnDragEntryVisual();
+        });
+
+        spawnDragHandler = spawnRoot.GetComponentsInChildren<GridInventoryUnityUISpawnItem>(true)
+            .FirstOrDefault(x => x.GetComponent<Dropdown>() == null);
+        if (spawnDragHandler == null)
+        {
+            var buttons = spawnRoot.GetComponentsInChildren<Button>(true);
+            var dragButton = buttons.FirstOrDefault(x => x.GetComponent<Dropdown>() == null);
+            if (dragButton != null) spawnDragHandler = dragButton.gameObject.AddComponent<GridInventoryUnityUISpawnItem>();
+        }
+
+        if (spawnDragHandler != null)
+        {
+            spawnDragLabel = spawnDragHandler.GetComponentInChildren<Text>(true);
+            spawnDragImage = spawnDragHandler.GetComponent<Image>();
+            var selector = spawnDropdown.GetComponent<GridInventoryUnityUISpawnSelector>();
+            if (selector == null) selector = spawnDropdown.gameObject.AddComponent<GridInventoryUnityUISpawnSelector>();
+            selector.Bind(this, spawnDragHandler, validItemIds);
+            UpdateSpawnDragEntryVisual();
+        }
+
+        return true;
     }
 
     private bool TryBindActionButtonsFromExisting()
@@ -1922,6 +1977,8 @@ public class GridInventoryUnityUI : MonoBehaviour
         uiText.fontSize = fontSize;
         uiText.alignment = alignment;
         uiText.color = Color.white;
+        uiText.horizontalOverflow = HorizontalWrapMode.Overflow;
+        uiText.verticalOverflow = VerticalWrapMode.Truncate;
         return uiText;
     }
 
@@ -1976,13 +2033,137 @@ public class GridInventoryUnityUI : MonoBehaviour
         if (TryGetVisual(itemId, out var icon, out var tint) && icon != null)
         {
             image.sprite = icon;
-            image.type = Image.Type.Sliced;
+            image.type = Image.Type.Simple;
             image.color = tint;
         }
 
         var handler = rect.gameObject.AddComponent<GridInventoryUnityUISpawnItem>();
         handler.Bind(this, itemId);
         return rect.gameObject;
+    }
+
+    private bool CreateSpawnSelector()
+    {
+        if (spawnRoot == null || gridInventoryService == null) return false;
+        var validItemIds = GetValidSpawnItemIds();
+        if (validItemIds.Count == 0) return false;
+
+        if (string.IsNullOrWhiteSpace(selectedSpawnItemId) || !validItemIds.Contains(selectedSpawnItemId))
+        {
+            selectedSpawnItemId = validItemIds[0];
+        }
+
+        var dropdownRect = CreateRect("SpawnItemDropdown", spawnRoot, new Vector2(420f, 32f), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, -1f));
+        spawnButtons.Add(dropdownRect.gameObject);
+        var dropdownImage = dropdownRect.gameObject.AddComponent<Image>();
+        dropdownImage.color = new Color(0.14f, 0.14f, 0.14f, 0.98f);
+        spawnDropdown = dropdownRect.gameObject.AddComponent<Dropdown>();
+        spawnDropdown.targetGraphic = dropdownImage;
+        spawnDropdown.captionText = CreateText("Label", dropdownRect, selectedSpawnItemId, 16, TextAnchor.MiddleLeft);
+        spawnDropdown.captionText.rectTransform.offsetMin = new Vector2(10f, 0f);
+        spawnDropdown.captionText.rectTransform.offsetMax = new Vector2(-28f, 0f);
+
+        var arrow = CreateText("Arrow", dropdownRect, "v", 18, TextAnchor.MiddleCenter);
+        arrow.rectTransform.anchorMin = new Vector2(1f, 0f);
+        arrow.rectTransform.anchorMax = new Vector2(1f, 1f);
+        arrow.rectTransform.sizeDelta = new Vector2(26f, 0f);
+        arrow.rectTransform.anchoredPosition = new Vector2(-13f, 0f);
+
+        var template = CreateDropdownTemplate(dropdownRect);
+        spawnDropdown.template = template;
+        spawnDropdown.itemText = template.GetComponentInChildren<Toggle>(true).GetComponentInChildren<Text>(true);
+        spawnDropdown.ClearOptions();
+        spawnDropdown.AddOptions(validItemIds.Select(GetItemTitle).ToList());
+        spawnDropdown.value = Mathf.Max(0, validItemIds.IndexOf(selectedSpawnItemId));
+        spawnDropdown.RefreshShownValue();
+        spawnDropdown.onValueChanged.AddListener(index =>
+        {
+            if (index < 0 || index >= validItemIds.Count) return;
+            selectedSpawnItemId = validItemIds[index];
+            UpdateSpawnDragEntryVisual();
+        });
+
+        var dragEntry = CreateSpawnEntry(spawnRoot, selectedSpawnItemId, new Vector2(260f, 32f), new Vector2(432f, -1f));
+        dragEntry.name = "SpawnSelectedItem";
+        spawnDragHandler = dragEntry.GetComponent<GridInventoryUnityUISpawnItem>();
+        spawnDragLabel = dragEntry.GetComponentInChildren<Text>(true);
+        spawnDragImage = dragEntry.GetComponent<Image>();
+        spawnButtons.Add(dragEntry);
+        var selector = spawnDropdown.GetComponent<GridInventoryUnityUISpawnSelector>();
+        if (selector == null) selector = spawnDropdown.gameObject.AddComponent<GridInventoryUnityUISpawnSelector>();
+        selector.Bind(this, spawnDragHandler, validItemIds);
+        UpdateSpawnDragEntryVisual();
+        return true;
+    }
+
+    private List<string> GetValidSpawnItemIds()
+    {
+        var validItemIds = new List<string>();
+        for (var i = 0; i < spawnItemIds.Count; i++)
+        {
+            var itemId = spawnItemIds[i];
+            if (string.IsNullOrWhiteSpace(itemId)) continue;
+            if (!gridInventoryService.TryGetItemDefinition(itemId, out _)) continue;
+            if (validItemIds.Contains(itemId)) continue;
+            validItemIds.Add(itemId);
+        }
+
+        return validItemIds;
+    }
+
+    private RectTransform CreateDropdownTemplate(RectTransform dropdownRect)
+    {
+        var template = CreateRect("Template", dropdownRect, new Vector2(420f, 240f), new Vector2(0f, 0f), new Vector2(1f, 0f), new Vector2(0f, 1f), new Vector2(0f, -34f));
+        var templateImage = template.gameObject.AddComponent<Image>();
+        templateImage.color = new Color(0.08f, 0.08f, 0.08f, 0.98f);
+        var scrollRect = template.gameObject.AddComponent<ScrollRect>();
+        scrollRect.horizontal = false;
+
+        var viewport = CreateRect("Viewport", template, Vector2.zero, Vector2.zero, Vector2.one, new Vector2(0f, 1f), Vector2.zero);
+        viewport.offsetMin = Vector2.zero;
+        viewport.offsetMax = Vector2.zero;
+        var mask = viewport.gameObject.AddComponent<Mask>();
+        mask.showMaskGraphic = false;
+        var viewportImage = viewport.gameObject.AddComponent<Image>();
+        viewportImage.color = Color.white;
+
+        var content = CreateRect("Content", viewport, new Vector2(420f, 32f), new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), Vector2.zero);
+        content.offsetMin = Vector2.zero;
+        content.offsetMax = Vector2.zero;
+        scrollRect.viewport = viewport;
+        scrollRect.content = content;
+
+        var item = CreateRect("Item", content, new Vector2(420f, 30f), new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), Vector2.zero);
+        var itemToggle = item.gameObject.AddComponent<Toggle>();
+        var itemBackground = item.gameObject.AddComponent<Image>();
+        itemBackground.color = new Color(0.18f, 0.18f, 0.18f, 0.95f);
+        itemToggle.targetGraphic = itemBackground;
+        var itemLabel = CreateText("Item Label", item, "Option", 15, TextAnchor.MiddleLeft);
+        itemLabel.rectTransform.offsetMin = new Vector2(10f, 0f);
+        itemLabel.rectTransform.offsetMax = new Vector2(-10f, 0f);
+
+        template.gameObject.SetActive(false);
+        return template;
+    }
+
+    private void UpdateSpawnDragEntryVisual()
+    {
+        if (string.IsNullOrWhiteSpace(selectedSpawnItemId)) return;
+        if (spawnDragHandler != null) spawnDragHandler.Bind(this, selectedSpawnItemId);
+        if (spawnDragLabel != null) spawnDragLabel.text = GetItemTitle(selectedSpawnItemId);
+        if (spawnDragImage == null) return;
+
+        if (TryGetVisual(selectedSpawnItemId, out var icon, out var tint) && icon != null)
+        {
+            spawnDragImage.sprite = icon;
+            spawnDragImage.type = Image.Type.Simple;
+            spawnDragImage.color = tint;
+            return;
+        }
+
+        spawnDragImage.sprite = null;
+        spawnDragImage.type = Image.Type.Simple;
+        spawnDragImage.color = new Color(0.16f, 0.16f, 0.16f, 0.95f);
     }
 
     private void ClearChildren(RectTransform root)
@@ -2060,7 +2241,7 @@ public class GridInventoryUnityUIItem : MonoBehaviour, IBeginDragHandler, IDragH
         if (image != null)
         {
             image.sprite = icon;
-            image.type = icon != null ? Image.Type.Sliced : Image.Type.Simple;
+            image.type = Image.Type.Simple;
             image.color = mergeHighlighted ? mergeColor : selected ? selectedColor : tint;
         }
         if (label != null)
@@ -2135,5 +2316,80 @@ public class GridInventoryUnityUISpawnItem : MonoBehaviour, IBeginDragHandler, I
     public void OnPointerClick(PointerEventData eventData)
     {
         controller?.HandleSpawnClick(itemId);
+    }
+}
+
+[ExecuteAlways]
+[RequireComponent(typeof(Dropdown))]
+public sealed class GridInventoryUnityUISpawnSelector : MonoBehaviour
+{
+    [SerializeField] private GridInventoryUnityUI inventoryUi;
+    [SerializeField] private GridInventoryUnityUISpawnItem spawnItem;
+    [SerializeField] private Image previewImage;
+    [SerializeField] private Text previewLabel;
+    [SerializeField] private List<string> itemIds = new List<string>();
+
+    private Dropdown dropdown;
+    private int lastValue = -1;
+
+    public void Bind(GridInventoryUnityUI ui, GridInventoryUnityUISpawnItem item, IReadOnlyList<string> ids)
+    {
+        inventoryUi = ui;
+        spawnItem = item;
+        previewImage = item != null ? item.GetComponent<Image>() : previewImage;
+        previewLabel = item != null ? item.GetComponentInChildren<Text>(true) : previewLabel;
+        itemIds.Clear();
+        if (ids != null) itemIds.AddRange(ids);
+        EnsureDropdown();
+        ApplySelection();
+    }
+
+    private void OnEnable()
+    {
+        EnsureDropdown();
+        ApplySelection();
+    }
+
+    private void OnValidate()
+    {
+        EnsureDropdown();
+        ApplySelection();
+    }
+
+    private void Update()
+    {
+        EnsureDropdown();
+        if (dropdown == null || dropdown.value == lastValue) return;
+        ApplySelection();
+    }
+
+    private void EnsureDropdown()
+    {
+        if (dropdown == null) dropdown = GetComponent<Dropdown>();
+    }
+
+    private void ApplySelection()
+    {
+        if (dropdown == null || inventoryUi == null || itemIds.Count == 0) return;
+        var index = Mathf.Clamp(dropdown.value, 0, itemIds.Count - 1);
+        lastValue = index;
+        var itemId = itemIds[index];
+
+        inventoryUi.HandleSpawnClick(itemId);
+        if (spawnItem != null) spawnItem.Bind(inventoryUi, itemId);
+        if (previewLabel != null) previewLabel.text = inventoryUi.GetSpawnItemTitle(itemId);
+        if (previewImage == null) return;
+
+        if (inventoryUi.TryGetSpawnItemVisual(itemId, out var icon, out var tint) && icon != null)
+        {
+            previewImage.sprite = icon;
+            previewImage.type = Image.Type.Simple;
+            previewImage.color = tint;
+            return;
+        }
+
+        previewImage.sprite = null;
+        previewImage.type = Image.Type.Simple;
+        previewImage.color = new Color(0.16f, 0.16f, 0.16f, 0.95f);
     }
 }
