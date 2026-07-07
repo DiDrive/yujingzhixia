@@ -281,6 +281,7 @@ public class GridInventoryUnityUI : MonoBehaviour
     private bool TryInitialize()
     {
         if (initialized) return true;
+        ResolvePrebuiltSideContainerState();
         if (gridInventoryService == null) gridInventoryService = FindObjectOfType<GridInventoryService>();
         if (gridInventoryService == null) return false;
         gridInventoryService.EnsureInitialized();
@@ -315,13 +316,13 @@ public class GridInventoryUnityUI : MonoBehaviour
         RefreshItems();
     }
 
-    private void ConfigureSideContainerView(GridInventoryUnityUI source, GridInventoryService service, string containerId)
+    private void ConfigureSideContainerView(GridInventoryUnityUI source, GridInventoryService service, string containerId, bool openOnStart = true)
     {
         ownerView = source;
         isSideContainerView = true;
         gridInventoryService = service;
         currentContainerId = containerId;
-        startOpen = true;
+        startOpen = openOnStart;
         showSpawnTools = false;
         allowSpawnFromEmptyCells = false;
         openOtherContainersAsSidePanels = false;
@@ -361,10 +362,33 @@ public class GridInventoryUnityUI : MonoBehaviour
         autoRepositionToolRoot = false;
     }
 
+    private void ResolvePrebuiltSideContainerState()
+    {
+        if (isSideContainerView) return;
+        if (!name.StartsWith("InventoryUI_")) return;
+        if (name == "InventoryUI_main_bag" || currentContainerId == "main_bag") return;
+        isSideContainerView = true;
+        openOtherContainersAsSidePanels = false;
+        showContainerToolbar = false;
+        showSpawnTools = false;
+        showActionToolbar = false;
+        if (gridRootOverride == null || toolbarRootOverride == null || spawnRootOverride == null || actionRootOverride == null || itemLayerRootOverride == null || ghostRootOverride == null)
+        {
+            buildRuntimeLayout = true;
+            strictManualMode = false;
+        }
+    }
+
     public void SetOpen(bool open)
     {
         if (!initialized && !TryInitialize()) return;
         if (canvas != null) canvas.enabled = open;
+    }
+
+    public bool IsOpen()
+    {
+        if (!initialized && !TryInitialize()) return false;
+        return canvas != null && canvas.enabled;
     }
 
     public void ToggleOpen()
@@ -426,7 +450,7 @@ public class GridInventoryUnityUI : MonoBehaviour
         }
 
         canvas = GetComponent<Canvas>();
-        if (canvas == null) canvas = GetComponentInParent<Canvas>();
+        if (canvas == null && !isSideContainerView) canvas = GetComponentInParent<Canvas>();
         if (canvas == null)
         {
             canvas = gameObject.AddComponent<Canvas>();
@@ -1762,8 +1786,15 @@ public class GridInventoryUnityUI : MonoBehaviour
         if (string.IsNullOrWhiteSpace(containerId) || gridInventoryService == null) return;
         if (sideContainerViews.TryGetValue(containerId, out var existing) && existing != null)
         {
-            Destroy(existing.gameObject);
-            sideContainerViews.Remove(containerId);
+            existing.SetOpen(!existing.IsOpen());
+            return;
+        }
+
+        if (TryFindSceneSideContainerView(containerId, out var sceneView))
+        {
+            sceneView.ConfigureSideContainerView(this, gridInventoryService, containerId, false);
+            sideContainerViews[containerId] = sceneView;
+            sceneView.SetOpen(!sceneView.IsOpen());
             return;
         }
 
@@ -1794,6 +1825,25 @@ public class GridInventoryUnityUI : MonoBehaviour
         sideView.ConfigureSideContainerView(this, gridInventoryService, containerId);
         sideContainerViews[containerId] = sideView;
         sideObject.SetActive(true);
+    }
+
+    private bool TryFindSceneSideContainerView(string containerId, out GridInventoryUnityUI sideView)
+    {
+        sideView = null;
+        var expectedName = $"InventoryUI_{containerId}";
+        var parent = panelRoot != null && panelRoot.parent != null ? panelRoot.parent : transform.parent;
+        if (parent == null) parent = transform.root;
+        var candidates = parent.GetComponentsInChildren<GridInventoryUnityUI>(true);
+        for (var i = 0; i < candidates.Length; i++)
+        {
+            var candidate = candidates[i];
+            if (candidate == null || candidate == this) continue;
+            if (candidate.name != expectedName) continue;
+            sideView = candidate;
+            return true;
+        }
+
+        return false;
     }
 
     private void ExecuteAutoSort()
