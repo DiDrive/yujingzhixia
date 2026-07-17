@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "itemId": "food_canned",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 3,
+      "itemTags": ["consumable", "food"],
+      "weight": 0.5
+    },
+    {
+      "itemId": "water_bottle",
+      "width": 1,
+      "height": 2,
+      "canRotate": true,
+      "maxStack": 2,
+      "itemTags": ["consumable", "drink"],
+      "weight": 0.8
+    },
+    {
+      "itemId": "bandage",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 5,
+      "itemTags": ["medical"],
+      "weight": 0.2
+    },
+    {
+      "itemId": "cloth_raw",
+      "width": 2,
+      "height": 1,
+      "canRotate": true,
+      "maxStack": 4,
+      "itemTags": ["material"],
+      "weight": 0.4
+    }
+  ]
+}

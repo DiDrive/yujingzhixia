@@ -1,0 +1,36 @@
+{
+  "tables": [
+    {
+      "tableId": "survival_basic",
+      "minRolls": 2,
+      "maxRolls": 4,
+      "allowDuplicates": true,
+      "entries": [
+        { "itemId": "food_canned", "minQuantity": 1, "maxQuantity": 2, "weight": 35 },
+        { "itemId": "water_bottle", "minQuantity": 1, "maxQuantity": 1, "weight": 30 },
+        { "itemId": "bandage", "minQuantity": 1, "maxQuantity": 2, "weight": 20 },
+        { "itemId": "cloth_raw", "minQuantity": 1, "maxQuantity": 2, "weight": 15 }
+      ]
+    },
+    {
+      "tableId": "medical_basic",
+      "minRolls": 1,
+      "maxRolls": 3,
+      "allowDuplicates": true,
+      "entries": [
+        { "itemId": "bandage", "minQuantity": 1, "maxQuantity": 3, "weight": 75 },
+        { "itemId": "cloth_raw", "minQuantity": 1, "maxQuantity": 2, "weight": 25 }
+      ]
+    },
+    {
+      "tableId": "resource_basic",
+      "minRolls": 2,
+      "maxRolls": 4,
+      "allowDuplicates": true,
+      "entries": [
+        { "itemId": "cloth_raw", "minQuantity": 1, "maxQuantity": 3, "weight": 70 },
+        { "itemId": "aluminum_foil", "minQuantity": 1, "maxQuantity": 3, "weight": 30 }
+      ]
+    }
+  ]
+}

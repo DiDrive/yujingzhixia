@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class GridInventoryUnityUI : MonoBehaviour
 {
+    private const float DefaultToolbarHeight = 34f;
+    private const float DefaultToolbarSpacing = 4f;
+
     [System.Serializable]
     private struct GridItemVisual
     {
@@ -51,6 +54,8 @@ public class GridInventoryUnityUI : MonoBehaviour
     [SerializeField] private bool autoAlignToolbarWithGrid = true;
     [Tooltip("网格尺寸变化时是否自动调整面板背景尺寸。开启后面板大小会随背包行列数、格子尺寸变化。")]
     [SerializeField] private bool autoResizePanelBackground = true;
+    [Tooltip("手动绑定或预制体模式下，是否仍根据容器行列数自动调整网格及各显示层尺寸。")]
+    [SerializeField] private bool autoResizeManualGridToContainer = true;
     [Tooltip("工具栏保底宽度。切到口袋这类小网格时，面板和工具栏不会小于这个宽度，避免按钮挤出背景。")]
     [SerializeField] private float minToolbarWidth = 380f;
     [Tooltip("面板背景右侧和底部的额外留白。X 控制右侧，Y 控制底部。")]
@@ -89,6 +94,10 @@ public class GridInventoryUnityUI : MonoBehaviour
     [Header("Debug Spawn")]
     [Tooltip("调试生成栏显示的物品ID列表。仅 Show Spawn Tools 开启时显示。")]
     [SerializeField] private List<string> spawnItemIds = new() { "food_canned", "water_bottle", "bandage", "cloth_raw" };
+    [Tooltip("运行时是否轻量修正生成下拉框和预览物品的位置，避免它们互相重叠或挤出生成栏。手动摆好且不重叠时不会改动。")]
+    [SerializeField] private bool autoAvoidSpawnToolOverlap = true;
+    [Tooltip("生成下拉框与预览物品自动避让时的间距。")]
+    [SerializeField] private float spawnToolSpacing = 8f;
     [Header("Colors")]
     [Tooltip("空格子的显示颜色。")]
     [SerializeField] private Color emptyCellColor = new(0.12f, 0.12f, 0.12f, 0.88f);
@@ -172,6 +181,8 @@ public class GridInventoryUnityUI : MonoBehaviour
     private int dragPointerOffsetRow;
     private int dragPointerOffsetColumn;
     private readonly Dictionary<string, GridInventoryUnityUIItem> itemViewByInstanceId = new();
+    private readonly HashSet<string> displayedInstanceIds = new();
+    private readonly List<string> staleItemIds = new();
     private readonly List<GameObject> toolbarButtons = new();
     private readonly List<GameObject> spawnButtons = new();
     private readonly List<GameObject> actionButtons = new();
@@ -187,6 +198,7 @@ public class GridInventoryUnityUI : MonoBehaviour
     private RectTransform contextMenuRoot;
     private Button splitContextButton;
     private Button rotateContextButton;
+    private Button closeButton;
     private InputField splitCountInput;
     private Text splitCountLabel;
     private string contextMenuInstanceId;
@@ -198,11 +210,17 @@ public class GridInventoryUnityUI : MonoBehaviour
     private GridInventoryUnityUI ownerView;
     private string previewContainerId;
     private bool toolRootBaseCaptured;
+    private bool editorItemViewsRegistered;
     private float toolRootBaseX;
     private float toolRootBaseZ;
     private readonly Dictionary<string, GridInventoryUnityUI> sideContainerViews = new();
     private static readonly List<GridInventoryUnityUI> ActiveViews = new();
     private static GridInventoryUnityUI activeDragOwner;
+
+    private bool UsesManualLayout => !buildRuntimeLayout;
+    private bool UsesEditorToolbarLayout => UsesManualLayout && toolRoot != null && toolRoot.GetComponent<VerticalLayoutGroup>() != null;
+    public string ContainerId => currentContainerId;
+    public bool IsSideContainerView => isSideContainerView;
 
     private static readonly string[] ToolLayoutChildNames =
     {
@@ -257,6 +275,11 @@ public class GridInventoryUnityUI : MonoBehaviour
         if (gridInventoryService == null) return;
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if (isSideContainerView)
+            {
+                SetOpen(false);
+                return;
+            }
             selectedInstanceId = null;
             HideContextMenu();
         }
@@ -285,15 +308,18 @@ public class GridInventoryUnityUI : MonoBehaviour
         if (gridInventoryService == null) gridInventoryService = FindObjectOfType<GridInventoryService>();
         if (gridInventoryService == null) return false;
         gridInventoryService.EnsureInitialized();
+        NormalizeToolbarSettings();
         ApplyCompactLayoutDefaults();
         BuildVisualMap();
         EnsureEventSystem();
         EnsureLayout();
+        EnsureCloseButton();
         if (toolbarRoot == null || spawnRoot == null || actionRoot == null || gridRoot == null || itemLayerRoot == null || ghostRoot == null) return false;
         ResolveContainerId();
         RebuildStaticButtons();
         RebuildGrid();
         RefreshItems();
+        EnsureCloseButton();
         initialized = true;
         ApplyStartVisibility();
         return true;
@@ -316,6 +342,106 @@ public class GridInventoryUnityUI : MonoBehaviour
         RefreshItems();
     }
 
+    /// <summary>
+    /// 供背包或搜索容器 UI 预制体绑定任意运行时容器。
+    /// </summary>
+    public void BindToContainer(GridInventoryService service, string containerId, bool sideContainer = true)
+    {
+        if (service == null || string.IsNullOrWhiteSpace(containerId)) return;
+        gridInventoryService = service;
+        gridInventoryService.EnsureInitialized();
+        currentContainerId = containerId;
+        isSideContainerView = sideContainer;
+        if (sideContainer)
+        {
+            openOtherContainersAsSidePanels = false;
+            showContainerToolbar = false;
+            showSpawnTools = false;
+            allowSpawnFromEmptyCells = false;
+        }
+
+        if (!initialized)
+        {
+            TryInitialize();
+            return;
+        }
+
+        selectedInstanceId = null;
+        HideContextMenu();
+        RebuildStaticButtons();
+        RebuildGrid();
+        RefreshItems();
+        RefreshTitle();
+    }
+
+    public bool ShowContainerAsSidePanel(string containerId)
+    {
+        if (string.IsNullOrWhiteSpace(containerId)) return false;
+        if (!initialized && !TryInitialize()) return false;
+        if (gridInventoryService == null || !gridInventoryService.TryGetContainerSize(containerId, out _, out _)) return false;
+        SetOpen(true);
+        return SetSideContainerVisible(containerId, true);
+    }
+
+    public bool ShowContainerAsSidePanel(string containerId, Vector2 panelOffset, float targetCellSize, float targetCellSpacing)
+    {
+        if (string.IsNullOrWhiteSpace(containerId)) return false;
+        if (!initialized && !TryInitialize()) return false;
+        if (gridInventoryService == null || !gridInventoryService.TryGetContainerSize(containerId, out _, out _)) return false;
+        SetOpen(true);
+        return SetSideContainerVisible(containerId, true, true, panelOffset, targetCellSize, targetCellSpacing);
+    }
+
+    public void HideContainerSidePanel(string containerId)
+    {
+        if (string.IsNullOrWhiteSpace(containerId)) return;
+        SetSideContainerVisible(containerId, false);
+    }
+
+    public bool IsContainerSidePanelOpen(string containerId)
+    {
+        return !string.IsNullOrWhiteSpace(containerId) &&
+               sideContainerViews.TryGetValue(containerId, out var view) &&
+               view != null &&
+               view.IsOpen();
+    }
+
+    public void ApplyExternalContainerLayout(Vector2 panelOffset, float targetCellSize, float targetCellSpacing)
+    {
+        cellSize = Mathf.Clamp(targetCellSize, 20f, 96f);
+        cellSpacing = Mathf.Clamp(targetCellSpacing, 0f, 16f);
+        var rect = panelRoot != null ? panelRoot : transform as RectTransform;
+        if (rect != null)
+        {
+            if (ownerView != null && ownerView.panelRoot != null)
+            {
+                rect.anchoredPosition = ownerView.panelRoot.anchoredPosition + panelOffset;
+            }
+            else
+            {
+                rect.anchoredPosition = panelOffset;
+            }
+        }
+
+        if (!initialized) return;
+        RebuildGrid();
+        RefreshItems();
+    }
+
+    /// <summary>
+    /// 背包隐藏时也同步场景 Item_* 节点的运行时交互绑定。
+    /// </summary>
+    public void RefreshEditorItemBindings(GridInventoryService service)
+    {
+        if (service == null) return;
+        gridInventoryService = service;
+        if (!TryInitialize()) return;
+        editorItemViewsRegistered = false;
+        RegisterEditorItemViews();
+        RefreshItems();
+        RefreshGridColors();
+    }
+
     private void ConfigureSideContainerView(GridInventoryUnityUI source, GridInventoryService service, string containerId, bool openOnStart = true)
     {
         ownerView = source;
@@ -336,7 +462,8 @@ public class GridInventoryUnityUI : MonoBehaviour
         buildRuntimeLayout = true;
         strictManualMode = false;
         autoAlignToolbarWithGrid = true;
-        autoResizePanelBackground = source.autoResizePanelBackground;
+        // 外部物资容器必须按自身行列数收缩，不能继承主背包的固定大面板尺寸。
+        autoResizePanelBackground = true;
         minToolbarWidth = Mathf.Min(source.minToolbarWidth, 180f);
         panelBackgroundPadding = source.panelBackgroundPadding;
         panelBackgroundSprite = source.panelBackgroundSprite;
@@ -382,31 +509,48 @@ public class GridInventoryUnityUI : MonoBehaviour
     public void SetOpen(bool open)
     {
         if (!initialized && !TryInitialize()) return;
-        if (canvas != null) canvas.enabled = open;
+        if (isSideContainerView && canvas != null && canvas.gameObject != gameObject)
+        {
+            if (panelRoot != null) panelRoot.gameObject.SetActive(open);
+        }
+        else if (canvas != null)
+        {
+            canvas.enabled = open;
+        }
+        if (open || isSideContainerView) return;
+        foreach (var sideView in sideContainerViews.Values)
+        {
+            if (sideView != null) sideView.SetOpen(false);
+        }
     }
 
     public bool IsOpen()
     {
         if (!initialized && !TryInitialize()) return false;
+        if (isSideContainerView && canvas != null && canvas.gameObject != gameObject)
+        {
+            return panelRoot != null && panelRoot.gameObject.activeSelf;
+        }
         return canvas != null && canvas.enabled;
     }
 
     public void ToggleOpen()
     {
         if (!initialized && !TryInitialize()) return;
-        if (canvas != null) canvas.enabled = !canvas.enabled;
+        SetOpen(!IsOpen());
     }
 
     private void ApplyStartVisibility()
     {
         if (startVisibilityApplied) return;
         startVisibilityApplied = true;
-        if (canvas != null) canvas.enabled = startOpen;
+        SetOpen(startOpen);
     }
 
     private void ApplyCompactLayoutDefaults()
     {
-        if (!useCompactLayout) return;
+        // 编辑器已搭好的手动布局必须保留原尺寸，不能在运行时改成紧凑网格。
+        if (!useCompactLayout || !buildRuntimeLayout) return;
         cellSize = 44f;
         cellSpacing = 3f;
         panelLeftPadding = 14f;
@@ -450,7 +594,7 @@ public class GridInventoryUnityUI : MonoBehaviour
         }
 
         canvas = GetComponent<Canvas>();
-        if (canvas == null && !isSideContainerView) canvas = GetComponentInParent<Canvas>();
+        if (canvas == null) canvas = GetComponentInParent<Canvas>();
         if (canvas == null)
         {
             canvas = gameObject.AddComponent<Canvas>();
@@ -492,14 +636,9 @@ public class GridInventoryUnityUI : MonoBehaviour
         itemLayerRoot.gameObject.SetActive(true);
         ghostRoot.gameObject.SetActive(true);
         ClearChildren(cellLayerRoot);
-        ClearChildren(itemLayerRoot);
+        ClearRuntimeItemChildren();
         ClearChildren(ghostRoot);
-        gridRoot.SetAsFirstSibling();
-        cellLayerRoot.SetAsLastSibling();
-        itemLayerRoot.SetAsLastSibling();
-        ghostRoot.SetAsLastSibling();
-        if (toolRoot != null) toolRoot.SetAsLastSibling();
-        if (titleText != null) titleText.transform.SetAsLastSibling();
+        ApplyInventoryLayerOrder();
     }
 
     private Text GetOrCreateTitleText(RectTransform root)
@@ -555,8 +694,9 @@ public class GridInventoryUnityUI : MonoBehaviour
 
     private bool TryBindManualLayout()
     {
-        if (gridRootOverride == null || toolbarRootOverride == null || spawnRootOverride == null || actionRootOverride == null) return false;
-        if (itemLayerRootOverride == null || ghostRootOverride == null) return false;
+        if (gridRootOverride == null || toolRootOverride == null) return false;
+        if (toolbarRootOverride == null || spawnRootOverride == null || actionRootOverride == null) return false;
+        if (cellLayerRootOverride == null || itemLayerRootOverride == null || ghostRootOverride == null) return false;
 
         gridRoot = gridRootOverride;
         toolbarRoot = toolbarRootOverride;
@@ -580,9 +720,48 @@ public class GridInventoryUnityUI : MonoBehaviour
         if (canvas == null) canvas = gameObject.AddComponent<Canvas>();
         EnsureCanvasScalerMode();
         if (GetComponent<GraphicRaycaster>() == null) gameObject.AddComponent<GraphicRaycaster>();
-        itemLayerRoot.SetAsLastSibling();
-        ghostRoot.SetAsLastSibling();
+        ApplyInventoryLayerOrder();
+        RefreshEditorToolbarLayout();
         return true;
+    }
+
+    private void NormalizeToolbarSettings()
+    {
+        if (toolbarHeight >= 1f) return;
+
+        toolbarHeight = DefaultToolbarHeight;
+        if (toolbarSpacing <= 0f) toolbarSpacing = DefaultToolbarSpacing;
+        Debug.LogWarning("GridInventoryUnityUI: 检测到零高度工具栏，已恢复为默认行高和间距。", this);
+    }
+
+    private void RefreshEditorToolbarLayout()
+    {
+        if (!UsesEditorToolbarLayout) return;
+
+        ConfigureToolbarRowLayout(toolbarRoot);
+        ConfigureToolbarRowLayout(spawnRoot);
+        ConfigureToolbarRowLayout(actionRoot);
+        Canvas.ForceUpdateCanvases();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(toolRoot);
+    }
+
+    private void ConfigureToolbarRowLayout(RectTransform row)
+    {
+        if (row == null) return;
+
+        var element = row.GetComponent<LayoutElement>();
+        if (element == null) element = row.gameObject.AddComponent<LayoutElement>();
+        element.minHeight = toolbarHeight;
+        element.preferredHeight = toolbarHeight;
+        element.flexibleHeight = 0f;
+
+        var layout = row.GetComponent<HorizontalLayoutGroup>();
+        if (layout == null) return;
+        layout.childAlignment = TextAnchor.UpperLeft;
+        layout.childControlWidth = false;
+        layout.childControlHeight = false;
+        layout.childForceExpandWidth = false;
+        layout.childForceExpandHeight = false;
     }
 
     private void RefreshTitle()
@@ -618,17 +797,14 @@ public class GridInventoryUnityUI : MonoBehaviour
             if (showContainerToolbar && !toolbarHandled) Debug.LogWarning("GridInventoryUnityUI: 严格手动模式下未在 ToolbarRoot 绑定到任何容器按钮。", this);
             if (showSpawnTools && !spawnHandled) Debug.LogWarning("GridInventoryUnityUI: 严格手动模式下未在 SpawnRoot 绑定到任何生成按钮。", this);
             if (showActionToolbar && !actionHandled) Debug.LogWarning("GridInventoryUnityUI: 严格手动模式下未在 ActionRoot 绑定到任何动作按钮。", this);
-            if (showActionToolbar && !hasAutoSortActionButton)
-            {
-                actionButtons.Add(CreateAutoSortButton(GetNextActionButtonX()).gameObject);
-            }
+            RefreshEditorToolbarLayout();
             return;
         }
 
         if (showContainerToolbar && !toolbarHandled)
         {
             var containerX = 0f;
-            foreach (var containerId in gridInventoryService.ContainerIds)
+            foreach (var containerId in gridInventoryService.PlayerContainerIds)
             {
                 var capturedContainer = containerId;
                 var button = CreateButton(toolbarRoot, containerId, new Vector2(120f, 34f), new Vector2(containerX, -2f), () =>
@@ -670,6 +846,7 @@ public class GridInventoryUnityUI : MonoBehaviour
             ExecuteSplitOne();
         });
         actionButtons.Add(splitButton.gameObject);
+        RefreshEditorToolbarLayout();
     }
 
     private Button CreateAutoSortButton(float x)
@@ -706,18 +883,26 @@ public class GridInventoryUnityUI : MonoBehaviour
         if (ghostRoot == null) return;
 
         ClearChildren(cellLayerRoot);
-        ClearChildren(itemLayerRoot);
+        ClearRuntimeItemChildren();
         ClearChildren(ghostRoot);
         itemViewByInstanceId.Clear();
+        editorItemViewsRegistered = false;
         HideContextMenu();
         previewGhostRect = null;
         previewGhostImage = null;
         previewGhostText = null;
 
-        var width = columns * cellSize + Mathf.Max(0, columns - 1) * cellSpacing;
-        var height = rows * cellSize + Mathf.Max(0, rows - 1) * cellSpacing;
+        var contentWidth = columns * cellSize + Mathf.Max(0, columns - 1) * cellSpacing;
+        var contentHeight = rows * cellSize + Mathf.Max(0, rows - 1) * cellSpacing;
+        var usesManualGridSize = !buildRuntimeLayout && gridRootOverride != null && !autoResizeManualGridToContainer;
+        if (!usesManualGridSize)
+        {
+            gridRoot.sizeDelta = new Vector2(contentWidth, contentHeight);
+        }
+
+        var width = usesManualGridSize ? gridRoot.sizeDelta.x : contentWidth;
+        var height = usesManualGridSize ? gridRoot.sizeDelta.y : contentHeight;
         var toolbarWidth = GetToolbarRequiredWidth(width);
-        gridRoot.sizeDelta = new Vector2(width, height);
         if (autoResizePanelBackground && panelRoot != null)
         {
             var requiredWidth = panelLeftPadding + Mathf.Max(width, toolbarWidth) + panelBackgroundPadding.x;
@@ -729,6 +914,7 @@ public class GridInventoryUnityUI : MonoBehaviour
         SyncLayerToGrid(itemLayerRoot);
         SyncLayerToGrid(ghostRoot);
         UpdateToolRootPosition();
+        ApplyInventoryLayerOrder();
 
         cellImages = new Image[rows, columns];
         for (var row = 0; row < rows; row++)
@@ -781,14 +967,12 @@ public class GridInventoryUnityUI : MonoBehaviour
         if (string.IsNullOrWhiteSpace(currentContainerId)) return;
         if (!gridInventoryService.TryGetContainerSize(currentContainerId, out _, out _)) return;
 
-        var displayed = new HashSet<string>();
-        var instances = gridInventoryService.ItemInstances.Values
-            .Where(x => x.containerId == currentContainerId && x.originRow >= 0 && x.originColumn >= 0)
-            .ToList();
+        RegisterEditorItemViews();
 
-        for (var i = 0; i < instances.Count; i++)
+        displayedInstanceIds.Clear();
+        foreach (var instance in gridInventoryService.ItemInstances.Values)
         {
-            var instance = instances[i];
+            if (instance.containerId != currentContainerId || instance.originRow < 0 || instance.originColumn < 0) continue;
             if (!gridInventoryService.TryGetItemDefinition(instance.itemId, out var definition)) continue;
             if (!GridPlacementSolver.TryGetFootprint(definition, instance.rotation, out var width, out var height)) continue;
 
@@ -817,21 +1001,80 @@ public class GridInventoryUnityUI : MonoBehaviour
             var mergeHighlighted = dragOwner.previewContainerId == currentContainerId && instance.instanceId == dragOwner.previewMergeInstanceId;
             view.SetVisual(instance.stackCount, definition.maxStack, instance.instanceId == selectedInstanceId, mergeHighlighted, selectedItemColor, mergeTargetColor, icon, tint);
             view.SetDragging(instance.instanceId == draggingInstanceId);
-            displayed.Add(instance.instanceId);
+            displayedInstanceIds.Add(instance.instanceId);
         }
 
-        var staleIds = itemViewByInstanceId.Keys.Where(id => !displayed.Contains(id)).ToList();
-        for (var i = 0; i < staleIds.Count; i++)
+        staleItemIds.Clear();
+        foreach (var instanceId in itemViewByInstanceId.Keys)
         {
-            var staleId = staleIds[i];
+            if (!displayedInstanceIds.Contains(instanceId)) staleItemIds.Add(instanceId);
+        }
+        for (var i = 0; i < staleItemIds.Count; i++)
+        {
+            var staleId = staleItemIds[i];
             if (itemViewByInstanceId.TryGetValue(staleId, out var staleView))
             {
-                Destroy(staleView.gameObject);
+                if (staleView.GetComponent<GridInventoryEditorItem>() != null)
+                {
+                    staleView.gameObject.SetActive(false);
+                }
+                else
+                {
+                    Destroy(staleView.gameObject);
+                }
             }
             itemViewByInstanceId.Remove(staleId);
             if (selectedInstanceId == staleId) selectedInstanceId = null;
             if (contextMenuInstanceId == staleId) HideContextMenu();
         }
+    }
+
+    /// <summary>
+    /// 编辑器物品节点已有自己的 Image/Button/Label，运行时只绑定交互逻辑，不重新创建节点。
+    /// </summary>
+    private void RegisterEditorItemViews()
+    {
+        if (editorItemViewsRegistered) return;
+        if (itemLayerRoot == null) return;
+        var editorItems = itemLayerRoot.GetComponentsInChildren<GridInventoryEditorItem>(true);
+        for (var i = 0; i < editorItems.Length; i++)
+        {
+            var editorItem = editorItems[i];
+            if (editorItem == null || editorItem.ContainerId != currentContainerId) continue;
+            var instanceId = editorItem.RuntimeInstanceId;
+            if (string.IsNullOrWhiteSpace(instanceId) || itemViewByInstanceId.ContainsKey(instanceId)) continue;
+
+            var view = editorItem.GetComponent<GridInventoryUnityUIItem>();
+            if (view == null) view = editorItem.gameObject.AddComponent<GridInventoryUnityUIItem>();
+            var image = editorItem.GetComponent<Image>();
+            if (image == null) image = editorItem.gameObject.AddComponent<Image>();
+            var label = editorItem.GetComponentInChildren<Text>(true);
+            if (label == null)
+            {
+                label = CreateText("Label", editorItem.transform, string.Empty, 20, TextAnchor.LowerRight);
+                label.color = Color.white;
+                label.rectTransform.anchorMin = Vector2.zero;
+                label.rectTransform.anchorMax = Vector2.one;
+                label.rectTransform.offsetMin = new Vector2(4f, 2f);
+                label.rectTransform.offsetMax = new Vector2(-4f, -2f);
+            }
+
+            view.Bind(this, instanceId, image, label);
+            itemViewByInstanceId[instanceId] = view;
+        }
+        editorItemViewsRegistered = true;
+    }
+
+    public void SnapEditorItemToGrid(GridInventoryEditorItem editorItem)
+    {
+        if (editorItem == null || itemLayerRoot == null) return;
+        var rect = editorItem.GetComponent<RectTransform>();
+        if (rect == null) return;
+        var step = Mathf.Max(1f, cellSize + cellSpacing);
+        var row = Mathf.Max(0, Mathf.RoundToInt(-rect.anchoredPosition.y / step));
+        var column = Mathf.Max(0, Mathf.RoundToInt(rect.anchoredPosition.x / step));
+        editorItem.SetGridPosition(row, column);
+        rect.anchoredPosition = new Vector2(column * step, -row * step);
     }
 
     private void RotateDragPreview()
@@ -868,6 +1111,24 @@ public class GridInventoryUnityUI : MonoBehaviour
         previewMergeHeight = 1;
         previewMergeInstanceId = null;
         var targetContainerId = !string.IsNullOrWhiteSpace(previewContainerId) ? previewContainerId : currentContainerId;
+        if (hasCell && TryGetMergeTargetFootprint(targetContainerId, row, column, out var mergeInstanceId, out var mergeRow, out var mergeColumn, out var mergeWidth, out var mergeHeight))
+        {
+            previewMergeInstanceId = mergeInstanceId;
+            previewMergeRow = mergeRow;
+            previewMergeColumn = mergeColumn;
+            previewMergeWidth = mergeWidth;
+            previewMergeHeight = mergeHeight;
+            previewCanPlace = false;
+            previewRow = -1;
+            previewColumn = -1;
+            previewWidth = 1;
+            previewHeight = 1;
+            previewGhostRect.sizeDelta = new Vector2(cellSize, cellSize);
+            previewGhostImage.color = previewValidColor;
+            previewGhostRect.position = screenPosition;
+            return;
+        }
+
         if (TryResolveDragPlacement(definition, targetContainerId, hasCell, row, column, out var resolvedRotation, out var targetRow, out var targetColumn, out var width, out var height, out var canPlace))
         {
             draggingRotation = resolvedRotation;
@@ -885,14 +1146,6 @@ public class GridInventoryUnityUI : MonoBehaviour
         previewColumn = hasCell ? targetColumn : -1;
         previewWidth = width;
         previewHeight = height;
-        if (hasCell && TryGetMergeTargetFootprint(targetContainerId, row, column, out var mergeInstanceId, out var mergeRow, out var mergeColumn, out var mergeWidth, out var mergeHeight))
-        {
-            previewMergeInstanceId = mergeInstanceId;
-            previewMergeRow = mergeRow;
-            previewMergeColumn = mergeColumn;
-            previewMergeWidth = mergeWidth;
-            previewMergeHeight = mergeHeight;
-        }
         previewGhostImage.color = previewCanPlace || previewMergeInstanceId != null ? previewValidColor : previewInvalidColor;
         previewGhostRect.position = screenPosition;
     }
@@ -1021,6 +1274,33 @@ public class GridInventoryUnityUI : MonoBehaviour
         dragHandle.Bind(panelRoot, canvas != null ? canvas : GetComponentInParent<Canvas>());
     }
 
+    private void EnsureCloseButton()
+    {
+        if (!isSideContainerView || panelRoot == null) return;
+        if (closeButton != null)
+        {
+            closeButton.transform.SetAsLastSibling();
+            return;
+        }
+
+        var existing = panelRoot.Find("Btn_Close");
+        if (existing != null) closeButton = existing.GetComponent<Button>();
+        if (closeButton == null)
+        {
+            closeButton = CreateButton(panelRoot, "×", new Vector2(30f, 30f), Vector2.zero, () => SetOpen(false));
+            closeButton.gameObject.name = "Btn_Close";
+        }
+
+        var rect = closeButton.transform as RectTransform;
+        if (rect == null) return;
+        rect.anchorMin = Vector2.one;
+        rect.anchorMax = Vector2.one;
+        rect.pivot = Vector2.one;
+        rect.sizeDelta = new Vector2(30f, 30f);
+        rect.anchoredPosition = new Vector2(-8f, -8f);
+        closeButton.transform.SetAsLastSibling();
+    }
+
     private bool TryGetCellByScreenPosition(Vector2 screenPosition, out int row, out int column)
     {
         row = -1;
@@ -1066,6 +1346,7 @@ public class GridInventoryUnityUI : MonoBehaviour
 
     private void AlignToolbarAndGrid(float gridWidth)
     {
+        if (UsesManualLayout) return;
         if (toolbarRoot == null || spawnRoot == null || actionRoot == null || gridRoot == null) return;
         var rowIndex = 0;
         if (toolRoot != null)
@@ -1151,8 +1432,18 @@ public class GridInventoryUnityUI : MonoBehaviour
         layer.sizeDelta = gridRoot.sizeDelta;
     }
 
+    private void ApplyInventoryLayerOrder()
+    {
+        if (gridRoot != null) gridRoot.SetAsFirstSibling();
+        if (cellLayerRoot != null) cellLayerRoot.SetAsLastSibling();
+        if (itemLayerRoot != null) itemLayerRoot.SetAsLastSibling();
+        if (ghostRoot != null) ghostRoot.SetAsLastSibling();
+        if (toolRoot != null) toolRoot.SetAsLastSibling();
+    }
+
     private void UpdateToolRootPosition()
     {
+        if (UsesManualLayout) return;
         if (!autoRepositionToolRoot || toolRoot == null || gridRoot == null) return;
         var gridCorners = new Vector3[4];
         gridRoot.GetWorldCorners(gridCorners);
@@ -1218,7 +1509,7 @@ public class GridInventoryUnityUI : MonoBehaviour
     private void ResolveContainerId()
     {
         if (!string.IsNullOrWhiteSpace(currentContainerId)) return;
-        foreach (var containerId in gridInventoryService.ContainerIds)
+        foreach (var containerId in gridInventoryService.PlayerContainerIds)
         {
             currentContainerId = containerId;
             break;
@@ -1661,6 +1952,7 @@ public class GridInventoryUnityUI : MonoBehaviour
             if (selector == null) selector = spawnDropdown.gameObject.AddComponent<GridInventoryUnityUISpawnSelector>();
             selector.Bind(this, spawnDragHandler, validItemIds);
             UpdateSpawnDragEntryVisual();
+            AutoAlignSpawnSelectorControls();
         }
 
         return true;
@@ -1707,7 +1999,7 @@ public class GridInventoryUnityUI : MonoBehaviour
     {
         if (button == null) return null;
         var token = BuildButtonToken(button);
-        foreach (var containerId in gridInventoryService.ContainerIds)
+        foreach (var containerId in gridInventoryService.PlayerContainerIds)
         {
             if (string.IsNullOrWhiteSpace(containerId)) continue;
             var normalized = NormalizeToken(containerId);
@@ -1784,20 +2076,39 @@ public class GridInventoryUnityUI : MonoBehaviour
     private void ToggleSideContainerView(string containerId)
     {
         if (string.IsNullOrWhiteSpace(containerId) || gridInventoryService == null) return;
+        var shouldOpen = !sideContainerViews.TryGetValue(containerId, out var current) ||
+                         current == null ||
+                         !current.IsOpen();
+        SetSideContainerVisible(containerId, shouldOpen);
+    }
+
+    private bool SetSideContainerVisible(
+        string containerId,
+        bool visible,
+        bool useLayoutOverride = false,
+        Vector2 panelOffset = default,
+        float targetCellSize = 0f,
+        float targetCellSpacing = 0f)
+    {
+        if (string.IsNullOrWhiteSpace(containerId) || gridInventoryService == null) return false;
+        if (!gridInventoryService.TryGetContainerSize(containerId, out _, out _)) return false;
         if (sideContainerViews.TryGetValue(containerId, out var existing) && existing != null)
         {
-            existing.SetOpen(!existing.IsOpen());
-            return;
+            if (useLayoutOverride) existing.ApplyExternalContainerLayout(panelOffset, targetCellSize, targetCellSpacing);
+            existing.SetOpen(visible);
+            return true;
         }
 
         if (TryFindSceneSideContainerView(containerId, out var sceneView))
         {
             sceneView.ConfigureSideContainerView(this, gridInventoryService, containerId, false);
             sideContainerViews[containerId] = sceneView;
-            sceneView.SetOpen(!sceneView.IsOpen());
-            return;
+            if (useLayoutOverride) sceneView.ApplyExternalContainerLayout(panelOffset, targetCellSize, targetCellSpacing);
+            sceneView.SetOpen(visible);
+            return true;
         }
 
+        if (!visible) return true;
         var parent = panelRoot != null && panelRoot.parent != null ? panelRoot.parent : transform.parent;
         if (parent == null) parent = transform;
         var sideObject = new GameObject($"InventoryUI_{containerId}");
@@ -1810,7 +2121,8 @@ public class GridInventoryUnityUI : MonoBehaviour
             sideRect.anchorMax = panelRoot.anchorMax;
             sideRect.pivot = panelRoot.pivot;
             sideRect.sizeDelta = panelRoot.sizeDelta;
-            sideRect.anchoredPosition = panelRoot.anchoredPosition + sidePanelOffset * (sideContainerViews.Count + 1);
+            var offset = useLayoutOverride ? panelOffset : sidePanelOffset * (sideContainerViews.Count + 1);
+            sideRect.anchoredPosition = panelRoot.anchoredPosition + offset;
         }
         else
         {
@@ -1818,13 +2130,17 @@ public class GridInventoryUnityUI : MonoBehaviour
             sideRect.anchorMax = new Vector2(0f, 1f);
             sideRect.pivot = new Vector2(0f, 1f);
             sideRect.sizeDelta = new Vector2(380f, 520f);
-            sideRect.anchoredPosition = sidePanelOffset * (sideContainerViews.Count + 1);
+            sideRect.anchoredPosition = useLayoutOverride
+                ? panelOffset
+                : sidePanelOffset * (sideContainerViews.Count + 1);
         }
 
         var sideView = sideObject.AddComponent<GridInventoryUnityUI>();
         sideView.ConfigureSideContainerView(this, gridInventoryService, containerId);
+        if (useLayoutOverride) sideView.ApplyExternalContainerLayout(panelOffset, targetCellSize, targetCellSpacing);
         sideContainerViews[containerId] = sideView;
         sideObject.SetActive(true);
+        return true;
     }
 
     private bool TryFindSceneSideContainerView(string containerId, out GridInventoryUnityUI sideView)
@@ -2143,7 +2459,49 @@ public class GridInventoryUnityUI : MonoBehaviour
         if (selector == null) selector = spawnDropdown.gameObject.AddComponent<GridInventoryUnityUISpawnSelector>();
         selector.Bind(this, spawnDragHandler, validItemIds);
         UpdateSpawnDragEntryVisual();
+        AutoAlignSpawnSelectorControls();
         return true;
+    }
+
+    private void AutoAlignSpawnSelectorControls()
+    {
+        if (!autoAvoidSpawnToolOverlap || spawnRoot == null || spawnDropdown == null || spawnDragHandler == null) return;
+        var dropdownRect = spawnDropdown.transform as RectTransform;
+        var dragRect = spawnDragHandler.transform as RectTransform;
+        if (dropdownRect == null || dragRect == null) return;
+        if (dropdownRect.parent != spawnRoot || dragRect.parent != spawnRoot) return;
+
+        var parentWidth = Mathf.Max(spawnRoot.rect.width, spawnRoot.sizeDelta.x, gridRoot != null ? gridRoot.sizeDelta.x : 0f, minToolbarWidth);
+        if (parentWidth <= 1f) return;
+
+        var dropdownBounds = GetTopLeftRect(dropdownRect);
+        var dragBounds = GetTopLeftRect(dragRect);
+        var overlaps = dropdownBounds.Overlaps(dragBounds);
+        var dragOutRight = dragBounds.xMax > parentWidth;
+        var dropdownOutRight = dropdownBounds.xMax > parentWidth;
+        if (!overlaps && !dragOutRight && !dropdownOutRight) return;
+
+        dragRect.anchorMin = new Vector2(0f, 1f);
+        dragRect.anchorMax = new Vector2(0f, 1f);
+        dragRect.pivot = new Vector2(0f, 1f);
+
+        var spacing = Mathf.Max(0f, spawnToolSpacing);
+        var rightSideX = dropdownRect.anchoredPosition.x + dropdownRect.sizeDelta.x + spacing;
+        if (!dropdownOutRight && rightSideX + dragRect.sizeDelta.x <= parentWidth)
+        {
+            dragRect.anchoredPosition = new Vector2(rightSideX, dropdownRect.anchoredPosition.y);
+            return;
+        }
+
+        dragRect.anchoredPosition = new Vector2(dropdownRect.anchoredPosition.x, dropdownRect.anchoredPosition.y - dropdownRect.sizeDelta.y - spacing);
+    }
+
+    private Rect GetTopLeftRect(RectTransform rect)
+    {
+        var size = rect.sizeDelta;
+        var x = rect.anchoredPosition.x - size.x * rect.pivot.x;
+        var yTop = rect.anchoredPosition.y + size.y * (1f - rect.pivot.y);
+        return new Rect(x, yTop - size.y, size.x, size.y);
     }
 
     private List<string> GetValidSpawnItemIds()
@@ -2222,6 +2580,17 @@ public class GridInventoryUnityUI : MonoBehaviour
         for (var i = root.childCount - 1; i >= 0; i--)
         {
             Destroy(root.GetChild(i).gameObject);
+        }
+    }
+
+    private void ClearRuntimeItemChildren()
+    {
+        if (itemLayerRoot == null) return;
+        for (var i = itemLayerRoot.childCount - 1; i >= 0; i--)
+        {
+            var child = itemLayerRoot.GetChild(i);
+            if (child.GetComponent<GridInventoryEditorItem>() != null) continue;
+            Destroy(child.gameObject);
         }
     }
 

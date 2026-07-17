@@ -10,26 +10,11 @@ public static class SyncFoodInventoryItems
 {
     private const string FoodFolder = "Assets/Resources/Characters/food";
 
-    private struct ContainerViewLayout
-    {
-        public Text titleText;
-        public RectTransform toolRoot;
-        public RectTransform toolbarRoot;
-        public RectTransform spawnRoot;
-        public RectTransform actionRoot;
-        public RectTransform gridRoot;
-        public RectTransform cellLayerRoot;
-        public RectTransform itemLayerRoot;
-        public RectTransform ghostRoot;
-        public Image panelBackground;
-        public Image gridBackground;
-    }
-
     [MenuItem("Tools/Inventory/Sync Food Items From Characters Food")]
     public static void Sync()
     {
         var service = Object.FindObjectOfType<GridInventoryService>(true);
-        var ui = FindMainInventoryUi();
+        var ui = GridInventoryEditorLayoutBuilder.FindMainInventoryUi();
 
         if (service == null)
         {
@@ -62,7 +47,7 @@ public static class SyncFoodInventoryItems
         WriteItemDefinitions(service, foodAssets);
         WriteItemVisuals(ui, foodAssets);
         BuildSpawnSelector(ui);
-        BuildSideContainerViews(service, ui);
+        GridInventoryEditorLayoutBuilder.SyncContainerViews(service);
 
         EditorUtility.SetDirty(service);
         EditorUtility.SetDirty(ui);
@@ -76,7 +61,6 @@ public static class SyncFoodInventoryItems
     public static void BuildSideContainerViewsMenu()
     {
         var service = Object.FindObjectOfType<GridInventoryService>(true);
-        var ui = FindMainInventoryUi();
 
         if (service == null)
         {
@@ -84,17 +68,12 @@ public static class SyncFoodInventoryItems
             return;
         }
 
-        if (ui == null)
-        {
-            Debug.LogError("SyncFoodInventoryItems: GridInventoryUnityUI not found in the current scene.");
-            return;
-        }
+        GridInventoryEditorLayoutBuilder.SyncContainerViews(service);
+    }
 
-        BuildSideContainerViews(service, ui);
-        EditorUtility.SetDirty(ui);
-        EditorSceneManager.MarkSceneDirty(ui.gameObject.scene);
-        EditorSceneManager.SaveScene(ui.gameObject.scene);
-        Debug.Log("SyncFoodInventoryItems: rebuilt editor-visible side container views.");
+    public static void SyncContainerViews(GridInventoryService service)
+    {
+        GridInventoryEditorLayoutBuilder.SyncContainerViews(service);
     }
 
     private static void EnsureSpriteImport(string assetPath)
@@ -127,31 +106,6 @@ public static class SyncFoodInventoryItems
         }
 
         if (changed) importer.SaveAndReimport();
-    }
-
-    private static GridInventoryUnityUI FindMainInventoryUi()
-    {
-        var all = Object.FindObjectsOfType<GridInventoryUnityUI>(true);
-        GridInventoryUnityUI fallback = null;
-        for (var i = 0; i < all.Length; i++)
-        {
-            var ui = all[i];
-            if (ui == null) continue;
-            if (fallback == null && !ui.name.StartsWith("InventoryUI_", System.StringComparison.Ordinal)) fallback = ui;
-
-            var serializedObject = new SerializedObject(ui);
-            if (serializedObject.FindProperty("currentContainerId").stringValue == "main_bag") return ui;
-        }
-
-        for (var i = 0; i < all.Length; i++)
-        {
-            var ui = all[i];
-            if (ui == null) continue;
-            var serializedObject = new SerializedObject(ui);
-            if (serializedObject.FindProperty("openOtherContainersAsSidePanels").boolValue) return ui;
-        }
-
-        return fallback != null ? fallback : all.FirstOrDefault();
     }
 
     private static void WriteItemDefinitions(GridInventoryService service, IReadOnlyList<FoodItemAsset> foodAssets)
@@ -245,12 +199,22 @@ public static class SyncFoodInventoryItems
             return;
         }
 
-        ClearChildren(spawnRoot);
         spawnRoot.gameObject.SetActive(true);
 
-        var dropdown = CreateDropdown(spawnRoot, spawnItemIds);
-        var dragEntry = CreateSpawnDragEntry(spawnRoot, spawnItemIds.Count > 0 ? spawnItemIds[0] : string.Empty);
-        var handler = dragEntry.AddComponent<GridInventoryUnityUISpawnItem>();
+        var dropdown = spawnRoot.GetComponentInChildren<Dropdown>(true);
+        if (dropdown == null)
+        {
+            dropdown = CreateDropdown(spawnRoot, spawnItemIds);
+        }
+        else
+        {
+            EnsureDropdownShape(dropdown, spawnItemIds);
+        }
+
+        var dragEntryTransform = FindDirectChild(spawnRoot, "SpawnSelectedItem");
+        var dragEntry = dragEntryTransform != null ? dragEntryTransform.gameObject : CreateSpawnDragEntry(spawnRoot, spawnItemIds.Count > 0 ? spawnItemIds[0] : string.Empty);
+        var handler = dragEntry.GetComponent<GridInventoryUnityUISpawnItem>();
+        if (handler == null) handler = dragEntry.AddComponent<GridInventoryUnityUISpawnItem>();
         handler.Bind(ui, spawnItemIds.Count > 0 ? spawnItemIds[0] : string.Empty);
         var selector = AddAndBindSpawnSelector(dropdown.gameObject, ui, handler, spawnItemIds);
         ApplySpawnDragEntryVisual(ui, dragEntry, handler, spawnItemIds.Count > 0 ? spawnItemIds[0] : string.Empty);
@@ -261,371 +225,12 @@ public static class SyncFoodInventoryItems
             if (index < 0 || index >= spawnItemIds.Count) return;
             ApplySpawnDragEntryVisual(ui, dragEntry, handler, spawnItemIds[index]);
         });
+        AutoAlignSpawnControls(spawnRoot, dropdown.transform as RectTransform, dragEntry.transform as RectTransform);
 
         EditorUtility.SetDirty(spawnRoot);
         EditorUtility.SetDirty(dropdown);
         EditorUtility.SetDirty(dragEntry);
         if (selector != null) EditorUtility.SetDirty(selector);
-    }
-
-    private static void BuildSideContainerViews(GridInventoryService service, GridInventoryUnityUI sourceUi)
-    {
-        var sourceObject = new SerializedObject(sourceUi);
-        var currentContainerId = sourceObject.FindProperty("currentContainerId").stringValue;
-        var sidePanelOffset = sourceObject.FindProperty("sidePanelOffset").vector2Value;
-
-        var containerIds = ReadContainerIds(service);
-        var sourceRect = sourceUi.GetComponent<RectTransform>();
-        var parent = sourceRect != null && sourceRect.parent != null ? sourceRect.parent : sourceUi.transform.parent;
-        if (parent == null) parent = sourceUi.transform;
-
-        var sideIndex = 0;
-        foreach (var containerId in containerIds)
-        {
-            if (string.IsNullOrWhiteSpace(containerId) || containerId == currentContainerId) continue;
-            var sideObjectName = $"InventoryUI_{containerId}";
-            var existing = FindDirectChild(parent, sideObjectName);
-            var isNew = existing == null;
-            var sideObject = isNew ? new GameObject(sideObjectName) : existing.gameObject;
-            if (isNew)
-            {
-                Undo.RegisterCreatedObjectUndo(sideObject, $"Create {sideObjectName}");
-                sideObject.transform.SetParent(parent, false);
-            }
-
-            var sideRect = sideObject.GetComponent<RectTransform>();
-            if (sideRect == null) sideRect = sideObject.AddComponent<RectTransform>();
-            EnsureSideCanvas(sideObject, sourceUi);
-            if (isNew && sourceRect != null)
-            {
-                sideRect.anchorMin = sourceRect.anchorMin;
-                sideRect.anchorMax = sourceRect.anchorMax;
-                sideRect.pivot = sourceRect.pivot;
-                sideRect.sizeDelta = sourceRect.sizeDelta;
-                sideRect.anchoredPosition = sourceRect.anchoredPosition + sidePanelOffset * (sideIndex + 1);
-                sideRect.localScale = sourceRect.localScale;
-            }
-
-            var sideUi = sideObject.GetComponent<GridInventoryUnityUI>();
-            if (sideUi == null) sideUi = sideObject.AddComponent<GridInventoryUnityUI>();
-            var layout = EnsureContainerViewLayout(sourceUi, sideRect, service, containerId);
-            ConfigureEditorSideContainerView(sourceUi, service, sideUi, containerId, layout);
-            sideObject.SetActive(true);
-
-            EditorUtility.SetDirty(sideObject);
-            EditorUtility.SetDirty(sideRect);
-            EditorUtility.SetDirty(sideUi);
-            sideIndex++;
-        }
-    }
-
-    private static void EnsureSideCanvas(GameObject sideObject, GridInventoryUnityUI sourceUi)
-    {
-        var canvas = sideObject.GetComponent<Canvas>();
-        if (canvas == null) canvas = sideObject.AddComponent<Canvas>();
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-
-        if (sideObject.GetComponent<GraphicRaycaster>() == null)
-        {
-            sideObject.AddComponent<GraphicRaycaster>();
-        }
-
-        var sourceCanvas = sourceUi.GetComponentInParent<Canvas>();
-        if (sourceCanvas != null)
-        {
-            canvas.pixelPerfect = sourceCanvas.pixelPerfect;
-            canvas.sortingOrder = sourceCanvas.sortingOrder + 1;
-        }
-
-        var scaler = sideObject.GetComponent<CanvasScaler>();
-        if (scaler == null) scaler = sideObject.AddComponent<CanvasScaler>();
-        var sourceScaler = sourceUi.GetComponentInParent<CanvasScaler>();
-        if (sourceScaler == null) return;
-        scaler.uiScaleMode = sourceScaler.uiScaleMode;
-        scaler.referenceResolution = sourceScaler.referenceResolution;
-        scaler.screenMatchMode = sourceScaler.screenMatchMode;
-        scaler.matchWidthOrHeight = sourceScaler.matchWidthOrHeight;
-        scaler.referencePixelsPerUnit = sourceScaler.referencePixelsPerUnit;
-        scaler.scaleFactor = sourceScaler.scaleFactor;
-    }
-
-    private static List<string> ReadContainerIds(GridInventoryService service)
-    {
-        var ids = new List<string>();
-        var serializedObject = new SerializedObject(service);
-        var containers = serializedObject.FindProperty("containerDefinitions");
-        for (var i = 0; i < containers.arraySize; i++)
-        {
-            var containerId = containers.GetArrayElementAtIndex(i).FindPropertyRelative("containerId").stringValue;
-            if (!string.IsNullOrWhiteSpace(containerId) && !ids.Contains(containerId)) ids.Add(containerId);
-        }
-
-        return ids;
-    }
-
-    private static ContainerViewLayout EnsureContainerViewLayout(GridInventoryUnityUI sourceUi, RectTransform root, GridInventoryService service, string containerId)
-    {
-        var source = new SerializedObject(sourceUi);
-        var cellSize = source.FindProperty("cellSize").floatValue;
-        var cellSpacing = source.FindProperty("cellSpacing").floatValue;
-        var panelLeftPadding = source.FindProperty("panelLeftPadding").floatValue;
-        var toolbarTopOffset = source.FindProperty("toolbarTopOffset").floatValue;
-        var toolbarHeight = source.FindProperty("toolbarHeight").floatValue;
-        var toolbarSpacing = source.FindProperty("toolbarSpacing").floatValue;
-        var gridTopSpacing = source.FindProperty("gridTopSpacing").floatValue;
-        var emptyCellColor = source.FindProperty("emptyCellColor").colorValue;
-        var panelColor = source.FindProperty("panelBackgroundColor").colorValue;
-        var gridColor = source.FindProperty("gridBackgroundColor").colorValue;
-        var panelSprite = source.FindProperty("panelBackgroundSprite").objectReferenceValue as Sprite;
-        var gridSprite = source.FindProperty("gridBackgroundSprite").objectReferenceValue as Sprite;
-
-        if (!TryReadContainerSize(service, containerId, out var rows, out var columns))
-        {
-            rows = 4;
-            columns = 4;
-        }
-
-        var gridSize = new Vector2(columns * cellSize + Mathf.Max(0, columns - 1) * cellSpacing, rows * cellSize + Mathf.Max(0, rows - 1) * cellSpacing);
-        var toolHeight = toolbarHeight * 3f + toolbarSpacing * 2f;
-        var toolbarWidth = Mathf.Max(gridSize.x, source.FindProperty("minToolbarWidth").floatValue);
-
-        var panelBackground = root.GetComponent<Image>();
-        if (panelBackground == null) panelBackground = root.gameObject.AddComponent<Image>();
-        panelBackground.sprite = panelSprite;
-        panelBackground.type = panelSprite != null ? Image.Type.Sliced : Image.Type.Simple;
-        panelBackground.color = panelColor;
-
-        var titleText = EnsureTextChild(root, "TitleText", $"背包  [{containerId}]  未选择", 18, TextAnchor.MiddleLeft);
-        var titleRect = titleText.rectTransform;
-        titleRect.anchorMin = new Vector2(0f, 1f);
-        titleRect.anchorMax = new Vector2(1f, 1f);
-        titleRect.pivot = new Vector2(0f, 1f);
-        titleRect.anchoredPosition = new Vector2(12f, -8f);
-        titleRect.sizeDelta = new Vector2(-24f, 24f);
-
-        var toolRoot = EnsureRectChild(root, "toolRoot", new Vector2(toolbarWidth, toolHeight), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(panelLeftPadding, -toolbarTopOffset));
-        var toolbarRoot = EnsureRectChild(toolRoot, "ContainerToolbar", new Vector2(toolbarWidth, toolbarHeight), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, 1f), Vector2.zero);
-        var spawnRoot = EnsureRectChild(toolRoot, "SpawnToolbar", new Vector2(toolbarWidth, toolbarHeight), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, -(toolbarHeight + toolbarSpacing)));
-        var actionRoot = EnsureRectChild(toolRoot, "ActionToolbar", new Vector2(toolbarWidth, toolbarHeight), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, -(toolbarHeight + toolbarSpacing) * 2f));
-
-        var gridPosition = new Vector2(panelLeftPadding, -(toolbarTopOffset + toolHeight + gridTopSpacing));
-        var gridRoot = EnsureRectChild(root, "GridRoot", gridSize, new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, 1f), gridPosition);
-        var gridBackground = gridRoot.GetComponent<Image>();
-        if (gridBackground == null) gridBackground = gridRoot.gameObject.AddComponent<Image>();
-        gridBackground.sprite = gridSprite;
-        gridBackground.type = gridSprite != null ? Image.Type.Sliced : Image.Type.Simple;
-        gridBackground.color = gridColor;
-
-        var cellLayerRoot = EnsureRectChild(root, "CellLayer", gridSize, gridRoot.anchorMin, gridRoot.anchorMax, gridRoot.pivot, gridPosition);
-        var itemLayerRoot = EnsureRectChild(root, "ItemLayer", gridSize, gridRoot.anchorMin, gridRoot.anchorMax, gridRoot.pivot, gridPosition);
-        var ghostRoot = EnsureRectChild(root, "GhostLayer", gridSize, gridRoot.anchorMin, gridRoot.anchorMax, gridRoot.pivot, gridPosition);
-        BuildEditorCells(cellLayerRoot, rows, columns, cellSize, cellSpacing, emptyCellColor);
-
-        gridRoot.SetAsFirstSibling();
-        cellLayerRoot.SetAsLastSibling();
-        itemLayerRoot.SetAsLastSibling();
-        ghostRoot.SetAsLastSibling();
-        toolRoot.SetAsLastSibling();
-        titleText.transform.SetAsLastSibling();
-
-        var panelWidth = panelLeftPadding + Mathf.Max(gridSize.x, toolbarWidth) + source.FindProperty("panelBackgroundPadding").vector2Value.x;
-        var panelHeight = toolbarTopOffset + toolHeight + gridTopSpacing + gridSize.y + source.FindProperty("panelBackgroundPadding").vector2Value.y;
-        root.sizeDelta = new Vector2(panelWidth, panelHeight);
-
-        EditorUtility.SetDirty(root);
-        EditorUtility.SetDirty(panelBackground);
-        EditorUtility.SetDirty(gridBackground);
-
-        return new ContainerViewLayout
-        {
-            titleText = titleText,
-            toolRoot = toolRoot,
-            toolbarRoot = toolbarRoot,
-            spawnRoot = spawnRoot,
-            actionRoot = actionRoot,
-            gridRoot = gridRoot,
-            cellLayerRoot = cellLayerRoot,
-            itemLayerRoot = itemLayerRoot,
-            ghostRoot = ghostRoot,
-            panelBackground = panelBackground,
-            gridBackground = gridBackground
-        };
-    }
-
-    private static void ConfigureEditorSideContainerView(GridInventoryUnityUI sourceUi, GridInventoryService service, GridInventoryUnityUI sideUi, string containerId, ContainerViewLayout layout)
-    {
-        var source = new SerializedObject(sourceUi);
-        var target = new SerializedObject(sideUi);
-        target.FindProperty("gridInventoryService").objectReferenceValue = service;
-        target.FindProperty("startOpen").boolValue = false;
-        target.FindProperty("showSpawnTools").boolValue = false;
-        target.FindProperty("allowSpawnFromEmptyCells").boolValue = false;
-        target.FindProperty("openOtherContainersAsSidePanels").boolValue = false;
-        target.FindProperty("allowPanelDragging").boolValue = source.FindProperty("allowPanelDragging").boolValue;
-        target.FindProperty("useCompactLayout").boolValue = source.FindProperty("useCompactLayout").boolValue;
-        target.FindProperty("scaleWithScreenSize").boolValue = source.FindProperty("scaleWithScreenSize").boolValue;
-        target.FindProperty("referenceResolution").vector2Value = source.FindProperty("referenceResolution").vector2Value;
-        target.FindProperty("screenMatchMode").floatValue = source.FindProperty("screenMatchMode").floatValue;
-        target.FindProperty("buildRuntimeLayout").boolValue = false;
-        target.FindProperty("strictManualMode").boolValue = true;
-        target.FindProperty("autoAlignToolbarWithGrid").boolValue = true;
-        target.FindProperty("autoResizePanelBackground").boolValue = source.FindProperty("autoResizePanelBackground").boolValue;
-        target.FindProperty("minToolbarWidth").floatValue = Mathf.Min(source.FindProperty("minToolbarWidth").floatValue, 180f);
-        target.FindProperty("panelBackgroundPadding").vector2Value = source.FindProperty("panelBackgroundPadding").vector2Value;
-        target.FindProperty("panelBackgroundSprite").objectReferenceValue = source.FindProperty("panelBackgroundSprite").objectReferenceValue;
-        target.FindProperty("gridBackgroundSprite").objectReferenceValue = source.FindProperty("gridBackgroundSprite").objectReferenceValue;
-        target.FindProperty("panelBackgroundColor").colorValue = source.FindProperty("panelBackgroundColor").colorValue;
-        target.FindProperty("gridBackgroundColor").colorValue = source.FindProperty("gridBackgroundColor").colorValue;
-        target.FindProperty("currentContainerId").stringValue = containerId;
-        target.FindProperty("toggleKey").enumValueIndex = source.FindProperty("toggleKey").enumValueIndex;
-        target.FindProperty("cellSize").floatValue = source.FindProperty("cellSize").floatValue;
-        target.FindProperty("cellSpacing").floatValue = source.FindProperty("cellSpacing").floatValue;
-        target.FindProperty("panelAnchoredPosition").vector2Value = source.FindProperty("panelAnchoredPosition").vector2Value;
-        target.FindProperty("panelLeftPadding").floatValue = source.FindProperty("panelLeftPadding").floatValue;
-        target.FindProperty("toolbarTopOffset").floatValue = source.FindProperty("toolbarTopOffset").floatValue;
-        target.FindProperty("toolbarHeight").floatValue = source.FindProperty("toolbarHeight").floatValue;
-        target.FindProperty("toolbarSpacing").floatValue = source.FindProperty("toolbarSpacing").floatValue;
-        target.FindProperty("gridTopSpacing").floatValue = source.FindProperty("gridTopSpacing").floatValue;
-        CopyProperty(source.FindProperty("emptyCellColor"), target.FindProperty("emptyCellColor"));
-        CopyProperty(source.FindProperty("occupiedCellColor"), target.FindProperty("occupiedCellColor"));
-        CopyProperty(source.FindProperty("selectedItemColor"), target.FindProperty("selectedItemColor"));
-        CopyProperty(source.FindProperty("previewValidColor"), target.FindProperty("previewValidColor"));
-        CopyProperty(source.FindProperty("mergeTargetColor"), target.FindProperty("mergeTargetColor"));
-        CopyProperty(source.FindProperty("previewInvalidColor"), target.FindProperty("previewInvalidColor"));
-        CopyArray(source.FindProperty("itemVisuals"), target.FindProperty("itemVisuals"));
-        target.FindProperty("showContainerToolbar").boolValue = false;
-        target.FindProperty("showActionToolbar").boolValue = false;
-        target.FindProperty("autoRepositionToolRoot").boolValue = false;
-        target.FindProperty("preferExistingButtons").boolValue = false;
-        target.FindProperty("titleTextOverride").objectReferenceValue = layout.titleText;
-        target.FindProperty("toolRootOverride").objectReferenceValue = layout.toolRoot;
-        target.FindProperty("toolbarRootOverride").objectReferenceValue = layout.toolbarRoot;
-        target.FindProperty("spawnRootOverride").objectReferenceValue = layout.spawnRoot;
-        target.FindProperty("actionRootOverride").objectReferenceValue = layout.actionRoot;
-        target.FindProperty("gridRootOverride").objectReferenceValue = layout.gridRoot;
-        target.FindProperty("cellLayerRootOverride").objectReferenceValue = layout.cellLayerRoot;
-        target.FindProperty("itemLayerRootOverride").objectReferenceValue = layout.itemLayerRoot;
-        target.FindProperty("ghostRootOverride").objectReferenceValue = layout.ghostRoot;
-        target.FindProperty("panelBackgroundOverride").objectReferenceValue = layout.panelBackground;
-        target.FindProperty("gridBackgroundOverride").objectReferenceValue = layout.gridBackground;
-        target.ApplyModifiedProperties();
-    }
-
-    private static bool TryReadContainerSize(GridInventoryService service, string containerId, out int rows, out int columns)
-    {
-        rows = 0;
-        columns = 0;
-        var serializedObject = new SerializedObject(service);
-        var containers = serializedObject.FindProperty("containerDefinitions");
-        for (var i = 0; i < containers.arraySize; i++)
-        {
-            var element = containers.GetArrayElementAtIndex(i);
-            if (element.FindPropertyRelative("containerId").stringValue != containerId) continue;
-            rows = Mathf.Max(1, element.FindPropertyRelative("rows").intValue);
-            columns = Mathf.Max(1, element.FindPropertyRelative("columns").intValue);
-            return true;
-        }
-
-        return false;
-    }
-
-    private static RectTransform EnsureRectChild(Transform parent, string objectName, Vector2 size, Vector2 anchorMin, Vector2 anchorMax, Vector2 pivot, Vector2 anchoredPosition)
-    {
-        var existing = parent.Find(objectName);
-        RectTransform rect;
-        if (existing == null)
-        {
-            var child = new GameObject(objectName);
-            Undo.RegisterCreatedObjectUndo(child, $"Create {objectName}");
-            child.transform.SetParent(parent, false);
-            rect = child.AddComponent<RectTransform>();
-        }
-        else
-        {
-            rect = existing as RectTransform;
-            if (rect == null) rect = existing.gameObject.AddComponent<RectTransform>();
-            existing.gameObject.SetActive(true);
-        }
-
-        rect.anchorMin = anchorMin;
-        rect.anchorMax = anchorMax;
-        rect.pivot = pivot;
-        rect.sizeDelta = size;
-        rect.anchoredPosition = anchoredPosition;
-        rect.localScale = Vector3.one;
-        EditorUtility.SetDirty(rect);
-        return rect;
-    }
-
-    private static Text EnsureTextChild(Transform parent, string objectName, string text, int fontSize, TextAnchor alignment)
-    {
-        var rect = EnsureRectChild(parent, objectName, new Vector2(200f, 24f), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, 1f), Vector2.zero);
-        var label = rect.GetComponent<Text>();
-        if (label == null) label = rect.gameObject.AddComponent<Text>();
-        label.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        label.text = text;
-        label.fontSize = fontSize;
-        label.alignment = alignment;
-        label.color = Color.white;
-        label.horizontalOverflow = HorizontalWrapMode.Overflow;
-        label.verticalOverflow = VerticalWrapMode.Truncate;
-        EditorUtility.SetDirty(label);
-        return label;
-    }
-
-    private static void BuildEditorCells(RectTransform cellLayerRoot, int rows, int columns, float cellSize, float cellSpacing, Color emptyCellColor)
-    {
-        for (var i = cellLayerRoot.childCount - 1; i >= 0; i--)
-        {
-            var child = cellLayerRoot.GetChild(i);
-            if (child.name.StartsWith("Cell_", System.StringComparison.Ordinal)) Undo.DestroyObjectImmediate(child.gameObject);
-        }
-
-        for (var row = 0; row < rows; row++)
-        {
-            for (var column = 0; column < columns; column++)
-            {
-                var cell = EnsureRectChild(cellLayerRoot, $"Cell_{row}_{column}", new Vector2(cellSize, cellSize), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(column * (cellSize + cellSpacing), -row * (cellSize + cellSpacing)));
-                var image = cell.GetComponent<Image>();
-                if (image == null) image = cell.gameObject.AddComponent<Image>();
-                image.color = emptyCellColor;
-                if (cell.GetComponent<Button>() == null) cell.gameObject.AddComponent<Button>();
-                EditorUtility.SetDirty(cell);
-                EditorUtility.SetDirty(image);
-            }
-        }
-    }
-
-    private static void CopyProperty(SerializedProperty source, SerializedProperty target)
-    {
-        if (source == null || target == null) return;
-        switch (source.propertyType)
-        {
-            case SerializedPropertyType.Color:
-                target.colorValue = source.colorValue;
-                break;
-            case SerializedPropertyType.Vector2:
-                target.vector2Value = source.vector2Value;
-                break;
-            case SerializedPropertyType.ObjectReference:
-                target.objectReferenceValue = source.objectReferenceValue;
-                break;
-        }
-    }
-
-    private static void CopyArray(SerializedProperty source, SerializedProperty target)
-    {
-        if (source == null || target == null || !source.isArray || !target.isArray) return;
-        target.ClearArray();
-        for (var i = 0; i < source.arraySize; i++)
-        {
-            target.InsertArrayElementAtIndex(i);
-            var sourceElement = source.GetArrayElementAtIndex(i);
-            var targetElement = target.GetArrayElementAtIndex(i);
-            targetElement.FindPropertyRelative("itemId").stringValue = sourceElement.FindPropertyRelative("itemId").stringValue;
-            targetElement.FindPropertyRelative("icon").objectReferenceValue = sourceElement.FindPropertyRelative("icon").objectReferenceValue;
-            targetElement.FindPropertyRelative("tint").colorValue = sourceElement.FindPropertyRelative("tint").colorValue;
-        }
     }
 
     private static Component AddAndBindSpawnSelector(GameObject dropdownObject, GridInventoryUnityUI ui, GridInventoryUnityUISpawnItem handler, IReadOnlyList<string> spawnItemIds)
@@ -667,6 +272,37 @@ public static class SyncFoodInventoryItems
         dropdown.value = 0;
         dropdown.RefreshShownValue();
         return dropdown;
+    }
+
+    private static void EnsureDropdownShape(Dropdown dropdown, IReadOnlyList<string> itemIds)
+    {
+        if (dropdown.targetGraphic == null)
+        {
+            var image = dropdown.GetComponent<Image>();
+            if (image == null) image = dropdown.gameObject.AddComponent<Image>();
+            image.color = new Color(0.14f, 0.14f, 0.14f, 0.98f);
+            dropdown.targetGraphic = image;
+        }
+
+        var rect = dropdown.transform as RectTransform;
+        if (dropdown.captionText == null && rect != null)
+        {
+            dropdown.captionText = CreateText("Label", rect, itemIds.Count > 0 ? itemIds[0] : string.Empty, 15, TextAnchor.MiddleLeft);
+            dropdown.captionText.rectTransform.offsetMin = new Vector2(10f, 0f);
+            dropdown.captionText.rectTransform.offsetMax = new Vector2(-28f, 0f);
+        }
+
+        if (dropdown.template == null && rect != null) dropdown.template = CreateDropdownTemplate(rect);
+        if (dropdown.itemText == null && dropdown.template != null)
+        {
+            var toggle = dropdown.template.GetComponentInChildren<Toggle>(true);
+            if (toggle != null) dropdown.itemText = toggle.GetComponentInChildren<Text>(true);
+        }
+
+        dropdown.ClearOptions();
+        dropdown.AddOptions(itemIds.ToList());
+        dropdown.value = 0;
+        dropdown.RefreshShownValue();
     }
 
     private static RectTransform CreateDropdownTemplate(RectTransform dropdownRect)
@@ -734,6 +370,42 @@ public static class SyncFoodInventoryItems
         image.sprite = visualSprite;
         image.type = Image.Type.Simple;
         image.color = visualSprite != null ? Color.white : new Color(0.16f, 0.16f, 0.16f, 0.95f);
+    }
+
+    private static void AutoAlignSpawnControls(RectTransform spawnRoot, RectTransform dropdownRect, RectTransform dragRect)
+    {
+        if (spawnRoot == null || dropdownRect == null || dragRect == null) return;
+        var parentWidth = Mathf.Max(spawnRoot.rect.width, spawnRoot.sizeDelta.x, 1f);
+        var dropdownBounds = GetTopLeftRect(dropdownRect);
+        var dragBounds = GetTopLeftRect(dragRect);
+        var overlaps = dropdownBounds.Overlaps(dragBounds);
+        var dragOutRight = dragBounds.xMax > parentWidth;
+        var dropdownOutRight = dropdownBounds.xMax > parentWidth;
+        if (!overlaps && !dragOutRight && !dropdownOutRight) return;
+
+        dragRect.anchorMin = new Vector2(0f, 1f);
+        dragRect.anchorMax = new Vector2(0f, 1f);
+        dragRect.pivot = new Vector2(0f, 1f);
+        const float spacing = 8f;
+        var rightSideX = dropdownRect.anchoredPosition.x + dropdownRect.sizeDelta.x + spacing;
+        if (!dropdownOutRight && rightSideX + dragRect.sizeDelta.x <= parentWidth)
+        {
+            dragRect.anchoredPosition = new Vector2(rightSideX, dropdownRect.anchoredPosition.y);
+        }
+        else
+        {
+            dragRect.anchoredPosition = new Vector2(dropdownRect.anchoredPosition.x, dropdownRect.anchoredPosition.y - dropdownRect.sizeDelta.y - spacing);
+        }
+
+        EditorUtility.SetDirty(dragRect);
+    }
+
+    private static Rect GetTopLeftRect(RectTransform rect)
+    {
+        var size = rect.sizeDelta;
+        var x = rect.anchoredPosition.x - size.x * rect.pivot.x;
+        var yTop = rect.anchoredPosition.y + size.y * (1f - rect.pivot.y);
+        return new Rect(x, yTop - size.y, size.x, size.y);
     }
 
     private static Sprite FindSpriteForItemId(GridInventoryUnityUI ui, string itemId)

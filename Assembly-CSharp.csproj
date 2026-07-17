@@ -60,12 +60,15 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.62f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Gameplay\Loot\LootTableDatabase.cs" />
     <Compile Include="Assets\Scripts\LoadAssetBundles\LoadFromFile.cs" />
     <Compile Include="Assets\Scripts\Gameplay\RuntimeDebugPanel.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Loot\SearchableLootContainer.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Map\ExtractionPoint.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Map\LootPoint.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Workbench\WorkbenchService.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Loot\LootSpawner.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Grid\Runtime\GridInventoryEditorItem.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Map\MapSpawnPoint.cs" />
     <Compile Include="Assets\Scripts\Gameplay\GameBootstrap.cs" />
     <Compile Include="Assets\SmallScaleInt\2D Zombie interior Tile pack 1\Example Scene\Scripts\ChestInteraction.cs" />
@@ -92,11 +95,14 @@
     <Compile Include="Assets\Scripts\Gameplay\CameraFollow2D.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Combat\Projectile2D.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Zombie\EnemyMovement2D.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Loot\WorldLootItem.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Player\PlayerCombatController2D.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridItemRotation.cs" />
     <Compile Include="Assets\Scripts\Core\GameplayRuntimeEvents.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Runtime\GridInventoryService.cs" />
     <Compile Include="Assets\Scripts\Survival\SurvivalSystem.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Interaction\PlayerInteractor2D.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Interaction\IWorldInteractable.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Night\NightAssaultSystem.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Map\FloorVisibilityController.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Zombie\EnemyMeleeAttack2D.cs" />

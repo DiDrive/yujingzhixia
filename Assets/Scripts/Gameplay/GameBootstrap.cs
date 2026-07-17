@@ -33,6 +33,10 @@ public class GameBootstrap : MonoBehaviour
     [SerializeField] private GridInventoryRuntimePreview gridInventoryRuntimePreview;
     [Tooltip("网格背包UnityUI引用。为空时可自动创建。")]
     [SerializeField] private GridInventoryUnityUI gridInventoryUnityUI;
+    [Tooltip("JSON 掉落表数据库引用。为空时自动创建。")]
+    [SerializeField] private LootTableDatabase lootTableDatabase;
+    [Tooltip("是否自动给玩家挂载世界交互组件。")]
+    [SerializeField] private bool autoCreatePlayerInteractor = true;
     [Tooltip("启动时是否自动创建运行时调试面板。")]
     [SerializeField] private bool autoCreateRuntimeDebugPanel = true;
     [Tooltip("启动时是否自动创建网格背包预览窗口。")]
@@ -56,9 +60,11 @@ public class GameBootstrap : MonoBehaviour
         if (nightAssaultSystem == null) nightAssaultSystem = FindSceneObjectOfType<NightAssaultSystem>();
         if (gridInventoryService == null) gridInventoryService = FindSceneObjectOfType<GridInventoryService>();
         if (gridInventoryRuntimePreview == null) gridInventoryRuntimePreview = FindSceneObjectOfType<GridInventoryRuntimePreview>();
-        if (gridInventoryUnityUI == null) gridInventoryUnityUI = FindSceneObjectOfType<GridInventoryUnityUI>();
+        if (gridInventoryUnityUI == null) gridInventoryUnityUI = FindMainInventoryUi();
+        if (lootTableDatabase == null) lootTableDatabase = FindSceneObjectOfType<LootTableDatabase>();
         if (runtimeDebugPanel == null) runtimeDebugPanel = FindSceneObjectOfType<RuntimeDebugPanel>();
         EnsureGridInventorySystems();
+        EnsureLootInteractionSystems();
         if (autoCreateRuntimeDebugPanel) EnsureRuntimeDebugPanel();
         BindRuntimeDebugPanel();
     }
@@ -187,6 +193,22 @@ public class GameBootstrap : MonoBehaviour
         }
     }
 
+    private void EnsureLootInteractionSystems()
+    {
+        if (lootTableDatabase == null)
+        {
+            var databaseObject = new GameObject("LootTableDatabase");
+            lootTableDatabase = databaseObject.AddComponent<LootTableDatabase>();
+        }
+
+        if (!autoCreatePlayerInteractor) return;
+        var player = FindSceneObjectOfType<PlayerCombatController2D>();
+        if (player == null) return;
+        var interactor = player.GetComponent<PlayerInteractor2D>();
+        if (interactor == null) interactor = player.gameObject.AddComponent<PlayerInteractor2D>();
+        interactor.Bind(inventoryService, gridInventoryService, gridInventoryUnityUI);
+    }
+
     private void BindRuntimeDebugPanel()
     {
         if (runtimeDebugPanel == null) return;
@@ -208,5 +230,25 @@ public class GameBootstrap : MonoBehaviour
         }
 
         return null;
+    }
+
+    private static GridInventoryUnityUI FindMainInventoryUi()
+    {
+        var views = Resources.FindObjectsOfTypeAll<GridInventoryUnityUI>();
+        for (var i = 0; i < views.Length; i++)
+        {
+            var candidate = views[i];
+            if (candidate == null || !candidate.gameObject.scene.IsValid()) continue;
+            if (candidate.name == "InventoryUI_main_bag") return candidate;
+        }
+
+        for (var i = 0; i < views.Length; i++)
+        {
+            var candidate = views[i];
+            if (candidate == null || !candidate.gameObject.scene.IsValid()) continue;
+            if (!candidate.IsSideContainerView && candidate.ContainerId == "main_bag") return candidate;
+        }
+
+        return FindSceneObjectOfType<GridInventoryUnityUI>();
     }
 }

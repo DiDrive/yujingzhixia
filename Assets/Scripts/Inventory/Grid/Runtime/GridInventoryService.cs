@@ -5,14 +5,33 @@ using UnityEngine;
 
 public class GridInventoryService : MonoBehaviour
 {
+    [Serializable]
+    private class ItemDefinitionJsonTable
+    {
+        public List<GridItemDefinition> items = new();
+    }
+
+    private struct StackCountSnapshot
+    {
+        public string instanceId;
+        public int stackCount;
+    }
+
     [Tooltip("容器定义列表。")]
     [SerializeField] private List<GridContainerDefinition> containerDefinitions = new();
     [Tooltip("物品定义列表。")]
     [SerializeField] private List<GridItemDefinition> itemDefinitions = new();
+    [Tooltip("可选的物品 JSON 表。为空时会尝试读取 Resources/Data/item_definitions.json。场景中已有定义时默认不会覆盖。")]
+    [SerializeField] private TextAsset itemDefinitionsJson;
+    [Tooltip("启动时优先用 JSON 覆盖 Inspector 中的物品定义。正式转表后再开启。")]
+    [SerializeField] private bool preferJsonItemDefinitions;
+    [Tooltip("是否在游戏启动时读取场景 ItemLayer 下的 GridInventoryEditorItem 节点作为默认背包内容。")]
+    [SerializeField] private bool loadEditorItemNodesOnStart = true;
     [Tooltip("快速转移时的容器优先级。")]
     [SerializeField] private List<string> quickTransferPriorityContainerIds = new();
 
     private readonly Dictionary<string, GridContainerDefinition> containerDefinitionById = new();
+    private readonly Dictionary<string, GridContainerOwnerType> containerOwnerById = new();
     private readonly Dictionary<string, GridItemDefinition> itemDefinitionById = new();
     private readonly Dictionary<string, GridOccupancyMap> occupancyByContainerId = new();
     private readonly Dictionary<string, GridItemInstance> itemInstanceById = new();
@@ -20,10 +39,30 @@ public class GridInventoryService : MonoBehaviour
 
     public IReadOnlyDictionary<string, GridItemInstance> ItemInstances => itemInstanceById;
     public IReadOnlyCollection<string> ContainerIds => containerDefinitionById.Keys;
+    public IEnumerable<string> PlayerContainerIds => containerOwnerById
+        .Where(pair => pair.Value == GridContainerOwnerType.Player)
+        .Select(pair => pair.Key);
+
+    public bool HasSceneEditorItemNodes()
+    {
+        var editorItems = FindObjectsOfType<GridInventoryEditorItem>(true);
+        for (var i = 0; i < editorItems.Length; i++)
+        {
+            var editorItem = editorItems[i];
+            if (editorItem != null && editorItem.gameObject.scene.IsValid()) return true;
+        }
+
+        return false;
+    }
 
     private void Awake()
     {
         EnsureInitialized();
+    }
+
+    private void Start()
+    {
+        if (loadEditorItemNodesOnStart) LoadEditorItemNodes();
     }
 
     public void EnsureInitialized()
@@ -44,7 +83,8 @@ public class GridInventoryService : MonoBehaviour
                 rows = 8,
                 columns = 10,
                 allowNestedContainer = false,
-                allowedItemTags = new List<string>()// 所有物品都允许放入主背包
+                allowedItemTags = new List<string>(),// 所有物品都允许放入主背包
+                ownerType = GridContainerOwnerType.Player
             });
             containerDefinitions.Add(new GridContainerDefinition
             {
@@ -52,8 +92,18 @@ public class GridInventoryService : MonoBehaviour
                 rows = 2,
                 columns = 3,
                 allowNestedContainer = false,
-                allowedItemTags = new List<string> { "consumable", "medical" }
+                allowedItemTags = new List<string> { "consumable", "medical" },
+                ownerType = GridContainerOwnerType.Player
             });
+        }
+
+        if (preferJsonItemDefinitions)
+        {
+            TryLoadItemDefinitionsFromJson(true);
+        }
+        else if (itemDefinitions.Count == 0)
+        {
+            TryLoadItemDefinitionsFromJson(false);
         }
 
         if (itemDefinitions.Count == 0)//如果没有物品定义，添加默认物品定义
@@ -111,6 +161,7 @@ public class GridInventoryService : MonoBehaviour
     public void RebuildRuntime()
     {
         containerDefinitionById.Clear();
+        containerOwnerById.Clear();
         itemDefinitionById.Clear();
         occupancyByContainerId.Clear();
         containerItemInstanceIds.Clear();
@@ -123,6 +174,7 @@ public class GridInventoryService : MonoBehaviour
             if (definition.rows <= 0 || definition.columns <= 0) continue;
 
             containerDefinitionById[definition.containerId] = definition;
+            containerOwnerById[definition.containerId] = definition.ownerType;
             occupancyByContainerId[definition.containerId] = new GridOccupancyMap(definition.rows, definition.columns);
             containerItemInstanceIds[definition.containerId] = new List<string>();
         }
@@ -133,6 +185,36 @@ public class GridInventoryService : MonoBehaviour
             if (string.IsNullOrWhiteSpace(definition.itemId)) continue;
             if (definition.width <= 0 || definition.height <= 0) continue;
             itemDefinitionById[definition.itemId] = definition;
+        }
+    }
+
+    /// <summary>
+    /// 将场景 ItemLayer 中的编辑器物品节点转为本次运行的物品实例。
+    /// </summary>
+    public void LoadEditorItemNodes()
+    {
+        var editorItems = FindObjectsOfType<GridInventoryEditorItem>(true);
+        for (var i = 0; i < editorItems.Length; i++)
+        {
+            var editorItem = editorItems[i];
+            if (editorItem == null || !editorItem.gameObject.scene.IsValid()) continue;
+            if (string.IsNullOrWhiteSpace(editorItem.ItemId)) continue;
+            if (!containerDefinitionById.ContainsKey(editorItem.ContainerId)) continue;
+
+            if (!TryCreateItemInstance(editorItem.ItemId, editorItem.StackCount, out var instanceId)) continue;
+            if (!TryPlace(instanceId, editorItem.ContainerId, editorItem.Row, editorItem.Column, editorItem.Rotation))
+            {
+                RemoveInstanceInternal(instanceId);
+                continue;
+            }
+
+            editorItem.SetRuntimeInstanceId(instanceId);
+        }
+
+        var inventoryUis = FindObjectsOfType<GridInventoryUnityUI>(true);
+        for (var i = 0; i < inventoryUis.Length; i++)
+        {
+            if (inventoryUis[i] != null) inventoryUis[i].RefreshEditorItemBindings(this);
         }
     }
 
@@ -173,34 +255,13 @@ public class GridInventoryService : MonoBehaviour
     /// <returns>是否成功添加物品。</returns>
     public bool AddItem(string itemId, int amount)
     {
-        if (string.IsNullOrWhiteSpace(itemId) || amount <= 0) return false;
-        if (!itemDefinitionById.TryGetValue(itemId, out var itemDefinition)) return false;
+        return TryAddItemToContainers(itemId, amount, BuildPlayerContainerPriority());
+    }
 
-        var pending = amount;
-        var createdInstanceIds = new List<string>();
-        var stackLimit = itemDefinition.maxStack > 0 ? itemDefinition.maxStack : amount;
-
-        while (pending > 0)
-        {
-            var createCount = Mathf.Min(stackLimit, pending);
-            if (!TryCreateItemInstance(itemId, createCount, out var instanceId))
-            {
-                RollbackCreatedInstances(createdInstanceIds);
-                return false;
-            }
-
-            if (!TryQuickTransfer(instanceId))
-            {
-                RemoveInstanceInternal(instanceId);
-                RollbackCreatedInstances(createdInstanceIds);
-                return false;
-            }
-
-            createdInstanceIds.Add(instanceId);
-            pending -= createCount;
-        }
-
-        return true;
+    public bool TryAddItemToContainer(string containerId, string itemId, int amount)
+    {
+        if (string.IsNullOrWhiteSpace(containerId)) return false;
+        return TryAddItemToContainers(itemId, amount, new List<string> { containerId });
     }
 
     /// <summary>
@@ -235,6 +296,7 @@ public class GridInventoryService : MonoBehaviour
         var pending = amount;
         var candidates = itemInstanceById.Values
             .Where(instance => instance.itemId == itemId)
+            .Where(instance => IsPlayerContainer(instance.containerId))
             .OrderBy(instance => instance.stackCount)
             .ToList();
 
@@ -350,6 +412,21 @@ public class GridInventoryService : MonoBehaviour
             var ignoreId = containerId == instance.containerId ? instanceId : null;
             if (!GridPlacementSolver.FindFirstFit(occupancy, definition, out var placement, true, ignoreId)) continue;
             if (TryPlace(instanceId, containerId, placement.row, placement.column, placement.rotation)) return true;
+        }
+
+        return false;
+    }
+
+    public bool TryQuickTransferToPlayer(string instanceId)
+    {
+        if (!itemInstanceById.TryGetValue(instanceId, out var instance)) return false;
+        if (IsPlayerContainer(instance.containerId)) return TryQuickTransfer(instanceId);
+
+        var priorities = BuildPlayerContainerPriority();
+        for (var i = 0; i < priorities.Count; i++)
+        {
+            if (!TryPlaceFirstFit(instanceId, priorities[i])) continue;
+            return true;
         }
 
         return false;
@@ -485,9 +562,77 @@ public class GridInventoryService : MonoBehaviour
         foreach (var pair in itemInstanceById)
         {
             if (pair.Value.itemId != itemId) continue;
+            if (!IsPlayerContainer(pair.Value.containerId)) continue;
             total += pair.Value.stackCount;
         }
         return total;
+    }
+
+    public int CountItemInContainer(string containerId, string itemId)
+    {
+        if (string.IsNullOrWhiteSpace(containerId) || string.IsNullOrWhiteSpace(itemId)) return 0;
+        var total = 0;
+        foreach (var instance in itemInstanceById.Values)
+        {
+            if (instance.containerId == containerId && instance.itemId == itemId)
+            {
+                total += instance.stackCount;
+            }
+        }
+
+        return total;
+    }
+
+    public bool TryGetContainerOwner(string containerId, out GridContainerOwnerType ownerType)
+    {
+        return containerOwnerById.TryGetValue(containerId, out ownerType);
+    }
+
+    public bool RegisterRuntimeContainer(
+        string containerId,
+        int rows,
+        int columns,
+        GridContainerOwnerType ownerType = GridContainerOwnerType.WorldLoot,
+        bool allowNestedContainer = false,
+        List<string> allowedItemTags = null)
+    {
+        if (string.IsNullOrWhiteSpace(containerId) || rows <= 0 || columns <= 0) return false;
+        if (containerDefinitionById.ContainsKey(containerId)) return true;
+
+        var definition = new GridContainerDefinition
+        {
+            containerId = containerId,
+            rows = rows,
+            columns = columns,
+            allowNestedContainer = allowNestedContainer,
+            allowedItemTags = allowedItemTags ?? new List<string>(),
+            ownerType = ownerType
+        };
+        containerDefinitionById[containerId] = definition;
+        containerOwnerById[containerId] = ownerType;
+        occupancyByContainerId[containerId] = new GridOccupancyMap(rows, columns);
+        containerItemInstanceIds[containerId] = new List<string>();
+        return true;
+    }
+
+    public bool UnregisterRuntimeContainer(string containerId, bool removeContainedItems = true)
+    {
+        if (!containerDefinitionById.ContainsKey(containerId)) return false;
+        if (removeContainedItems && containerItemInstanceIds.TryGetValue(containerId, out var ids))
+        {
+            var copy = ids.ToArray();
+            for (var i = 0; i < copy.Length; i++) RemoveInstanceInternal(copy[i]);
+        }
+        else if (containerItemInstanceIds.TryGetValue(containerId, out var remaining) && remaining.Count > 0)
+        {
+            return false;
+        }
+
+        containerDefinitionById.Remove(containerId);
+        containerOwnerById.Remove(containerId);
+        occupancyByContainerId.Remove(containerId);
+        containerItemInstanceIds.Remove(containerId);
+        return true;
     }
 
     /// <summary>
@@ -752,28 +897,152 @@ public class GridInventoryService : MonoBehaviour
     /// <returns>容器优先级列表。</returns>
     private List<string> BuildContainerPriority(string currentContainerId)
     {
-        var result = new List<string>();
-        for (var i = 0; i < quickTransferPriorityContainerIds.Count; i++)
-        {
-            var containerId = quickTransferPriorityContainerIds[i];
-            if (string.IsNullOrWhiteSpace(containerId)) continue;
-            if (result.Contains(containerId)) continue;
-            result.Add(containerId);
-        }
+        var result = BuildPlayerContainerPriority();
 
-        foreach (var containerId in containerDefinitionById.Keys)
-        {
-            if (result.Contains(containerId)) continue;
-            result.Add(containerId);
-        }
-
-        if (!string.IsNullOrWhiteSpace(currentContainerId))
+        if (!string.IsNullOrWhiteSpace(currentContainerId) && IsPlayerContainer(currentContainerId))
         {
             result.Remove(currentContainerId);
             result.Add(currentContainerId);
         }
 
         return result;
+    }
+
+    private List<string> BuildPlayerContainerPriority()
+    {
+        var result = new List<string>();
+        for (var i = 0; i < quickTransferPriorityContainerIds.Count; i++)
+        {
+            var containerId = quickTransferPriorityContainerIds[i];
+            if (string.IsNullOrWhiteSpace(containerId) || !IsPlayerContainer(containerId)) continue;
+            if (!result.Contains(containerId)) result.Add(containerId);
+        }
+
+        foreach (var pair in containerOwnerById)
+        {
+            if (pair.Value != GridContainerOwnerType.Player || result.Contains(pair.Key)) continue;
+            result.Add(pair.Key);
+        }
+
+        return result;
+    }
+
+    private bool IsPlayerContainer(string containerId)
+    {
+        return !string.IsNullOrWhiteSpace(containerId) &&
+               containerOwnerById.TryGetValue(containerId, out var ownerType) &&
+               ownerType == GridContainerOwnerType.Player;
+    }
+
+    private bool TryPlaceFirstFit(string instanceId, string containerId)
+    {
+        if (!itemInstanceById.TryGetValue(instanceId, out var instance)) return false;
+        if (!itemDefinitionById.TryGetValue(instance.itemId, out var definition)) return false;
+        if (!containerDefinitionById.TryGetValue(containerId, out var containerDefinition)) return false;
+        if (!occupancyByContainerId.TryGetValue(containerId, out var occupancy)) return false;
+        if (!CanContainerAcceptItem(containerDefinition, definition)) return false;
+        var ignoreId = instance.containerId == containerId ? instanceId : null;
+        if (!GridPlacementSolver.FindFirstFit(occupancy, definition, out var placement, true, ignoreId)) return false;
+        return TryPlace(instanceId, containerId, placement.row, placement.column, placement.rotation);
+    }
+
+    private bool TryAddItemToContainers(string itemId, int amount, List<string> targetContainerIds)
+    {
+        if (string.IsNullOrWhiteSpace(itemId) || amount <= 0 || targetContainerIds == null || targetContainerIds.Count == 0) return false;
+        if (!itemDefinitionById.TryGetValue(itemId, out var itemDefinition)) return false;
+
+        var validTargets = targetContainerIds
+            .Where(id => !string.IsNullOrWhiteSpace(id) && containerDefinitionById.ContainsKey(id))
+            .Distinct()
+            .ToList();
+        if (validTargets.Count == 0) return false;
+
+        var pending = amount;
+        var stackLimit = itemDefinition.maxStack > 0 ? itemDefinition.maxStack : int.MaxValue;
+        var snapshots = new List<StackCountSnapshot>();
+        var createdInstanceIds = new List<string>();
+
+        var mergeTargets = itemInstanceById.Values
+            .Where(instance => instance.itemId == itemId && validTargets.Contains(instance.containerId))
+            .Where(instance => instance.stackCount < stackLimit)
+            .OrderBy(instance => validTargets.IndexOf(instance.containerId))
+            .ThenByDescending(instance => instance.stackCount)
+            .ToList();
+
+        for (var i = 0; i < mergeTargets.Count && pending > 0; i++)
+        {
+            var instance = mergeTargets[i];
+            var add = Mathf.Min(pending, stackLimit - instance.stackCount);
+            if (add <= 0) continue;
+            snapshots.Add(new StackCountSnapshot { instanceId = instance.instanceId, stackCount = instance.stackCount });
+            instance.stackCount += add;
+            itemInstanceById[instance.instanceId] = instance;
+            pending -= add;
+        }
+
+        while (pending > 0)
+        {
+            var createCount = stackLimit == int.MaxValue ? pending : Mathf.Min(stackLimit, pending);
+            if (!TryCreateItemInstance(itemId, createCount, out var instanceId))
+            {
+                RollbackAddOperation(snapshots, createdInstanceIds);
+                return false;
+            }
+
+            var placed = false;
+            for (var i = 0; i < validTargets.Count; i++)
+            {
+                if (!TryPlaceFirstFit(instanceId, validTargets[i])) continue;
+                placed = true;
+                break;
+            }
+
+            if (!placed)
+            {
+                RemoveInstanceInternal(instanceId);
+                RollbackAddOperation(snapshots, createdInstanceIds);
+                return false;
+            }
+
+            createdInstanceIds.Add(instanceId);
+            pending -= createCount;
+        }
+
+        return true;
+    }
+
+    private void RollbackAddOperation(List<StackCountSnapshot> snapshots, List<string> createdInstanceIds)
+    {
+        for (var i = 0; i < snapshots.Count; i++)
+        {
+            var snapshot = snapshots[i];
+            if (!itemInstanceById.TryGetValue(snapshot.instanceId, out var instance)) continue;
+            instance.stackCount = snapshot.stackCount;
+            itemInstanceById[snapshot.instanceId] = instance;
+        }
+
+        RollbackCreatedInstances(createdInstanceIds);
+    }
+
+    public bool TryLoadItemDefinitionsFromJson(bool replaceExisting)
+    {
+        var source = itemDefinitionsJson != null
+            ? itemDefinitionsJson
+            : Resources.Load<TextAsset>("Data/item_definitions");
+        if (source == null || string.IsNullOrWhiteSpace(source.text)) return false;
+
+        var table = JsonUtility.FromJson<ItemDefinitionJsonTable>(source.text);
+        if (table?.items == null || table.items.Count == 0) return false;
+        if (replaceExisting) itemDefinitions.Clear();
+        var knownIds = new HashSet<string>(itemDefinitions.Select(item => item.itemId));
+        for (var i = 0; i < table.items.Count; i++)
+        {
+            var item = table.items[i];
+            if (string.IsNullOrWhiteSpace(item.itemId) || item.width <= 0 || item.height <= 0) continue;
+            if (knownIds.Add(item.itemId)) itemDefinitions.Add(item);
+        }
+
+        return true;
     }
     /// <summary>
     /// 计算物品定义的占用面积。

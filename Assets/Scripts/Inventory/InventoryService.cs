@@ -43,7 +43,8 @@ public class InventoryService : MonoBehaviour
     {
         gridInventoryService = service;
         var shouldUseGridBackend = enableBackend && gridInventoryService != null;
-        if (shouldUseGridBackend && !useGridInventoryBackend && stacks.Count > 0)
+        var hasSceneItemNodes = shouldUseGridBackend && gridInventoryService.HasSceneEditorItemNodes();
+        if (shouldUseGridBackend && !useGridInventoryBackend && stacks.Count > 0 && !hasSceneItemNodes)
         {
             gridInventoryService.EnsureInitialized();
             MigrateStacksToGridBackend();

@@ -61,9 +61,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Editor\Inventory\SyncFoodInventoryItems.cs" />
+    <Compile Include="Assets\Scripts\Editor\Inventory\GridInventoryServiceEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\MapTools\TileSpriteDepthSplitterWindow.cs" />
+    <Compile Include="Assets\Scripts\Editor\Inventory\GridInventoryEditorLayoutBuilder.cs" />
     <Compile Include="Assets\Scripts\Editor\CreateAssetBundles.cs" />
     <Compile Include="Assets\Scripts\Editor\MapTools\MapTilemapTools.cs" />
+    <Compile Include="Assets\Scripts\Editor\Loot\SearchableLootContainerEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
