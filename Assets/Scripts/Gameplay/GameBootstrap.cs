@@ -35,8 +35,19 @@ public class GameBootstrap : MonoBehaviour
     [SerializeField] private GridInventoryUnityUI gridInventoryUnityUI;
     [Tooltip("JSON 掉落表数据库引用。为空时自动创建。")]
     [SerializeField] private LootTableDatabase lootTableDatabase;
+    [Tooltip("场景 Canvas 下的世界交互提示和搜索进度 UI。必须在编辑器中预先创建；运行时不会生成。")]
+    [SerializeField] private WorldInteractionPromptUI interactionPromptUi;
     [Tooltip("是否自动给玩家挂载世界交互组件。")]
     [SerializeField] private bool autoCreatePlayerInteractor = true;
+    [Header("World Interaction")]
+    [Tooltip("仅在运行时自动创建 PlayerInteractor2D 时使用的默认检测半径。玩家已经挂载交互器时，以玩家组件上的配置为准。")]
+    [Min(0.1f)] [SerializeField] private float playerInteractionRange = 1.6f;
+    [Tooltip("仅在运行时自动创建 PlayerInteractor2D 时使用的默认扫描间隔。")]
+    [Min(0.02f)] [SerializeField] private float interactionScanInterval = 0.08f;
+    [Tooltip("运行时显示当前目标、距离以及搜索/拾取进度。正式 UI 接入后可以关闭。")]
+    [SerializeField] private bool showInteractionOverlay = true;
+    [Tooltip("在 Scene 视图中显示玩家交互范围的蓝色圆圈。")]
+    [SerializeField] private bool showInteractionRangeGizmo = true;
     [Tooltip("启动时是否自动创建运行时调试面板。")]
     [SerializeField] private bool autoCreateRuntimeDebugPanel = true;
     [Tooltip("启动时是否自动创建网格背包预览窗口。")]
@@ -62,6 +73,7 @@ public class GameBootstrap : MonoBehaviour
         if (gridInventoryRuntimePreview == null) gridInventoryRuntimePreview = FindSceneObjectOfType<GridInventoryRuntimePreview>();
         if (gridInventoryUnityUI == null) gridInventoryUnityUI = FindMainInventoryUi();
         if (lootTableDatabase == null) lootTableDatabase = FindSceneObjectOfType<LootTableDatabase>();
+        if (interactionPromptUi == null) interactionPromptUi = FindSceneObjectOfType<WorldInteractionPromptUI>();
         if (runtimeDebugPanel == null) runtimeDebugPanel = FindSceneObjectOfType<RuntimeDebugPanel>();
         EnsureGridInventorySystems();
         EnsureLootInteractionSystems();
@@ -193,6 +205,9 @@ public class GameBootstrap : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 连接场景中已有的搜索、交互提示和物品数据服务；仅在必要时补齐运行所需服务。
+    /// </summary>
     private void EnsureLootInteractionSystems()
     {
         if (lootTableDatabase == null)
@@ -205,8 +220,15 @@ public class GameBootstrap : MonoBehaviour
         var player = FindSceneObjectOfType<PlayerCombatController2D>();
         if (player == null) return;
         var interactor = player.GetComponent<PlayerInteractor2D>();
-        if (interactor == null) interactor = player.gameObject.AddComponent<PlayerInteractor2D>();
-        interactor.Bind(inventoryService, gridInventoryService, gridInventoryUnityUI);
+        var createdInteractor = interactor == null;
+        if (createdInteractor) interactor = player.gameObject.AddComponent<PlayerInteractor2D>();
+
+        // 场景或预制体已经配置好的交互器以自身 Inspector 参数为准，避免启动时覆盖策划调参。
+        if (createdInteractor)
+        {
+            interactor.Configure(playerInteractionRange, interactionScanInterval, showInteractionOverlay, showInteractionRangeGizmo);
+        }
+        interactor.Bind(inventoryService, gridInventoryService, gridInventoryUnityUI, interactionPromptUi);
     }
 
     private void BindRuntimeDebugPanel()

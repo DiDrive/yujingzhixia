@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// 网格背包的数据服务，统一管理容器定义、物品定义、占用格和物品实例。
+/// </summary>
 public class GridInventoryService : MonoBehaviour
 {
     [Serializable]
@@ -106,7 +109,8 @@ public class GridInventoryService : MonoBehaviour
             TryLoadItemDefinitionsFromJson(false);
         }
 
-        if (itemDefinitions.Count == 0)//如果没有物品定义，添加默认物品定义
+        // JSON 和 Inspector 均未提供定义时才使用兜底数据；品质也会决定逐物品搜索耗时。
+        if (itemDefinitions.Count == 0)
         {
             itemDefinitions.Add(new GridItemDefinition
             {
@@ -116,7 +120,8 @@ public class GridInventoryService : MonoBehaviour
                 canRotate = false,
                 maxStack = 3,
                 itemTags = new List<string> { "consumable" },
-                weight = 0.5f
+                weight = 0.5f,
+                quality = GridItemQuality.Common
             });
             itemDefinitions.Add(new GridItemDefinition
             {
@@ -126,7 +131,8 @@ public class GridInventoryService : MonoBehaviour
                 canRotate = true,
                 maxStack = 2,
                 itemTags = new List<string> { "consumable" },
-                weight = 0.8f
+                weight = 0.8f,
+                quality = GridItemQuality.Uncommon
             });
             itemDefinitions.Add(new GridItemDefinition
             {
@@ -136,7 +142,8 @@ public class GridInventoryService : MonoBehaviour
                 canRotate = false,
                 maxStack = 5,
                 itemTags = new List<string> { "medical" },
-                weight = 0.2f
+                weight = 0.2f,
+                quality = GridItemQuality.Common
             });
             itemDefinitions.Add(new GridItemDefinition
             {
@@ -146,7 +153,8 @@ public class GridInventoryService : MonoBehaviour
                 canRotate = true,
                 maxStack = 4,
                 itemTags = new List<string> { "material" },
-                weight = 0.4f
+                weight = 0.4f,
+                quality = GridItemQuality.Uncommon
             });
         }
 
@@ -276,9 +284,25 @@ public class GridInventoryService : MonoBehaviour
     /// <returns>是否成功放置物品实例。</returns>
     public bool TrySpawnToCell(string itemId, string containerId, int row, int column, GridItemRotation rotation = GridItemRotation.Deg0, int stackCount = 1)
     {
-        if (!TryCreateItemInstance(itemId, stackCount, out var instanceId)) return false;
+        return TrySpawnToCell(itemId, containerId, row, column, rotation, stackCount, out _);
+    }
+
+    /// <summary>
+    /// 在指定格子恢复物品，并返回本次创建的新实例 ID，供外部状态恢复时重新建立引用。
+    /// </summary>
+    public bool TrySpawnToCell(
+        string itemId,
+        string containerId,
+        int row,
+        int column,
+        GridItemRotation rotation,
+        int stackCount,
+        out string instanceId)
+    {
+        if (!TryCreateItemInstance(itemId, stackCount, out instanceId)) return false;
         if (TryPlace(instanceId, containerId, row, column, rotation)) return true;
         RemoveInstanceInternal(instanceId);
+        instanceId = null;
         return false;
     }
 

@@ -2,39 +2,2192 @@
   "items": [
     {
       "itemId": "food_canned",
+      "displayName": "罐头",
+      "iconResourcePath": "texture/food_canned",
       "width": 1,
       "height": 1,
       "canRotate": false,
       "maxStack": 3,
-      "itemTags": ["consumable", "food"],
-      "weight": 0.5
+      "itemTags": [
+        "consumable",
+        "food"
+      ],
+      "weight": 0.5,
+      "quality": 0
     },
     {
       "itemId": "water_bottle",
+      "displayName": "瓶装水",
+      "iconResourcePath": "texture/water_bottle",
       "width": 1,
       "height": 2,
       "canRotate": true,
       "maxStack": 2,
-      "itemTags": ["consumable", "drink"],
-      "weight": 0.8
+      "itemTags": [
+        "consumable",
+        "drink"
+      ],
+      "weight": 0.8,
+      "quality": 1
     },
     {
       "itemId": "bandage",
+      "displayName": "绷带",
+      "iconResourcePath": "texture/bandage",
       "width": 1,
       "height": 1,
       "canRotate": false,
       "maxStack": 5,
-      "itemTags": ["medical"],
-      "weight": 0.2
+      "itemTags": [
+        "medical"
+      ],
+      "weight": 0.2,
+      "quality": 0
     },
     {
       "itemId": "cloth_raw",
+      "displayName": "布料",
+      "iconResourcePath": "texture/cloth_raw",
       "width": 2,
       "height": 1,
       "canRotate": true,
       "maxStack": 4,
-      "itemTags": ["material"],
-      "weight": 0.4
+      "itemTags": [
+        "material"
+      ],
+      "weight": 0.4,
+      "quality": 1
+    },
+    {
+      "itemId": "aluminum_foil",
+      "displayName": "铝箔",
+      "iconResourcePath": "Characters/food/aluminum_foil",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 5,
+      "itemTags": [
+        "material"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "dry_dog_food",
+      "displayName": "狗粮",
+      "iconResourcePath": "Characters/food/dry_dog_food",
+      "width": 2,
+      "height": 2,
+      "canRotate": false,
+      "maxStack": 2,
+      "itemTags": [
+        "consumable",
+        "food"
+      ],
+      "weight": 1.2,
+      "quality": 1
+    },
+    {
+      "itemId": "watermelon",
+      "displayName": "西瓜",
+      "iconResourcePath": "Characters/food/watermelon1",
+      "width": 2,
+      "height": 2,
+      "canRotate": false,
+      "maxStack": 1,
+      "itemTags": [
+        "consumable",
+        "food",
+        "drink"
+      ],
+      "weight": 3,
+      "quality": 1
+    },
+    {
+      "itemId": "medical_box",
+      "displayName": "医疗箱",
+      "iconResourcePath": "Characters/food/bandage_box",
+      "width": 2,
+      "height": 1,
+      "canRotate": true,
+      "maxStack": 1,
+      "itemTags": [
+        "medical"
+      ],
+      "weight": 0.8,
+      "quality": 2
+    },
+    {
+      "itemId": "american_cheese_p",
+      "displayName": "american_cheese_p",
+      "iconResourcePath": "Characters/food/American_cheese_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "bacon",
+      "displayName": "bacon",
+      "iconResourcePath": "Characters/food/bacon",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "baking_powder",
+      "displayName": "baking_powder",
+      "iconResourcePath": "Characters/food/baking_powder",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "ball_pen",
+      "displayName": "ball_pen",
+      "iconResourcePath": "Characters/food/ball_pen",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "banana",
+      "displayName": "banana",
+      "iconResourcePath": "Characters/food/banana",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "bandage_box",
+      "displayName": "bandage_box",
+      "iconResourcePath": "Characters/food/bandage_box",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "barbeque_sauce",
+      "displayName": "barbeque_sauce",
+      "iconResourcePath": "Characters/food/barbeque_sauce",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "basket_metal",
+      "displayName": "basket_metal",
+      "iconResourcePath": "Characters/food/basket_metal",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "basket_yellow",
+      "displayName": "basket_yellow",
+      "iconResourcePath": "Characters/food/basket_yellow",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "bathroom_cleaner",
+      "displayName": "bathroom_cleaner",
+      "iconResourcePath": "Characters/food/bathroom_cleaner",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "batteries",
+      "displayName": "batteries",
+      "iconResourcePath": "Characters/food/batteries",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "bell_pepper",
+      "displayName": "bell_pepper",
+      "iconResourcePath": "Characters/food/bell_pepper",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "bell_pepper_p",
+      "displayName": "bell_pepper_p",
+      "iconResourcePath": "Characters/food/bell_pepper_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "body_lotion",
+      "displayName": "body_lotion",
+      "iconResourcePath": "Characters/food/body_lotion",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "bowl",
+      "displayName": "bowl",
+      "iconResourcePath": "Characters/food/bowl",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "bubble_gum",
+      "displayName": "bubble_gum",
+      "iconResourcePath": "Characters/food/bubble_gum",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "butter",
+      "displayName": "butter",
+      "iconResourcePath": "Characters/food/butter",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "butter2",
+      "displayName": "butter2",
+      "iconResourcePath": "Characters/food/butter2",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "cabbage",
+      "displayName": "cabbage",
+      "iconResourcePath": "Characters/food/cabbage",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "cabbage_p",
+      "displayName": "cabbage_p",
+      "iconResourcePath": "Characters/food/cabbage_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "candy_bar",
+      "displayName": "candy_bar",
+      "iconResourcePath": "Characters/food/candy_bar",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "cereal1",
+      "displayName": "cereal1",
+      "iconResourcePath": "Characters/food/cereal1",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "cereal2",
+      "displayName": "cereal2",
+      "iconResourcePath": "Characters/food/cereal2",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "chopping_board",
+      "displayName": "chopping_board",
+      "iconResourcePath": "Characters/food/chopping board",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "cleaning_brush",
+      "displayName": "cleaning_brush",
+      "iconResourcePath": "Characters/food/cleaning_brush",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "cleaning_gloves",
+      "displayName": "cleaning_gloves",
+      "iconResourcePath": "Characters/food/cleaning_gloves",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "cleaning_gloves_p",
+      "displayName": "cleaning_gloves_p",
+      "iconResourcePath": "Characters/food/cleaning_gloves_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "coffee_bag",
+      "displayName": "coffee_bag",
+      "iconResourcePath": "Characters/food/coffee_bag",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "cookies",
+      "displayName": "cookies",
+      "iconResourcePath": "Characters/food/cookies",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "cooking_oil",
+      "displayName": "cooking_oil",
+      "iconResourcePath": "Characters/food/cooking_oil",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "credit_card_1",
+      "displayName": "credit_card_1",
+      "iconResourcePath": "Characters/food/credit_card_1",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "credit_card_2",
+      "displayName": "credit_card_2",
+      "iconResourcePath": "Characters/food/credit_card_2",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "credit_card_3",
+      "displayName": "credit_card_3",
+      "iconResourcePath": "Characters/food/credit_card_3",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "detergent",
+      "displayName": "detergent",
+      "iconResourcePath": "Characters/food/detergent",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "egg_box",
+      "displayName": "egg_box",
+      "iconResourcePath": "Characters/food/egg_box",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "egg_brown",
+      "displayName": "egg_brown",
+      "iconResourcePath": "Characters/food/egg_brown",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "egg_brown_p",
+      "displayName": "egg_brown_p",
+      "iconResourcePath": "Characters/food/egg_brown_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "egg_white",
+      "displayName": "egg_white",
+      "iconResourcePath": "Characters/food/egg_white",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "egg_white_p",
+      "displayName": "egg_white_p",
+      "iconResourcePath": "Characters/food/egg_white_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "energy_bar",
+      "displayName": "energy_bar",
+      "iconResourcePath": "Characters/food/energy_bar",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "eraser",
+      "displayName": "eraser",
+      "iconResourcePath": "Characters/food/eraser",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "eraser_p",
+      "displayName": "eraser_p",
+      "iconResourcePath": "Characters/food/eraser_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "fish",
+      "displayName": "fish",
+      "iconResourcePath": "Characters/food/fish",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "fish_p",
+      "displayName": "fish_p",
+      "iconResourcePath": "Characters/food/fish_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "flour",
+      "displayName": "flour",
+      "iconResourcePath": "Characters/food/flour",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "fruit_cocktail_can",
+      "displayName": "fruit_cocktail_can",
+      "iconResourcePath": "Characters/food/fruit_cocktail_can",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "frying_pan",
+      "displayName": "frying_pan",
+      "iconResourcePath": "Characters/food/frying pan",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "frying_pan_p",
+      "displayName": "frying_pan_p",
+      "iconResourcePath": "Characters/food/frying pan_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "glue",
+      "displayName": "glue",
+      "iconResourcePath": "Characters/food/glue",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "glue_p",
+      "displayName": "glue_p",
+      "iconResourcePath": "Characters/food/glue_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "glue_stick",
+      "displayName": "glue_stick",
+      "iconResourcePath": "Characters/food/glue_stick",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "grape_soda",
+      "displayName": "grape_soda",
+      "iconResourcePath": "Characters/food/grape_soda",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "green_apple",
+      "displayName": "green_apple",
+      "iconResourcePath": "Characters/food/green_apple",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "green_apple_p",
+      "displayName": "green_apple_p",
+      "iconResourcePath": "Characters/food/green_apple_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "green_grape",
+      "displayName": "green_grape",
+      "iconResourcePath": "Characters/food/green_grape",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "green_grape_p",
+      "displayName": "green_grape_p",
+      "iconResourcePath": "Characters/food/green_grape_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "hand_sanitiser",
+      "displayName": "hand_sanitiser",
+      "iconResourcePath": "Characters/food/hand_sanitiser",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "hot_cocoa_mix",
+      "displayName": "hot_cocoa_mix",
+      "iconResourcePath": "Characters/food/hot_cocoa_mix",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "jam_strawberry",
+      "displayName": "jam_strawberry",
+      "iconResourcePath": "Characters/food/jam_strawberry",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "ketchup",
+      "displayName": "ketchup",
+      "iconResourcePath": "Characters/food/ketchup",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "kitchen_knife_set",
+      "displayName": "kitchen_knife_set",
+      "iconResourcePath": "Characters/food/kitchen_knife_set",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "kitchen_knife_set_p",
+      "displayName": "kitchen_knife_set_p",
+      "iconResourcePath": "Characters/food/kitchen_knife_set_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "kitchen_soap",
+      "displayName": "kitchen_soap",
+      "iconResourcePath": "Characters/food/kitchen_soap",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "light_bulb",
+      "displayName": "light_bulb",
+      "iconResourcePath": "Characters/food/light_bulb",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "light_bulb_box",
+      "displayName": "light_bulb_box",
+      "iconResourcePath": "Characters/food/light_bulb_box",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "marshmallows",
+      "displayName": "marshmallows",
+      "iconResourcePath": "Characters/food/marshmallows",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "meat1",
+      "displayName": "meat1",
+      "iconResourcePath": "Characters/food/meat1",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "meat1_p",
+      "displayName": "meat1_p",
+      "iconResourcePath": "Characters/food/meat1_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "meat2",
+      "displayName": "meat2",
+      "iconResourcePath": "Characters/food/meat2",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "meat2_p",
+      "displayName": "meat2_p",
+      "iconResourcePath": "Characters/food/meat2_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "milk_bottle",
+      "displayName": "milk_bottle",
+      "iconResourcePath": "Characters/food/milk_bottle",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "milk_chocolate",
+      "displayName": "milk_chocolate",
+      "iconResourcePath": "Characters/food/milk_chocolate",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "milk_gallon",
+      "displayName": "milk_gallon",
+      "iconResourcePath": "Characters/food/milk_gallon",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "milk_pack",
+      "displayName": "milk_pack",
+      "iconResourcePath": "Characters/food/milk_pack",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "milk_plastic",
+      "displayName": "milk_plastic",
+      "iconResourcePath": "Characters/food/milk_plastic",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "mushroom_white",
+      "displayName": "mushroom_white",
+      "iconResourcePath": "Characters/food/mushroom_white",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "mushroom_white_p",
+      "displayName": "mushroom_white_p",
+      "iconResourcePath": "Characters/food/mushroom_white_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "mustard",
+      "displayName": "mustard",
+      "iconResourcePath": "Characters/food/mustard",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "olive_oil",
+      "displayName": "olive_oil",
+      "iconResourcePath": "Characters/food/olive_oil",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "orange_juice",
+      "displayName": "orange_juice",
+      "iconResourcePath": "Characters/food/orange_juice",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "paper_bag",
+      "displayName": "paper_bag",
+      "iconResourcePath": "Characters/food/paper_bag",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "peanut_butter",
+      "displayName": "peanut_butter",
+      "iconResourcePath": "Characters/food/peanut_butter",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "pencil_box",
+      "displayName": "pencil_box",
+      "iconResourcePath": "Characters/food/pencil_box",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "plain_yogurt",
+      "displayName": "plain_yogurt",
+      "iconResourcePath": "Characters/food/plain_yogurt",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "potato",
+      "displayName": "potato",
+      "iconResourcePath": "Characters/food/potato",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "potato_p",
+      "displayName": "potato_p",
+      "iconResourcePath": "Characters/food/potato_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "potatochip_blue",
+      "displayName": "potatochip_blue",
+      "iconResourcePath": "Characters/food/potatochip_blue",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "potatochip_green",
+      "displayName": "potatochip_green",
+      "iconResourcePath": "Characters/food/potatochip_green",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "potatochip_yellow",
+      "displayName": "potatochip_yellow",
+      "iconResourcePath": "Characters/food/potatochip_yellow",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "power_strip_typea",
+      "displayName": "power_strip_typea",
+      "iconResourcePath": "Characters/food/power_strip_typeA",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "power_strip_typef",
+      "displayName": "power_strip_typef",
+      "iconResourcePath": "Characters/food/power_strip_typeF",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "receipt",
+      "displayName": "receipt",
+      "iconResourcePath": "Characters/food/receipt",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "red_apple",
+      "displayName": "red_apple",
+      "iconResourcePath": "Characters/food/red_apple",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "red_apple_p",
+      "displayName": "red_apple_p",
+      "iconResourcePath": "Characters/food/red_apple_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "red_grape",
+      "displayName": "red_grape",
+      "iconResourcePath": "Characters/food/red_grape",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "red_grape_p",
+      "displayName": "red_grape_p",
+      "iconResourcePath": "Characters/food/red_grape_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "rolling_pin",
+      "displayName": "rolling_pin",
+      "iconResourcePath": "Characters/food/rolling pin",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "rubber_duck",
+      "displayName": "rubber_duck",
+      "iconResourcePath": "Characters/food/rubber_duck",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "rubber_ducktopus",
+      "displayName": "rubber_ducktopus",
+      "iconResourcePath": "Characters/food/rubber_ducktopus",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "salmon",
+      "displayName": "salmon",
+      "iconResourcePath": "Characters/food/salmon",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "salmon_p",
+      "displayName": "salmon_p",
+      "iconResourcePath": "Characters/food/salmon_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "salt",
+      "displayName": "salt",
+      "iconResourcePath": "Characters/food/salt",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "sausage_p",
+      "displayName": "sausage_p",
+      "iconResourcePath": "Characters/food/sausage_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "scissors",
+      "displayName": "scissors",
+      "iconResourcePath": "Characters/food/scissors",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "scissors_p",
+      "displayName": "scissors_p",
+      "iconResourcePath": "Characters/food/scissors_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "scrub_brush",
+      "displayName": "scrub_brush",
+      "iconResourcePath": "Characters/food/scrub_brush",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "scrub_sponge",
+      "displayName": "scrub_sponge",
+      "iconResourcePath": "Characters/food/scrub_sponge",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "shampoo",
+      "displayName": "shampoo",
+      "iconResourcePath": "Characters/food/shampoo",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "sliced_bread_p",
+      "displayName": "sliced_bread_p",
+      "iconResourcePath": "Characters/food/sliced_bread_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "snack1",
+      "displayName": "snack1",
+      "iconResourcePath": "Characters/food/snack1",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "snack2",
+      "displayName": "snack2",
+      "iconResourcePath": "Characters/food/snack2",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "soap",
+      "displayName": "soap",
+      "iconResourcePath": "Characters/food/soap",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "soap_box",
+      "displayName": "soap_box",
+      "iconResourcePath": "Characters/food/soap_box",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "soft_drink_blue",
+      "displayName": "soft_drink_blue",
+      "iconResourcePath": "Characters/food/soft_drink_blue",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "soft_drink_green",
+      "displayName": "soft_drink_green",
+      "iconResourcePath": "Characters/food/soft_drink_green",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "soft_drink_red",
+      "displayName": "soft_drink_red",
+      "iconResourcePath": "Characters/food/soft_drink_red",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "soft_drink_yellow",
+      "displayName": "soft_drink_yellow",
+      "iconResourcePath": "Characters/food/soft_drink_yellow",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "spatula",
+      "displayName": "spatula",
+      "iconResourcePath": "Characters/food/spatula",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "spatula_p",
+      "displayName": "spatula_p",
+      "iconResourcePath": "Characters/food/spatula_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "strawberry",
+      "displayName": "strawberry",
+      "iconResourcePath": "Characters/food/strawberry",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "strawberry_ice_cream",
+      "displayName": "strawberry_ice_cream",
+      "iconResourcePath": "Characters/food/strawberry_ice_cream",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "strawberry_jam",
+      "displayName": "strawberry_jam",
+      "iconResourcePath": "Characters/food/strawberry_jam",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "strawberry_p",
+      "displayName": "strawberry_p",
+      "iconResourcePath": "Characters/food/strawberry_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "sugar",
+      "displayName": "sugar",
+      "iconResourcePath": "Characters/food/sugar",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "sun_cream_tube",
+      "displayName": "sun_cream_tube",
+      "iconResourcePath": "Characters/food/sun_cream_tube",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "teakettle",
+      "displayName": "teakettle",
+      "iconResourcePath": "Characters/food/teakettle",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "toilet_paper",
+      "displayName": "toilet_paper",
+      "iconResourcePath": "Characters/food/toilet_paper",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "toothbrush",
+      "displayName": "toothbrush",
+      "iconResourcePath": "Characters/food/toothbrush",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "toothbrush_set",
+      "displayName": "toothbrush_set",
+      "iconResourcePath": "Characters/food/toothbrush_set",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "toothpaste",
+      "displayName": "toothpaste",
+      "iconResourcePath": "Characters/food/toothpaste",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "toothpaste_box",
+      "displayName": "toothpaste_box",
+      "iconResourcePath": "Characters/food/toothpaste_box",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "tuna_can",
+      "displayName": "tuna_can",
+      "iconResourcePath": "Characters/food/tuna_can",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "vanilla_or_lemon_ice_cream",
+      "displayName": "vanilla_or_lemon_ice_cream",
+      "iconResourcePath": "Characters/food/vanilla_or_lemon_ice_cream",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "water",
+      "displayName": "water",
+      "iconResourcePath": "Characters/food/water",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "watermelon1",
+      "displayName": "watermelon1",
+      "iconResourcePath": "Characters/food/watermelon1",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "watermelon2",
+      "displayName": "watermelon2",
+      "iconResourcePath": "Characters/food/watermelon2",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "wax",
+      "displayName": "wax",
+      "iconResourcePath": "Characters/food/wax",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "wet_wipe",
+      "displayName": "wet_wipe",
+      "iconResourcePath": "Characters/food/wet_wipe",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "whisk",
+      "displayName": "whisk",
+      "iconResourcePath": "Characters/food/whisk",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "whisk_p",
+      "displayName": "whisk_p",
+      "iconResourcePath": "Characters/food/whisk_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "white_cheese",
+      "displayName": "white_cheese",
+      "iconResourcePath": "Characters/food/white_cheese",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "white_cheese_p",
+      "displayName": "white_cheese_p",
+      "iconResourcePath": "Characters/food/white_cheese_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "white_cheese_piece",
+      "displayName": "white_cheese_piece",
+      "iconResourcePath": "Characters/food/white_cheese_piece",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "white_cheese_piece_p",
+      "displayName": "white_cheese_piece_p",
+      "iconResourcePath": "Characters/food/white_cheese_piece_p",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "wine_red",
+      "displayName": "wine_red",
+      "iconResourcePath": "Characters/food/wine_red",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "wine_white",
+      "displayName": "wine_white",
+      "iconResourcePath": "Characters/food/wine_white",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "wine_white2",
+      "displayName": "wine_white2",
+      "iconResourcePath": "Characters/food/wine_white2",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
+    },
+    {
+      "itemId": "wine_white3",
+      "displayName": "wine_white3",
+      "iconResourcePath": "Characters/food/wine_white3",
+      "width": 1,
+      "height": 1,
+      "canRotate": false,
+      "maxStack": 10,
+      "itemTags": [
+        "loot"
+      ],
+      "weight": 0.1,
+      "quality": 0
     }
   ]
 }

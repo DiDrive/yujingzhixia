@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridItemDefinition.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Zombie\EnemyHealth2D.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Shelter\ShelterModuleService.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Loot\SearchableLootRuntimeStateStore.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Map\FloorLayerUtility.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Zombie\AnimatorParamUtil2D.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Combat\DebugDamageableTarget.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="Assets\SmallScaleInt\2D Zombie interior Tile pack 1\Example Scene\Scripts\PlayerController.cs" />
     <Compile Include="Assets\SmallScaleInt\2D Zombie interior Tile pack 1\Example Scene\Scripts\AnimationController.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridOccupancyMap.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Interaction\WorldInteractionPromptUI.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridItemInstance.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Rendering\FloorSortingState.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridPlacementSolver.cs" />
@@ -1022,6 +1024,10 @@
       <HintPath>Library\ScriptAssemblies\glTFast.dots.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="PrimeTween.Runtime">
+      <HintPath>Library\ScriptAssemblies\PrimeTween.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.Recorder.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Recorder.Editor.dll</HintPath>
       <Private>False</Private>
@@ -1314,12 +1320,20 @@
       <HintPath>Library\ScriptAssemblies\Unity.2D.Animation.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="PrimeTween.Editor">
+      <HintPath>Library\ScriptAssemblies\PrimeTween.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.2D.IK.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.IK.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="PrimeTween.Debug.csproj">
+      <Project>{A0C045C7-92A5-1C38-1A5E-696E84232561}</Project>
+      <Name>PrimeTween.Debug</Name>
+    </ProjectReference>
     <ProjectReference Include="Bezi.Editor.csproj">
       <Project>{BE76621C-B9FB-D2BA-A34E-918F716FE3DB}</Project>
       <Name>Bezi.Editor</Name>
@@ -1332,9 +1346,17 @@
       <Project>{AF3A1897-E86A-1470-D068-9F6E9A641F78}</Project>
       <Name>Sirenix.OdinInspector.CompatibilityLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="PrimeTween.Installer.csproj">
+      <Project>{EDC38A2E-11DB-6EB0-99FB-1B85A7F221BD}</Project>
+      <Name>PrimeTween.Installer</Name>
+    </ProjectReference>
     <ProjectReference Include="Sirenix.OdinInspector.Modules.UnityMathematics.csproj">
       <Project>{391F7B05-8E17-1157-2289-8643A90C8E11}</Project>
       <Name>Sirenix.OdinInspector.Modules.UnityMathematics</Name>
+    </ProjectReference>
+    <ProjectReference Include="PrimeTween.Demo.csproj">
+      <Project>{0E3D5D51-AB86-7E68-471D-5BF4E5BB4D6F}</Project>
+      <Name>PrimeTween.Demo</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

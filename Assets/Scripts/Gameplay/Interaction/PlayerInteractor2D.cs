@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// 玩家世界交互控制器。负责选择最近目标、处理按住 F 的计时，并驱动场景中预制的交互提示 UI。
+/// </summary>
 public class PlayerInteractor2D : MonoBehaviour
 {
     [Tooltip("世界交互按键。默认 F。")]
@@ -18,14 +21,21 @@ public class PlayerInteractor2D : MonoBehaviour
     [SerializeField] private GridInventoryUnityUI inventoryUi;
     [Tooltip("是否显示原型阶段的交互提示和搜索进度条。后续接正式 UI Prefab 后可以关闭。")]
     [SerializeField] private bool showRuntimeOverlay = true;
+    [Tooltip("场景 Canvas 下可直接编辑的交互提示 UI。为空时会查找 WorldInteractionPromptUI；不会在运行时创建。")]
+    [SerializeField] private WorldInteractionPromptUI interactionUi;
+    [Tooltip("在 Scene 视图中始终显示交互范围。蓝色圆圈就是可搜索容器和可拾取物资的检测范围。")]
+    [SerializeField] private bool showInteractionRangeGizmo = true;
+    [Header("Runtime Status (运行时状态)")]
+    [Tooltip("运行时已登记的可交互物数量。这里只统计主动登记的搜索容器和露天物资，不包含瓦片碰撞器。")]
+    [SerializeField] private int registeredInteractableCount;
+    [Tooltip("运行时当前选中的搜索或拾取目标。显示“无”表示玩家不在任何可交互物自身碰撞器的范围内。")]
+    [SerializeField] private string currentTargetDebug = "未运行";
 
-    private readonly Collider2D[] overlapResults = new Collider2D[32];
     private MonoBehaviour targetBehaviour;
     private IWorldInteractable target;
     private float nextScanTime;
     private float holdProgress;
-    private string feedback;
-    private float feedbackUntil;
+    private float targetDistance;
 
     public InventoryService Inventory => inventoryService;
     public GridInventoryService GridInventory => gridInventoryService;
@@ -36,34 +46,54 @@ public class PlayerInteractor2D : MonoBehaviour
         ResolveServices();
     }
 
+    private void OnEnable()
+    {
+        nextScanTime = 0f;
+    }
+
     private void Update()
     {
-        if (Time.unscaledTime >= nextScanTime)
+        // 按住交互键时锁定当前目标，避免多个物体靠得很近时目标切换导致进度反复归零。
+        var isHoldingCurrentTarget = holdProgress > 0f && Input.GetKey(interactKey);
+        if (!isHoldingCurrentTarget && Time.unscaledTime >= nextScanTime)
         {
             nextScanTime = Time.unscaledTime + Mathf.Max(0.02f, scanInterval);
             ScanForTarget();
         }
 
         UpdateInteractionInput();
+        RefreshInteractionUi();
     }
 
-    public void Bind(InventoryService inventory, GridInventoryService grid, GridInventoryUnityUI ui)
+    public void Bind(InventoryService inventory, GridInventoryService grid, GridInventoryUnityUI ui, WorldInteractionPromptUI promptUi = null)
     {
         inventoryService = inventory;
         gridInventoryService = grid;
         inventoryUi = ui;
+        if (promptUi != null) interactionUi = promptUi;
+        nextScanTime = 0f;
+    }
+
+    public void Configure(float range, float interval, bool runtimeOverlay, bool rangeGizmo)
+    {
+        interactionRange = Mathf.Max(0.1f, range);
+        scanInterval = Mathf.Max(0.02f, interval);
+        showRuntimeOverlay = runtimeOverlay;
+        showInteractionRangeGizmo = rangeGizmo;
     }
 
     public void ShowFeedback(string message, float duration = 1.5f)
     {
-        feedback = message;
-        feedbackUntil = Time.unscaledTime + Mathf.Max(0.1f, duration);
+        if (interactionUi == null) ResolveServices();
+        interactionUi?.ShowFeedback(message, duration);
     }
 
+    /// <summary>补齐背包服务、主背包 UI 和世界交互提示 UI 引用。</summary>
     private void ResolveServices()
     {
         if (inventoryService == null) inventoryService = FindObjectOfType<InventoryService>();
         if (gridInventoryService == null) gridInventoryService = FindObjectOfType<GridInventoryService>();
+        if (interactionUi == null) interactionUi = FindObjectOfType<WorldInteractionPromptUI>(true);
         if (inventoryUi == null)
         {
             var views = FindObjectsOfType<GridInventoryUnityUI>(true);
@@ -76,57 +106,53 @@ public class PlayerInteractor2D : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 从交互物注册表中选择玩家范围内最近的目标；距离按目标自身碰撞器的最近点计算。
+    /// </summary>
     private void ScanForTarget()
     {
-        var count = Physics2D.OverlapCircleNonAlloc(transform.position, interactionRange, overlapResults, interactionLayers);
         IWorldInteractable bestTarget = null;
         MonoBehaviour bestBehaviour = null;
         var bestDistance = float.MaxValue;
+        var entries = WorldInteractableRegistry2D.Entries;
+        registeredInteractableCount = entries.Count;
+        var rangeSqr = interactionRange * interactionRange;
 
-        for (var i = 0; i < count; i++)
+        for (var i = 0; i < entries.Count; i++)
         {
-            var hit = overlapResults[i];
-            if (hit == null) continue;
-            if (!TryFindInteractable(hit.transform, out var candidate, out var candidateBehaviour)) continue;
+            var entry = entries[i];
+            var candidateBehaviour = entry.Behaviour;
+            var candidate = entry.Interactable;
+            if (candidateBehaviour == null || candidate == null) continue;
             if (!candidate.CanInteract(this)) continue;
 
-            var interactionTransform = candidate.InteractionTransform != null
-                ? candidate.InteractionTransform
-                : candidateBehaviour.transform;
-            var distance = ((Vector2)interactionTransform.position - (Vector2)transform.position).sqrMagnitude;
-            if (distance >= bestDistance) continue;
-            bestDistance = distance;
-            bestTarget = candidate;
-            bestBehaviour = candidateBehaviour;
+            var colliders = entry.Colliders;
+            for (var colliderIndex = 0; colliderIndex < colliders.Length; colliderIndex++)
+            {
+                var hit = colliders[colliderIndex];
+                if (hit == null || !hit.enabled || !hit.gameObject.activeInHierarchy) continue;
+                if ((interactionLayers.value & (1 << hit.gameObject.layer)) == 0) continue;
+
+                var closestPoint = hit.ClosestPoint(transform.position);
+                var distance = (closestPoint - (Vector2)transform.position).sqrMagnitude;
+                if (distance > rangeSqr || distance >= bestDistance) continue;
+                bestDistance = distance;
+                bestTarget = candidate;
+                bestBehaviour = candidateBehaviour;
+            }
         }
 
+        targetDistance = bestTarget != null ? Mathf.Sqrt(bestDistance) : 0f;
+        currentTargetDebug = bestBehaviour != null
+            ? $"{bestBehaviour.name}（{targetDistance:0.00}/{interactionRange:0.00}m）"
+            : "无";
         if (bestBehaviour == targetBehaviour) return;
         target = bestTarget;
         targetBehaviour = bestBehaviour;
         holdProgress = 0f;
     }
 
-    private static bool TryFindInteractable(Transform source, out IWorldInteractable interactable, out MonoBehaviour behaviour)
-    {
-        var cursor = source;
-        while (cursor != null)
-        {
-            var components = cursor.GetComponents<MonoBehaviour>();
-            for (var i = 0; i < components.Length; i++)
-            {
-                if (components[i] is not IWorldInteractable candidate) continue;
-                interactable = candidate;
-                behaviour = components[i];
-                return true;
-            }
-            cursor = cursor.parent;
-        }
-
-        interactable = null;
-        behaviour = null;
-        return false;
-    }
-
+    /// <summary>处理即时交互和需要持续按键的交互计时。</summary>
     private void UpdateInteractionInput()
     {
         if (targetBehaviour == null || target == null || !target.CanInteract(this))
@@ -152,6 +178,7 @@ public class PlayerInteractor2D : MonoBehaviour
         if (holdProgress >= duration) CompleteInteraction();
     }
 
+    /// <summary>清空本次按住进度并把实际行为交给当前目标执行。</summary>
     private void CompleteInteraction()
     {
         var completedTarget = target;
@@ -160,29 +187,58 @@ public class PlayerInteractor2D : MonoBehaviour
         nextScanTime = 0f;
     }
 
-    private void OnGUI()
+    /// <summary>刷新世界提示；容器窗口打开后主动隐藏世界中的搜索提示。</summary>
+    private void RefreshInteractionUi()
     {
-        if (!showRuntimeOverlay) return;
-        var centerX = Screen.width * 0.5f;
-        var bottom = Screen.height - 150f;
-
-        if (targetBehaviour != null && target != null && target.CanInteract(this))
+        if (interactionUi == null)
         {
-            var promptRect = new Rect(centerX - 180f, bottom, 360f, 28f);
-            GUI.Box(promptRect, $"[{interactKey}] {target.InteractionPrompt}");
-            var duration = Mathf.Max(0f, target.InteractionHoldDuration);
-            if (duration > 0.01f && holdProgress > 0f)
-            {
-                var progress = Mathf.Clamp01(holdProgress / duration);
-                GUI.Box(new Rect(centerX - 150f, bottom + 32f, 300f, 18f), string.Empty);
-                GUI.Box(new Rect(centerX - 148f, bottom + 34f, 296f * progress, 14f), $"{progress:P0}");
-            }
+            ResolveServices();
+            if (interactionUi == null) return;
+        }
+        if (!showRuntimeOverlay || targetBehaviour == null || target == null || !target.CanInteract(this))
+        {
+            interactionUi.HideTarget();
+            return;
         }
 
-        if (!string.IsNullOrWhiteSpace(feedback) && Time.unscaledTime < feedbackUntil)
+        // 容器窗口已经打开时，世界中的“搜索/打开”提示不再显示。
+        if (targetBehaviour is SearchableLootContainer openContainer && openContainer.IsContainerUiOpen)
         {
-            GUI.Box(new Rect(centerX - 180f, bottom - 38f, 360f, 28f), feedback);
+            interactionUi.HideTarget();
+            return;
         }
+
+        var duration = Mathf.Max(0f, target.InteractionHoldDuration);
+        var showProgress = duration > 0.01f && holdProgress > 0f;
+        var progress = showProgress ? Mathf.Clamp01(holdProgress / duration) : 0f;
+        interactionUi.ShowTarget(
+            interactKey.ToString(),
+            target.InteractionPrompt,
+            GetTargetDescription(),
+            targetDistance,
+            interactionRange,
+            progress,
+            showProgress);
+    }
+
+    private string GetTargetDescription()
+    {
+        if (targetBehaviour is WorldLootItem worldLoot)
+        {
+            return $"物资 {worldLoot.ItemId} x{worldLoot.Quantity}（{targetBehaviour.name}）";
+        }
+        if (targetBehaviour is SearchableLootContainer container)
+        {
+            return $"容器 {targetBehaviour.name}（{container.RuntimeContainerId}）";
+        }
+        return targetBehaviour.name;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (!showInteractionRangeGizmo) return;
+        Gizmos.color = new Color(0.25f, 0.85f, 1f, 0.25f);
+        Gizmos.DrawWireSphere(transform.position, Mathf.Max(0.1f, interactionRange));
     }
 
     private void OnDrawGizmosSelected()

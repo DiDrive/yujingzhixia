@@ -6,9 +6,20 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 将 Resources/Characters/food 下的物品资源同步到背包编辑器列表与 JSON 定义表。
+/// 该工具只补齐缺失条目，不覆盖策划已经手工调整的物品参数。
+/// </summary>
 public static class SyncFoodInventoryItems
 {
     private const string FoodFolder = "Assets/Resources/Characters/food";
+    private const string ItemDefinitionsJsonPath = "Assets/Resources/Data/item_definitions.json";
+
+    [System.Serializable]
+    private sealed class ItemDefinitionJsonFile
+    {
+        public List<GridItemDefinition> items = new();
+    }
 
     [MenuItem("Tools/Inventory/Sync Food Items From Characters Food")]
     public static void Sync()
@@ -44,6 +55,7 @@ public static class SyncFoodInventoryItems
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
 
+        MergeItemDefinitionsJson(foodAssets);
         WriteItemDefinitions(service, foodAssets);
         WriteItemVisuals(ui, foodAssets);
         BuildSpawnSelector(ui);
@@ -55,6 +67,63 @@ public static class SyncFoodInventoryItems
         EditorSceneManager.SaveScene(service.gameObject.scene);
 
         Debug.Log($"SyncFoodInventoryItems: synced {foodAssets.Count} food items from {FoodFolder} and rebuilt the editor-visible spawn dropdown.");
+    }
+
+    /// <summary>
+    /// 合并食物资源到物品定义表，并为新增条目写入尺寸、品质和图标路径等默认值。
+    /// </summary>
+    private static void MergeItemDefinitionsJson(IReadOnlyList<FoodItemAsset> foodAssets)
+    {
+        ItemDefinitionJsonFile table = null;
+        if (File.Exists(ItemDefinitionsJsonPath))
+        {
+            table = JsonUtility.FromJson<ItemDefinitionJsonFile>(File.ReadAllText(ItemDefinitionsJsonPath));
+        }
+        table ??= new ItemDefinitionJsonFile();
+        table.items ??= new List<GridItemDefinition>();
+
+        var indexById = new Dictionary<string, int>();
+        for (var i = 0; i < table.items.Count; i++)
+        {
+            var id = table.items[i].itemId;
+            if (!string.IsNullOrWhiteSpace(id) && !indexById.ContainsKey(id)) indexById.Add(id, i);
+        }
+
+        // 使用字典查重，保留 JSON 中已有条目的人工配置，仅创建尚不存在的资源。
+        foreach (var asset in foodAssets)
+        {
+            var resourcePath = asset.Path
+                .Replace("Assets/Resources/", string.Empty)
+                .Replace(Path.GetExtension(asset.Path), string.Empty)
+                .Replace('\\', '/');
+
+            if (indexById.TryGetValue(asset.ItemId, out var existingIndex))
+            {
+                var existing = table.items[existingIndex];
+                if (string.IsNullOrWhiteSpace(existing.displayName)) existing.displayName = asset.ItemId;
+                if (string.IsNullOrWhiteSpace(existing.iconResourcePath)) existing.iconResourcePath = resourcePath;
+                table.items[existingIndex] = existing;
+                continue;
+            }
+
+            indexById.Add(asset.ItemId, table.items.Count);
+            table.items.Add(new GridItemDefinition
+            {
+                itemId = asset.ItemId,
+                displayName = asset.ItemId,
+                iconResourcePath = resourcePath,
+                width = 1,
+                height = 1,
+                canRotate = false,
+                maxStack = 10,
+                itemTags = new List<string> { "loot" },
+                weight = 0.1f,
+                quality = GridItemQuality.Common
+            });
+        }
+
+        File.WriteAllText(ItemDefinitionsJsonPath, JsonUtility.ToJson(table, true));
+        AssetDatabase.ImportAsset(ItemDefinitionsJsonPath, ImportAssetOptions.ForceUpdate);
     }
 
     [MenuItem("Tools/Inventory/Build Side Container Views")]

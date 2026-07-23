@@ -4,8 +4,15 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// 网格背包与搜索容器共用的 UI 视图，负责布局、拖拽、操作按钮及逐物品搜索蒙版。
+/// </summary>
 public class GridInventoryUnityUI : MonoBehaviour
 {
+    /// <summary>
+    /// 由搜索容器提供单个物品的揭示状态；返回 false 表示该物品不受搜索蒙版控制。
+    /// </summary>
+    public delegate bool ItemSearchStateProvider(string containerId, string instanceId, out bool revealed, out bool searching, out float progress);
     private const float DefaultToolbarHeight = 34f;
     private const float DefaultToolbarSpacing = 4f;
 
@@ -25,6 +32,8 @@ public class GridInventoryUnityUI : MonoBehaviour
     [SerializeField] private GridInventoryService gridInventoryService;
     [Tooltip("游戏启动时是否默认显示背包界面。关闭后仍可用 Toggle Key 打开。")]
     [SerializeField] private bool startOpen;
+    [Tooltip("等待外部容器在运行时完成绑定后再初始化。场景中预先摆好的搜索容器 UI 建议开启，避免 Awake 时按错误容器重建布局。")]
+    [SerializeField] private bool deferInitializationUntilBound;
     [Tooltip("是否显示原型调试用的物品生成栏。正式游戏建议关闭，物品应通过拾取、掉落或奖励进入背包。")]
     [SerializeField] private bool showSpawnTools;
     [Tooltip("是否允许点击空格直接生成当前调试物品。仅在 Show Spawn Tools 开启时生效，正式游戏建议关闭。")]
@@ -114,6 +123,21 @@ public class GridInventoryUnityUI : MonoBehaviour
     [Header("Item Visuals")]
     [Tooltip("物品图标和颜色映射表。每一项的 Item Id 必须和物品定义ID一致。")]
     [SerializeField] private List<GridItemVisual> itemVisuals = new();
+    [Header("Item Search Mask")]
+    [Tooltip("尚未轮到搜索的物品蒙版颜色。")]
+    [SerializeField] private Color unrevealedItemMaskColor = new(0.045f, 0.045f, 0.055f, 0.98f);
+    [Tooltip("当前正在搜索的物品蒙版颜色。")]
+    [SerializeField] private Color searchingItemMaskColor = new(0.13f, 0.18f, 0.22f, 0.98f);
+    [Tooltip("可选的搜索蒙版图片。为空时使用纯色方块；换 UI 时可在这里指定自己的蒙版 Sprite。")]
+    [SerializeField] private Sprite itemSearchMaskSprite;
+    [Tooltip("尚未搜索物品上显示的文字。")]
+    [SerializeField] private string unrevealedItemText = "?";
+    [Tooltip("当前物品搜索文字格式。{0} 会替换为百分比，例如：搜索中\\n{0:P0}。")]
+    [SerializeField] private string searchingItemTextFormat = "搜索中\n{0:P0}";
+    [Tooltip("搜索蒙版文字颜色。")]
+    [SerializeField] private Color itemSearchTextColor = Color.white;
+    [Tooltip("搜索蒙版文字字号。")]
+    [Range(8, 40)] [SerializeField] private int itemSearchTextFontSize = 14;
     [Header("Manual Layout Overrides")]
     [Tooltip("手动布局模式下的标题文本组件。Build Runtime Layout 关闭时使用。")]
     [SerializeField] private Text titleTextOverride;
@@ -205,6 +229,8 @@ public class GridInventoryUnityUI : MonoBehaviour
     private int contextMenuMaxSplitCount = 1;
     private readonly Dictionary<string, GridItemVisual> visualByItemId = new();
     private bool initialized;
+    private bool hasExplicitRuntimeBinding;
+    private string displayTitleOverride;
     private bool startVisibilityApplied;
     private bool isSideContainerView;
     private GridInventoryUnityUI ownerView;
@@ -216,6 +242,7 @@ public class GridInventoryUnityUI : MonoBehaviour
     private readonly Dictionary<string, GridInventoryUnityUI> sideContainerViews = new();
     private static readonly List<GridInventoryUnityUI> ActiveViews = new();
     private static GridInventoryUnityUI activeDragOwner;
+    private ItemSearchStateProvider itemSearchStateProvider;
 
     private bool UsesManualLayout => !buildRuntimeLayout;
     private bool UsesEditorToolbarLayout => UsesManualLayout && toolRoot != null && toolRoot.GetComponent<VerticalLayoutGroup>() != null;
@@ -234,6 +261,14 @@ public class GridInventoryUnityUI : MonoBehaviour
 
     private void Awake()
     {
+        // 搜索容器 UI 需要在编辑模式保持可见，方便直接调整布局；
+        // 进入游戏后则必须先隐藏，直到对应容器完成搜索并显式绑定。
+        if (deferInitializationUntilBound && !hasExplicitRuntimeBinding && !startOpen)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
         TryInitialize();
     }
 
@@ -304,6 +339,7 @@ public class GridInventoryUnityUI : MonoBehaviour
     private bool TryInitialize()
     {
         if (initialized) return true;
+        if (deferInitializationUntilBound && !hasExplicitRuntimeBinding) return false;
         ResolvePrebuiltSideContainerState();
         if (gridInventoryService == null) gridInventoryService = FindObjectOfType<GridInventoryService>();
         if (gridInventoryService == null) return false;
@@ -328,6 +364,7 @@ public class GridInventoryUnityUI : MonoBehaviour
     public void Bind(GridInventoryService service)
     {
         if (service == null) return;
+        hasExplicitRuntimeBinding = true;
         var serviceChanged = gridInventoryService != service;
         gridInventoryService = service;
         gridInventoryService.EnsureInitialized();
@@ -345,9 +382,11 @@ public class GridInventoryUnityUI : MonoBehaviour
     /// <summary>
     /// 供背包或搜索容器 UI 预制体绑定任意运行时容器。
     /// </summary>
-    public void BindToContainer(GridInventoryService service, string containerId, bool sideContainer = true)
+    public void BindToContainer(GridInventoryService service, string containerId, bool sideContainer = true, string displayTitle = null)
     {
         if (service == null || string.IsNullOrWhiteSpace(containerId)) return;
+        hasExplicitRuntimeBinding = true;
+        displayTitleOverride = displayTitle;
         gridInventoryService = service;
         gridInventoryService.EnsureInitialized();
         currentContainerId = containerId;
@@ -372,6 +411,14 @@ public class GridInventoryUnityUI : MonoBehaviour
         RebuildGrid();
         RefreshItems();
         RefreshTitle();
+    }
+
+    /// <summary>
+    /// 注入当前容器的逐物品搜索状态，使通用背包 UI 无需依赖具体的搜索容器实现。
+    /// </summary>
+    public void SetItemSearchStateProvider(ItemSearchStateProvider provider)
+    {
+        itemSearchStateProvider = provider;
     }
 
     public bool ShowContainerAsSidePanel(string containerId)
@@ -768,6 +815,13 @@ public class GridInventoryUnityUI : MonoBehaviour
     {
         if (titleText == null) return;
         var selectedText = string.IsNullOrWhiteSpace(selectedInstanceId) ? "未选择" : GetSelectedItemTitle(selectedInstanceId);
+        if (isSideContainerView && !string.IsNullOrWhiteSpace(displayTitleOverride))
+        {
+            titleText.text = string.IsNullOrWhiteSpace(selectedInstanceId)
+                ? displayTitleOverride
+                : $"{displayTitleOverride}  {selectedText}";
+            return;
+        }
         titleText.text = $"背包  [{GetContainerTitle(currentContainerId)}]  {selectedText}";
     }
 
@@ -1000,6 +1054,22 @@ public class GridInventoryUnityUI : MonoBehaviour
             var dragOwner = activeDragOwner != null ? activeDragOwner : this;
             var mergeHighlighted = dragOwner.previewContainerId == currentContainerId && instance.instanceId == dragOwner.previewMergeInstanceId;
             view.SetVisual(instance.stackCount, definition.maxStack, instance.instanceId == selectedInstanceId, mergeHighlighted, selectedItemColor, mergeTargetColor, icon, tint);
+            // 搜索容器中的物品在被逐个识别前显示蒙版；普通背包不会提供该状态。
+            if (itemSearchStateProvider != null && itemSearchStateProvider(currentContainerId, instance.instanceId, out var revealed, out var searching, out var searchProgress))
+            {
+                view.SetSearchState(
+                    revealed,
+                    searching,
+                    searchProgress,
+                    unrevealedItemMaskColor,
+                    searchingItemMaskColor,
+                    itemSearchMaskSprite,
+                    unrevealedItemText,
+                    searchingItemTextFormat,
+                    itemSearchTextColor,
+                    itemSearchTextFontSize);
+            }
+            else view.SetSearchState(true, false, 1f, unrevealedItemMaskColor, searchingItemMaskColor, itemSearchMaskSprite, unrevealedItemText, searchingItemTextFormat, itemSearchTextColor, itemSearchTextFontSize);
             view.SetDragging(instance.instanceId == draggingInstanceId);
             displayedInstanceIds.Add(instance.instanceId);
         }
@@ -1522,6 +1592,7 @@ public class GridInventoryUnityUI : MonoBehaviour
         HideContextMenu();
         if (gridInventoryService.TryGetCellOccupantId(currentContainerId, row, column, out var occupantId))
         {
+            if (!CanInteractWithItem(occupantId)) return;
             if (selectedInstanceId == occupantId)
             {
                 selectedInstanceId = null;
@@ -1556,12 +1627,14 @@ public class GridInventoryUnityUI : MonoBehaviour
 
     public void HandleItemClick(string instanceId)
     {
+        if (!CanInteractWithItem(instanceId)) return;
         HideContextMenu();
         selectedInstanceId = selectedInstanceId == instanceId ? null : instanceId;
     }
 
     public void HandleItemRightClick(string instanceId, Vector2 screenPosition)
     {
+        if (!CanInteractWithItem(instanceId)) return;
         if (string.IsNullOrWhiteSpace(instanceId)) return;
         if (!gridInventoryService.TryGetItemInstance(instanceId, out var instance)) return;
         if (!gridInventoryService.TryGetItemDefinition(instance.itemId, out var definition)) return;
@@ -1578,6 +1651,7 @@ public class GridInventoryUnityUI : MonoBehaviour
 
     public void HandleItemBeginDrag(string instanceId, Vector2 screenPosition, RectTransform itemRect)
     {
+        if (!CanInteractWithItem(instanceId)) return;
         if (!gridInventoryService.TryGetItemInstance(instanceId, out var instance)) return;
         HideContextMenu();
         selectedInstanceId = instanceId;
@@ -1822,13 +1896,24 @@ public class GridInventoryUnityUI : MonoBehaviour
         return bestRow >= 0 && gridInventoryService.TryPlace(instanceId, containerId, bestRow, bestColumn, bestRotation);
     }
 
+    /// <summary>
+    /// 优先读取 Inspector 中配置的图标；未配置时再从 JSON 定义中的 Resources 路径加载。
+    /// </summary>
     private bool TryGetVisual(string itemId, out Sprite icon, out Color tint)
     {
         icon = null;
         tint = new Color(0.31f, 0.48f, 0.72f, 0.95f);
-        if (!visualByItemId.TryGetValue(itemId, out var visual)) return false;
-        icon = visual.icon;
-        tint = visual.tint.a <= 0f ? Color.white : visual.tint;
+        if (visualByItemId.TryGetValue(itemId, out var visual))
+        {
+            icon = visual.icon;
+            tint = visual.tint.a <= 0f ? Color.white : visual.tint;
+            if (icon != null) return true;
+        }
+
+        if (!gridInventoryService.TryGetItemDefinition(itemId, out var definition) || string.IsNullOrWhiteSpace(definition.iconResourcePath)) return false;
+        icon = Resources.Load<Sprite>(definition.iconResourcePath);
+        if (icon == null) return false;
+        tint = Color.white;
         return true;
     }
 
@@ -1857,6 +1942,9 @@ public class GridInventoryUnityUI : MonoBehaviour
 
     private string GetItemTitle(string itemId)
     {
+        if (gridInventoryService != null &&
+            gridInventoryService.TryGetItemDefinition(itemId, out var definition) &&
+            !string.IsNullOrWhiteSpace(definition.displayName)) return definition.displayName;
         return itemId switch
         {
             "food_canned" => "罐头",
@@ -1956,6 +2044,16 @@ public class GridInventoryUnityUI : MonoBehaviour
         }
 
         return true;
+    }
+
+    /// <summary>
+    /// 未搜索完成的物品只允许观看蒙版，禁止拖拽、旋转、拆分和丢弃。
+    /// </summary>
+    private bool CanInteractWithItem(string instanceId)
+    {
+        return itemSearchStateProvider == null ||
+               !itemSearchStateProvider(currentContainerId, instanceId, out var revealed, out _, out _) ||
+               revealed;
     }
 
     private bool TryBindActionButtonsFromExisting()
@@ -2636,6 +2734,7 @@ public class GridInventoryUnityUIItem : MonoBehaviour, IBeginDragHandler, IDragH
     private Text label;
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
+    private bool revealed = true;
 
     public void Bind(GridInventoryUnityUI uiController, string id, Image targetImage, Text targetLabel)
     {
@@ -2665,6 +2764,7 @@ public class GridInventoryUnityUIItem : MonoBehaviour, IBeginDragHandler, IDragH
         }
         if (label != null)
         {
+            label.alignment = TextAnchor.LowerRight;
             if (maxStack > 1) label.text = $"{stackCount}/{maxStack}";
             else label.text = string.Empty;
         }
@@ -2676,8 +2776,59 @@ public class GridInventoryUnityUIItem : MonoBehaviour, IBeginDragHandler, IDragH
         canvasGroup.alpha = dragging ? 0.35f : 1f;
     }
 
+    /// <summary>
+    /// 刷新单个格子物品的搜索蒙版、搜索中文字及填充进度。
+    /// </summary>
+    public void SetSearchState(
+        bool isRevealed,
+        bool searching,
+        float progress,
+        Color unrevealedColor,
+        Color searchingColor,
+        Sprite maskSprite,
+        string unrevealedText,
+        string searchingTextFormat,
+        Color textColor,
+        int textFontSize)
+    {
+        revealed = isRevealed;
+        if (revealed) return;
+
+        if (image != null)
+        {
+            image.sprite = maskSprite;
+            image.color = searching ? searchingColor : unrevealedColor;
+        }
+        if (label != null)
+        {
+            label.alignment = TextAnchor.MiddleCenter;
+            label.color = textColor;
+            label.fontSize = Mathf.Clamp(textFontSize, 8, 40);
+            label.text = searching
+                ? FormatSearchText(searchingTextFormat, progress)
+                : string.IsNullOrEmpty(unrevealedText) ? "?" : unrevealedText;
+        }
+    }
+
+    /// <summary>
+    /// 将搜索进度传入可配置格式；格式错误时使用安全的默认文案，避免 UI 刷新中断。
+    /// </summary>
+    private static string FormatSearchText(string format, float progress)
+    {
+        if (string.IsNullOrWhiteSpace(format)) return $"搜索中\n{Mathf.Clamp01(progress):P0}";
+        try
+        {
+            return string.Format(format, Mathf.Clamp01(progress));
+        }
+        catch (System.FormatException)
+        {
+            return $"搜索中\n{Mathf.Clamp01(progress):P0}";
+        }
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!revealed) return;
         if (rectTransform != null) rectTransform.SetAsLastSibling();
         controller?.HandleItemBeginDrag(instanceId, eventData.position, rectTransform);
         if (canvasGroup != null) canvasGroup.blocksRaycasts = false;
@@ -2696,6 +2847,7 @@ public class GridInventoryUnityUIItem : MonoBehaviour, IBeginDragHandler, IDragH
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (!revealed) return;
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             controller?.HandleItemRightClick(instanceId, eventData.position);

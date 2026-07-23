@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8588796625371517164}
   - component: {fileID: 581080908778306230}
   - component: {fileID: 666048956592670088}
+  - component: {fileID: 7238109456623419071}
   m_Layer: 17
   m_Name: player
   m_TagString: Player
@@ -40,6 +41,30 @@ Transform:
   - {fileID: 6281716996673130218}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7238109456623419071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524712216701060628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e23d95fb70c66c341b849163ed05c9d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactKey: 102
+  interactionRange: 1.6
+  scanInterval: 0.08
+  interactionLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  inventoryService: {fileID: 0}
+  gridInventoryService: {fileID: 0}
+  inventoryUi: {fileID: 0}
+  showRuntimeOverlay: 1
+  interactionUi: {fileID: 0}
+  showInteractionRangeGizmo: 1
 --- !u!212 &3603964222704591087
 SpriteRenderer:
   m_ObjectHideFlags: 0

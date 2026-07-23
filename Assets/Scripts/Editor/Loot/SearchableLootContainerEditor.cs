@@ -4,6 +4,9 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 搜索容器的专用 Inspector：提供地图放置说明、稳定 ID 管理和可编辑 UI 的创建/同步入口。
+/// </summary>
 [CustomEditor(typeof(SearchableLootContainer))]
 public class SearchableLootContainerEditor : Editor
 {
@@ -19,6 +22,18 @@ public class SearchableLootContainerEditor : Editor
 
         var sceneViewProperty = serializedObject.FindProperty("containerUiSceneView");
         var sceneView = sceneViewProperty.objectReferenceValue as GridInventoryUnityUI;
+        if (sceneView == null)
+        {
+            sceneView = FindExistingSceneView();
+            if (sceneView != null)
+            {
+                sceneViewProperty.objectReferenceValue = sceneView;
+                serializedObject.ApplyModifiedProperties();
+                MarkDirty();
+            }
+        }
+
+        DrawPlacementAndIdentityHelp(sceneView);
 
         if (sceneView == null)
         {
@@ -70,6 +85,44 @@ public class SearchableLootContainerEditor : Editor
         }
 
         serializedObject.ApplyModifiedProperties();
+    }
+
+    /// <summary>
+    /// 绘制瓦片地图放置方式、交互范围说明及场景 UI 状态提示。
+    /// </summary>
+    private void DrawPlacementAndIdentityHelp(GridInventoryUnityUI sceneView)
+    {
+        EditorGUILayout.Space(8f);
+        EditorGUILayout.LabelField(new GUIContent("瓦片地图搜索点", "搜索容器应是覆盖在瓦片地图上的独立 GameObject，而不是 Tilemap 本身。"), EditorStyles.boldLabel);
+        EditorGUILayout.HelpBox(
+            "使用方式：在需要可搜索的位置放置本预制体实例，移动它的 Transform，并调整 Collider2D 范围。不要把 SearchableLootContainer 挂到整个 Tilemap/TilemapCollider2D 上。玩家进入交互半径后按住 F 搜索，并不依赖 OnTriggerEnter。",
+            MessageType.Info);
+
+        var id = serializedObject.FindProperty("persistentId").stringValue;
+        var containers = FindObjectsOfType<SearchableLootContainer>(true);
+        var duplicateCount = 0;
+        for (var i = 0; i < containers.Length; i++)
+        {
+            if (containers[i] != null && containers[i].PersistentId == id) duplicateCount++;
+        }
+        if (string.IsNullOrWhiteSpace(id) || duplicateCount <= 1) return;
+
+        EditorGUILayout.HelpBox(
+            $"检测到 {duplicateCount} 个搜索容器使用相同 Persistent Id。它们会共享运行时容器数据，请为复制出来的容器生成新 ID。",
+            MessageType.Error);
+        if (!GUILayout.Button(new GUIContent("为当前容器生成新 ID", "生成唯一 ID；如果已经创建场景 UI，也会同步重命名并更新绑定。"))) return;
+
+        Undo.RecordObject(target, "Regenerate Searchable Container Id");
+        serializedObject.FindProperty("persistentId").stringValue = Guid.NewGuid().ToString("N").Substring(0, 12);
+        serializedObject.ApplyModifiedProperties();
+        if (sceneView != null)
+        {
+            Undo.RecordObject(sceneView.gameObject, "Rename Searchable Container UI");
+            sceneView.name = $"InventoryUI_loot_{Sanitize(serializedObject.FindProperty("persistentId").stringValue)}";
+            ConfigureUiComponent(sceneView);
+            SyncSceneView(sceneView, false);
+        }
+        MarkDirty();
     }
 
     private GridInventoryUnityUI CreateSceneView()
@@ -153,6 +206,7 @@ public class SearchableLootContainerEditor : Editor
         var serializedUi = new SerializedObject(ui);
         serializedUi.FindProperty("gridInventoryService").objectReferenceValue = service;
         serializedUi.FindProperty("startOpen").boolValue = false;
+        serializedUi.FindProperty("deferInitializationUntilBound").boolValue = true;
         serializedUi.FindProperty("showSpawnTools").boolValue = false;
         serializedUi.FindProperty("allowSpawnFromEmptyCells").boolValue = false;
         serializedUi.FindProperty("openOtherContainersAsSidePanels").boolValue = false;
@@ -176,6 +230,10 @@ public class SearchableLootContainerEditor : Editor
         var rows = Mathf.Max(1, serializedObject.FindProperty("rows").intValue);
         var columns = Mathf.Max(1, serializedObject.FindProperty("columns").intValue);
         var serializedUi = new SerializedObject(ui);
+        serializedUi.FindProperty("deferInitializationUntilBound").boolValue = true;
+        serializedUi.FindProperty("currentContainerId").stringValue =
+            $"loot_{Sanitize(serializedObject.FindProperty("persistentId").stringValue)}";
+        serializedUi.ApplyModifiedPropertiesWithoutUndo();
         var cellSize = Mathf.Clamp(serializedUi.FindProperty("cellSize").floatValue, 20f, 96f);
         var spacing = Mathf.Clamp(serializedUi.FindProperty("cellSpacing").floatValue, 0f, 16f);
         var gridRoot = serializedUi.FindProperty("gridRootOverride").objectReferenceValue as RectTransform;
@@ -231,6 +289,22 @@ public class SearchableLootContainerEditor : Editor
         SceneView.RepaintAll();
     }
 
+    /// <summary>
+    /// 按容器稳定 ID 查找与其同级、可在编辑模式直接调整的场景 UI。
+    /// </summary>
+    private GridInventoryUnityUI FindExistingSceneView()
+    {
+        var persistentId = serializedObject.FindProperty("persistentId").stringValue;
+        if (string.IsNullOrWhiteSpace(persistentId)) return null;
+        var expectedName = $"InventoryUI_loot_{Sanitize(persistentId)}";
+        var views = FindObjectsOfType<GridInventoryUnityUI>(true);
+        for (var i = 0; i < views.Length; i++)
+        {
+            if (views[i] != null && views[i].name == expectedName) return views[i];
+        }
+        return null;
+    }
+
     private void EnsurePersistentId()
     {
         var idProperty = serializedObject.FindProperty("persistentId");
@@ -256,9 +330,12 @@ public class SearchableLootContainerEditor : Editor
     {
         if (mainUi != null)
         {
-            var canvas = mainUi.GetComponentInParent<Canvas>();
-            if (canvas != null) return canvas.transform;
+            // 主背包对象本身可能也挂有 Canvas。容器 UI 应与主背包同级，
+            // 因此优先使用主背包的直接父节点，而不是最近的 Canvas。
             if (mainUi.transform.parent != null) return mainUi.transform.parent;
+
+            var canvas = mainUi.GetComponentInParent<Canvas>();
+            if (canvas != null && canvas.transform != mainUi.transform) return canvas.transform;
         }
 
         var existingCanvas = FindObjectOfType<Canvas>();

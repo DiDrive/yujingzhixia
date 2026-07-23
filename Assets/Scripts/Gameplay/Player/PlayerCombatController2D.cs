@@ -160,7 +160,22 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
     private bool isDead;
     private bool isDeathAnimationFinished;
     private bool corpseFadeStarted;
+    // 缓存 Animator 参数是否存在，兼容不同角色使用参数不完全一致的控制器。
     private bool hasHitTrigger;
+    private bool hasLightAttackTrigger;
+    private bool hasHeavyAttackTrigger;
+    private bool hasMoveX;
+    private bool hasMoveY;
+    private bool hasSpeed;
+    private bool hasFacingX;
+    private bool hasFacingY;
+    private bool hasIsMoving;
+    private bool hasIsChargingHeavy;
+    private bool hasHeavyCharge;
+    private bool hasMoveDir8;
+    private bool hasFaceDir8;
+    private bool hasWeaponPose;
+    private bool hasIsDead;
 
     public bool IsDead => isDead;
 
@@ -197,10 +212,7 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
             rb.useFullKinematicContacts = true;
         }
         if (characterAnimator == null) characterAnimator = GetComponent<Animator>();
-        if (characterAnimator != null && !string.IsNullOrWhiteSpace(hitTriggerParam))
-        {
-            hasHitTrigger = AnimatorParamUtil2D.HasParameter(characterAnimator, hitTriggerParam, AnimatorControllerParameterType.Trigger);
-        }
+        CacheAnimatorParameters();
         if (survivalSystem == null) survivalSystem = FindObjectOfType<SurvivalSystem>();
         if (startingWeapon != null) EquipWeapon(startingWeapon);
     }
@@ -405,7 +417,7 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
         if (Time.time < nextLightAttackTime) return;
         nextLightAttackTime = Time.time + Mathf.Max(0.01f, CurrentLightAttackCooldown);
 
-        if (characterAnimator != null) characterAnimator.SetTrigger("LightAttack");
+        if (characterAnimator != null && hasLightAttackTrigger) characterAnimator.SetTrigger("LightAttack");
 
         if (currentWeapon != null && currentWeapon.type == WeaponType.Ranged && currentWeapon.ranged.spawnOnAnimationEvent)
         {
@@ -426,7 +438,7 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
         var elapsed = Time.time - heavyChargeStartTime;
         t = Mathf.Clamp01(elapsed / Mathf.Max(0.01f, CurrentHeavyChargeDuration));
         var damage = Mathf.Lerp(defaultHeavyAttackMinDamage, defaultHeavyAttackMaxDamage, t);
-        if (characterAnimator != null) characterAnimator.SetTrigger("HeavyAttack");
+        if (characterAnimator != null && hasHeavyAttackTrigger) characterAnimator.SetTrigger("HeavyAttack");
         PerformMeleeAttack(damage, true);
     }
 
@@ -446,18 +458,41 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
             ? moveInput.normalized
             : (keepLastMoveDirectionForAnimation ? lastMoveDirection : Vector2.zero);
 
-        characterAnimator.SetFloat("MoveX", moveDir.x, animatorDirectionDamp, Time.deltaTime);
-        characterAnimator.SetFloat("MoveY", moveDir.y, animatorDirectionDamp, Time.deltaTime);
-        characterAnimator.SetFloat("Speed", currentMoveVelocity.magnitude);
-        characterAnimator.SetFloat("FacingX", lookDirection.x, animatorDirectionDamp, Time.deltaTime);
-        characterAnimator.SetFloat("FacingY", lookDirection.y, animatorDirectionDamp, Time.deltaTime);
-        characterAnimator.SetBool("IsMoving", moveInput.sqrMagnitude > 0.0001f);
-        characterAnimator.SetBool("IsChargingHeavy", isChargingHeavy);
-        characterAnimator.SetFloat("HeavyCharge", HeavyChargeNormalized);
-        characterAnimator.SetInteger("MoveDir8", DirectionTo8Way(moveDir));
-        characterAnimator.SetInteger("FaceDir8", DirectionTo8Way(lookDirection));
-        characterAnimator.SetInteger("WeaponPose", currentWeapon != null ? (int)currentWeapon.pose : 0);
-        characterAnimator.SetBool("IsDead", isDead);
+        if (hasMoveX) characterAnimator.SetFloat("MoveX", moveDir.x, animatorDirectionDamp, Time.deltaTime);
+        if (hasMoveY) characterAnimator.SetFloat("MoveY", moveDir.y, animatorDirectionDamp, Time.deltaTime);
+        if (hasSpeed) characterAnimator.SetFloat("Speed", currentMoveVelocity.magnitude);
+        if (hasFacingX) characterAnimator.SetFloat("FacingX", lookDirection.x, animatorDirectionDamp, Time.deltaTime);
+        if (hasFacingY) characterAnimator.SetFloat("FacingY", lookDirection.y, animatorDirectionDamp, Time.deltaTime);
+        if (hasIsMoving) characterAnimator.SetBool("IsMoving", moveInput.sqrMagnitude > 0.0001f);
+        if (hasIsChargingHeavy) characterAnimator.SetBool("IsChargingHeavy", isChargingHeavy);
+        if (hasHeavyCharge) characterAnimator.SetFloat("HeavyCharge", HeavyChargeNormalized);
+        if (hasMoveDir8) characterAnimator.SetInteger("MoveDir8", DirectionTo8Way(moveDir));
+        if (hasFaceDir8) characterAnimator.SetInteger("FaceDir8", DirectionTo8Way(lookDirection));
+        if (hasWeaponPose) characterAnimator.SetInteger("WeaponPose", currentWeapon != null ? (int)currentWeapon.pose : 0);
+        if (hasIsDead) characterAnimator.SetBool("IsDead", isDead);
+    }
+
+    /// <summary>
+    /// 检测当前 Animator Controller 支持的参数，后续写入前据此安全过滤。
+    /// </summary>
+    private void CacheAnimatorParameters()
+    {
+        hasMoveX = AnimatorParamUtil2D.HasParameter(characterAnimator, "MoveX", AnimatorControllerParameterType.Float);
+        hasMoveY = AnimatorParamUtil2D.HasParameter(characterAnimator, "MoveY", AnimatorControllerParameterType.Float);
+        hasSpeed = AnimatorParamUtil2D.HasParameter(characterAnimator, "Speed", AnimatorControllerParameterType.Float);
+        hasFacingX = AnimatorParamUtil2D.HasParameter(characterAnimator, "FacingX", AnimatorControllerParameterType.Float);
+        hasFacingY = AnimatorParamUtil2D.HasParameter(characterAnimator, "FacingY", AnimatorControllerParameterType.Float);
+        hasIsMoving = AnimatorParamUtil2D.HasParameter(characterAnimator, "IsMoving", AnimatorControllerParameterType.Bool);
+        hasIsChargingHeavy = AnimatorParamUtil2D.HasParameter(characterAnimator, "IsChargingHeavy", AnimatorControllerParameterType.Bool);
+        hasHeavyCharge = AnimatorParamUtil2D.HasParameter(characterAnimator, "HeavyCharge", AnimatorControllerParameterType.Float);
+        hasMoveDir8 = AnimatorParamUtil2D.HasParameter(characterAnimator, "MoveDir8", AnimatorControllerParameterType.Int);
+        hasFaceDir8 = AnimatorParamUtil2D.HasParameter(characterAnimator, "FaceDir8", AnimatorControllerParameterType.Int);
+        hasWeaponPose = AnimatorParamUtil2D.HasParameter(characterAnimator, "WeaponPose", AnimatorControllerParameterType.Int);
+        hasIsDead = AnimatorParamUtil2D.HasParameter(characterAnimator, "IsDead", AnimatorControllerParameterType.Bool);
+        hasLightAttackTrigger = AnimatorParamUtil2D.HasParameter(characterAnimator, "LightAttack", AnimatorControllerParameterType.Trigger);
+        hasHeavyAttackTrigger = AnimatorParamUtil2D.HasParameter(characterAnimator, "HeavyAttack", AnimatorControllerParameterType.Trigger);
+        hasHitTrigger = !string.IsNullOrWhiteSpace(hitTriggerParam) &&
+                        AnimatorParamUtil2D.HasParameter(characterAnimator, hitTriggerParam, AnimatorControllerParameterType.Trigger);
     }
 
     private static int DirectionTo8Way(Vector2 dir)
@@ -600,6 +635,7 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
             if (weapon != null && weapon.animatorController != null)
             {
                 characterAnimator.runtimeAnimatorController = weapon.animatorController;
+                CacheAnimatorParameters();
             }
         }
     }
@@ -659,8 +695,8 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
         if (rb != null) rb.velocity = Vector2.zero;
         if (characterAnimator != null)
         {
-            characterAnimator.ResetTrigger("LightAttack");
-            characterAnimator.ResetTrigger("HeavyAttack");
+            if (hasLightAttackTrigger) characterAnimator.ResetTrigger("LightAttack");
+            if (hasHeavyAttackTrigger) characterAnimator.ResetTrigger("HeavyAttack");
         }
         return true;
     }

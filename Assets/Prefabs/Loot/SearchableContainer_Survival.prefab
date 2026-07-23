@@ -90,12 +90,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a716296efb86d314383e45a34bdfb0f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  persistentId: 60ca1bf34e13
+  persistentId: 
   displayName: "\u7269\u8D44\u5BB9\u5668"
   searchDuration: 1.5
-  lootTableId: survival_basic
+  lootTableId: debug_all_items
   minRolls: -1
   maxRolls: -1
+  commonItemSearchDuration: 0.8
+  uncommonItemSearchDuration: 1.2
+  rareItemSearchDuration: 1.8
+  epicItemSearchDuration: 2.6
+  legendaryItemSearchDuration: 4
   rows: 4
   columns: 5
   allowedItemTags: []
@@ -106,3 +111,6 @@ MonoBehaviour:
   containerUiSceneView: {fileID: 0}
   containerUiPrefab: {fileID: 0}
   containerUiParent: {fileID: 0}
+  allowRuntimeUiFallback: 0
+  showSceneMarker: 1
+  sceneMarkerSize: {x: 0.8, y: 0.8}
