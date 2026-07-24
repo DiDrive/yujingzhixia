@@ -176,8 +176,12 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
     private bool hasFaceDir8;
     private bool hasWeaponPose;
     private bool hasIsDead;
+    [Header("Runtime Control (运行时控制)")]
+    [Tooltip("运行时是否允许读取移动、瞄准、攻击和武器切换输入。撤离完成后由流程系统关闭。")]
+    [SerializeField] private bool playerControlEnabled = true;
 
     public bool IsDead => isDead;
+    public bool PlayerControlEnabled => playerControlEnabled;
 
     public event Action<float, bool> OnAttackPerformed;
 
@@ -225,6 +229,13 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
             return;
         }
 
+        if (!playerControlEnabled)
+        {
+            ClearControlInput();
+            UpdateAnimatorParams();
+            return;
+        }
+
         ReadMoveInput();
         UpdateLookDirection();
         UpdateProjectileSpawnPoint();
@@ -242,12 +253,35 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
 
     private void FixedUpdate()
     {
-        if (isDead)
+        if (isDead || !playerControlEnabled)
         {
             if (rb != null) rb.velocity = Vector2.zero;
             return;
         }
         MoveCharacter();
+    }
+
+    /// <summary>
+    /// 开启或关闭玩家的移动、瞄准、攻击和武器切换输入。
+    /// 关闭时立即清除速度与蓄力状态，避免撤离完成后角色继续滑动或释放攻击。
+    /// </summary>
+    public void SetPlayerControlEnabled(bool enabled)
+    {
+        playerControlEnabled = enabled;
+        if (!enabled) ClearControlInput();
+    }
+
+    /// <summary>清空所有由玩家输入产生的瞬时状态。</summary>
+    private void ClearControlInput()
+    {
+        moveInput = Vector2.zero;
+        moveInputRaw = Vector2.zero;
+        currentMoveVelocity = Vector2.zero;
+        hitKnockbackVelocity = Vector2.zero;
+        hitKnockbackEndTime = 0f;
+        isChargingHeavy = false;
+        pendingProjectileShot = false;
+        if (rb != null) rb.velocity = Vector2.zero;
     }
 
     private void ReadMoveInput()
@@ -265,7 +299,8 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
     private void MoveCharacter()
     {
         if (rb == null) return;
-        var velocity = moveInput * moveSpeed * Mathf.Max(0f, moveMultiplier);
+        var survivalMoveMultiplier = survivalSystem != null ? survivalSystem.MoveSpeedMultiplier : 1f;
+        var velocity = moveInput * moveSpeed * Mathf.Max(0f, moveMultiplier) * survivalMoveMultiplier;
         if (Time.time < hitKnockbackEndTime) velocity += hitKnockbackVelocity;
         if (!useKinematicMotor || rb.bodyType != RigidbodyType2D.Kinematic)
         {
@@ -402,6 +437,7 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
 
         if (Input.GetMouseButtonDown(1))
         {
+            if (survivalSystem != null && !survivalSystem.CanUseChargeAttack) return;
             isChargingHeavy = true;
             heavyChargeStartTime = Time.time;
         }
@@ -535,6 +571,7 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
     private void PerformMeleeAttack(float damage, bool isHeavy)
     {
         if (isDead) return;
+        damage *= survivalSystem != null ? survivalSystem.DamageMultiplier : 1f;
         var range = CurrentAttackRange;
         var radius = CurrentAttackRadius;
         var hitMask = FloorLayerUtility.GetActorHitMaskForCurrentFloor(transform, CurrentHitMask);
@@ -580,6 +617,7 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
     private void FireProjectile(RangedAttackSettings ranged)
     {
         if (ranged.projectilePrefab == null) return;
+        var survivalDamageMultiplier = survivalSystem != null ? survivalSystem.DamageMultiplier : 1f;
         var spawn = projectileSpawnPoint != null ? projectileSpawnPoint.position : transform.position;
         var projectile = Instantiate(ranged.projectilePrefab, spawn, Quaternion.identity);
         var dir = SnapToCardinal(lookDirection);
@@ -588,7 +626,7 @@ public class PlayerCombatController2D : MonoBehaviour, IDamageable, global::IHit
             dir,
             Mathf.Max(0.01f, ranged.projectileSpeed),
             Mathf.Max(0.01f, ranged.projectileLifetime),
-            Mathf.Max(0f, ranged.damage),
+            Mathf.Max(0f, ranged.damage) * survivalDamageMultiplier,
             Mathf.Max(0f, ranged.knockback),
             FloorLayerUtility.GetProjectileHitMaskForCurrentFloor(
                 transform,

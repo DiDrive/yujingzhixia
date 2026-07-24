@@ -36,5 +36,10 @@ public class MapSpawnPoint : MonoBehaviour
             _ => new Color(0.9f, 0.9f, 0.9f, 0.85f)
         };
         Gizmos.DrawWireSphere(transform.position, Mathf.Max(0.1f, Radius));
+#if UNITY_EDITOR
+        UnityEditor.Handles.Label(
+            transform.position + Vector3.up * (Mathf.Max(0.1f, Radius) + 0.15f),
+            $"出生点：{SpawnId}\n{spawnKind}");
+#endif
     }
 }

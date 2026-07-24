@@ -19,8 +19,6 @@ public class GameBootstrap : MonoBehaviour
     [SerializeField] private SurvivalSystem survivalSystem;
     [Tooltip("背包系统引用。")]
     [SerializeField] private InventoryService inventoryService;
-    [Tooltip("掉落生成器引用。")]
-    [SerializeField] private LootSpawner lootSpawner;
     [Tooltip("工作台服务引用。")]
     [SerializeField] private WorkbenchService workbenchService;
     [Tooltip("庇护所模块服务引用。")]
@@ -37,6 +35,21 @@ public class GameBootstrap : MonoBehaviour
     [SerializeField] private LootTableDatabase lootTableDatabase;
     [Tooltip("场景 Canvas 下的世界交互提示和搜索进度 UI。必须在编辑器中预先创建；运行时不会生成。")]
     [SerializeField] private WorldInteractionPromptUI interactionPromptUi;
+    [Header("Run Flow (出生与撤离)")]
+    [Tooltip("局内玩家预制体。场景中不需要预摆 Player；启动后会从该预制体生成。")]
+    [SerializeField] private PlayerCombatController2D playerPrefab;
+    [Tooltip("场景中没有活动玩家时，是否自动从 Player Prefab 生成。正式地图建议开启。")]
+    [SerializeField] private bool spawnPlayerWhenMissing = true;
+    [Tooltip("进入地图时是否把玩家移动到 MapSpawnPoint。点位必须在编辑器中预先放置。")]
+    [SerializeField] private bool placePlayerAtSpawnOnStart = true;
+    [Tooltip("优先使用的玩家出生点 ID。为空时从所有 Player 类型出生点中随机选择。")]
+    [SerializeField] private string preferredPlayerSpawnId;
+    [Tooltip("通过调试入口明确开始新一局时，是否清空上一局的搜索容器状态。普通场景重载不会清空。")]
+    [SerializeField] private bool clearLootContainerStateOnNewRun = true;
+    [Tooltip("地图启动后是否把主流程切换到摸金阶段。")]
+    [SerializeField] private bool enterRaidPhaseOnStart = true;
+    [Tooltip("撤离成功反馈在公共提示 UI 中显示的秒数。")]
+    [Min(0.1f)] [SerializeField] private float extractionSuccessMessageDuration = 3f;
     [Tooltip("是否自动给玩家挂载世界交互组件。")]
     [SerializeField] private bool autoCreatePlayerInteractor = true;
     [Header("World Interaction")]
@@ -56,6 +69,8 @@ public class GameBootstrap : MonoBehaviour
     [SerializeField] private bool autoCreateGridInventoryUnityUI = true;
     [Tooltip("运行时调试面板引用。为空时可自动查找或自动创建。")]
     [SerializeField] private RuntimeDebugPanel runtimeDebugPanel;
+    private bool extractionCompleted;
+    private PlayerCombatController2D runtimePlayer;
 
     /// <summary>
     /// 自动查找关键系统引用，减少手工挂载遗漏。
@@ -65,7 +80,6 @@ public class GameBootstrap : MonoBehaviour
         if (gameStateMachine == null) gameStateMachine = FindSceneObjectOfType<GameStateMachine>();
         if (survivalSystem == null) survivalSystem = FindSceneObjectOfType<SurvivalSystem>();
         if (inventoryService == null) inventoryService = FindSceneObjectOfType<InventoryService>();
-        if (lootSpawner == null) lootSpawner = FindSceneObjectOfType<LootSpawner>();
         if (workbenchService == null) workbenchService = FindSceneObjectOfType<WorkbenchService>();
         if (shelterModuleService == null) shelterModuleService = FindSceneObjectOfType<ShelterModuleService>();
         if (nightAssaultSystem == null) nightAssaultSystem = FindSceneObjectOfType<NightAssaultSystem>();
@@ -81,13 +95,172 @@ public class GameBootstrap : MonoBehaviour
         BindRuntimeDebugPanel();
     }
 
+    /// <summary>所有场景对象完成 Awake 后，开始本次地图流程并放置玩家。</summary>
+    private void Start()
+    {
+        BeginMapRun(false);
+    }
+
+    /// <summary>
+    /// 初始化当前地图。普通场景进入不会清除会话级容器快照，以便同一局重载后继续恢复。
+    /// </summary>
+    public void BeginMapRun()
+    {
+        BeginMapRun(false);
+    }
+
+    /// <summary>初始化地图，并按调用方意图决定是否开始全新的局内状态。</summary>
+    private void BeginMapRun(bool startNewRun)
+    {
+        extractionCompleted = false;
+        if (startNewRun && clearLootContainerStateOnNewRun) SearchableLootRuntimeStateStore.ClearAll();
+
+        var extractionPoints = FindObjectsOfType<ExtractionPoint>(true);
+        for (var i = 0; i < extractionPoints.Length; i++) extractionPoints[i].ResetForNewRun();
+
+        if (enterRaidPhaseOnStart && gameStateMachine != null)
+        {
+            gameStateMachine.StartRun();
+            gameStateMachine.EnterRaid();
+        }
+
+        if (placePlayerAtSpawnOnStart) PlacePlayerAtSpawn();
+    }
+
+    /// <summary>
+    /// 选择配置的玩家出生点；未指定 ID 时随机选择一个 Player 类型点位。
+    /// </summary>
+    public bool PlacePlayerAtSpawn()
+    {
+        var player = ResolveOrSpawnPlayer();
+        if (player == null)
+        {
+            Debug.LogWarning("无法设置玩家出生位置：没有活动玩家，并且没有可生成的 Player Prefab。", this);
+            return false;
+        }
+
+        var spawnPoints = FindObjectsOfType<MapSpawnPoint>(true);
+        var candidates = new System.Collections.Generic.List<MapSpawnPoint>();
+        MapSpawnPoint selected = null;
+        for (var i = 0; i < spawnPoints.Length; i++)
+        {
+            var point = spawnPoints[i];
+            if (point == null || point.SpawnKind != MapSpawnKind.Player) continue;
+            candidates.Add(point);
+            if (!string.IsNullOrWhiteSpace(preferredPlayerSpawnId) &&
+                point.SpawnId == preferredPlayerSpawnId)
+            {
+                selected = point;
+            }
+        }
+
+        if (selected == null && candidates.Count > 0)
+        {
+            selected = candidates[Random.Range(0, candidates.Count)];
+        }
+        if (selected == null)
+        {
+            Debug.LogWarning("无法设置玩家出生位置：场景中没有 Player 类型的 MapSpawnPoint。", this);
+            return false;
+        }
+
+        var spawnPosition = selected.GetRandomPosition();
+        spawnPosition.z = player.transform.position.z;
+        var body = player.GetComponent<Rigidbody2D>();
+        if (body != null)
+        {
+            body.position = spawnPosition;
+            body.velocity = Vector2.zero;
+            body.angularVelocity = 0f;
+        }
+        player.transform.position = spawnPosition;
+        SetPlayerControlsEnabled(player, true);
+        BindPlayerRuntime(player);
+        Debug.Log($"玩家已放置到出生点 {selected.SpawnId}。", selected);
+        return true;
+    }
+
+    /// <summary>优先返回场景中的活动玩家；没有时从配置的预制体实例化。</summary>
+    private PlayerCombatController2D ResolveOrSpawnPlayer()
+    {
+        if (runtimePlayer != null && runtimePlayer.gameObject.activeInHierarchy) return runtimePlayer;
+
+        runtimePlayer = FindObjectOfType<PlayerCombatController2D>();
+        if (runtimePlayer != null) return runtimePlayer;
+        if (!spawnPlayerWhenMissing || playerPrefab == null) return null;
+
+        runtimePlayer = Instantiate(playerPrefab);
+        runtimePlayer.name = playerPrefab.name;
+        return runtimePlayer;
+    }
+
+    /// <summary>把运行时生成的玩家接入背包、搜索提示和交互系统。</summary>
+    private void BindPlayerRuntime(PlayerCombatController2D player)
+    {
+        if (player == null) return;
+        var interactor = player.GetComponent<PlayerInteractor2D>();
+        var createdInteractor = interactor == null;
+        if (createdInteractor && autoCreatePlayerInteractor)
+        {
+            interactor = player.gameObject.AddComponent<PlayerInteractor2D>();
+        }
+        if (interactor == null) return;
+
+        if (createdInteractor)
+        {
+            interactor.Configure(
+                playerInteractionRange,
+                interactionScanInterval,
+                showInteractionOverlay,
+                showInteractionRangeGizmo);
+        }
+        interactor.enabled = true;
+        interactor.Bind(inventoryService, gridInventoryService, gridInventoryUnityUI, interactionPromptUi);
+    }
+
+    /// <summary>统一开启或关闭玩家的移动战斗输入与世界交互输入。</summary>
+    private static void SetPlayerControlsEnabled(PlayerCombatController2D player, bool enabled)
+    {
+        if (player == null) return;
+        player.SetPlayerControlEnabled(enabled);
+        var interactor = player.GetComponent<PlayerInteractor2D>();
+        if (interactor != null) interactor.enabled = enabled;
+        var body = player.GetComponent<Rigidbody2D>();
+        if (!enabled && body != null) body.velocity = Vector2.zero;
+    }
+
+    /// <summary>
+    /// 撤离点倒计时结束后的统一入口。当前样机保留背包并返回庇护所阶段；
+    /// 后续存在正式庇护所场景时，可订阅 ExtractionCompletedEvent 进行存档和切场景。
+    /// </summary>
+    public bool CompleteExtraction(ExtractionPoint extractionPoint)
+    {
+        if (extractionCompleted || extractionPoint == null) return false;
+        extractionCompleted = true;
+
+        var player = runtimePlayer != null ? runtimePlayer : FindObjectOfType<PlayerCombatController2D>();
+        SetPlayerControlsEnabled(player, false);
+        gameStateMachine?.ReturnShelterBeforeNight();
+        EventBus.Publish(new ExtractionCompletedEvent(
+            extractionPoint.ExtractionId,
+            extractionPoint.TargetId));
+
+        if (interactionPromptUi == null) interactionPromptUi = FindSceneObjectOfType<WorldInteractionPromptUI>();
+        interactionPromptUi?.ShowFeedback(
+            $"撤离成功：{extractionPoint.DisplayName}",
+            extractionSuccessMessageDuration);
+        Debug.Log(
+            $"撤离成功。撤离点={extractionPoint.ExtractionId}，目标流程={extractionPoint.TargetId}，玩家背包已保留。",
+            extractionPoint);
+        return true;
+    }
+
     /// <summary>
     /// 调试用：开始一轮出击流程。
     /// </summary>
     public void DebugStartRun()
     {
-        if (gameStateMachine == null) return;
-        gameStateMachine.StartRun();
+        BeginMapRun(true);
         Debug.Log("开始一轮出击流程");
     }
 
@@ -125,8 +298,8 @@ public class GameBootstrap : MonoBehaviour
     /// </summary>
     public void DebugGrantSurvivalLoot()
     {
-        if (lootSpawner == null || inventoryService == null) return;
-        lootSpawner.GrantLoot(inventoryService, LootChestType.Survival, 2);
+        if (lootTableDatabase == null || inventoryService == null) return;
+        lootTableDatabase.GrantToInventory(inventoryService, "survival_basic", 2, 2);
     }
 
     /// <summary>
@@ -217,18 +390,10 @@ public class GameBootstrap : MonoBehaviour
         }
 
         if (!autoCreatePlayerInteractor) return;
-        var player = FindSceneObjectOfType<PlayerCombatController2D>();
+        var player = FindObjectOfType<PlayerCombatController2D>();
         if (player == null) return;
-        var interactor = player.GetComponent<PlayerInteractor2D>();
-        var createdInteractor = interactor == null;
-        if (createdInteractor) interactor = player.gameObject.AddComponent<PlayerInteractor2D>();
-
-        // 场景或预制体已经配置好的交互器以自身 Inspector 参数为准，避免启动时覆盖策划调参。
-        if (createdInteractor)
-        {
-            interactor.Configure(playerInteractionRange, interactionScanInterval, showInteractionOverlay, showInteractionRangeGizmo);
-        }
-        interactor.Bind(inventoryService, gridInventoryService, gridInventoryUnityUI, interactionPromptUi);
+        runtimePlayer = player;
+        BindPlayerRuntime(player);
     }
 
     private void BindRuntimeDebugPanel()

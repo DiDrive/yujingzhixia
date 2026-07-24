@@ -92,6 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   persistentId: 
   displayName: "\u7269\u8D44\u5BB9\u5668"
+  floorIndex: 0
   searchDuration: 1.5
   lootTableId: debug_all_items
   minRolls: -1

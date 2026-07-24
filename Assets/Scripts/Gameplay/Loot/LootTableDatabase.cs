@@ -79,6 +79,31 @@ public class LootTableDatabase : MonoBehaviour
         return result;
     }
 
+    /// <summary>
+    /// 从指定 JSON 掉落表抽取物品并发放到统一背包入口。
+    /// 返回成功写入背包的堆叠数量；背包空间不足的堆叠不会计入。
+    /// </summary>
+    public int GrantToInventory(
+        InventoryService inventoryService,
+        string tableId,
+        int minRollsOverride = -1,
+        int maxRollsOverride = -1)
+    {
+        if (inventoryService == null || string.IsNullOrWhiteSpace(tableId)) return 0;
+
+        var stacks = Roll(tableId, minRollsOverride, maxRollsOverride);
+        var grantedStackCount = 0;
+        for (var i = 0; i < stacks.Count; i++)
+        {
+            var stack = stacks[i];
+            if (inventoryService.AddItem(stack.itemId, stack.quantity))
+                grantedStackCount++;
+        }
+
+        EventBus.Publish(new LootGrantedEvent(tableId, grantedStackCount));
+        return grantedStackCount;
+    }
+
     private void RegisterTables(List<LootTableJsonDefinition> tables)
     {
         if (tables == null) return;

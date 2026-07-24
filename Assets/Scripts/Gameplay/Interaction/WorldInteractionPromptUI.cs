@@ -22,6 +22,7 @@ public class WorldInteractionPromptUI : MonoBehaviour
     [SerializeField] private Text feedbackText;
 
     private bool targetVisible;
+    private bool extractionVisible;
     private float feedbackUntil;
     private RectTransform progressFillRect;
 
@@ -42,6 +43,7 @@ public class WorldInteractionPromptUI : MonoBehaviour
             SetProgressFill(0f);
         }
         targetVisible = false;
+        extractionVisible = false;
         if (progressRoot != null) progressRoot.SetActive(false);
         if (feedbackText != null) feedbackText.gameObject.SetActive(false);
         RefreshVisibility();
@@ -60,6 +62,8 @@ public class WorldInteractionPromptUI : MonoBehaviour
     /// </summary>
     public void ShowTarget(string keyName, string actionPrompt, string targetDescription, float distance, float range, float progress, bool showProgress)
     {
+        // 撤离倒计时优先级更高，进入撤离点后不再用普通搜索提示覆盖同一套编辑器 UI。
+        if (extractionVisible) return;
         if (!gameObject.activeSelf) gameObject.SetActive(true);
         transform.SetAsLastSibling();
         if (promptCanvas != null) promptCanvas.enabled = true;
@@ -102,6 +106,40 @@ public class WorldInteractionPromptUI : MonoBehaviour
     public void HideTarget()
     {
         targetVisible = false;
+        if (!extractionVisible && progressRoot != null) progressRoot.SetActive(false);
+        RefreshVisibility();
+    }
+
+    /// <summary>
+    /// 使用场景中已有的提示文字和进度条显示撤离倒计时，不创建任何运行时 UI。
+    /// </summary>
+    public void ShowExtraction(string displayName, float elapsed, float duration)
+    {
+        if (!gameObject.activeSelf) gameObject.SetActive(true);
+        transform.SetAsLastSibling();
+        if (promptCanvas != null) promptCanvas.enabled = true;
+
+        extractionVisible = true;
+        targetVisible = false;
+        duration = Mathf.Max(0.01f, duration);
+        var progress = Mathf.Clamp01(elapsed / duration);
+        var remaining = Mathf.Max(0f, duration - elapsed);
+
+        if (promptText != null)
+        {
+            promptText.gameObject.SetActive(true);
+            promptText.text = $"正在撤离：{displayName}";
+        }
+        if (progressRoot != null) progressRoot.SetActive(true);
+        SetProgressFill(progress);
+        if (progressText != null) progressText.text = $"撤离倒计时 {remaining:0.0} 秒";
+        RefreshVisibility();
+    }
+
+    /// <summary>玩家离开撤离范围或撤离完成时，关闭撤离倒计时显示。</summary>
+    public void HideExtraction()
+    {
+        extractionVisible = false;
         if (progressRoot != null) progressRoot.SetActive(false);
         RefreshVisibility();
     }
@@ -121,7 +159,7 @@ public class WorldInteractionPromptUI : MonoBehaviour
     {
         if (canvasGroup == null) return;
         var feedbackVisible = feedbackText != null && feedbackText.gameObject.activeSelf;
-        var visible = targetVisible || feedbackVisible;
+        var visible = targetVisible || extractionVisible || feedbackVisible;
         canvasGroup.alpha = visible ? 1f : 0f;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;

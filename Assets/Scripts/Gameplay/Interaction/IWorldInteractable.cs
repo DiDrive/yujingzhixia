@@ -10,6 +10,8 @@ public interface IWorldInteractable
     string InteractionPrompt { get; }
     /// <summary>完成交互需要持续按键的秒数；0 表示按下后立即执行。</summary>
     float InteractionHoldDuration { get; }
+    /// <summary>该交互物所属的逻辑楼层。0 表示一楼，1 表示二楼，以此类推。</summary>
+    int InteractionFloorIndex { get; }
     /// <summary>交互目标在世界中的参考位置。</summary>
     Transform InteractionTransform { get; }
     /// <summary>判断指定玩家当前是否可以与该对象交互。</summary>

@@ -8,18 +8,6 @@ public enum NightAssaultResult
 }
 
 /// <summary>
-/// 摸金箱体类型定义。
-/// </summary>
-public enum LootChestType
-{
-    Survival,
-    Weapon,
-    Resource,
-    Rare,
-    Medical
-}
-
-/// <summary>
 /// 供电状态变更事件。
 /// </summary>
 public readonly struct PowerStateChangedEvent
@@ -65,12 +53,27 @@ public readonly struct NightAssaultResolvedEvent
 /// </summary>
 public readonly struct LootGrantedEvent
 {
-    public readonly LootChestType ChestType;
+    public readonly string TableId;
     public readonly int StackCount;
 
-    public LootGrantedEvent(LootChestType chestType, int stackCount)
+    public LootGrantedEvent(string tableId, int stackCount)
     {
-        ChestType = chestType;
+        TableId = tableId;
         StackCount = stackCount;
+    }
+}
+
+/// <summary>
+/// 玩家完成一次地图撤离时发布，后续正式结算、存档和场景切换可以订阅该事件。
+/// </summary>
+public readonly struct ExtractionCompletedEvent
+{
+    public readonly string ExtractionId;
+    public readonly string TargetId;
+
+    public ExtractionCompletedEvent(string extractionId, string targetId)
+    {
+        ExtractionId = extractionId;
+        TargetId = targetId;
     }
 }

@@ -13,6 +13,17 @@ public class PlayerInteractor2D : MonoBehaviour
     [SerializeField] private float scanInterval = 0.08f;
     [Tooltip("参与世界交互检测的物理层。正式地图建议只勾选 Interactable 层。")]
     [SerializeField] private LayerMask interactionLayers = ~0;
+    [Header("Floor (楼层限制)")]
+    [Tooltip("开启后，只能发现和操作与玩家 Active Floor Index 相同的容器及露天物资。建议始终开启。")]
+    [SerializeField] private bool requireSameFloor = true;
+    [Header("Line of Sight (视线阻挡)")]
+    [Tooltip("开启后，玩家与目标之间存在墙体碰撞器时，不会显示交互提示，也不能开始或继续搜索。")]
+    [SerializeField] private bool requireClearLineOfSight = true;
+    [Tooltip("会阻挡搜索和拾取的物理层。默认包含 Wall、Wall_F0、Wall_F1、Wall_F2；地图墙体碰撞器必须位于这些层之一。")]
+    [SerializeField] private LayerMask lineOfSightBlockingLayers =
+        (1 << 14) | (1 << 18) | (1 << 19) | (1 << 20);
+    [Tooltip("视线检测的起点。为空时使用玩家 Transform；如果角色碰撞中心与脚底位置差异较大，可指定一个玩家子物体。")]
+    [SerializeField] private Transform lineOfSightOrigin;
     [Tooltip("玩家背包服务。为空时运行时自动查找。")]
     [SerializeField] private InventoryService inventoryService;
     [Tooltip("网格背包服务。为空时运行时自动查找。")]
@@ -36,10 +47,22 @@ public class PlayerInteractor2D : MonoBehaviour
     private float nextScanTime;
     private float holdProgress;
     private float targetDistance;
+    private Vector2 targetClosestPoint;
 
     public InventoryService Inventory => inventoryService;
     public GridInventoryService GridInventory => gridInventoryService;
     public GridInventoryUnityUI InventoryUi => inventoryUi;
+
+    /// <summary>
+    /// 判断指定逻辑楼层是否就是玩家当前楼层。
+    /// 玩家楼层来自自身或父节点上的 FloorSortingState.ActiveFloorIndex。
+    /// </summary>
+    public bool IsOnInteractionFloor(int floorIndex)
+    {
+        if (!requireSameFloor) return true;
+        var playerFloorIndex = FloorLayerUtility.GetFloorIndex(transform);
+        return playerFloorIndex >= 0 && playerFloorIndex == Mathf.Max(0, floorIndex);
+    }
 
     private void Awake()
     {
@@ -49,6 +72,12 @@ public class PlayerInteractor2D : MonoBehaviour
     private void OnEnable()
     {
         nextScanTime = 0f;
+    }
+
+    private void OnDisable()
+    {
+        ClearCurrentTarget();
+        interactionUi?.HideTarget();
     }
 
     private void Update()
@@ -114,6 +143,7 @@ public class PlayerInteractor2D : MonoBehaviour
         IWorldInteractable bestTarget = null;
         MonoBehaviour bestBehaviour = null;
         var bestDistance = float.MaxValue;
+        var bestClosestPoint = Vector2.zero;
         var entries = WorldInteractableRegistry2D.Entries;
         registeredInteractableCount = entries.Count;
         var rangeSqr = interactionRange * interactionRange;
@@ -124,6 +154,7 @@ public class PlayerInteractor2D : MonoBehaviour
             var candidateBehaviour = entry.Behaviour;
             var candidate = entry.Interactable;
             if (candidateBehaviour == null || candidate == null) continue;
+            if (!IsOnInteractionFloor(candidate.InteractionFloorIndex)) continue;
             if (!candidate.CanInteract(this)) continue;
 
             var colliders = entry.Colliders;
@@ -136,13 +167,16 @@ public class PlayerInteractor2D : MonoBehaviour
                 var closestPoint = hit.ClosestPoint(transform.position);
                 var distance = (closestPoint - (Vector2)transform.position).sqrMagnitude;
                 if (distance > rangeSqr || distance >= bestDistance) continue;
+                if (!HasClearLineOfSight(closestPoint)) continue;
                 bestDistance = distance;
+                bestClosestPoint = closestPoint;
                 bestTarget = candidate;
                 bestBehaviour = candidateBehaviour;
             }
         }
 
         targetDistance = bestTarget != null ? Mathf.Sqrt(bestDistance) : 0f;
+        targetClosestPoint = bestClosestPoint;
         currentTargetDebug = bestBehaviour != null
             ? $"{bestBehaviour.name}（{targetDistance:0.00}/{interactionRange:0.00}m）"
             : "无";
@@ -155,7 +189,7 @@ public class PlayerInteractor2D : MonoBehaviour
     /// <summary>处理即时交互和需要持续按键的交互计时。</summary>
     private void UpdateInteractionInput()
     {
-        if (targetBehaviour == null || target == null || !target.CanInteract(this))
+        if (!RefreshCurrentTargetAccess())
         {
             holdProgress = 0f;
             return;
@@ -176,6 +210,88 @@ public class PlayerInteractor2D : MonoBehaviour
 
         holdProgress += Time.unscaledDeltaTime;
         if (holdProgress >= duration) CompleteInteraction();
+    }
+
+    /// <summary>
+    /// 重新确认当前目标仍在距离内且没有被墙体挡住。
+    /// 搜索按键按住期间也会执行，玩家移动到墙后时会立即中断当前进度。
+    /// </summary>
+    private bool RefreshCurrentTargetAccess()
+    {
+        if (targetBehaviour == null || target == null ||
+            !IsOnInteractionFloor(target.InteractionFloorIndex) ||
+            !target.CanInteract(this))
+        {
+            ClearCurrentTarget();
+            return false;
+        }
+
+        var entries = WorldInteractableRegistry2D.Entries;
+        var rangeSqr = interactionRange * interactionRange;
+        var bestDistance = float.MaxValue;
+        var bestClosestPoint = Vector2.zero;
+        var found = false;
+
+        for (var entryIndex = 0; entryIndex < entries.Count; entryIndex++)
+        {
+            var entry = entries[entryIndex];
+            if (entry.Behaviour != targetBehaviour) continue;
+
+            var colliders = entry.Colliders;
+            for (var colliderIndex = 0; colliderIndex < colliders.Length; colliderIndex++)
+            {
+                var collider = colliders[colliderIndex];
+                if (collider == null || !collider.enabled || !collider.gameObject.activeInHierarchy) continue;
+                if ((interactionLayers.value & (1 << collider.gameObject.layer)) == 0) continue;
+
+                var closestPoint = collider.ClosestPoint(transform.position);
+                var distance = (closestPoint - (Vector2)transform.position).sqrMagnitude;
+                if (distance > rangeSqr || distance >= bestDistance) continue;
+                if (!HasClearLineOfSight(closestPoint)) continue;
+
+                bestDistance = distance;
+                bestClosestPoint = closestPoint;
+                found = true;
+            }
+
+            break;
+        }
+
+        if (!found)
+        {
+            ClearCurrentTarget();
+            return false;
+        }
+
+        targetDistance = Mathf.Sqrt(bestDistance);
+        targetClosestPoint = bestClosestPoint;
+        currentTargetDebug = $"{targetBehaviour.name}（{targetDistance:0.00}/{interactionRange:0.00}m）";
+        return true;
+    }
+
+    /// <summary>判断玩家到目标碰撞器最近点的连线是否被指定墙体层阻挡。</summary>
+    private bool HasClearLineOfSight(Vector2 destination)
+    {
+        if (!requireClearLineOfSight || lineOfSightBlockingLayers.value == 0) return true;
+
+        var origin = lineOfSightOrigin != null
+            ? (Vector2)lineOfSightOrigin.position
+            : (Vector2)transform.position;
+        if ((destination - origin).sqrMagnitude <= 0.0001f) return true;
+
+        return Physics2D.Linecast(origin, destination, lineOfSightBlockingLayers).collider == null;
+    }
+
+    /// <summary>清空失效或被墙体遮挡的当前目标及其搜索进度。</summary>
+    private void ClearCurrentTarget()
+    {
+        target = null;
+        targetBehaviour = null;
+        targetDistance = 0f;
+        targetClosestPoint = Vector2.zero;
+        currentTargetDebug = "无";
+        holdProgress = 0f;
+        nextScanTime = 0f;
     }
 
     /// <summary>清空本次按住进度并把实际行为交给当前目标执行。</summary>
@@ -245,5 +361,12 @@ public class PlayerInteractor2D : MonoBehaviour
     {
         Gizmos.color = new Color(0.25f, 0.85f, 1f, 0.7f);
         Gizmos.DrawWireSphere(transform.position, Mathf.Max(0.1f, interactionRange));
+
+        if (targetBehaviour == null) return;
+        var origin = lineOfSightOrigin != null ? lineOfSightOrigin.position : transform.position;
+        Gizmos.color = HasClearLineOfSight(targetClosestPoint)
+            ? new Color(0.25f, 1f, 0.45f, 0.9f)
+            : new Color(1f, 0.25f, 0.2f, 0.9f);
+        Gizmos.DrawLine(origin, targetClosestPoint);
     }
 }

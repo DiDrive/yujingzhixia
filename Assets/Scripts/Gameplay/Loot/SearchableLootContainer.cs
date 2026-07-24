@@ -14,6 +14,9 @@ public class SearchableLootContainer : MonoBehaviour, IWorldInteractable
     [SerializeField] private string persistentId;
     [Tooltip("交互提示中显示的容器名称。")]
     [SerializeField] private string displayName = "物资容器";
+    [Header("Floor")]
+    [Tooltip("该容器所在的逻辑楼层。0=一楼，1=二楼，2=三楼。只有玩家当前楼层与此值相同才可搜索。")]
+    [Min(0)] [SerializeField] private int floorIndex;
     [Header("Search")]
     [Tooltip("第一次搜索需要持续按住交互键的秒数。已经搜索过的容器再次打开不需要等待。")]
     [SerializeField] private float searchDuration = 1.5f;
@@ -83,6 +86,7 @@ public class SearchableLootContainer : MonoBehaviour, IWorldInteractable
 
     public string InteractionPrompt => searched ? $"打开 {displayName}" : $"搜索 {displayName}";
     public float InteractionHoldDuration => searched ? 0f : Mathf.Max(0f, searchDuration);
+    public int InteractionFloorIndex => Mathf.Max(0, floorIndex);
     public Transform InteractionTransform => transform;
     public bool HasBeenSearched => searched;
     public string RuntimeContainerId => runtimeContainerId;
@@ -103,6 +107,14 @@ public class SearchableLootContainer : MonoBehaviour, IWorldInteractable
 
     private void Update()
     {
+        // 换楼后立即关闭仍显示的容器，避免隔层继续查看或搬动物资。
+        if (lastInteractor != null && IsContainerUiOpenInternal() &&
+            !lastInteractor.IsOnInteractionFloor(InteractionFloorIndex))
+        {
+            ForceCloseOpenUi();
+            return;
+        }
+
         if (searched && IsContainerUiOpenInternal() &&
             currentItemSearchIndex >= 0 && currentItemSearchIndex < itemSearchQueue.Count)
         {
@@ -128,7 +140,8 @@ public class SearchableLootContainer : MonoBehaviour, IWorldInteractable
 
     public bool CanInteract(PlayerInteractor2D interactor)
     {
-        return isActiveAndEnabled && interactor != null;
+        return isActiveAndEnabled && interactor != null &&
+               interactor.IsOnInteractionFloor(InteractionFloorIndex);
     }
 
     /// <summary>处理首次搜索、再次开关，以及不同世界容器之间的互斥。</summary>
@@ -519,7 +532,7 @@ public class SearchableLootContainer : MonoBehaviour, IWorldInteractable
         Gizmos.DrawWireCube(transform.position, size);
 #if UNITY_EDITOR
         UnityEditor.Handles.Label(transform.position + Vector3.up * (size.y * 0.5f + 0.15f),
-            $"可搜索：{displayName}\nID: {persistentId}");
+            $"可搜索：{displayName}（F{InteractionFloorIndex}）\nID: {persistentId}");
 #endif
     }
 

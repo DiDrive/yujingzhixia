@@ -41,30 +41,6 @@ Transform:
   - {fileID: 6281716996673130218}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7238109456623419071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1524712216701060628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e23d95fb70c66c341b849163ed05c9d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactKey: 102
-  interactionRange: 1.6
-  scanInterval: 0.08
-  interactionLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  inventoryService: {fileID: 0}
-  gridInventoryService: {fileID: 0}
-  inventoryUi: {fileID: 0}
-  showRuntimeOverlay: 1
-  interactionUi: {fileID: 0}
-  showInteractionRangeGizmo: 1
 --- !u!212 &3603964222704591087
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -193,6 +169,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 24577
   movementSkin: 0.02
+  resolveWallOverlaps: 1
+  maxOverlapResolveIterations: 4
+  overlapResolvePadding: 0.01
   hitKnockbackDistance: 0.2
   hitKnockbackDurationSeconds: 0.12
   maxHitKnockbackSpeed: 2
@@ -237,6 +216,7 @@ MonoBehaviour:
   keepLastMoveDirectionForAnimation: 1
   animatorDirectionDamp: 0.08
   hitTriggerParam: Hit
+  playerControlEnabled: 1
 --- !u!114 &5606460242431959165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,7 +271,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.009687424, y: -0.06812525}
+  m_Offset: {x: 0.0032958984, y: -0.080908775}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -302,7 +282,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.44218826, y: 0.85281277}
+  m_Size: {x: 0.4294052, y: 0.8272457}
   m_EdgeRadius: 0
 --- !u!210 &581080908778306230
 SortingGroup:
@@ -331,7 +311,40 @@ MonoBehaviour:
   floorIndex: 0
   renderFloorOverride: -1
   temporaryFloorOverride: -1
+  visibilityFloorOverride: -1
   syncUnityLayerWithFloor: 1
+--- !u!114 &7238109456623419071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524712216701060628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e23d95fb70c66c341b849163ed05c9d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactKey: 102
+  interactionRange: 0.5
+  scanInterval: 0.08
+  interactionLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  requireSameFloor: 1
+  requireClearLineOfSight: 1
+  lineOfSightBlockingLayers:
+    serializedVersion: 2
+    m_Bits: 1851392
+  lineOfSightOrigin: {fileID: 0}
+  inventoryService: {fileID: 0}
+  gridInventoryService: {fileID: 0}
+  inventoryUi: {fileID: 0}
+  showRuntimeOverlay: 1
+  interactionUi: {fileID: 0}
+  showInteractionRangeGizmo: 1
+  registeredInteractableCount: 0
+  currentTargetDebug: "\u672A\u8FD0\u884C"
 --- !u!1 &5570916327065903465
 GameObject:
   m_ObjectHideFlags: 0

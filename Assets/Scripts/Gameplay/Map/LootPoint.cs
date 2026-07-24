@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LootPoint : MonoBehaviour
 {
-    [Tooltip("掉落表或物资组 ID。后续可接 LootSpawner 或自定义掉落系统。")]
+    [Tooltip("统一 JSON 掉落表 ID，对应 Resources/Data/loot_tables.json 中的 tableId。")]
     [SerializeField] private string lootTableId = "survival_basic";
     [Tooltip("最少生成数量。")]
     [SerializeField] private int minCount = 1;

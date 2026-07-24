@@ -350,6 +350,9 @@ public static class MapTilemapTools
 
         if (!hasPlayerSpawn) warnings.Add("Missing player MapSpawnPoint.");
 
+        var extractionPoints = Object.FindObjectsOfType<ExtractionPoint>();
+        if (extractionPoints.Length == 0) warnings.Add("Missing ExtractionPoint.");
+
         if (warnings.Count == 0)
         {
             Debug.Log("Map validation passed.");

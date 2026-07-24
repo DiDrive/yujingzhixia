@@ -112,6 +112,7 @@
     <Compile Include="Assets\SmallScaleInt\2D Zombie interior Tile pack 1\Example Scene\Scripts\PlayerController.cs" />
     <Compile Include="Assets\SmallScaleInt\2D Zombie interior Tile pack 1\Example Scene\Scripts\AnimationController.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridOccupancyMap.cs" />
+    <Compile Include="Assets\Scripts\Survival\PlayerSurvivalHUD.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Interaction\WorldInteractionPromptUI.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridItemInstance.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Rendering\FloorSortingState.cs" />

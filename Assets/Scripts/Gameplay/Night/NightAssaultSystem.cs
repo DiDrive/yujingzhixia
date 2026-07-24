@@ -12,16 +12,10 @@ public class NightAssaultSystem : MonoBehaviour
     [SerializeField] private int totalWaves = 2;
     [PropertyTooltip("夜袭胜利后发放奖励的抽取次数。")]
     [SerializeField] private int victoryRewardRollCount = 3;
-    /// <summary>
-    /// 夜袭奖励箱体类型。
-    /// </summary>
-    [PropertyTooltip("夜袭胜利时使用的奖励箱体类型。")]
-    [SerializeField] private LootChestType rewardChestType = LootChestType.Resource;
-    /// <summary>
-    /// 掉落池服务，用于生成夜袭奖励。
-    /// </summary>
-    [PropertyTooltip("奖励掉落生成器引用。")]
-    [SerializeField] private LootSpawner lootSpawner;
+    [PropertyTooltip("夜袭胜利奖励使用的 JSON 掉落表 ID，配置位于 Resources/Data/loot_tables.json。")]
+    [SerializeField] private string victoryRewardLootTableId = "night_assault_reward";
+    [PropertyTooltip("统一 JSON 掉落表数据库。")]
+    [SerializeField] private LootTableDatabase lootTableDatabase;
     /// <summary>
     /// 库存服务，用于存储夜袭奖励。
     /// </summary>
@@ -67,10 +61,14 @@ public class NightAssaultSystem : MonoBehaviour
         IsRunning = false;
 
         var rewardCount = 0;
-        if (result == NightAssaultResult.Victory && lootSpawner != null && inventoryService != null)
+        if (result == NightAssaultResult.Victory && lootTableDatabase != null && inventoryService != null)
         {
-            var granted = lootSpawner.GrantLoot(inventoryService, rewardChestType, Mathf.Max(1, victoryRewardRollCount));
-            rewardCount = granted ? victoryRewardRollCount : 0;
+            var rolls = Mathf.Max(1, victoryRewardRollCount);
+            rewardCount = lootTableDatabase.GrantToInventory(
+                inventoryService,
+                victoryRewardLootTableId,
+                rolls,
+                rolls);
         }
 
         if (gameStateMachine != null) gameStateMachine.EndCycleToResult();

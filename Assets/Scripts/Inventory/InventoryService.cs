@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -22,35 +21,30 @@ public struct ItemStack
 }
 
 /// <summary>
-/// 背包服务：负责物品增加、消耗与计数。
+/// 背包统一入口：把工作台、奖励、消耗品等系统的请求转发给网格背包。
+/// 物品真实数据只保存在 GridInventoryService 中，本组件不再维护第二份堆叠列表。
 /// </summary>
 public class InventoryService : MonoBehaviour
 {
-    [PropertyTooltip("是否启用网格背包后端。启用后 Add/Consume/Count 将委托给 GridInventoryService。")]
-    [SerializeField] private bool useGridInventoryBackend;
-    [PropertyTooltip("网格背包服务引用。")]
+    [PropertyTooltip("唯一的网格背包数据服务。场景中建议直接绑定；为空时运行时自动查找。")]
     [SerializeField] private GridInventoryService gridInventoryService;
-    [PropertyTooltip("背包最大格子数。达到上限后无法新增新堆叠。")]
-    [SerializeField] private int maxSlots = 20;
-    [PropertyTooltip("单个堆叠的数量上限。")]
-    [SerializeField] private int defaultStackLimit = 99;
-    [PropertyTooltip("当前背包堆叠列表。")]
-    [SerializeField] private List<ItemStack> stacks = new();
 
-    public IReadOnlyList<ItemStack> Stacks => stacks;
+    public GridInventoryService GridInventory => gridInventoryService;
 
+    private void Awake()
+    {
+        if (gridInventoryService == null)
+            gridInventoryService = FindObjectOfType<GridInventoryService>();
+    }
+
+    /// <summary>
+    /// 绑定唯一网格背包后端。保留 enableBackend 参数用于兼容现有调用；
+    /// 传入 false 时清空后端，传入 true 时使用给定服务。
+    /// </summary>
     public void BindGridBackend(GridInventoryService service, bool enableBackend)
     {
-        gridInventoryService = service;
-        var shouldUseGridBackend = enableBackend && gridInventoryService != null;
-        var hasSceneItemNodes = shouldUseGridBackend && gridInventoryService.HasSceneEditorItemNodes();
-        if (shouldUseGridBackend && !useGridInventoryBackend && stacks.Count > 0 && !hasSceneItemNodes)
-        {
-            gridInventoryService.EnsureInitialized();
-            MigrateStacksToGridBackend();
-        }
-
-        useGridInventoryBackend = shouldUseGridBackend;
+        gridInventoryService = enableBackend ? service : null;
+        if (gridInventoryService != null) gridInventoryService.EnsureInitialized();
     }
 
     /// <summary>
@@ -58,32 +52,8 @@ public class InventoryService : MonoBehaviour
     /// </summary>
     public bool AddItem(string itemId, int amount)
     {
-        if (useGridInventoryBackend && gridInventoryService != null)
-        {
-            return gridInventoryService.AddItem(itemId, amount);
-        }
-
-        if (string.IsNullOrWhiteSpace(itemId) || amount <= 0) return false;
-
-        for (var i = 0; i < stacks.Count; i++)
-        {
-            if (stacks[i].itemId != itemId) continue;
-            var canAdd = defaultStackLimit - stacks[i].quantity;
-            if (canAdd <= 0) continue;
-            var add = Mathf.Min(canAdd, amount);
-            stacks[i] = new ItemStack(itemId, stacks[i].quantity + add);
-            amount -= add;
-            if (amount == 0) return true;
-        }
-
-        while (amount > 0 && stacks.Count < maxSlots)
-        {
-            var add = Mathf.Min(defaultStackLimit, amount);
-            stacks.Add(new ItemStack(itemId, add));
-            amount -= add;
-        }
-
-        return amount == 0;
+        return gridInventoryService != null &&
+               gridInventoryService.AddItem(itemId, amount);
     }
 
     /// <summary>
@@ -91,28 +61,8 @@ public class InventoryService : MonoBehaviour
     /// </summary>
     public bool ConsumeItem(string itemId, int amount)
     {
-        if (useGridInventoryBackend && gridInventoryService != null)
-        {
-            return gridInventoryService.ConsumeItem(itemId, amount);
-        }
-
-        if (string.IsNullOrWhiteSpace(itemId) || amount <= 0) return false;
-        var left = amount;
-
-        for (var i = stacks.Count - 1; i >= 0; i--)
-        {
-            if (stacks[i].itemId != itemId) continue;
-            var take = Mathf.Min(left, stacks[i].quantity);
-            var remain = stacks[i].quantity - take;
-            left -= take;
-
-            if (remain <= 0) stacks.RemoveAt(i);
-            else stacks[i] = new ItemStack(itemId, remain);
-
-            if (left == 0) return true;
-        }
-
-        return false;
+        return gridInventoryService != null &&
+               gridInventoryService.ConsumeItem(itemId, amount);
     }
 
     /// <summary>
@@ -120,34 +70,8 @@ public class InventoryService : MonoBehaviour
     /// </summary>
     public int CountItem(string itemId)
     {
-        if (useGridInventoryBackend && gridInventoryService != null)
-        {
-            return gridInventoryService.CountItem(itemId);
-        }
-
-        var total = 0;
-        for (var i = 0; i < stacks.Count; i++)
-        {
-            if (stacks[i].itemId == itemId) total += stacks[i].quantity;
-        }
-        return total;
-    }
-
-    private void MigrateStacksToGridBackend()
-    {
-        if (gridInventoryService == null) return;
-
-        var remainingStacks = new List<ItemStack>();
-        for (var i = 0; i < stacks.Count; i++)
-        {
-            var stack = stacks[i];
-            if (string.IsNullOrWhiteSpace(stack.itemId) || stack.quantity <= 0) continue;
-            if (!gridInventoryService.AddItem(stack.itemId, stack.quantity))
-            {
-                remainingStacks.Add(stack);
-            }
-        }
-
-        stacks = remainingStacks;
+        return gridInventoryService != null
+            ? gridInventoryService.CountItem(itemId)
+            : 0;
     }
 }
