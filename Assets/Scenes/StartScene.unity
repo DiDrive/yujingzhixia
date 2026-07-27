@@ -3343,6 +3343,127 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 275732795}
   m_CullTransparentMesh: 1
+--- !u!1 &303359453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 303359454}
+  - component: {fileID: 303359457}
+  - component: {fileID: 303359456}
+  - component: {fileID: 303359455}
+  m_Layer: 5
+  m_Name: "Btn_\u4F7F\u7528"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &303359454
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303359453}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1989984616}
+  m_Father: {fileID: 603252940301949673}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 80, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &303359455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303359453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 303359456}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &303359456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303359453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &303359457
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303359453}
+  m_CullTransparentMesh: 1
 --- !u!1 &306657090
 GameObject:
   m_ObjectHideFlags: 0
@@ -13351,7 +13472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c97ba12e8b1f046b871a498feeb8a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hunger: 36.90713
+  hunger: 40
   thirst: 57.643944
   fatigue: 37.789543
   hp: 100
@@ -14624,6 +14745,85 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &689553071
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 689553072}
+  - component: {fileID: 689553074}
+  - component: {fileID: 689553073}
+  m_Layer: 5
+  m_Name: StatusText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &689553072
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689553071}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1223301212}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -8, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &689553073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689553071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 13
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
+--- !u!222 &689553074
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689553071}
+  m_CullTransparentMesh: 1
 --- !u!1 &689664013
 GameObject:
   m_ObjectHideFlags: 0
@@ -33106,6 +33306,81 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &949359184
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 949359185}
+  - component: {fileID: 949359187}
+  - component: {fileID: 949359186}
+  m_Layer: 5
+  m_Name: Fill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &949359185
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949359184}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1223301212}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -4, y: -4}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &949359186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949359184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.28, g: 0.72, b: 0.38, a: 0.9}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 0
+  m_FillAmount: 0
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &949359187
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949359184}
+  m_CullTransparentMesh: 1
 --- !u!1 &955782068
 GameObject:
   m_ObjectHideFlags: 0
@@ -36038,30 +36313,44 @@ MonoBehaviour:
     ownerType: 0
   itemDefinitions:
   - itemId: food_canned
-    displayName: 
-    iconResourcePath: 
+    displayName: "\u7F50\u5934"
+    iconResourcePath: texture/food_canned
     width: 1
     height: 1
     canRotate: 0
     maxStack: 3
     itemTags:
     - consumable
+    - food
     weight: 0.5
     quality: 0
+    usable: 1
+    useProfile: 
+    useDuration: 1.5
+    useEffects:
+    - type: Hunger
+      value: 30
   - itemId: water_bottle
-    displayName: 
-    iconResourcePath: 
+    displayName: "\u74F6\u88C5\u6C34"
+    iconResourcePath: texture/water_bottle
     width: 1
     height: 2
     canRotate: 1
     maxStack: 2
     itemTags:
     - consumable
+    - drink
     weight: 0.8
-    quality: 0
+    quality: 1
+    usable: 1
+    useProfile: 
+    useDuration: 1.2
+    useEffects:
+    - type: Thirst
+      value: 35
   - itemId: bandage
-    displayName: 
-    iconResourcePath: 
+    displayName: "\u7EF7\u5E26"
+    iconResourcePath: texture/bandage
     width: 1
     height: 1
     canRotate: 0
@@ -36070,9 +36359,15 @@ MonoBehaviour:
     - medical
     weight: 0.2
     quality: 0
+    usable: 1
+    useProfile: 
+    useDuration: 2
+    useEffects:
+    - type: Health
+      value: 20
   - itemId: cloth_raw
-    displayName: 
-    iconResourcePath: 
+    displayName: "\u5E03\u6599"
+    iconResourcePath: texture/cloth_raw
     width: 2
     height: 1
     canRotate: 1
@@ -36080,1657 +36375,2672 @@ MonoBehaviour:
     itemTags:
     - material
     weight: 0.4
-    quality: 0
+    quality: 1
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: aluminum_foil
-    displayName: 
-    iconResourcePath: 
+    displayName: "\u94DD\u7B94"
+    iconResourcePath: Characters/food/aluminum_foil
     width: 1
     height: 1
     canRotate: 0
-    maxStack: 10
+    maxStack: 5
     itemTags:
-    - food
+    - material
     weight: 0.1
     quality: 0
-  - itemId: american_cheese_p
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: bacon
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: baking_powder
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: ball_pen
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: banana
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: bandage_box
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: barbeque_sauce
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: basket_metal
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: basket_yellow
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: bathroom_cleaner
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: batteries
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: bell_pepper
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: bell_pepper_p
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: body_lotion
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: bowl
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: bubble_gum
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: butter
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: butter2
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: cabbage
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: cabbage_p
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: candy_bar
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: cereal1
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: cereal2
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: chopping_board
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: cleaning_brush
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: cleaning_gloves
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: cleaning_gloves_p
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: coffee_bag
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: cookies
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: cooking_oil
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: credit_card_1
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: credit_card_2
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: credit_card_3
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
-  - itemId: detergent
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
-    canRotate: 0
-    maxStack: 10
-    itemTags:
-    - food
-    weight: 0.1
-    quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: dry_dog_food
-    displayName: 
-    iconResourcePath: 
+    displayName: "\u72D7\u7CAE"
+    iconResourcePath: Characters/food/dry_dog_food
+    width: 2
+    height: 2
+    canRotate: 0
+    maxStack: 2
+    itemTags:
+    - consumable
+    - food
+    weight: 1.2
+    quality: 1
+    usable: 1
+    useProfile: 
+    useDuration: 1.8
+    useEffects:
+    - type: Hunger
+      value: 20
+    - type: Thirst
+      value: -5
+  - itemId: watermelon
+    displayName: "\u897F\u74DC"
+    iconResourcePath: Characters/food/watermelon1
+    width: 2
+    height: 2
+    canRotate: 0
+    maxStack: 1
+    itemTags:
+    - consumable
+    - food
+    - drink
+    weight: 3
+    quality: 1
+    usable: 1
+    useProfile: 
+    useDuration: 1.4
+    useEffects:
+    - type: Hunger
+      value: 10
+    - type: Thirst
+      value: 25
+  - itemId: medical_box
+    displayName: "\u533B\u7597\u7BB1"
+    iconResourcePath: Characters/food/bandage_box
+    width: 2
+    height: 1
+    canRotate: 1
+    maxStack: 1
+    itemTags:
+    - medical
+    weight: 0.8
+    quality: 2
+    usable: 1
+    useProfile: 
+    useDuration: 4
+    useEffects:
+    - type: Health
+      value: 50
+    - type: CureInfection
+      value: 0
+  - itemId: american_cheese_p
+    displayName: american_cheese_p
+    iconResourcePath: Characters/food/American_cheese_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: food_small
+    useDuration: 1.2
+    useEffects:
+    - type: Hunger
+      value: 12
+  - itemId: bacon
+    displayName: bacon
+    iconResourcePath: Characters/food/bacon
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    - consumable
+    - food
+    weight: 0.1
+    quality: 0
+    usable: 1
+    useProfile: food_small
+    useDuration: 1.2
+    useEffects:
+    - type: Hunger
+      value: 12
+  - itemId: baking_powder
+    displayName: baking_powder
+    iconResourcePath: Characters/food/baking_powder
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    weight: 0.1
+    quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
+  - itemId: ball_pen
+    displayName: ball_pen
+    iconResourcePath: Characters/food/ball_pen
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    weight: 0.1
+    quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
+  - itemId: banana
+    displayName: banana
+    iconResourcePath: Characters/food/banana
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    - consumable
+    - food
+    - drink
+    weight: 0.1
+    quality: 0
+    usable: 1
+    useProfile: fruit_medium
+    useDuration: 1.4
+    useEffects:
+    - type: Hunger
+      value: 12
+    - type: Thirst
+      value: 10
+  - itemId: bandage_box
+    displayName: bandage_box
+    iconResourcePath: Characters/food/bandage_box
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    - consumable
+    - medical
+    weight: 0.1
+    quality: 0
+    usable: 1
+    useProfile: medical_small
+    useDuration: 2.5
+    useEffects:
+    - type: Health
+      value: 35
+  - itemId: barbeque_sauce
+    displayName: barbeque_sauce
+    iconResourcePath: Characters/food/barbeque_sauce
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    weight: 0.1
+    quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
+  - itemId: basket_metal
+    displayName: basket_metal
+    iconResourcePath: Characters/food/basket_metal
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    weight: 0.1
+    quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
+  - itemId: basket_yellow
+    displayName: basket_yellow
+    iconResourcePath: Characters/food/basket_yellow
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    weight: 0.1
+    quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
+  - itemId: bathroom_cleaner
+    displayName: bathroom_cleaner
+    iconResourcePath: Characters/food/bathroom_cleaner
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    weight: 0.1
+    quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
+  - itemId: batteries
+    displayName: batteries
+    iconResourcePath: Characters/food/batteries
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    weight: 0.1
+    quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
+  - itemId: bell_pepper
+    displayName: bell_pepper
+    iconResourcePath: Characters/food/bell_pepper
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    - consumable
+    - food
+    - drink
+    weight: 0.1
+    quality: 0
+    usable: 1
+    useProfile: fruit_small
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 7
+    - type: Thirst
+      value: 5
+  - itemId: bell_pepper_p
+    displayName: bell_pepper_p
+    iconResourcePath: Characters/food/bell_pepper_p
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    - consumable
+    - food
+    - drink
+    weight: 0.1
+    quality: 0
+    usable: 1
+    useProfile: fruit_small
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 7
+    - type: Thirst
+      value: 5
+  - itemId: body_lotion
+    displayName: body_lotion
+    iconResourcePath: Characters/food/body_lotion
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    weight: 0.1
+    quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
+  - itemId: bowl
+    displayName: bowl
+    iconResourcePath: Characters/food/bowl
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    weight: 0.1
+    quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
+  - itemId: bubble_gum
+    displayName: bubble_gum
+    iconResourcePath: Characters/food/bubble_gum
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    - consumable
+    - food
+    weight: 0.1
+    quality: 0
+    usable: 1
+    useProfile: snack_sweet
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 12
+    - type: Thirst
+      value: -2
+  - itemId: butter
+    displayName: butter
+    iconResourcePath: Characters/food/butter
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    - consumable
+    - food
+    weight: 0.1
+    quality: 0
+    usable: 1
+    useProfile: food_small
+    useDuration: 1.2
+    useEffects:
+    - type: Hunger
+      value: 12
+  - itemId: butter2
+    displayName: butter2
+    iconResourcePath: Characters/food/butter2
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    - consumable
+    - food
+    weight: 0.1
+    quality: 0
+    usable: 1
+    useProfile: food_small
+    useDuration: 1.2
+    useEffects:
+    - type: Hunger
+      value: 12
+  - itemId: cabbage
+    displayName: cabbage
+    iconResourcePath: Characters/food/cabbage
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    - consumable
+    - food
+    - drink
+    weight: 0.1
+    quality: 0
+    usable: 1
+    useProfile: fruit_medium
+    useDuration: 1.4
+    useEffects:
+    - type: Hunger
+      value: 12
+    - type: Thirst
+      value: 10
+  - itemId: cabbage_p
+    displayName: cabbage_p
+    iconResourcePath: Characters/food/cabbage_p
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    - consumable
+    - food
+    - drink
+    weight: 0.1
+    quality: 0
+    usable: 1
+    useProfile: fruit_medium
+    useDuration: 1.4
+    useEffects:
+    - type: Hunger
+      value: 12
+    - type: Thirst
+      value: 10
+  - itemId: candy_bar
+    displayName: candy_bar
+    iconResourcePath: Characters/food/candy_bar
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    - consumable
+    - food
+    weight: 0.1
+    quality: 0
+    usable: 1
+    useProfile: snack_sweet
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 12
+    - type: Thirst
+      value: -2
+  - itemId: cereal1
+    displayName: cereal1
+    iconResourcePath: Characters/food/cereal1
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    - consumable
+    - food
+    weight: 0.1
+    quality: 0
+    usable: 1
+    useProfile: food_medium
+    useDuration: 1.8
+    useEffects:
+    - type: Hunger
+      value: 22
+  - itemId: cereal2
+    displayName: cereal2
+    iconResourcePath: Characters/food/cereal2
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    - consumable
+    - food
+    weight: 0.1
+    quality: 0
+    usable: 1
+    useProfile: food_medium
+    useDuration: 1.8
+    useEffects:
+    - type: Hunger
+      value: 22
+  - itemId: chopping_board
+    displayName: chopping_board
+    iconResourcePath: Characters/food/chopping board
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    weight: 0.1
+    quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
+  - itemId: cleaning_brush
+    displayName: cleaning_brush
+    iconResourcePath: Characters/food/cleaning_brush
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    weight: 0.1
+    quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
+  - itemId: cleaning_gloves
+    displayName: cleaning_gloves
+    iconResourcePath: Characters/food/cleaning_gloves
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    weight: 0.1
+    quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
+  - itemId: cleaning_gloves_p
+    displayName: cleaning_gloves_p
+    iconResourcePath: Characters/food/cleaning_gloves_p
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    weight: 0.1
+    quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
+  - itemId: coffee_bag
+    displayName: coffee_bag
+    iconResourcePath: Characters/food/coffee_bag
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    weight: 0.1
+    quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
+  - itemId: cookies
+    displayName: cookies
+    iconResourcePath: Characters/food/cookies
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    - consumable
+    - food
+    weight: 0.1
+    quality: 0
+    usable: 1
+    useProfile: snack_sweet
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 12
+    - type: Thirst
+      value: -2
+  - itemId: cooking_oil
+    displayName: cooking_oil
+    iconResourcePath: Characters/food/cooking_oil
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    weight: 0.1
+    quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
+  - itemId: credit_card_1
+    displayName: credit_card_1
+    iconResourcePath: Characters/food/credit_card_1
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    weight: 0.1
+    quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
+  - itemId: credit_card_2
+    displayName: credit_card_2
+    iconResourcePath: Characters/food/credit_card_2
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    weight: 0.1
+    quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
+  - itemId: credit_card_3
+    displayName: credit_card_3
+    iconResourcePath: Characters/food/credit_card_3
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    weight: 0.1
+    quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
+  - itemId: detergent
+    displayName: detergent
+    iconResourcePath: Characters/food/detergent
+    width: 1
+    height: 1
+    canRotate: 0
+    maxStack: 10
+    itemTags:
+    - loot
+    weight: 0.1
+    quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: egg_box
-    displayName: 
-    iconResourcePath: 
+    displayName: egg_box
+    iconResourcePath: Characters/food/egg_box
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: egg_brown
-    displayName: 
-    iconResourcePath: 
+    displayName: egg_brown
+    iconResourcePath: Characters/food/egg_brown
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: egg_brown_p
-    displayName: 
-    iconResourcePath: 
+    displayName: egg_brown_p
+    iconResourcePath: Characters/food/egg_brown_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: egg_white
-    displayName: 
-    iconResourcePath: 
+    displayName: egg_white
+    iconResourcePath: Characters/food/egg_white
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: egg_white_p
-    displayName: 
-    iconResourcePath: 
+    displayName: egg_white_p
+    iconResourcePath: Characters/food/egg_white_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: energy_bar
-    displayName: 
-    iconResourcePath: 
+    displayName: energy_bar
+    iconResourcePath: Characters/food/energy_bar
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: food_medium
+    useDuration: 1.8
+    useEffects:
+    - type: Hunger
+      value: 22
   - itemId: eraser
-    displayName: 
-    iconResourcePath: 
+    displayName: eraser
+    iconResourcePath: Characters/food/eraser
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: eraser_p
-    displayName: 
-    iconResourcePath: 
+    displayName: eraser_p
+    iconResourcePath: Characters/food/eraser_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: fish
-    displayName: 
-    iconResourcePath: 
+    displayName: fish
+    iconResourcePath: Characters/food/fish
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: fish_p
-    displayName: 
-    iconResourcePath: 
+    displayName: fish_p
+    iconResourcePath: Characters/food/fish_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: flour
-    displayName: 
-    iconResourcePath: 
+    displayName: flour
+    iconResourcePath: Characters/food/flour
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: fruit_cocktail_can
-    displayName: 
-    iconResourcePath: 
+    displayName: fruit_cocktail_can
+    iconResourcePath: Characters/food/fruit_cocktail_can
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
+    - drink
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: fruit_medium
+    useDuration: 1.4
+    useEffects:
+    - type: Hunger
+      value: 12
+    - type: Thirst
+      value: 10
   - itemId: frying_pan
-    displayName: 
-    iconResourcePath: 
+    displayName: frying_pan
+    iconResourcePath: Characters/food/frying pan
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: frying_pan_p
-    displayName: 
-    iconResourcePath: 
+    displayName: frying_pan_p
+    iconResourcePath: Characters/food/frying pan_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: glue
-    displayName: 
-    iconResourcePath: 
+    displayName: glue
+    iconResourcePath: Characters/food/glue
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: glue_p
-    displayName: 
-    iconResourcePath: 
+    displayName: glue_p
+    iconResourcePath: Characters/food/glue_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: glue_stick
-    displayName: 
-    iconResourcePath: 
+    displayName: glue_stick
+    iconResourcePath: Characters/food/glue_stick
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: grape_soda
-    displayName: 
-    iconResourcePath: 
+    displayName: grape_soda
+    iconResourcePath: Characters/food/grape_soda
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
+    - consumable
+    - drink
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: drink_medium
+    useDuration: 1.4
+    useEffects:
+    - type: Thirst
+      value: 30
   - itemId: green_apple
-    displayName: 
-    iconResourcePath: 
+    displayName: green_apple
+    iconResourcePath: Characters/food/green_apple
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
+    - drink
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: fruit_small
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 7
+    - type: Thirst
+      value: 5
   - itemId: green_apple_p
-    displayName: 
-    iconResourcePath: 
+    displayName: green_apple_p
+    iconResourcePath: Characters/food/green_apple_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
+    - drink
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: fruit_small
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 7
+    - type: Thirst
+      value: 5
   - itemId: green_grape
-    displayName: 
-    iconResourcePath: 
+    displayName: green_grape
+    iconResourcePath: Characters/food/green_grape
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
+    - drink
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: fruit_small
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 7
+    - type: Thirst
+      value: 5
   - itemId: green_grape_p
-    displayName: 
-    iconResourcePath: 
+    displayName: green_grape_p
+    iconResourcePath: Characters/food/green_grape_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
+    - drink
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: fruit_small
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 7
+    - type: Thirst
+      value: 5
   - itemId: hand_sanitiser
-    displayName: 
-    iconResourcePath: 
+    displayName: hand_sanitiser
+    iconResourcePath: Characters/food/hand_sanitiser
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: hot_cocoa_mix
-    displayName: 
-    iconResourcePath: 
+    displayName: hot_cocoa_mix
+    iconResourcePath: Characters/food/hot_cocoa_mix
     width: 1
-    height: 1
+    height: 2
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: jam_strawberry
-    displayName: 
-    iconResourcePath: 
+    displayName: jam_strawberry
+    iconResourcePath: Characters/food/jam_strawberry
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: snack_sweet
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 12
+    - type: Thirst
+      value: -2
   - itemId: ketchup
-    displayName: 
-    iconResourcePath: 
-    width: 1
+    displayName: ketchup
+    iconResourcePath: Characters/food/ketchup
+    width: 2
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: kitchen_knife_set
-    displayName: 
-    iconResourcePath: 
+    displayName: kitchen_knife_set
+    iconResourcePath: Characters/food/kitchen_knife_set
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: kitchen_knife_set_p
-    displayName: 
-    iconResourcePath: 
+    displayName: kitchen_knife_set_p
+    iconResourcePath: Characters/food/kitchen_knife_set_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: kitchen_soap
-    displayName: 
-    iconResourcePath: 
-    width: 1
+    displayName: kitchen_soap
+    iconResourcePath: Characters/food/kitchen_soap
+    width: 2
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: light_bulb
-    displayName: 
-    iconResourcePath: 
+    displayName: light_bulb
+    iconResourcePath: Characters/food/light_bulb
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: light_bulb_box
-    displayName: 
-    iconResourcePath: 
+    displayName: light_bulb_box
+    iconResourcePath: Characters/food/light_bulb_box
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: marshmallows
-    displayName: 
-    iconResourcePath: 
+    displayName: marshmallows
+    iconResourcePath: Characters/food/marshmallows
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: snack_sweet
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 12
+    - type: Thirst
+      value: -2
   - itemId: meat1
-    displayName: 
-    iconResourcePath: 
+    displayName: meat1
+    iconResourcePath: Characters/food/meat1
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: meat1_p
-    displayName: 
-    iconResourcePath: 
+    displayName: meat1_p
+    iconResourcePath: Characters/food/meat1_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: meat2
-    displayName: 
-    iconResourcePath: 
+    displayName: meat2
+    iconResourcePath: Characters/food/meat2
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: meat2_p
-    displayName: 
-    iconResourcePath: 
+    displayName: meat2_p
+    iconResourcePath: Characters/food/meat2_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: milk_bottle
-    displayName: 
-    iconResourcePath: 
+    displayName: milk_bottle
+    iconResourcePath: Characters/food/milk_bottle
     width: 1
-    height: 1
+    height: 2
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
+    - consumable
+    - drink
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: drink_medium
+    useDuration: 1.4
+    useEffects:
+    - type: Thirst
+      value: 30
   - itemId: milk_chocolate
-    displayName: 
-    iconResourcePath: 
+    displayName: milk_chocolate
+    iconResourcePath: Characters/food/milk_chocolate
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: snack_sweet
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 12
+    - type: Thirst
+      value: -2
   - itemId: milk_gallon
-    displayName: 
-    iconResourcePath: 
+    displayName: milk_gallon
+    iconResourcePath: Characters/food/milk_gallon
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
+    - consumable
+    - drink
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: drink_large
+    useDuration: 2
+    useEffects:
+    - type: Thirst
+      value: 45
   - itemId: milk_pack
-    displayName: 
-    iconResourcePath: 
+    displayName: milk_pack
+    iconResourcePath: Characters/food/milk_pack
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
+    - consumable
+    - drink
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: drink_medium
+    useDuration: 1.4
+    useEffects:
+    - type: Thirst
+      value: 30
   - itemId: milk_plastic
-    displayName: 
-    iconResourcePath: 
+    displayName: milk_plastic
+    iconResourcePath: Characters/food/milk_plastic
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
+    - consumable
+    - drink
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: drink_medium
+    useDuration: 1.4
+    useEffects:
+    - type: Thirst
+      value: 30
   - itemId: mushroom_white
-    displayName: 
-    iconResourcePath: 
+    displayName: mushroom_white
+    iconResourcePath: Characters/food/mushroom_white
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: food_small
+    useDuration: 1.2
+    useEffects:
+    - type: Hunger
+      value: 12
   - itemId: mushroom_white_p
-    displayName: 
-    iconResourcePath: 
+    displayName: mushroom_white_p
+    iconResourcePath: Characters/food/mushroom_white_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: food_small
+    useDuration: 1.2
+    useEffects:
+    - type: Hunger
+      value: 12
   - itemId: mustard
-    displayName: 
-    iconResourcePath: 
+    displayName: mustard
+    iconResourcePath: Characters/food/mustard
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: olive_oil
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
+    displayName: olive_oil
+    iconResourcePath: Characters/food/olive_oil
+    width: 2
+    height: 2
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: orange_juice
-    displayName: 
-    iconResourcePath: 
+    displayName: orange_juice
+    iconResourcePath: Characters/food/orange_juice
     width: 1
-    height: 1
+    height: 2
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
+    - consumable
+    - drink
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: drink_medium
+    useDuration: 1.4
+    useEffects:
+    - type: Thirst
+      value: 30
   - itemId: paper_bag
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
+    displayName: paper_bag
+    iconResourcePath: Characters/food/paper_bag
+    width: 2
+    height: 2
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: peanut_butter
-    displayName: 
-    iconResourcePath: 
+    displayName: peanut_butter
+    iconResourcePath: Characters/food/peanut_butter
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: food_medium
+    useDuration: 1.8
+    useEffects:
+    - type: Hunger
+      value: 22
   - itemId: pencil_box
-    displayName: 
-    iconResourcePath: 
-    width: 1
+    displayName: pencil_box
+    iconResourcePath: Characters/food/pencil_box
+    width: 2
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: plain_yogurt
-    displayName: 
-    iconResourcePath: 
+    displayName: plain_yogurt
+    iconResourcePath: Characters/food/plain_yogurt
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: food_small
+    useDuration: 1.2
+    useEffects:
+    - type: Hunger
+      value: 12
   - itemId: potato
-    displayName: 
-    iconResourcePath: 
+    displayName: potato
+    iconResourcePath: Characters/food/potato
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: potato_p
-    displayName: 
-    iconResourcePath: 
+    displayName: potato_p
+    iconResourcePath: Characters/food/potato_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: potatochip_blue
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
+    displayName: potatochip_blue
+    iconResourcePath: Characters/food/potatochip_blue
+    width: 2
+    height: 2
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: snack_salty
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 14
+    - type: Thirst
+      value: -4
   - itemId: potatochip_green
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
+    displayName: potatochip_green
+    iconResourcePath: Characters/food/potatochip_green
+    width: 2
+    height: 2
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: snack_salty
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 14
+    - type: Thirst
+      value: -4
   - itemId: potatochip_yellow
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
+    displayName: potatochip_yellow
+    iconResourcePath: Characters/food/potatochip_yellow
+    width: 2
+    height: 2
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: snack_salty
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 14
+    - type: Thirst
+      value: -4
   - itemId: power_strip_typea
-    displayName: 
-    iconResourcePath: 
+    displayName: power_strip_typea
+    iconResourcePath: Characters/food/power_strip_typeA
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: power_strip_typef
-    displayName: 
-    iconResourcePath: 
+    displayName: power_strip_typef
+    iconResourcePath: Characters/food/power_strip_typeF
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: receipt
-    displayName: 
-    iconResourcePath: 
+    displayName: receipt
+    iconResourcePath: Characters/food/receipt
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: red_apple
-    displayName: 
-    iconResourcePath: 
+    displayName: red_apple
+    iconResourcePath: Characters/food/red_apple
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
+    - drink
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: fruit_small
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 7
+    - type: Thirst
+      value: 5
   - itemId: red_apple_p
-    displayName: 
-    iconResourcePath: 
+    displayName: red_apple_p
+    iconResourcePath: Characters/food/red_apple_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
+    - drink
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: fruit_small
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 7
+    - type: Thirst
+      value: 5
   - itemId: red_grape
-    displayName: 
-    iconResourcePath: 
+    displayName: red_grape
+    iconResourcePath: Characters/food/red_grape
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
+    - drink
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: fruit_small
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 7
+    - type: Thirst
+      value: 5
   - itemId: red_grape_p
-    displayName: 
-    iconResourcePath: 
+    displayName: red_grape_p
+    iconResourcePath: Characters/food/red_grape_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
+    - drink
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: fruit_small
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 7
+    - type: Thirst
+      value: 5
   - itemId: rolling_pin
-    displayName: 
-    iconResourcePath: 
+    displayName: rolling_pin
+    iconResourcePath: Characters/food/rolling pin
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: rubber_duck
-    displayName: 
-    iconResourcePath: 
+    displayName: rubber_duck
+    iconResourcePath: Characters/food/rubber_duck
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: rubber_ducktopus
-    displayName: 
-    iconResourcePath: 
+    displayName: rubber_ducktopus
+    iconResourcePath: Characters/food/rubber_ducktopus
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: salmon
-    displayName: 
-    iconResourcePath: 
+    displayName: salmon
+    iconResourcePath: Characters/food/salmon
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: salmon_p
-    displayName: 
-    iconResourcePath: 
+    displayName: salmon_p
+    iconResourcePath: Characters/food/salmon_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: salt
-    displayName: 
-    iconResourcePath: 
+    displayName: salt
+    iconResourcePath: Characters/food/salt
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: sausage_p
-    displayName: 
-    iconResourcePath: 
+    displayName: sausage_p
+    iconResourcePath: Characters/food/sausage_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: food_medium
+    useDuration: 1.8
+    useEffects:
+    - type: Hunger
+      value: 22
   - itemId: scissors
-    displayName: 
-    iconResourcePath: 
+    displayName: scissors
+    iconResourcePath: Characters/food/scissors
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: scissors_p
-    displayName: 
-    iconResourcePath: 
+    displayName: scissors_p
+    iconResourcePath: Characters/food/scissors_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: scrub_brush
-    displayName: 
-    iconResourcePath: 
+    displayName: scrub_brush
+    iconResourcePath: Characters/food/scrub_brush
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: scrub_sponge
-    displayName: 
-    iconResourcePath: 
+    displayName: scrub_sponge
+    iconResourcePath: Characters/food/scrub_sponge
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: shampoo
-    displayName: 
-    iconResourcePath: 
+    displayName: shampoo
+    iconResourcePath: Characters/food/shampoo
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: sliced_bread_p
-    displayName: 
-    iconResourcePath: 
+    displayName: sliced_bread_p
+    iconResourcePath: Characters/food/sliced_bread_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: food_small
+    useDuration: 1.2
+    useEffects:
+    - type: Hunger
+      value: 12
   - itemId: snack1
-    displayName: 
-    iconResourcePath: 
+    displayName: snack1
+    iconResourcePath: Characters/food/snack1
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: snack_salty
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 14
+    - type: Thirst
+      value: -4
   - itemId: snack2
-    displayName: 
-    iconResourcePath: 
+    displayName: snack2
+    iconResourcePath: Characters/food/snack2
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: snack_sweet
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 12
+    - type: Thirst
+      value: -2
   - itemId: soap
-    displayName: 
-    iconResourcePath: 
+    displayName: soap
+    iconResourcePath: Characters/food/soap
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: soap_box
-    displayName: 
-    iconResourcePath: 
+    displayName: soap_box
+    iconResourcePath: Characters/food/soap_box
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: soft_drink_blue
-    displayName: 
-    iconResourcePath: 
+    displayName: soft_drink_blue
+    iconResourcePath: Characters/food/soft_drink_blue
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
+    - consumable
+    - drink
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: drink_medium
+    useDuration: 1.4
+    useEffects:
+    - type: Thirst
+      value: 30
   - itemId: soft_drink_green
-    displayName: 
-    iconResourcePath: 
+    displayName: soft_drink_green
+    iconResourcePath: Characters/food/soft_drink_green
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
+    - consumable
+    - drink
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: drink_medium
+    useDuration: 1.4
+    useEffects:
+    - type: Thirst
+      value: 30
   - itemId: soft_drink_red
-    displayName: 
-    iconResourcePath: 
+    displayName: soft_drink_red
+    iconResourcePath: Characters/food/soft_drink_red
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
+    - consumable
+    - drink
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: drink_medium
+    useDuration: 1.4
+    useEffects:
+    - type: Thirst
+      value: 30
   - itemId: soft_drink_yellow
-    displayName: 
-    iconResourcePath: 
+    displayName: soft_drink_yellow
+    iconResourcePath: Characters/food/soft_drink_yellow
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
+    - consumable
+    - drink
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: drink_medium
+    useDuration: 1.4
+    useEffects:
+    - type: Thirst
+      value: 30
   - itemId: spatula
-    displayName: 
-    iconResourcePath: 
+    displayName: spatula
+    iconResourcePath: Characters/food/spatula
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: spatula_p
-    displayName: 
-    iconResourcePath: 
+    displayName: spatula_p
+    iconResourcePath: Characters/food/spatula_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: strawberry
-    displayName: 
-    iconResourcePath: 
+    displayName: strawberry
+    iconResourcePath: Characters/food/strawberry
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
+    - drink
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: fruit_small
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 7
+    - type: Thirst
+      value: 5
   - itemId: strawberry_ice_cream
-    displayName: 
-    iconResourcePath: 
+    displayName: strawberry_ice_cream
+    iconResourcePath: Characters/food/strawberry_ice_cream
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: snack_sweet
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 12
+    - type: Thirst
+      value: -2
   - itemId: strawberry_jam
-    displayName: 
-    iconResourcePath: 
+    displayName: strawberry_jam
+    iconResourcePath: Characters/food/strawberry_jam
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: snack_sweet
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 12
+    - type: Thirst
+      value: -2
   - itemId: strawberry_p
-    displayName: 
-    iconResourcePath: 
+    displayName: strawberry_p
+    iconResourcePath: Characters/food/strawberry_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
+    - drink
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: fruit_small
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 7
+    - type: Thirst
+      value: 5
   - itemId: sugar
-    displayName: 
-    iconResourcePath: 
+    displayName: sugar
+    iconResourcePath: Characters/food/sugar
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: sun_cream_tube
-    displayName: 
-    iconResourcePath: 
+    displayName: sun_cream_tube
+    iconResourcePath: Characters/food/sun_cream_tube
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: teakettle
-    displayName: 
-    iconResourcePath: 
+    displayName: teakettle
+    iconResourcePath: Characters/food/teakettle
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: toilet_paper
-    displayName: 
-    iconResourcePath: 
+    displayName: toilet_paper
+    iconResourcePath: Characters/food/toilet_paper
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: toothbrush
-    displayName: 
-    iconResourcePath: 
+    displayName: toothbrush
+    iconResourcePath: Characters/food/toothbrush
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: toothbrush_set
-    displayName: 
-    iconResourcePath: 
+    displayName: toothbrush_set
+    iconResourcePath: Characters/food/toothbrush_set
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: toothpaste
-    displayName: 
-    iconResourcePath: 
+    displayName: toothpaste
+    iconResourcePath: Characters/food/toothpaste
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: toothpaste_box
-    displayName: 
-    iconResourcePath: 
+    displayName: toothpaste_box
+    iconResourcePath: Characters/food/toothpaste_box
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: tuna_can
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
+    displayName: tuna_can
+    iconResourcePath: Characters/food/tuna_can
+    width: 3
+    height: 3
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: food_medium
+    useDuration: 1.8
+    useEffects:
+    - type: Hunger
+      value: 22
   - itemId: vanilla_or_lemon_ice_cream
-    displayName: 
-    iconResourcePath: 
+    displayName: vanilla_or_lemon_ice_cream
+    iconResourcePath: Characters/food/vanilla_or_lemon_ice_cream
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: snack_sweet
+    useDuration: 1
+    useEffects:
+    - type: Hunger
+      value: 12
+    - type: Thirst
+      value: -2
   - itemId: water
-    displayName: 
-    iconResourcePath: 
+    displayName: water
+    iconResourcePath: Characters/food/water
     width: 1
-    height: 1
+    height: 2
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
+    - consumable
+    - drink
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: drink_medium
+    useDuration: 1.4
+    useEffects:
+    - type: Thirst
+      value: 30
   - itemId: watermelon1
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
+    displayName: watermelon1
+    iconResourcePath: Characters/food/watermelon1
+    width: 2
+    height: 2
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
+    - drink
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: fruit_medium
+    useDuration: 1.4
+    useEffects:
+    - type: Hunger
+      value: 12
+    - type: Thirst
+      value: 10
   - itemId: watermelon2
-    displayName: 
-    iconResourcePath: 
-    width: 1
-    height: 1
+    displayName: watermelon2
+    iconResourcePath: Characters/food/watermelon2
+    width: 2
+    height: 2
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
+    - drink
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: fruit_medium
+    useDuration: 1.4
+    useEffects:
+    - type: Hunger
+      value: 12
+    - type: Thirst
+      value: 10
   - itemId: wax
-    displayName: 
-    iconResourcePath: 
+    displayName: wax
+    iconResourcePath: Characters/food/wax
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: wet_wipe
-    displayName: 
-    iconResourcePath: 
+    displayName: wet_wipe
+    iconResourcePath: Characters/food/wet_wipe
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: whisk
-    displayName: 
-    iconResourcePath: 
+    displayName: whisk
+    iconResourcePath: Characters/food/whisk
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: whisk_p
-    displayName: 
-    iconResourcePath: 
+    displayName: whisk_p
+    iconResourcePath: Characters/food/whisk_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
     weight: 0.1
     quality: 0
+    usable: 0
+    useProfile: 
+    useDuration: 0
+    useEffects: []
   - itemId: white_cheese
-    displayName: 
-    iconResourcePath: 
+    displayName: white_cheese
+    iconResourcePath: Characters/food/white_cheese
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: food_small
+    useDuration: 1.2
+    useEffects:
+    - type: Hunger
+      value: 12
   - itemId: white_cheese_p
-    displayName: 
-    iconResourcePath: 
+    displayName: white_cheese_p
+    iconResourcePath: Characters/food/white_cheese_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: food_small
+    useDuration: 1.2
+    useEffects:
+    - type: Hunger
+      value: 12
   - itemId: white_cheese_piece
-    displayName: 
-    iconResourcePath: 
+    displayName: white_cheese_piece
+    iconResourcePath: Characters/food/white_cheese_piece
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: food_small
+    useDuration: 1.2
+    useEffects:
+    - type: Hunger
+      value: 12
   - itemId: white_cheese_piece_p
-    displayName: 
-    iconResourcePath: 
+    displayName: white_cheese_piece_p
+    iconResourcePath: Characters/food/white_cheese_piece_p
     width: 1
     height: 1
     canRotate: 0
     maxStack: 10
     itemTags:
+    - loot
+    - consumable
     - food
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: food_small
+    useDuration: 1.2
+    useEffects:
+    - type: Hunger
+      value: 12
   - itemId: wine_red
-    displayName: 
-    iconResourcePath: 
+    displayName: wine_red
+    iconResourcePath: Characters/food/wine_red
     width: 1
-    height: 1
+    height: 3
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
+    - consumable
+    - drink
+    - alcohol
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: alcohol
+    useDuration: 1.6
+    useEffects:
+    - type: Hunger
+      value: 4
+    - type: Thirst
+      value: -10
+    - type: Fatigue
+      value: -8
   - itemId: wine_white
-    displayName: 
-    iconResourcePath: 
+    displayName: wine_white
+    iconResourcePath: Characters/food/wine_white
     width: 1
-    height: 1
+    height: 3
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
+    - consumable
+    - drink
+    - alcohol
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: alcohol
+    useDuration: 1.6
+    useEffects:
+    - type: Hunger
+      value: 4
+    - type: Thirst
+      value: -10
+    - type: Fatigue
+      value: -8
   - itemId: wine_white2
-    displayName: 
-    iconResourcePath: 
+    displayName: wine_white2
+    iconResourcePath: Characters/food/wine_white2
     width: 1
-    height: 1
+    height: 3
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
+    - consumable
+    - drink
+    - alcohol
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: alcohol
+    useDuration: 1.6
+    useEffects:
+    - type: Hunger
+      value: 4
+    - type: Thirst
+      value: -10
+    - type: Fatigue
+      value: -8
   - itemId: wine_white3
-    displayName: 
-    iconResourcePath: 
+    displayName: wine_white3
+    iconResourcePath: Characters/food/wine_white3
     width: 1
-    height: 1
+    height: 3
     canRotate: 0
     maxStack: 10
     itemTags:
-    - food
+    - loot
+    - consumable
+    - drink
+    - alcohol
     weight: 0.1
     quality: 0
+    usable: 1
+    useProfile: alcohol
+    useDuration: 1.6
+    useEffects:
+    - type: Hunger
+      value: 4
+    - type: Thirst
+      value: -10
+    - type: Fatigue
+      value: -8
   itemDefinitionsJson: {fileID: 0}
   preferJsonItemDefinitions: 1
   loadEditorItemNodesOnStart: 1
@@ -42029,6 +43339,104 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1222403703}
   m_CullTransparentMesh: 1
+--- !u!1 &1223301211
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1223301212}
+  - component: {fileID: 1223301215}
+  - component: {fileID: 1223301214}
+  - component: {fileID: 1223301213}
+  m_Layer: 5
+  m_Name: UseProgress
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1223301212
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223301211}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 949359185}
+  - {fileID: 689553072}
+  m_Father: {fileID: 603252940301949673}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1223301213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223301211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 180
+  m_PreferredHeight: 30
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
+--- !u!114 &1223301214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223301211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.035, g: 0.035, b: 0.035, a: 0.92}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1223301215
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223301211}
+  m_CullTransparentMesh: 1
 --- !u!1 &1245352158
 GameObject:
   m_ObjectHideFlags: 0
@@ -43148,6 +44556,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1369663124}
   - component: {fileID: 1369663125}
+  - component: {fileID: 1369663126}
   m_Layer: 0
   m_Name: Core_Inventory
   m_TagString: Untagged
@@ -43183,6 +44592,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridInventoryService: {fileID: 1088768162}
+--- !u!114 &1369663126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369663123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841153bfaaafe0144b9a61dd75959c61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridInventoryService: {fileID: 1088768162}
+  survivalSystem: {fileID: 592113588}
+  resultMessageDuration: 1.8
 --- !u!1 &1374035447
 GameObject:
   m_ObjectHideFlags: 0
@@ -145825,6 +147249,85 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1989984615
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1989984616}
+  - component: {fileID: 1989984618}
+  - component: {fileID: 1989984617}
+  m_Layer: 5
+  m_Name: Text (Legacy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1989984616
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989984615}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 303359454}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1989984617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989984615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\u4F7F\u7528"
+--- !u!222 &1989984618
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989984615}
+  m_CullTransparentMesh: 1
 --- !u!1 &2003790160
 GameObject:
   m_ObjectHideFlags: 0
@@ -145981,6 +147484,9 @@ MonoBehaviour:
   gridBackgroundColor: {r: 0.1, g: 0.1, b: 0.1, a: 0.75}
   currentContainerId: loot_39c7005957a8
   toggleKey: 9
+  itemUseService: {fileID: 0}
+  itemUseStatusText: {fileID: 0}
+  itemUseProgressFill: {fileID: 0}
   cellSize: 36
   cellSpacing: 2
   panelAnchoredPosition: {x: 28, y: -28}
@@ -148134,6 +149640,30 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2545544037951024817, guid: e31ee520f2dbcfe4db26a9449b12fa59, type: 3}
+      propertyPath: itemUseService
+      value: 
+      objectReference: {fileID: 1369663126}
+    - target: {fileID: 2545544037951024817, guid: e31ee520f2dbcfe4db26a9449b12fa59, type: 3}
+      propertyPath: itemUseStatusText
+      value: 
+      objectReference: {fileID: 689553073}
+    - target: {fileID: 2545544037951024817, guid: e31ee520f2dbcfe4db26a9449b12fa59, type: 3}
+      propertyPath: itemUseProgressFill
+      value: 
+      objectReference: {fileID: 949359186}
+    - target: {fileID: 2545544037951024817, guid: e31ee520f2dbcfe4db26a9449b12fa59, type: 3}
+      propertyPath: occupiedCellColor.b
+      value: 0.028301895
+      objectReference: {fileID: 0}
+    - target: {fileID: 2545544037951024817, guid: e31ee520f2dbcfe4db26a9449b12fa59, type: 3}
+      propertyPath: occupiedCellColor.g
+      value: 0.028301895
+      objectReference: {fileID: 0}
+    - target: {fileID: 2545544037951024817, guid: e31ee520f2dbcfe4db26a9449b12fa59, type: 3}
+      propertyPath: occupiedCellColor.r
+      value: 0.028301895
+      objectReference: {fileID: 0}
+    - target: {fileID: 2545544037951024817, guid: e31ee520f2dbcfe4db26a9449b12fa59, type: 3}
       propertyPath: gridInventoryService
       value: 
       objectReference: {fileID: 1088768162}
@@ -148375,9 +149905,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6883422522067729913, guid: e31ee520f2dbcfe4db26a9449b12fa59, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 303359454}
+    - targetCorrespondingSourceObject: {fileID: 6883422522067729913, guid: e31ee520f2dbcfe4db26a9449b12fa59, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1223301212}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e31ee520f2dbcfe4db26a9449b12fa59, type: 3}
+--- !u!224 &603252940301949673 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6883422522067729913, guid: e31ee520f2dbcfe4db26a9449b12fa59, type: 3}
+  m_PrefabInstance: {fileID: 603252940301949672}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2681658288889701223
 PrefabInstance:
   m_ObjectHideFlags: 0

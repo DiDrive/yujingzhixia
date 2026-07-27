@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\Gameplay\Combat\WeaponDefinition.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridItemDefinition.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Zombie\EnemyHealth2D.cs" />
+    <Compile Include="Assets\Scripts\Survival\ConsumableItemUseService.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Shelter\ShelterModuleService.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Loot\SearchableLootRuntimeStateStore.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Map\FloorLayerUtility.cs" />

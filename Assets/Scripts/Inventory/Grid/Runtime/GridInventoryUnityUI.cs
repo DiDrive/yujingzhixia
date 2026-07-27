@@ -83,6 +83,13 @@ public class GridInventoryUnityUI : MonoBehaviour
     [SerializeField] private string currentContainerId = "main_bag";
     [Tooltip("背包界面开关按键。默认 Tab。")]
     [SerializeField] private KeyCode toggleKey = KeyCode.Tab;
+    [Header("Item Use")]
+    [Tooltip("场景中的消耗品使用服务。为空时运行时只查找已有组件，不会自动创建。")]
+    [SerializeField] private ConsumableItemUseService itemUseService;
+    [Tooltip("编辑器中可调整的使用状态文字，例如“正在使用罐头 50%”。")]
+    [SerializeField] private Text itemUseStatusText;
+    [Tooltip("编辑器中可调整的使用进度填充图片。Image Type 应设置为 Filled。")]
+    [SerializeField] private Image itemUseProgressFill;
     [Header("Sizing")]
     [Tooltip("单个背包格子的像素尺寸。数值越大背包越大；常用范围 36-56。")]
     [SerializeField] private float cellSize = 44f;
@@ -333,6 +340,7 @@ public class GridInventoryUnityUI : MonoBehaviour
         RefreshItems();
         RefreshGridColors();
         RefreshTitle();
+        RefreshItemUseStatus();
         UpdateToolRootPosition();
     }
 
@@ -343,6 +351,7 @@ public class GridInventoryUnityUI : MonoBehaviour
         ResolvePrebuiltSideContainerState();
         if (gridInventoryService == null) gridInventoryService = FindObjectOfType<GridInventoryService>();
         if (gridInventoryService == null) return false;
+        if (itemUseService == null) itemUseService = FindObjectOfType<ConsumableItemUseService>();
         gridInventoryService.EnsureInitialized();
         NormalizeToolbarSettings();
         ApplyCompactLayoutDefaults();
@@ -880,6 +889,13 @@ public class GridInventoryUnityUI : MonoBehaviour
         }
 
         if (actionHandled) return;
+
+        var useButton = CreateButton(actionRoot, "使用", new Vector2(86f, 28f), new Vector2(actionX, -2f), () =>
+        {
+            ExecuteUseSelected();
+        });
+        actionButtons.Add(useButton.gameObject);
+        actionX += 92f;
 
         var rotateButton = CreateButton(actionRoot, "旋转", new Vector2(86f, 28f), new Vector2(actionX, -2f), () =>
         {
@@ -2078,6 +2094,12 @@ public class GridInventoryUnityUI : MonoBehaviour
                 boundCount++;
                 continue;
             }
+            if (IsUseToken(token))
+            {
+                button.onClick.AddListener(ExecuteUseSelected);
+                boundCount++;
+                continue;
+            }
             if (IsRemoveToken(token))
             {
                 button.onClick.AddListener(ExecuteRemoveSelected);
@@ -2144,6 +2166,11 @@ public class GridInventoryUnityUI : MonoBehaviour
     private bool IsRotateToken(string token)
     {
         return token.Contains("rotate") || token.Contains("旋转");
+    }
+
+    private bool IsUseToken(string token)
+    {
+        return token.Contains("use") || token.Contains("consume") || token.Contains("使用");
     }
 
     private bool IsRemoveToken(string token)
@@ -2274,6 +2301,42 @@ public class GridInventoryUnityUI : MonoBehaviour
     {
         if (string.IsNullOrWhiteSpace(selectedInstanceId)) return;
         gridInventoryService.TryRotate(selectedInstanceId);
+    }
+
+    /// <summary>请求使用当前选中的玩家背包物品；具体计时、效果和扣除由消耗品服务统一处理。</summary>
+    private void ExecuteUseSelected()
+    {
+        if (string.IsNullOrWhiteSpace(selectedInstanceId) || !CanInteractWithItem(selectedInstanceId)) return;
+        if (itemUseService == null) itemUseService = FindObjectOfType<ConsumableItemUseService>();
+        if (itemUseService == null)
+        {
+            if (itemUseStatusText != null) itemUseStatusText.text = "未找到消耗品使用服务";
+            return;
+        }
+
+        itemUseService.TryBeginUse(selectedInstanceId, out _);
+        RefreshItemUseStatus();
+    }
+
+    /// <summary>把场景中已有的状态文字和 Filled Image 同步为当前使用进度。</summary>
+    private void RefreshItemUseStatus()
+    {
+        if (itemUseService == null)
+        {
+            if (itemUseProgressFill != null) itemUseProgressFill.fillAmount = 0f;
+            return;
+        }
+
+        if (itemUseStatusText != null) itemUseStatusText.text = itemUseService.StatusMessage;
+        if (itemUseProgressFill != null)
+        {
+            var progress = itemUseService.IsUsing ? itemUseService.Progress : 0f;
+            itemUseProgressFill.fillAmount = progress;
+
+            // 同时收缩 RectTransform，保证没有指定 Sprite 时进度条也会按比例改变宽度。
+            var fillRect = itemUseProgressFill.rectTransform;
+            fillRect.anchorMax = new Vector2(progress, fillRect.anchorMax.y);
+        }
     }
 
     private void ExecuteRemoveSelected()

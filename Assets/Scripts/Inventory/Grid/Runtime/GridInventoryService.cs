@@ -11,6 +11,8 @@ public class GridInventoryService : MonoBehaviour
     [Serializable]
     private class ItemDefinitionJsonTable
     {
+        public List<GridItemUseProfile> useProfiles = new();
+        public List<GridItemUseProfileAssignment> itemUseProfileAssignments = new();
         public List<GridItemDefinition> items = new();
     }
 
@@ -727,6 +729,33 @@ public class GridInventoryService : MonoBehaviour
         return itemDefinitionById.TryGetValue(itemId, out definition);
     }
 
+    /// <summary>判断指定实例是否位于玩家拥有的背包或口袋中。</summary>
+    public bool IsPlayerOwnedInstance(string instanceId)
+    {
+        return itemInstanceById.TryGetValue(instanceId, out var instance) &&
+               IsPlayerContainer(instance.containerId);
+    }
+
+    /// <summary>
+    /// 从指定物品实例中精确扣除数量。用于“使用选中物品”，避免错误扣到同类的另一组堆叠。
+    /// </summary>
+    public bool TryConsumeFromInstance(string instanceId, int amount)
+    {
+        if (string.IsNullOrWhiteSpace(instanceId) || amount <= 0) return false;
+        if (!itemInstanceById.TryGetValue(instanceId, out var instance)) return false;
+        if (!IsPlayerContainer(instance.containerId) || instance.stackCount < amount) return false;
+
+        instance.stackCount -= amount;
+        if (instance.stackCount <= 0)
+        {
+            RemoveInstanceInternal(instanceId);
+            return true;
+        }
+
+        itemInstanceById[instanceId] = instance;
+        return true;
+    }
+
     /// <summary>
     /// 检查物品实例是否可以在指定容器的指定位置放置。
     /// </summary>
@@ -1059,14 +1088,80 @@ public class GridInventoryService : MonoBehaviour
         if (table?.items == null || table.items.Count == 0) return false;
         if (replaceExisting) itemDefinitions.Clear();
         var knownIds = new HashSet<string>(itemDefinitions.Select(item => item.itemId));
+        var profileById = BuildUseProfileMap(table.useProfiles);
+        var assignedProfileByItemId = BuildUseProfileAssignmentMap(table.itemUseProfileAssignments);
         for (var i = 0; i < table.items.Count; i++)
         {
             var item = table.items[i];
             if (string.IsNullOrWhiteSpace(item.itemId) || item.width <= 0 || item.height <= 0) continue;
+            item = ResolveItemUseProfile(item, profileById, assignedProfileByItemId);
             if (knownIds.Add(item.itemId)) itemDefinitions.Add(item);
         }
 
         return true;
+    }
+
+    /// <summary>建立使用档案索引，忽略空 ID 和重复项。</summary>
+    private static Dictionary<string, GridItemUseProfile> BuildUseProfileMap(List<GridItemUseProfile> profiles)
+    {
+        var result = new Dictionary<string, GridItemUseProfile>();
+        if (profiles == null) return result;
+        for (var i = 0; i < profiles.Count; i++)
+        {
+            var profile = profiles[i];
+            if (string.IsNullOrWhiteSpace(profile.profileId) || result.ContainsKey(profile.profileId)) continue;
+            result.Add(profile.profileId, profile);
+        }
+        return result;
+    }
+
+    /// <summary>建立物品到使用档案的分配索引。</summary>
+    private static Dictionary<string, string> BuildUseProfileAssignmentMap(List<GridItemUseProfileAssignment> assignments)
+    {
+        var result = new Dictionary<string, string>();
+        if (assignments == null) return result;
+        for (var i = 0; i < assignments.Count; i++)
+        {
+            var assignment = assignments[i];
+            if (string.IsNullOrWhiteSpace(assignment.itemId) ||
+                string.IsNullOrWhiteSpace(assignment.profileId)) continue;
+            result[assignment.itemId] = assignment.profileId;
+        }
+        return result;
+    }
+
+    /// <summary>
+    /// 将通用档案合并进物品定义。物品自身显式填写的 Use Effects 和 Use Duration 优先。
+    /// </summary>
+    private static GridItemDefinition ResolveItemUseProfile(
+        GridItemDefinition item,
+        IReadOnlyDictionary<string, GridItemUseProfile> profileById,
+        IReadOnlyDictionary<string, string> assignedProfileByItemId)
+    {
+        var profileId = item.useProfile;
+        if (string.IsNullOrWhiteSpace(profileId))
+            assignedProfileByItemId.TryGetValue(item.itemId, out profileId);
+        if (string.IsNullOrWhiteSpace(profileId) || !profileById.TryGetValue(profileId, out var profile))
+            return item;
+
+        item.useProfile = profileId;
+        item.usable = true;
+        if (item.useDuration <= 0f) item.useDuration = Mathf.Max(0f, profile.useDuration);
+        if (item.useEffects == null || item.useEffects.Count == 0)
+            item.useEffects = profile.useEffects != null
+                ? new List<GridItemUseEffect>(profile.useEffects)
+                : new List<GridItemUseEffect>();
+
+        item.itemTags ??= new List<string>();
+        if (profile.itemTagsToAdd != null)
+        {
+            for (var i = 0; i < profile.itemTagsToAdd.Count; i++)
+            {
+                var tag = profile.itemTagsToAdd[i];
+                if (!string.IsNullOrWhiteSpace(tag) && !item.itemTags.Contains(tag)) item.itemTags.Add(tag);
+            }
+        }
+        return item;
     }
     /// <summary>
     /// 计算物品定义的占用面积。
