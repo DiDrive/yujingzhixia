@@ -294,7 +294,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 1535939025
   m_SortingLayer: 3
-  m_SortingOrder: -1690
+  m_SortingOrder: -1442
   m_SortAtRoot: 0
 --- !u!114 &666048956592670088
 MonoBehaviour:
@@ -326,7 +326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactKey: 102
-  interactionRange: 0.5
+  interactionRange: 1
   scanInterval: 0.08
   interactionLayers:
     serializedVersion: 2
@@ -335,7 +335,7 @@ MonoBehaviour:
   requireClearLineOfSight: 1
   lineOfSightBlockingLayers:
     serializedVersion: 2
-    m_Bits: 1851392
+    m_Bits: 16384
   lineOfSightOrigin: {fileID: 0}
   inventoryService: {fileID: 0}
   gridInventoryService: {fileID: 0}

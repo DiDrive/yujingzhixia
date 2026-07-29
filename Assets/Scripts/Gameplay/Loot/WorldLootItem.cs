@@ -25,6 +25,7 @@ public class WorldLootItem : MonoBehaviour, IWorldInteractable
     public float InteractionHoldDuration => Mathf.Max(0f, pickupDuration);
     public int InteractionFloorIndex => Mathf.Max(0, floorIndex);
     public Transform InteractionTransform => transform;
+    public Vector2 InteractionLineOfSightPoint => transform.position;
     public string ItemId => itemId;
     public int Quantity => Mathf.Max(1, quantity);
 

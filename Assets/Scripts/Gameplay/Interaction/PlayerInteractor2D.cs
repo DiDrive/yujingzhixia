@@ -19,9 +19,8 @@ public class PlayerInteractor2D : MonoBehaviour
     [Header("Line of Sight (视线阻挡)")]
     [Tooltip("开启后，玩家与目标之间存在墙体碰撞器时，不会显示交互提示，也不能开始或继续搜索。")]
     [SerializeField] private bool requireClearLineOfSight = true;
-    [Tooltip("会阻挡搜索和拾取的物理层。默认包含 Wall、Wall_F0、Wall_F1、Wall_F2；地图墙体碰撞器必须位于这些层之一。")]
-    [SerializeField] private LayerMask lineOfSightBlockingLayers =
-        (1 << 14) | (1 << 18) | (1 << 19) | (1 << 20);
+    [Tooltip("额外阻挡搜索和拾取的物理层。运行时会自动加入玩家当前楼层的 Wall_Fx，并排除其他楼层的 Wall_Fx；通常这里只需保留公共 Wall 层。")]
+    [SerializeField] private LayerMask lineOfSightBlockingLayers = 1 << 14;
     [Tooltip("视线检测的起点。为空时使用玩家 Transform；如果角色碰撞中心与脚底位置差异较大，可指定一个玩家子物体。")]
     [SerializeField] private Transform lineOfSightOrigin;
     [Tooltip("玩家背包服务。为空时运行时自动查找。")]
@@ -167,9 +166,10 @@ public class PlayerInteractor2D : MonoBehaviour
                 var closestPoint = hit.ClosestPoint(transform.position);
                 var distance = (closestPoint - (Vector2)transform.position).sqrMagnitude;
                 if (distance > rangeSqr || distance >= bestDistance) continue;
-                if (!HasClearLineOfSight(closestPoint)) continue;
+                var lineOfSightPoint = GetLineOfSightPoint(candidate, hit);
+                if (!HasClearLineOfSight(lineOfSightPoint)) continue;
                 bestDistance = distance;
-                bestClosestPoint = closestPoint;
+                bestClosestPoint = lineOfSightPoint;
                 bestTarget = candidate;
                 bestBehaviour = candidateBehaviour;
             }
@@ -247,10 +247,11 @@ public class PlayerInteractor2D : MonoBehaviour
                 var closestPoint = collider.ClosestPoint(transform.position);
                 var distance = (closestPoint - (Vector2)transform.position).sqrMagnitude;
                 if (distance > rangeSqr || distance >= bestDistance) continue;
-                if (!HasClearLineOfSight(closestPoint)) continue;
+                var lineOfSightPoint = GetLineOfSightPoint(target, collider);
+                if (!HasClearLineOfSight(lineOfSightPoint)) continue;
 
                 bestDistance = distance;
-                bestClosestPoint = closestPoint;
+                bestClosestPoint = lineOfSightPoint;
                 found = true;
             }
 
@@ -269,17 +270,60 @@ public class PlayerInteractor2D : MonoBehaviour
         return true;
     }
 
-    /// <summary>判断玩家到目标碰撞器最近点的连线是否被指定墙体层阻挡。</summary>
+    /// <summary>
+    /// 优先使用交互物在编辑器中明确设置的视线点。
+    /// 贴墙容器的中心往往位于墙 Collider 内，而最近表面点又可能穿到墙外；
+    /// 独立视线点可以准确表达“玩家应该从哪一侧接触这个容器”。
+    /// </summary>
+    private static Vector2 GetLineOfSightPoint(
+        IWorldInteractable interactable,
+        Collider2D targetCollider)
+    {
+        if (interactable != null)
+            return interactable.InteractionLineOfSightPoint;
+        return targetCollider != null ? targetCollider.ClosestPoint(Vector2.zero) : Vector2.zero;
+    }
+
+    /// <summary>判断玩家到目标内部检测点的连线是否被当前楼层墙体阻挡。</summary>
     private bool HasClearLineOfSight(Vector2 destination)
     {
-        if (!requireClearLineOfSight || lineOfSightBlockingLayers.value == 0) return true;
+        if (!requireClearLineOfSight) return true;
 
         var origin = lineOfSightOrigin != null
             ? (Vector2)lineOfSightOrigin.position
             : (Vector2)transform.position;
         if ((destination - origin).sqrMagnitude <= 0.0001f) return true;
 
-        return Physics2D.Linecast(origin, destination, lineOfSightBlockingLayers).collider == null;
+        var blockingMask = ResolveLineOfSightBlockingMask();
+        if (blockingMask.value == 0) return true;
+        return Physics2D.Linecast(origin, destination, blockingMask).collider == null;
+    }
+
+    /// <summary>
+    /// Inspector 可以保留公共 Wall 和其他自定义阻挡层，但 Wall_Fx 只使用玩家当前楼层。
+    /// 这样一楼搜索不会被二楼墙体投影误挡，同时也兼容旧 Prefab 中曾经勾选全部 Wall_Fx 的配置。
+    /// </summary>
+    private LayerMask ResolveLineOfSightBlockingMask()
+    {
+        var value = lineOfSightBlockingLayers.value;
+
+        for (var layer = 0; layer < 32; layer++)
+        {
+            if (!FloorLayerUtility.IsWallLayer(layer)) continue;
+            var layerName = LayerMask.LayerToName(layer);
+            if (layerName == "Wall") continue;
+            value &= ~(1 << layer);
+        }
+
+        var currentFloor = FloorLayerUtility.GetFloorIndex(transform);
+        if (currentFloor >= 0)
+        {
+            var currentFloorWallLayer = FloorLayerUtility.GetWallLayer(currentFloor);
+            if (currentFloorWallLayer >= 0)
+                value |= 1 << currentFloorWallLayer;
+        }
+
+        return value;
     }
 
     /// <summary>清空失效或被墙体遮挡的当前目标及其搜索进度。</summary>

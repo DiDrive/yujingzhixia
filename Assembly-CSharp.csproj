@@ -91,6 +91,7 @@
     <Compile Include="Assets\Scripts\Gameplay\Zombie\EnemyAttack2D.cs" />
     <Compile Include="Assets\Scripts\Core\EventBus.cs" />
     <Compile Include="Assets\SmallScaleInt\2D Zombie interior Tile pack 1\Example Scene\Scripts\SmoothCameraFollow.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Map\MinimapController.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Zombie\ZombieController2D.cs" />
     <Compile Include="Assets\SmallScaleInt\2D Zombie interior Tile pack 1\Example Scene\Scripts\ZombieAI.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Runtime\GridInventoryRuntimePreview.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Assets\Scripts\Gameplay\Zombie\EnemyMovement2D.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Loot\WorldLootItem.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Player\PlayerCombatController2D.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Map\MinimapRealtimeRenderer.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridItemRotation.cs" />
     <Compile Include="Assets\Scripts\Core\GameplayRuntimeEvents.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Runtime\GridInventoryService.cs" />
@@ -122,6 +124,7 @@
     <Compile Include="Assets\Scripts\Gameplay\Map\FloorTransitionTrigger2D.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Map\FloorRenderOverrideTrigger2D.cs" />
     <Compile Include="Assets\SmallScaleInt\2D Zombie interior Tile pack 1\Example Scene\Scripts\RoofVisibility.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Map\MinimapMarker.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridContainerDefinition.cs" />
   </ItemGroup>
   <ItemGroup>

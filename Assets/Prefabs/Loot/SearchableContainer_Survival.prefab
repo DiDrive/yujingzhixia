@@ -30,7 +30,8 @@ Transform:
   m_LocalPosition: {x: 18.5, y: 17.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4617506520266101615}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &5369853790760794066
@@ -93,6 +94,7 @@ MonoBehaviour:
   persistentId: 
   displayName: "\u7269\u8D44\u5BB9\u5668"
   floorIndex: 0
+  interactionLineOfSightPoint: {fileID: 4617506520266101615}
   searchDuration: 1.5
   lootTableId: debug_all_items
   minRolls: -1
@@ -115,3 +117,34 @@ MonoBehaviour:
   allowRuntimeUiFallback: 0
   showSceneMarker: 1
   sceneMarkerSize: {x: 0.8, y: 0.8}
+--- !u!1 &8711870978714053820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4617506520266101615}
+  m_Layer: 0
+  m_Name: InteractionPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4617506520266101615
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8711870978714053820}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.26, y: 0.26, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 734859357979618498}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

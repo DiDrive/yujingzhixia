@@ -63,7 +63,9 @@
     <Compile Include="Assets\Scripts\Editor\Loot\LootSystemUnificationMigration.cs" />
     <Compile Include="Assets\Scripts\Editor\Inventory\SyncFoodInventoryItems.cs" />
     <Compile Include="Assets\Scripts\Editor\Inventory\GridInventoryServiceEditor.cs" />
+    <Compile Include="Assets\Scripts\Editor\MapTools\MinimapEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\MapTools\TileSpriteDepthSplitterWindow.cs" />
+    <Compile Include="Assets\Scripts\Editor\MapTools\MinimapRealtimeEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\Inventory\GridInventoryEditorLayoutBuilder.cs" />
     <Compile Include="Assets\Scripts\Editor\CreateAssetBundles.cs" />
     <Compile Include="Assets\Scripts\Editor\MapTools\MapTilemapTools.cs" />

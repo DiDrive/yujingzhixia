@@ -17,6 +17,9 @@ public class SearchableLootContainer : MonoBehaviour, IWorldInteractable
     [Header("Floor")]
     [Tooltip("该容器所在的逻辑楼层。0=一楼，1=二楼，2=三楼。只有玩家当前楼层与此值相同才可搜索。")]
     [Min(0)] [SerializeField] private int floorIndex;
+    [Header("Interaction")]
+    [Tooltip("隔墙检测射向的实际操作点。贴墙容器必须把它放在玩家能够操作的一侧；为空时退回容器 Transform。")]
+    [SerializeField] private Transform interactionLineOfSightPoint;
     [Header("Search")]
     [Tooltip("第一次搜索需要持续按住交互键的秒数。已经搜索过的容器再次打开不需要等待。")]
     [SerializeField] private float searchDuration = 1.5f;
@@ -88,6 +91,10 @@ public class SearchableLootContainer : MonoBehaviour, IWorldInteractable
     public float InteractionHoldDuration => searched ? 0f : Mathf.Max(0f, searchDuration);
     public int InteractionFloorIndex => Mathf.Max(0, floorIndex);
     public Transform InteractionTransform => transform;
+    public Vector2 InteractionLineOfSightPoint =>
+        interactionLineOfSightPoint != null
+            ? (Vector2)interactionLineOfSightPoint.position
+            : (Vector2)transform.position;
     public bool HasBeenSearched => searched;
     public string RuntimeContainerId => runtimeContainerId;
     public string PersistentId => persistentId;
@@ -522,6 +529,11 @@ public class SearchableLootContainer : MonoBehaviour, IWorldInteractable
 
     private void OnDrawGizmos()
     {
+        var sightPoint = InteractionLineOfSightPoint;
+        Gizmos.color = new Color(1f, 0.75f, 0.15f, 0.95f);
+        Gizmos.DrawWireSphere(sightPoint, 0.08f);
+        Gizmos.DrawLine(transform.position, sightPoint);
+
         if (!showSceneMarker) return;
         Gizmos.color = searched
             ? new Color(0.4f, 0.8f, 0.5f, 0.85f)

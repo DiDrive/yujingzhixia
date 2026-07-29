@@ -76,6 +76,20 @@ public class FloorVisibilityController : MonoBehaviour
     private VisibilityMode appliedVisibilityMode;
     private float nextActorRefreshTime;
 
+    /// <summary>
+    /// 当前最终生效的显示模式。没有进入室内区域时使用室外默认模式。
+    /// 小地图相机会读取该状态决定调试信息，但实际画面直接复用本组件处理后的 Renderer 状态。
+    /// </summary>
+    public VisibilityMode CurrentVisibilityMode =>
+        activeIndoorZoneIds.Count > 0 ? visibilityMode : defaultModeWhenNoIndoorZone;
+
+    /// <summary>玩家当前用于楼层显示的逻辑楼层。</summary>
+    public int CurrentFloorIndex =>
+        targetFloorState != null ? Mathf.Max(0, targetFloorState.VisibilityFloorIndex) : 0;
+
+    /// <summary>玩家当前是否处于需要显示室内当前楼层的区域。</summary>
+    public bool IsIndoorFocusActive => CurrentVisibilityMode == VisibilityMode.IndoorFocus;
+
     private void Awake()
     {
         RebuildFloorRendererCache();

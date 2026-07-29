@@ -14,6 +14,11 @@ public interface IWorldInteractable
     int InteractionFloorIndex { get; }
     /// <summary>交互目标在世界中的参考位置。</summary>
     Transform InteractionTransform { get; }
+    /// <summary>
+    /// 玩家视线必须能够到达的世界坐标。
+    /// 对贴墙容器应放在实际可操作的一侧，避免目标中心嵌在墙体中或 Collider 穿墙造成误判。
+    /// </summary>
+    Vector2 InteractionLineOfSightPoint { get; }
     /// <summary>判断指定玩家当前是否可以与该对象交互。</summary>
     bool CanInteract(PlayerInteractor2D interactor);
     /// <summary>执行搜索、拾取或打开等实际交互行为。</summary>
