@@ -93,6 +93,7 @@
     <Compile Include="Assets\SmallScaleInt\2D Zombie interior Tile pack 1\Example Scene\Scripts\SmoothCameraFollow.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Map\MinimapController.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Zombie\ZombieController2D.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Zombie\ZombieCorpseLootController.cs" />
     <Compile Include="Assets\SmallScaleInt\2D Zombie interior Tile pack 1\Example Scene\Scripts\ZombieAI.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Runtime\GridInventoryRuntimePreview.cs" />
     <Compile Include="Assets\Scripts\Gameplay\CameraFollow2D.cs" />

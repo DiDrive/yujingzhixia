@@ -96,9 +96,36 @@ public class SearchableLootContainer : MonoBehaviour, IWorldInteractable
             ? (Vector2)interactionLineOfSightPoint.position
             : (Vector2)transform.position;
     public bool HasBeenSearched => searched;
+    /// <summary>容器已经生成掉落，且当前已没有任何物品。</summary>
+    public bool IsEmpty => populated && gridInventory != null &&
+                           !gridInventory.ItemInstances.Values.Any(item => item.containerId == runtimeContainerId);
     public string RuntimeContainerId => runtimeContainerId;
     public string PersistentId => persistentId;
     public bool IsContainerUiOpen => IsContainerUiOpenInternal();
+
+    /// <summary>
+    /// 把本组件配置成运行时生成的容器（例如僵尸尸体）。调用时组件所在物体应保持未激活，
+    /// 从而确保 Awake/OnEnable 使用新的唯一 ID、楼层和共享场景 UI 完成注册。
+    /// </summary>
+    public void ConfigureRuntime(
+        string uniqueId,
+        string runtimeDisplayName,
+        int runtimeFloorIndex,
+        string runtimeLootTableId,
+        int runtimeRows,
+        int runtimeColumns,
+        GridInventoryUnityUI sharedSceneUi)
+    {
+        persistentId = uniqueId;
+        runtimeContainerId = string.Empty;
+        displayName = string.IsNullOrWhiteSpace(runtimeDisplayName) ? "尸体" : runtimeDisplayName;
+        floorIndex = Mathf.Max(0, runtimeFloorIndex);
+        lootTableId = string.IsNullOrWhiteSpace(runtimeLootTableId) ? "zombie_civilian" : runtimeLootTableId;
+        rows = Mathf.Max(1, runtimeRows);
+        columns = Mathf.Max(1, runtimeColumns);
+        containerUiSceneView = sharedSceneUi;
+        allowRuntimeUiFallback = false;
+    }
 
     private void Awake()
     {

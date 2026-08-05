@@ -41,7 +41,23 @@ public static class FloorLayerUtility
     {
         if (target == null) return -1;
         var state = target.GetComponentInParent<FloorSortingState>();
-        return state != null ? state.ActiveFloorIndex : -1;
+        if (state != null) return state.ActiveFloorIndex;
+
+        // 静态摆放的敌人可能还没有 FloorSortingState，此时从 Actor_Fx 物理层兜底读取楼层。
+        // 这样死亡生成的尸体容器仍能固定在正确楼层，而不是全部落到一楼。
+        var current = target;
+        while (current != null)
+        {
+            var layerName = LayerMask.LayerToName(current.gameObject.layer);
+            if (layerName.StartsWith(ActorLayerPrefix) &&
+                int.TryParse(layerName.Substring(ActorLayerPrefix.Length), out var layerFloor))
+            {
+                return Mathf.Max(0, layerFloor);
+            }
+            current = current.parent;
+        }
+
+        return -1;
     }
 
     public static bool AreOnSameFloor(Transform a, Transform b)

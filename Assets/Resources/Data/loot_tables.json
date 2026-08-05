@@ -45,6 +45,50 @@
       ]
     },
     {
+      "tableId": "zombie_civilian",
+      "minRolls": 1,
+      "maxRolls": 3,
+      "allowDuplicates": false,
+      "entries": [
+        {
+          "itemId": "cloth_raw",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 35
+        },
+        {
+          "itemId": "bandage",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 18
+        },
+        {
+          "itemId": "batteries",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 14
+        },
+        {
+          "itemId": "energy_bar",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 12
+        },
+        {
+          "itemId": "receipt",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 10
+        },
+        {
+          "itemId": "credit_card_1",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 6
+        }
+      ]
+    },
+    {
       "tableId": "medical_basic",
       "minRolls": 1,
       "maxRolls": 3,

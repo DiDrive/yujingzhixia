@@ -2419,6 +2419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridInventoryService: {fileID: 0}
   startOpen: 0
+  deferInitializationUntilBound: 0
   showSpawnTools: 0
   allowSpawnFromEmptyCells: 0
   openOtherContainersAsSidePanels: 1
@@ -2441,6 +2442,9 @@ MonoBehaviour:
   gridBackgroundColor: {r: 0.6603774, g: 0.34470809, b: 0.07787468, a: 0.75}
   currentContainerId: main_bag
   toggleKey: 9
+  itemUseService: {fileID: 0}
+  itemUseStatusText: {fileID: 0}
+  itemUseProgressFill: {fileID: 0}
   cellSize: 56
   cellSpacing: 4
   panelAnchoredPosition: {x: 40, y: -40}
@@ -3075,6 +3079,13 @@ MonoBehaviour:
   - itemId: wine_white3
     icon: {fileID: 21300000, guid: 53da9d0482f024247b24ec2bae0d0b0b, type: 3}
     tint: {r: 1, g: 1, b: 1, a: 1}
+  unrevealedItemMaskColor: {r: 0.045, g: 0.045, b: 0.055, a: 0.98}
+  searchingItemMaskColor: {r: 0.13, g: 0.18, b: 0.22, a: 0.98}
+  itemSearchMaskSprite: {fileID: 0}
+  unrevealedItemText: '?'
+  searchingItemTextFormat: "\u641C\u7D22\u4E2D\n{0:P0}"
+  itemSearchTextColor: {r: 1, g: 1, b: 1, a: 1}
+  itemSearchTextFontSize: 14
   titleTextOverride: {fileID: 1785442229155871668}
   toolbarRootOverride: {fileID: 6401479257314992422}
   spawnRootOverride: {fileID: 8310470913955556275}
@@ -4260,7 +4271,6 @@ GameObject:
   - component: {fileID: 1257847534204634996}
   - component: {fileID: 4204938749993942012}
   - component: {fileID: 1785442229155871668}
-  - component: {fileID: 462192515613484174}
   m_Layer: 0
   m_Name: TitleText
   m_TagString: Untagged
@@ -4329,18 +4339,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u80CC\u5305  [main_bag]  \u672A\u9009\u62E9"
---- !u!114 &462192515613484174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1600362563847619535}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1635586690749890249
 GameObject:
   m_ObjectHideFlags: 0
@@ -8153,7 +8151,6 @@ GameObject:
   - component: {fileID: 3809411150404528687}
   - component: {fileID: 8503044724303357303}
   - component: {fileID: 8368506356135863240}
-  - component: {fileID: 2590513477785937052}
   m_Layer: 5
   m_Name: SpawnItemDropdown
   m_TagString: Untagged
@@ -8582,177 +8579,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_AlphaFadeSpeed: 0.15
---- !u!114 &2590513477785937052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3389875814125458253}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryUi: {fileID: 2545544037951024817}
-  spawnItem: {fileID: 1209661512995579101}
-  previewImage: {fileID: 3218178123943657407}
-  previewLabel: {fileID: 8616235308211854445}
-  itemIds:
-  - food_canned
-  - water_bottle
-  - bandage
-  - cloth_raw
-  - aluminum_foil
-  - american_cheese_p
-  - bacon
-  - baking_powder
-  - ball_pen
-  - banana
-  - bandage_box
-  - barbeque_sauce
-  - basket_metal
-  - basket_yellow
-  - bathroom_cleaner
-  - batteries
-  - bell_pepper
-  - bell_pepper_p
-  - body_lotion
-  - bowl
-  - bubble_gum
-  - butter
-  - butter2
-  - cabbage
-  - cabbage_p
-  - candy_bar
-  - cereal1
-  - cereal2
-  - chopping_board
-  - cleaning_brush
-  - cleaning_gloves
-  - cleaning_gloves_p
-  - coffee_bag
-  - cookies
-  - cooking_oil
-  - credit_card_1
-  - credit_card_2
-  - credit_card_3
-  - detergent
-  - dry_dog_food
-  - egg_box
-  - egg_brown
-  - egg_brown_p
-  - egg_white
-  - egg_white_p
-  - energy_bar
-  - eraser
-  - eraser_p
-  - fish
-  - fish_p
-  - flour
-  - fruit_cocktail_can
-  - frying_pan
-  - frying_pan_p
-  - glue
-  - glue_p
-  - glue_stick
-  - grape_soda
-  - green_apple
-  - green_apple_p
-  - green_grape
-  - green_grape_p
-  - hand_sanitiser
-  - hot_cocoa_mix
-  - jam_strawberry
-  - ketchup
-  - kitchen_knife_set
-  - kitchen_knife_set_p
-  - kitchen_soap
-  - light_bulb
-  - light_bulb_box
-  - marshmallows
-  - meat1
-  - meat1_p
-  - meat2
-  - meat2_p
-  - milk_bottle
-  - milk_chocolate
-  - milk_gallon
-  - milk_pack
-  - milk_plastic
-  - mushroom_white
-  - mushroom_white_p
-  - mustard
-  - olive_oil
-  - orange_juice
-  - paper_bag
-  - peanut_butter
-  - pencil_box
-  - plain_yogurt
-  - potato
-  - potato_p
-  - potatochip_blue
-  - potatochip_green
-  - potatochip_yellow
-  - power_strip_typea
-  - power_strip_typef
-  - receipt
-  - red_apple
-  - red_apple_p
-  - red_grape
-  - red_grape_p
-  - rolling_pin
-  - rubber_duck
-  - rubber_ducktopus
-  - salmon
-  - salmon_p
-  - salt
-  - sausage_p
-  - scissors
-  - scissors_p
-  - scrub_brush
-  - scrub_sponge
-  - shampoo
-  - sliced_bread_p
-  - snack1
-  - snack2
-  - soap
-  - soap_box
-  - soft_drink_blue
-  - soft_drink_green
-  - soft_drink_red
-  - soft_drink_yellow
-  - spatula
-  - spatula_p
-  - strawberry
-  - strawberry_ice_cream
-  - strawberry_jam
-  - strawberry_p
-  - sugar
-  - sun_cream_tube
-  - teakettle
-  - toilet_paper
-  - toothbrush
-  - toothbrush_set
-  - toothpaste
-  - toothpaste_box
-  - tuna_can
-  - vanilla_or_lemon_ice_cream
-  - water
-  - watermelon1
-  - watermelon2
-  - wax
-  - wet_wipe
-  - whisk
-  - whisk_p
-  - white_cheese
-  - white_cheese_p
-  - white_cheese_piece
-  - white_cheese_piece_p
-  - wine_red
-  - wine_white
-  - wine_white2
-  - wine_white3
 --- !u!1 &3404418989846593838
 GameObject:
   m_ObjectHideFlags: 0
@@ -15245,7 +15071,6 @@ GameObject:
   - component: {fileID: 6149192578965052496}
   - component: {fileID: 3218178123943657407}
   - component: {fileID: 1925610844978804551}
-  - component: {fileID: 1209661512995579101}
   m_Layer: 5
   m_Name: SpawnSelectedItem
   m_TagString: Untagged
@@ -15355,18 +15180,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1209661512995579101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6536226849794104605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6648831862450612707
 GameObject:
   m_ObjectHideFlags: 0

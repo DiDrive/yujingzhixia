@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using Gameplay.Combat;
 using UnityEngine;
 
@@ -63,6 +64,8 @@ public class ZombieController2D : MonoBehaviour, IDamageable, global::IHitReceiv
     [Header("Physics")]
     [Tooltip("切换到 Attack/Idle 时是否立刻清零速度，避免出现“攻击时滑动”。")]
     [SerializeField] private bool stopImmediatelyWhenNotChasing = true;
+    [Tooltip("把僵尸刚体切换为 Kinematic，彻底禁止玩家通过普通身体碰撞推动僵尸。AI 移动和武器击退仍由脚本驱动。")]
+    [SerializeField] private bool preventCharacterPushing = true;
     [Tooltip("是否启用受击击退。")]
     [SerializeField] private bool enableKnockback = true;
     [Tooltip("击退强度缩放（将 DamageInfo.Knockback 转成 Rigidbody2D 的冲量）。")]
@@ -96,17 +99,26 @@ public class ZombieController2D : MonoBehaviour, IDamageable, global::IHitReceiv
     private bool hasIsDead;
     private bool hasHitTrigger;
     private bool corpseFadeStarted;
+    private bool corpseFadeBlockedForLoot;
     private ZombieState lastState;
     private float hitStunUntilTime;
+    private float scriptedKnockbackUntilTime;
+    private Vector2 scriptedKnockbackVelocity;
     private Coroutine hitFlashRoutine;
+    private SpriteRenderer[] hitFlashSprites;
+    private Color[] hitFlashOriginalColors;
 
     public ZombieState State { get; private set; } = ZombieState.Idle;
     public Transform Target => target;
+    /// <summary>僵尸第一次进入死亡状态时触发，供尸体掉落等外部系统接入。</summary>
+    public event Action Died;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
+        // Kinematic 刚体仍可由 velocity 驱动和阻挡 Dynamic 玩家，但不会接受玩家碰撞产生的反向冲量。
+        if (preventCharacterPushing && rb != null) rb.bodyType = RigidbodyType2D.Kinematic;
         if (animator == null) animator = GetComponentInChildren<Animator>(true);
         if (movement == null) movement = GetComponent<EnemyMovement2D>();
         // 这里做“自动装配”：你既可以手动拖引用，也可以直接把模块挂在同一个僵尸物体上让它自动找到。
@@ -123,6 +135,11 @@ public class ZombieController2D : MonoBehaviour, IDamageable, global::IHitReceiv
 
         CacheAnimatorParams();
         lastState = State;
+    }
+
+    private void OnEnable()
+    {
+        EnsureUnpushableBodyType();
     }
 
 
@@ -147,8 +164,28 @@ public class ZombieController2D : MonoBehaviour, IDamageable, global::IHitReceiv
     private void FixedUpdate()
     {
         if (State == ZombieState.Dead) return;
+        EnsureUnpushableBodyType();
+
+        // Kinematic 模式下用短时脚本速度表达武器击退，避免依赖 Dynamic 刚体的 AddForce。
+        if (Time.time < scriptedKnockbackUntilTime)
+        {
+            if (rb != null) rb.velocity = scriptedKnockbackVelocity;
+            return;
+        }
+        if (scriptedKnockbackVelocity.sqrMagnitude > 0f)
+        {
+            scriptedKnockbackVelocity = Vector2.zero;
+            if (rb != null) rb.velocity = Vector2.zero;
+        }
         if (Time.time < hitStunUntilTime) return;
         ApplyMovement();
+    }
+
+    /// <summary>防止 Prefab/场景覆盖或其他初始化代码把僵尸重新改回可被推动的 Dynamic 刚体。</summary>
+    private void EnsureUnpushableBodyType()
+    {
+        if (!preventCharacterPushing || rb == null) return;
+        if (rb.bodyType != RigidbodyType2D.Kinematic) rb.bodyType = RigidbodyType2D.Kinematic;
     }
 
     private void EnsureTarget()
@@ -308,12 +345,22 @@ public class ZombieController2D : MonoBehaviour, IDamageable, global::IHitReceiv
         ApplyDamage(hit.Damage);
         if (State == ZombieState.Dead) return;
 
-        if (enableKnockback && rb != null && rb.bodyType == RigidbodyType2D.Dynamic && hit.Knockback > 0f)
+        if (enableKnockback && rb != null && hit.Knockback > 0f)
         {
             var dir = hit.Direction.sqrMagnitude > 0.0001f
                 ? hit.Direction.normalized
                 : ((Vector2)transform.position - hit.SourcePosition).normalized;
-            rb.AddForce(dir * (hit.Knockback * Mathf.Max(0f, knockbackImpulseScale)), ForceMode2D.Impulse);
+            if (preventCharacterPushing || rb.bodyType == RigidbodyType2D.Kinematic)
+            {
+                scriptedKnockbackVelocity = dir * (hit.Knockback * Mathf.Max(0f, knockbackImpulseScale));
+                scriptedKnockbackUntilTime = Time.time + Mathf.Max(0.02f, hitStunSeconds);
+            }
+            else if (rb.bodyType == RigidbodyType2D.Dynamic)
+            {
+                rb.AddForce(
+                    dir * (hit.Knockback * Mathf.Max(0f, knockbackImpulseScale)),
+                    ForceMode2D.Impulse);
+            }
         }
 
         if (hitStunSeconds > 0f) hitStunUntilTime = Mathf.Max(hitStunUntilTime, Time.time + hitStunSeconds);
@@ -328,11 +375,35 @@ public class ZombieController2D : MonoBehaviour, IDamageable, global::IHitReceiv
         State = ZombieState.Dead;
         if (movement != null) movement.enabled = false;
         if (attack != null) attack.enabled = false;
+        scriptedKnockbackVelocity = Vector2.zero;
+        scriptedKnockbackUntilTime = 0f;
         if (rb != null) rb.velocity = Vector2.zero;
         if (col != null) col.enabled = false;
+        // 死亡前若仍处于受击闪红，必须先恢复基础颜色，避免死亡动画和尸体永久继承红色。
+        CancelHitFlashAndRestoreColors();
         if (animator != null && hasIsDead) animator.SetBool(isDeadParam, true);
+        Died?.Invoke();
         StartCorpseFadeIfNeeded(corpseFadeDelaySeconds);
     }
+
+    /// <summary>
+    /// 尸体仍可搜索或仍有物品时阻止自动淡出。尸体容器应在僵尸死亡前调用本方法。
+    /// </summary>
+    public void BlockCorpseFadeForLoot()
+    {
+        corpseFadeBlockedForLoot = true;
+    }
+
+    /// <summary>
+    /// 尸体被搜空并关闭 UI 后恢复淡出。可选择在淡出结束时销毁整个僵尸对象。
+    /// </summary>
+    public void ReleaseCorpseFadeAfterLoot(float delaySeconds, bool destroyWhenFinished)
+    {
+        corpseFadeBlockedForLoot = false;
+        destroyAfterFade = destroyWhenFinished;
+        StartCorpseFadeIfNeeded(Mathf.Max(0f, delaySeconds));
+    }
+    
 
     private void HandleDamaged(float amount)
     {
@@ -344,32 +415,51 @@ public class ZombieController2D : MonoBehaviour, IDamageable, global::IHitReceiv
 
     private void StartHitFlash()
     {
-        if (hitFlashRoutine != null) StopCoroutine(hitFlashRoutine);
+        // 连续受击时先恢复上一次缓存颜色，禁止把“红色”再次缓存成新的基础颜色。
+        CancelHitFlashAndRestoreColors();
+
+        hitFlashSprites = GetComponentsInChildren<SpriteRenderer>(true);
+        if (hitFlashSprites == null || hitFlashSprites.Length == 0) return;
+
+        hitFlashOriginalColors = new Color[hitFlashSprites.Length];
+        for (var i = 0; i < hitFlashSprites.Length; i++)
+        {
+            var sprite = hitFlashSprites[i];
+            hitFlashOriginalColors[i] = sprite != null ? sprite.color : Color.white;
+            if (sprite != null) sprite.color = hitFlashColor;
+        }
+
         hitFlashRoutine = StartCoroutine(HitFlashCoroutine());
     }
 
     private IEnumerator HitFlashCoroutine()
     {
-        var sprites = GetComponentsInChildren<SpriteRenderer>(true);
-        if (sprites == null || sprites.Length == 0) yield break;
-
-        var colors = new Color[sprites.Length];
-        for (var i = 0; i < sprites.Length; i++)
-        {
-            colors[i] = sprites[i] != null ? sprites[i].color : Color.white;
-        }
-
-        for (var i = 0; i < sprites.Length; i++)
-        {
-            if (sprites[i] != null) sprites[i].color = hitFlashColor;
-        }
-
         yield return new WaitForSeconds(Mathf.Max(0.01f, hitFlashDurationSeconds));
+        RestoreHitFlashColors();
+        hitFlashRoutine = null;
+    }
 
-        for (var i = 0; i < sprites.Length; i++)
+    /// <summary>中断受击闪烁并恢复闪烁开始前的 Renderer 颜色。</summary>
+    private void CancelHitFlashAndRestoreColors()
+    {
+        if (hitFlashRoutine != null) StopCoroutine(hitFlashRoutine);
+        hitFlashRoutine = null;
+        RestoreHitFlashColors();
+    }
+
+    private void RestoreHitFlashColors()
+    {
+        if (hitFlashSprites != null && hitFlashOriginalColors != null)
         {
-            if (sprites[i] != null) sprites[i].color = colors[i];
+            var count = Mathf.Min(hitFlashSprites.Length, hitFlashOriginalColors.Length);
+            for (var i = 0; i < count; i++)
+            {
+                if (hitFlashSprites[i] != null) hitFlashSprites[i].color = hitFlashOriginalColors[i];
+            }
         }
+
+        hitFlashSprites = null;
+        hitFlashOriginalColors = null;
     }
 
     private void CacheAnimatorParams()
@@ -385,6 +475,7 @@ public class ZombieController2D : MonoBehaviour, IDamageable, global::IHitReceiv
     private void StartCorpseFadeIfNeeded(float delaySeconds)
     {
         if (!fadeCorpseAfterDeath) return;
+        if (corpseFadeBlockedForLoot) return;
         if (corpseFadeStarted) return;
         corpseFadeStarted = true;
         StartCoroutine(FadeOutSpritesCoroutine(Mathf.Max(0f, delaySeconds)));
