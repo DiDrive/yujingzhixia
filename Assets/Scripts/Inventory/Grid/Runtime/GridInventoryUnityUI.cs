@@ -117,6 +117,8 @@ public class GridInventoryUnityUI : MonoBehaviour
     [Header("Colors")]
     [Tooltip("空格子的显示颜色。")]
     [SerializeField] private Color emptyCellColor = new(0.12f, 0.12f, 0.12f, 0.88f);
+    [Tooltip("尚未解锁格子的颜色。锁格同时会禁用点击、放置和自动整理占用。")]
+    [SerializeField] private Color lockedCellColor = new(0.055f, 0.055f, 0.065f, 0.98f);
     [Tooltip("已被物品占用的格子底色。物品图片会覆盖在上方。")]
     [SerializeField] private Color occupiedCellColor = new(0.2f, 0.3f, 0.42f, 0.9f);
     [Tooltip("当前选中物品的高亮颜色。")]
@@ -535,6 +537,7 @@ public class GridInventoryUnityUI : MonoBehaviour
         toolbarSpacing = source.toolbarSpacing;
         gridTopSpacing = source.gridTopSpacing;
         emptyCellColor = source.emptyCellColor;
+        lockedCellColor = source.lockedCellColor;
         occupiedCellColor = source.occupiedCellColor;
         selectedItemColor = source.selectedItemColor;
         previewValidColor = source.previewValidColor;
@@ -998,6 +1001,7 @@ public class GridInventoryUnityUI : MonoBehaviour
                 var capturedRow = row;
                 var capturedColumn = column;
                 button.onClick.AddListener(() => OnCellClicked(capturedRow, capturedColumn));
+                button.interactable = !gridInventoryService.IsCellLocked(currentContainerId, row, column);
                 cellImages[row, column] = image;
             }
         }
@@ -1012,8 +1016,16 @@ public class GridInventoryUnityUI : MonoBehaviour
         {
             for (var column = 0; column < columns; column++)
             {
+                var locked = gridInventoryService.IsCellLocked(currentContainerId, row, column);
                 var occupied = gridInventoryService.IsCellOccupied(currentContainerId, row, column);
-                var color = occupied ? occupiedCellColor : emptyCellColor;
+                var color = locked ? lockedCellColor : occupied ? occupiedCellColor : emptyCellColor;
+                var button = cellImages[row, column] != null ? cellImages[row, column].GetComponent<Button>() : null;
+                if (button != null) button.interactable = !locked;
+                if (locked)
+                {
+                    cellImages[row, column].color = color;
+                    continue;
+                }
                 if (!string.IsNullOrWhiteSpace(selectedInstanceId) && gridInventoryService.TryGetCellOccupantId(currentContainerId, row, column, out var occupantId) && occupantId == selectedInstanceId)
                 {
                     color = selectedItemColor;

@@ -1781,6 +1781,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridInventoryService: {fileID: 0}
   startOpen: 0
+  deferInitializationUntilBound: 0
   showSpawnTools: 0
   allowSpawnFromEmptyCells: 0
   openOtherContainersAsSidePanels: 0
@@ -1803,6 +1804,9 @@ MonoBehaviour:
   gridBackgroundColor: {r: 0.6603774, g: 0.34470809, b: 0.07787468, a: 0.75}
   currentContainerId: min_bag
   toggleKey: 9
+  itemUseService: {fileID: 0}
+  itemUseStatusText: {fileID: 0}
+  itemUseProgressFill: {fileID: 0}
   cellSize: 56
   cellSpacing: 4
   panelAnchoredPosition: {x: 40, y: -40}
@@ -2287,6 +2291,13 @@ MonoBehaviour:
   - itemId: wine_white3
     icon: {fileID: 21300000, guid: 53da9d0482f024247b24ec2bae0d0b0b, type: 3}
     tint: {r: 1, g: 1, b: 1, a: 1}
+  unrevealedItemMaskColor: {r: 0.045, g: 0.045, b: 0.055, a: 0.98}
+  searchingItemMaskColor: {r: 0.13, g: 0.18, b: 0.22, a: 0.98}
+  itemSearchMaskSprite: {fileID: 0}
+  unrevealedItemText: '?'
+  searchingItemTextFormat: "\u641C\u7D22\u4E2D\n{0:P0}"
+  itemSearchTextColor: {r: 1, g: 1, b: 1, a: 1}
+  itemSearchTextFontSize: 14
   titleTextOverride: {fileID: 4358601440329652786}
   toolbarRootOverride: {fileID: 1426538379178726677}
   spawnRootOverride: {fileID: 3052868807806460569}

@@ -26,6 +26,26 @@ public class WorldInteractionPromptUI : MonoBehaviour
     private float feedbackUntil;
     private RectTransform progressFillRect;
 
+    /// <summary>供编辑器场景构建工具绑定可视节点；所有节点仍保存在场景中，可直接调整样式。</summary>
+    public void Configure(
+        Canvas ownerCanvas,
+        CanvasGroup group,
+        Text prompt,
+        GameObject progress,
+        Image fill,
+        Text progressLabel,
+        Text feedback)
+    {
+        promptCanvas = ownerCanvas;
+        canvasGroup = group;
+        promptText = prompt;
+        progressRoot = progress;
+        progressFill = fill;
+        progressText = progressLabel;
+        feedbackText = feedback;
+        progressFillRect = fill != null ? fill.rectTransform : null;
+    }
+
     private void Awake()
     {
         if (promptCanvas == null) promptCanvas = GetComponent<Canvas>();

@@ -39,6 +39,7 @@ public class GridInventoryService : MonoBehaviour
     private readonly Dictionary<string, GridContainerOwnerType> containerOwnerById = new();
     private readonly Dictionary<string, GridItemDefinition> itemDefinitionById = new();
     private readonly Dictionary<string, GridOccupancyMap> occupancyByContainerId = new();
+    private readonly Dictionary<string, int> unlockedCellCountByContainerId = new();
     private readonly Dictionary<string, GridItemInstance> itemInstanceById = new();
     private readonly Dictionary<string, List<string>> containerItemInstanceIds = new();
 
@@ -174,6 +175,7 @@ public class GridInventoryService : MonoBehaviour
         containerOwnerById.Clear();
         itemDefinitionById.Clear();
         occupancyByContainerId.Clear();
+        unlockedCellCountByContainerId.Clear();
         containerItemInstanceIds.Clear();
         itemInstanceById.Clear();
 
@@ -185,7 +187,11 @@ public class GridInventoryService : MonoBehaviour
 
             containerDefinitionById[definition.containerId] = definition;
             containerOwnerById[definition.containerId] = definition.ownerType;
-            occupancyByContainerId[definition.containerId] = new GridOccupancyMap(definition.rows, definition.columns);
+            var occupancy = new GridOccupancyMap(definition.rows, definition.columns);
+            var unlockedCount = NormalizeUnlockedCellCount(definition.initialUnlockedCellCount, definition.rows, definition.columns);
+            occupancy.SetUnlockedCellCount(unlockedCount);
+            occupancyByContainerId[definition.containerId] = occupancy;
+            unlockedCellCountByContainerId[definition.containerId] = unlockedCount;
             containerItemInstanceIds[definition.containerId] = new List<string>();
         }
 
@@ -480,6 +486,7 @@ public class GridInventoryService : MonoBehaviour
 
         var failedIds = new List<string>();
         occupancyByContainerId[containerId] = new GridOccupancyMap(occupancy.Rows, occupancy.Columns);
+        occupancyByContainerId[containerId].SetUnlockedCellCount(GetUnlockedCellCount(containerId));
         containerItemInstanceIds[containerId].Clear();
         var rebuiltOccupancy = occupancyByContainerId[containerId];
 
@@ -620,7 +627,8 @@ public class GridInventoryService : MonoBehaviour
         int columns,
         GridContainerOwnerType ownerType = GridContainerOwnerType.WorldLoot,
         bool allowNestedContainer = false,
-        List<string> allowedItemTags = null)
+        List<string> allowedItemTags = null,
+        int initialUnlockedCellCount = 0)
     {
         if (string.IsNullOrWhiteSpace(containerId) || rows <= 0 || columns <= 0) return false;
         if (containerDefinitionById.ContainsKey(containerId)) return true;
@@ -630,13 +638,18 @@ public class GridInventoryService : MonoBehaviour
             containerId = containerId,
             rows = rows,
             columns = columns,
+            initialUnlockedCellCount = initialUnlockedCellCount,
             allowNestedContainer = allowNestedContainer,
             allowedItemTags = allowedItemTags ?? new List<string>(),
             ownerType = ownerType
         };
         containerDefinitionById[containerId] = definition;
         containerOwnerById[containerId] = ownerType;
-        occupancyByContainerId[containerId] = new GridOccupancyMap(rows, columns);
+        var occupancy = new GridOccupancyMap(rows, columns);
+        var unlockedCount = NormalizeUnlockedCellCount(initialUnlockedCellCount, rows, columns);
+        occupancy.SetUnlockedCellCount(unlockedCount);
+        occupancyByContainerId[containerId] = occupancy;
+        unlockedCellCountByContainerId[containerId] = unlockedCount;
         containerItemInstanceIds[containerId] = new List<string>();
         return true;
     }
@@ -657,8 +670,25 @@ public class GridInventoryService : MonoBehaviour
         containerDefinitionById.Remove(containerId);
         containerOwnerById.Remove(containerId);
         occupancyByContainerId.Remove(containerId);
+        unlockedCellCountByContainerId.Remove(containerId);
         containerItemInstanceIds.Remove(containerId);
         return true;
+    }
+
+    /// <summary>
+    /// 开始新一局时移除上一张地图留下的搜索容器和尸体容器。
+    /// 玩家背包与基地 Storage 容器不会被清理，因此撤离物资和仓库内容能够跨场景保留。
+    /// </summary>
+    public void ClearTransientWorldContainers()
+    {
+        var transientIds = containerOwnerById
+            .Where(pair => pair.Value == GridContainerOwnerType.WorldLoot ||
+                           pair.Value == GridContainerOwnerType.Corpse)
+            .Select(pair => pair.Key)
+            .ToArray();
+
+        for (var i = 0; i < transientIds.Length; i++)
+            UnregisterRuntimeContainer(transientIds[i], true);
     }
 
     /// <summary>
@@ -689,6 +719,33 @@ public class GridInventoryService : MonoBehaviour
     {
         if (!occupancyByContainerId.TryGetValue(containerId, out var occupancy)) return false;
         return occupancy.IsCellOccupied(row, column);
+    }
+
+    /// <summary>查询指定格子是否尚未解锁。UI、拖放、自动整理共用这一份容量状态。</summary>
+    public bool IsCellLocked(string containerId, int row, int column)
+    {
+        return occupancyByContainerId.TryGetValue(containerId, out var occupancy) && occupancy.IsCellLocked(row, column);
+    }
+
+    /// <summary>获取容器当前已解锁格数；找不到容器时返回 0。</summary>
+    public int GetUnlockedCellCount(string containerId)
+    {
+        return unlockedCellCountByContainerId.TryGetValue(containerId, out var count) ? count : 0;
+    }
+
+    /// <summary>
+    /// 解锁接下来的若干格。基地升级、任务、材料消费等条件系统只需在条件满足后调用此入口。
+    /// </summary>
+    public bool TryUnlockNextCells(string containerId, int cellCount, out int unlockedCellCount)
+    {
+        unlockedCellCount = GetUnlockedCellCount(containerId);
+        if (cellCount <= 0 || !occupancyByContainerId.TryGetValue(containerId, out var occupancy)) return false;
+        var total = occupancy.Rows * occupancy.Columns;
+        if (unlockedCellCount >= total) return false;
+        unlockedCellCount = Mathf.Min(total, unlockedCellCount + cellCount);
+        unlockedCellCountByContainerId[containerId] = unlockedCellCount;
+        occupancy.SetUnlockedCellCount(unlockedCellCount);
+        return true;
     }
 
     /// <summary>
@@ -1171,6 +1228,13 @@ public class GridInventoryService : MonoBehaviour
     private int GetArea(GridItemDefinition definition)
     {
         return Mathf.Max(1, definition.width) * Mathf.Max(1, definition.height);
+    }
+
+    /// <summary>把 Inspector 中的 0（兼容旧数据）解释为全解锁，并限制到有效范围。</summary>
+    private static int NormalizeUnlockedCellCount(int configuredCount, int rows, int columns)
+    {
+        var total = Mathf.Max(0, rows) * Mathf.Max(0, columns);
+        return configuredCount <= 0 ? total : Mathf.Clamp(configuredCount, 1, total);
     }
 
     private int GetItemTypeSortKey(string containerId, string itemId)

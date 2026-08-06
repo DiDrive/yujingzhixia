@@ -82,7 +82,8 @@ public class PlayerSurvivalHUD : MonoBehaviour
 
     private void OnValidate()
     {
-        Refresh();
+        // ExecuteAlways 的 Update 会在下一次编辑器刷新时更新预览。
+        // 不在 OnValidate 内改 RectTransform，避免 Unity 的 CheckConsistency 阶段触发 SendMessage 错误。
     }
 
     /// <summary>
@@ -112,6 +113,10 @@ public class PlayerSurvivalHUD : MonoBehaviour
     /// </summary>
     public void Refresh()
     {
+        // 跨场景切换后，场景 HUD 原来的序列化引用可能指向已清理的重复服务；自动绑定常驻实例。
+        if (Application.isPlaying && survivalSystem == null)
+            survivalSystem = FindObjectOfType<SurvivalSystem>();
+
         if (Application.isPlaying && survivalSystem != null)
         {
             SetRow(hpFill, hpValueText, survivalSystem.HpNormalized, survivalSystem.hp, survivalSystem.MaxHp);

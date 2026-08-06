@@ -65,6 +65,8 @@
     <Compile Include="Assets\Scripts\Gameplay\RuntimeDebugPanel.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Loot\SearchableLootContainer.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Map\ExtractionPoint.cs" />
+    <Compile Include="Assets\Scripts\Core\SceneFlowController.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Shelter\ShelterInteractionPoint.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Map\LootPoint.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Workbench\WorkbenchService.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Loot\LootSpawner.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="Assets\Scripts\Gameplay\Map\MapRegionTrigger.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Map\BuildingVisibilityZone2D.cs" />
     <Compile Include="Assets\Scripts\Inventory\InventoryService.cs" />
+    <Compile Include="Assets\Scripts\Core\PersistentGameServices.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridAutoSortResult.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Combat\WeaponDefinition.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridItemDefinition.cs" />
@@ -126,6 +129,7 @@
     <Compile Include="Assets\Scripts\Gameplay\Map\FloorRenderOverrideTrigger2D.cs" />
     <Compile Include="Assets\SmallScaleInt\2D Zombie interior Tile pack 1\Example Scene\Scripts\RoofVisibility.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Map\MinimapMarker.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Shelter\ShelterSceneController.cs" />
     <Compile Include="Assets\Scripts\Inventory\Grid\Core\GridContainerDefinition.cs" />
   </ItemGroup>
   <ItemGroup>

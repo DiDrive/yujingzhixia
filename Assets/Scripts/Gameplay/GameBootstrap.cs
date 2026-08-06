@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -9,6 +10,9 @@ public class GameBootstrap : MonoBehaviour
     private static void AutoCreateBootstrap()
     {
         if (FindObjectOfType<GameBootstrap>() != null) return;
+        // GameBootstrap 只属于局内地图。基地场景不能自动生成它，否则会错误进入 Raid 阶段并生成局内调试对象。
+        if (FindObjectOfType<ShelterSceneController>() != null) return;
+        if (FindObjectOfType<MapSpawnPoint>() == null && FindObjectOfType<ExtractionPoint>() == null) return;
         var bootstrapObject = new GameObject("GameBootstrap");
         bootstrapObject.AddComponent<GameBootstrap>();
     }
@@ -98,7 +102,12 @@ public class GameBootstrap : MonoBehaviour
     /// <summary>所有场景对象完成 Awake 后，开始本次地图流程并放置玩家。</summary>
     private void Start()
     {
-        BeginMapRun(false);
+        // 每张玩法场景都预摆相同核心预制体；切场景后优先重新绑定上一场景保留下来的权威实例。
+        ResolveCoreReferences();
+        EnsureGridInventorySystems();
+        EnsureLootInteractionSystems();
+        BindRuntimeDebugPanel();
+        BeginMapRun(SceneFlowController.ConsumePendingNewRun());
     }
 
     /// <summary>
@@ -252,7 +261,48 @@ public class GameBootstrap : MonoBehaviour
         Debug.Log(
             $"撤离成功。撤离点={extractionPoint.ExtractionId}，目标流程={extractionPoint.TargetId}，玩家背包已保留。",
             extractionPoint);
+        StartCoroutine(TransitionToShelterAfterDelay());
         return true;
+    }
+
+    /// <summary>给撤离成功提示留出显示时间，然后加载编辑器中预先制作的基地场景。</summary>
+    private IEnumerator TransitionToShelterAfterDelay()
+    {
+        yield return new WaitForSecondsRealtime(Mathf.Max(0.1f, extractionSuccessMessageDuration));
+        if (SceneFlowController.Instance != null)
+        {
+            SceneFlowController.Instance.LoadShelter();
+            yield break;
+        }
+
+        Debug.LogWarning("撤离已完成，但没有找到 SceneFlowController；当前仍停留在局内场景。", this);
+    }
+
+    /// <summary>重新解析会跨场景保留的核心服务。</summary>
+    private void ResolveCoreReferences()
+    {
+        // 场景切换的第一帧，新场景自带的核心副本尚未完成延迟销毁；必须优先使用上一场景保留的实例。
+        var persistent = PersistentGameServices.Instance;
+        if (persistent != null)
+        {
+            gameStateMachine = persistent.GetService<GameStateMachine>() ?? gameStateMachine;
+            survivalSystem = persistent.GetService<SurvivalSystem>() ?? survivalSystem;
+            inventoryService = persistent.GetService<InventoryService>() ?? inventoryService;
+            workbenchService = persistent.GetService<WorkbenchService>() ?? workbenchService;
+            shelterModuleService = persistent.GetService<ShelterModuleService>() ?? shelterModuleService;
+            nightAssaultSystem = persistent.GetService<NightAssaultSystem>() ?? nightAssaultSystem;
+            gridInventoryService = persistent.GetService<GridInventoryService>() ?? gridInventoryService;
+            lootTableDatabase = persistent.GetService<LootTableDatabase>() ?? lootTableDatabase;
+        }
+
+        if (gameStateMachine == null) gameStateMachine = FindSceneObjectOfType<GameStateMachine>();
+        if (survivalSystem == null) survivalSystem = FindSceneObjectOfType<SurvivalSystem>();
+        if (inventoryService == null) inventoryService = FindSceneObjectOfType<InventoryService>();
+        if (workbenchService == null) workbenchService = FindSceneObjectOfType<WorkbenchService>();
+        if (shelterModuleService == null) shelterModuleService = FindSceneObjectOfType<ShelterModuleService>();
+        if (nightAssaultSystem == null) nightAssaultSystem = FindSceneObjectOfType<NightAssaultSystem>();
+        if (gridInventoryService == null) gridInventoryService = FindSceneObjectOfType<GridInventoryService>();
+        if (lootTableDatabase == null) lootTableDatabase = FindSceneObjectOfType<LootTableDatabase>();
     }
 
     /// <summary>

@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\Editor\Inventory\GridInventoryEditorLayoutBuilder.cs" />
     <Compile Include="Assets\Scripts\Editor\CreateAssetBundles.cs" />
     <Compile Include="Assets\Scripts\Editor\MapTools\MapTilemapTools.cs" />
+    <Compile Include="Assets\Scripts\Editor\Shelter\ShelterSceneBuilder.cs" />
     <Compile Include="Assets\Scripts\Editor\Loot\SearchableLootContainerEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\Survival\PlayerSurvivalHUDEditor.cs" />
   </ItemGroup>

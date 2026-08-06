@@ -19,6 +19,8 @@ public struct GridContainerDefinition
     public int rows;
     [PropertyTooltip("容器网格列数。")]
     public int columns;
+    [PropertyTooltip("游戏开始时已解锁的格子数，按从上到下、从左到右的顺序解锁。0 或大于总格数表示全部解锁。")]
+    public int initialUnlockedCellCount;
     [PropertyTooltip("是否允许嵌套容器。")]//是否允许套包
     public bool allowNestedContainer;
     [PropertyTooltip("允许放入的物品标签。为空时不限制。")]

@@ -5,6 +5,7 @@ public sealed class GridOccupancyMap    // 网格占用地图，记录每个格�
 {
     private readonly bool[,] occupied;// 记录每个格子是否被占用
     private readonly string[,] occupantInstanceIds;// 记录每个格子占用的物品实例ID
+    private readonly bool[,] locked;// 锁格属于容量状态，任何放置算法都必须把它当作不可用区域
 
     public int Rows { get; }
     public int Columns { get; }
@@ -20,6 +21,7 @@ public sealed class GridOccupancyMap    // 网格占用地图，记录每个格�
         Columns = Math.Max(0, columns);
         occupied = new bool[Rows, Columns];
         occupantInstanceIds = new string[Rows, Columns];
+        locked = new bool[Rows, Columns];
     }
 
     /// <summary>
@@ -66,6 +68,7 @@ public sealed class GridOccupancyMap    // 网格占用地图，记录每个格�
         {
             for (var column = originColumn; column < originColumn + width; column++)
             {
+                if (locked[row, column]) return false;
                 if (!occupied[row, column]) continue;
                 if (!string.IsNullOrEmpty(ignoreInstanceId) && occupantInstanceIds[row, column] == ignoreInstanceId) continue;
                 return false;
@@ -125,6 +128,38 @@ public sealed class GridOccupancyMap    // 网格占用地图，记录每个格�
     {
         if (!IsInside(row, column)) return false;
         return occupied[row, column];
+    }
+
+    /// <summary>查询一个格子是否因容量尚未解锁而不可用。</summary>
+    public bool IsCellLocked(int row, int column)
+    {
+        return IsInside(row, column) && locked[row, column];
+    }
+
+    /// <summary>
+    /// 按行优先顺序设置已解锁格子数量。锁格不会清除其中已有物品，调用方应只在初始化或安全升级时使用。
+    /// </summary>
+    public void SetUnlockedCellCount(int unlockedCellCount)
+    {
+        var total = Rows * Columns;
+        var normalized = unlockedCellCount <= 0 ? total : Math.Min(unlockedCellCount, total);
+        for (var row = 0; row < Rows; row++)
+        {
+            for (var column = 0; column < Columns; column++)
+            {
+                locked[row, column] = row * Columns + column >= normalized;
+            }
+        }
+    }
+
+    /// <summary>返回当前已解锁格子的数量。</summary>
+    public int GetUnlockedCellCount()
+    {
+        var count = 0;
+        for (var row = 0; row < Rows; row++)
+        for (var column = 0; column < Columns; column++)
+            if (!locked[row, column]) count++;
+        return count;
     }
 
     public string GetCellOccupantId(int row, int column)
