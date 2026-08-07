@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Editor\Loot\LootSystemUnificationMigration.cs" />
+    <Compile Include="Assets\Scripts\Editor\Shelter\ShelterSceneControllerEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\Inventory\SyncFoodInventoryItems.cs" />
     <Compile Include="Assets\Scripts\Editor\Inventory\GridInventoryServiceEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\MapTools\MinimapEditor.cs" />

@@ -75,7 +75,21 @@ public static class ShelterSceneBuilder
         var corePrefabMissing = AssetDatabase.LoadAssetAtPath<GameObject>(CorePrefabPath) == null;
         var stashPrefabMissing = AssetDatabase.LoadAssetAtPath<GameObject>(StashPrefabPath) == null;
         var startNeedsSetup = !StartSceneContainsPersistentFlow();
-        if (shelterMissing || corePrefabMissing || stashPrefabMissing || startNeedsSetup) BuildAll(false);
+        if (shelterMissing || corePrefabMissing || stashPrefabMissing || startNeedsSetup)
+        {
+            BuildAll(false);
+            return;
+        }
+
+        // 旧仓库预制体没有实体“整理”按钮。脚本更新后自动迁移一次，确保按钮能在 Prefab Mode 中直接调整。
+        var stashPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(StashPrefabPath);
+        var actionRoot = stashPrefab != null ? stashPrefab.transform.Find("toolRoot/ActionToolbar") : null;
+        if (actionRoot != null && actionRoot.GetComponentInChildren<Button>(true) == null)
+        {
+            ReadConfiguredStashSize(out var rows, out var columns);
+            RebuildStashPrefabPreview(rows, columns);
+            AssetDatabase.SaveAssets();
+        }
     }
 
     private static void BuildAll(bool forceShelterRebuild)
@@ -318,6 +332,7 @@ public static class ShelterSceneBuilder
             serialized.FindProperty("showContainerToolbar").boolValue = false;
             serialized.FindProperty("showSpawnTools").boolValue = false;
             serialized.FindProperty("showActionToolbar").boolValue = true;
+            serialized.FindProperty("preferExistingButtons").boolValue = true;
             serialized.ApplyModifiedPropertiesWithoutUndo();
 
             RebuildStashPrefabPreview(root, 12, 16);
@@ -380,6 +395,8 @@ public static class ShelterSceneBuilder
         if (gridRoot == null || cellLayer == null || itemLayer == null || ghostLayer == null || panelRect == null)
             throw new InvalidOperationException("基地仓库预制体的 GridRoot/CellLayer/ItemLayer/GhostLayer 引用不完整。 ");
 
+        EnsureStashActionToolbar(root);
+
         var previousGridSize = gridRoot.sizeDelta;
         var horizontalChrome = Mathf.Max(0f, panelRect.sizeDelta.x - previousGridSize.x);
         var verticalChrome = Mathf.Max(0f, panelRect.sizeDelta.y - previousGridSize.y);
@@ -418,6 +435,50 @@ public static class ShelterSceneBuilder
 
         EditorUtility.SetDirty(root);
         EditorUtility.SetDirty(view);
+    }
+
+    /// <summary>建立编辑器中真实存在的仓库动作栏与整理按钮，运行时只负责绑定点击事件。</summary>
+    private static void EnsureStashActionToolbar(GameObject root)
+    {
+        var toolRoot = root.transform.Find("toolRoot") as RectTransform;
+        var containerToolbar = root.transform.Find("toolRoot/ContainerToolbar");
+        var spawnToolbar = root.transform.Find("toolRoot/SpawnToolbar");
+        var actionRoot = root.transform.Find("toolRoot/ActionToolbar") as RectTransform;
+        if (toolRoot == null || actionRoot == null) return;
+
+        toolRoot.gameObject.SetActive(true);
+        if (containerToolbar != null) containerToolbar.gameObject.SetActive(false);
+        if (spawnToolbar != null) spawnToolbar.gameObject.SetActive(false);
+        actionRoot.gameObject.SetActive(true);
+
+        if (actionRoot.GetComponentInChildren<Button>(true) != null) return;
+        var buttonObject = new GameObject("整理", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Button));
+        buttonObject.layer = root.layer;
+        var buttonRect = buttonObject.GetComponent<RectTransform>();
+        buttonRect.SetParent(actionRoot, false);
+        buttonRect.anchorMin = new Vector2(0f, 1f);
+        buttonRect.anchorMax = new Vector2(0f, 1f);
+        buttonRect.pivot = new Vector2(0f, 1f);
+        buttonRect.sizeDelta = new Vector2(86f, 28f);
+        buttonRect.anchoredPosition = new Vector2(0f, -2f);
+        buttonObject.GetComponent<Image>().color = new Color(0.2f, 0.22f, 0.24f, 0.96f);
+
+        var labelObject = new GameObject("Label", typeof(RectTransform), typeof(CanvasRenderer), typeof(Text));
+        labelObject.layer = root.layer;
+        var labelRect = labelObject.GetComponent<RectTransform>();
+        labelRect.SetParent(buttonRect, false);
+        labelRect.anchorMin = Vector2.zero;
+        labelRect.anchorMax = Vector2.one;
+        labelRect.offsetMin = Vector2.zero;
+        labelRect.offsetMax = Vector2.zero;
+        var label = labelObject.GetComponent<Text>();
+        label.text = "整理";
+        // Unity 2022.3 已将旧 Arial 内置资源更名为 LegacyRuntime.ttf。
+        label.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        label.fontSize = 14;
+        label.alignment = TextAnchor.MiddleCenter;
+        label.color = Color.white;
+        label.raycastTarget = false;
     }
 
     private static void SyncPreviewLayer(RectTransform layer, RectTransform gridRoot, Vector2 size)

@@ -39,6 +39,31 @@ public sealed class ShelterSceneController : MonoBehaviour
     public SurvivalSystem Survival => survivalSystem;
     public ShelterModuleService ShelterModules => shelterModuleService;
 
+    /// <summary>获取测试面板显示用的容器容量状态。</summary>
+    public bool TryGetContainerUnlockStatus(string containerId, out int unlocked, out int total, out int columns)
+    {
+        unlocked = 0;
+        total = 0;
+        columns = 0;
+        if (gridInventoryService == null) ResolveServices();
+        if (gridInventoryService == null || !gridInventoryService.TryGetContainerSize(containerId, out var rows, out columns)) return false;
+        unlocked = gridInventoryService.GetUnlockedCellCount(containerId);
+        total = rows * columns;
+        return true;
+    }
+
+    /// <summary>测试：解锁基地仓库的下一整行。</summary>
+    public void TestUnlockNextStashRow()
+    {
+        TestUnlockNextRow(StashContainerId, "基地仓库");
+    }
+
+    /// <summary>测试：解锁主背包的下一整行。</summary>
+    public void TestUnlockNextMainBagRow()
+    {
+        TestUnlockNextRow("main_bag", "主背包");
+    }
+
     private void Start()
     {
         ResolveServices();
@@ -124,9 +149,34 @@ public sealed class ShelterSceneController : MonoBehaviour
         }
         if (stashUi != null)
         {
-            stashUi.BindToContainer(gridInventoryService, StashContainerId, true, "基地仓库");
+            // 仓库是侧边容器，但需要保留“整理”等动作按钮。
+            stashUi.BindToContainer(gridInventoryService, StashContainerId, true, "基地仓库", true);
             stashUi.SetOpen(false);
         }
+    }
+
+    private void TestUnlockNextRow(string containerId, string displayName)
+    {
+        if (!Application.isPlaying)
+        {
+            Debug.LogWarning($"{displayName}测试解锁只能在 Play Mode 中执行。", this);
+            return;
+        }
+
+        if (gridInventoryService == null) ResolveServices();
+        if (gridInventoryService == null || !gridInventoryService.TryGetContainerSize(containerId, out var rows, out var columns))
+        {
+            Debug.LogWarning($"找不到{displayName}容器：{containerId}。", this);
+            return;
+        }
+
+        if (gridInventoryService.TryUnlockNextCells(containerId, columns, out var unlocked))
+        {
+            Debug.Log($"{displayName}已解锁下一行：{unlocked}/{rows * columns} 格。", this);
+            return;
+        }
+
+        Debug.Log($"{displayName}已经全部解锁：{gridInventoryService.GetUnlockedCellCount(containerId)}/{rows * columns} 格。", this);
     }
 
     private void SpawnAndBindPlayer()

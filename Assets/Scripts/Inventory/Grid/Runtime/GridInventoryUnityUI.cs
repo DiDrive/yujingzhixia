@@ -393,7 +393,7 @@ public class GridInventoryUnityUI : MonoBehaviour
     /// <summary>
     /// 供背包或搜索容器 UI 预制体绑定任意运行时容器。
     /// </summary>
-    public void BindToContainer(GridInventoryService service, string containerId, bool sideContainer = true, string displayTitle = null)
+    public void BindToContainer(GridInventoryService service, string containerId, bool sideContainer = true, string displayTitle = null, bool showActions = false)
     {
         if (service == null || string.IsNullOrWhiteSpace(containerId)) return;
         hasExplicitRuntimeBinding = true;
@@ -402,6 +402,8 @@ public class GridInventoryUnityUI : MonoBehaviour
         gridInventoryService.EnsureInitialized();
         currentContainerId = containerId;
         isSideContainerView = sideContainer;
+        showActionToolbar = showActions;
+        if (showActions) preferExistingButtons = true;
         if (sideContainer)
         {
             openOtherContainersAsSidePanels = false;
@@ -1049,6 +1051,7 @@ public class GridInventoryUnityUI : MonoBehaviour
         if (string.IsNullOrWhiteSpace(currentContainerId)) return;
         if (!gridInventoryService.TryGetContainerSize(currentContainerId, out _, out _)) return;
 
+        RefreshEditorItemNodeVisibility();
         RegisterEditorItemViews();
 
         displayedInstanceIds.Clear();
@@ -1118,6 +1121,8 @@ public class GridInventoryUnityUI : MonoBehaviour
                 }
                 else
                 {
+                    // Destroy 会延迟到帧末，先隐藏可避免跨容器拖放后残留一帧旧图像。
+                    staleView.gameObject.SetActive(false);
                     Destroy(staleView.gameObject);
                 }
             }
@@ -1141,7 +1146,9 @@ public class GridInventoryUnityUI : MonoBehaviour
             if (editorItem == null || editorItem.ContainerId != currentContainerId) continue;
             var instanceId = editorItem.RuntimeInstanceId;
             if (string.IsNullOrWhiteSpace(instanceId) || itemViewByInstanceId.ContainsKey(instanceId)) continue;
+            if (!gridInventoryService.TryGetItemInstance(instanceId, out var runtimeInstance) || runtimeInstance.containerId != currentContainerId) continue;
 
+            editorItem.gameObject.SetActive(true);
             var view = editorItem.GetComponent<GridInventoryUnityUIItem>();
             if (view == null) view = editorItem.gameObject.AddComponent<GridInventoryUnityUIItem>();
             var image = editorItem.GetComponent<Image>();
@@ -1161,6 +1168,26 @@ public class GridInventoryUnityUI : MonoBehaviour
             itemViewByInstanceId[instanceId] = view;
         }
         editorItemViewsRegistered = true;
+    }
+
+    /// <summary>
+    /// 编辑器预摆的 Item_* 节点不会随数据实例跨容器换父节点，因此必须依据运行时 containerId 控制显隐。
+    /// 这能避免物品已经进入仓库，主背包仍显示原节点的视觉残留。
+    /// </summary>
+    private void RefreshEditorItemNodeVisibility()
+    {
+        if (itemLayerRoot == null || gridInventoryService == null) return;
+        var editorItems = itemLayerRoot.GetComponentsInChildren<GridInventoryEditorItem>(true);
+        for (var i = 0; i < editorItems.Length; i++)
+        {
+            var editorItem = editorItems[i];
+            if (editorItem == null || editorItem.ContainerId != currentContainerId) continue;
+            var instanceId = editorItem.RuntimeInstanceId;
+            var shouldShow = !string.IsNullOrWhiteSpace(instanceId) &&
+                             gridInventoryService.TryGetItemInstance(instanceId, out var instance) &&
+                             instance.containerId == currentContainerId;
+            if (editorItem.gameObject.activeSelf != shouldShow) editorItem.gameObject.SetActive(shouldShow);
+        }
     }
 
     public void SnapEditorItemToGrid(GridInventoryEditorItem editorItem)
@@ -1751,6 +1778,19 @@ public class GridInventoryUnityUI : MonoBehaviour
         previewContainerId = null;
         if (activeDragOwner == this) activeDragOwner = null;
         if (previewGhostRect != null) previewGhostRect.gameObject.SetActive(false);
+        RefreshAllOpenViewsAfterTransfer();
+    }
+
+    /// <summary>跨容器移动完成后立即刷新源和目标窗口，不等待各自下一次 Update。</summary>
+    private static void RefreshAllOpenViewsAfterTransfer()
+    {
+        for (var i = ActiveViews.Count - 1; i >= 0; i--)
+        {
+            var view = ActiveViews[i];
+            if (view == null || !view.initialized || view.gridInventoryService == null) continue;
+            view.RefreshItems();
+            view.RefreshGridColors();
+        }
     }
 
     public void HandleSpawnClick(string itemId)
@@ -2095,6 +2135,7 @@ public class GridInventoryUnityUI : MonoBehaviour
             if (string.IsNullOrWhiteSpace(token)) continue;
             if (IsAutoSortToken(token))
             {
+                button.onClick.RemoveListener(ExecuteAutoSort);
                 button.onClick.AddListener(ExecuteAutoSort);
                 hasAutoSortActionButton = true;
                 boundCount++;
@@ -2102,24 +2143,28 @@ public class GridInventoryUnityUI : MonoBehaviour
             }
             if (IsRotateToken(token))
             {
+                button.onClick.RemoveListener(ExecuteRotateSelected);
                 button.onClick.AddListener(ExecuteRotateSelected);
                 boundCount++;
                 continue;
             }
             if (IsUseToken(token))
             {
+                button.onClick.RemoveListener(ExecuteUseSelected);
                 button.onClick.AddListener(ExecuteUseSelected);
                 boundCount++;
                 continue;
             }
             if (IsRemoveToken(token))
             {
+                button.onClick.RemoveListener(ExecuteRemoveSelected);
                 button.onClick.AddListener(ExecuteRemoveSelected);
                 boundCount++;
                 continue;
             }
             if (IsSplitToken(token))
             {
+                button.onClick.RemoveListener(ExecuteSplitOne);
                 button.onClick.AddListener(ExecuteSplitOne);
                 boundCount++;
             }

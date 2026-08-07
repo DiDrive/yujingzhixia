@@ -220,14 +220,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 14692491}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.2588191, w: 0.9659258}
+  m_LocalRotation: {x: -0, y: -0, z: 0.2588191, w: 0.9659258}
   m_LocalPosition: {x: 15.869883, y: 17.964035, z: 0.00065472606}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 958032408}
   - {fileID: 1492883808}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1140179940}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 30}
 --- !u!1 &24548122
 GameObject:
@@ -36579,6 +36579,9 @@ Transform:
   - {fileID: 1457377719}
   - {fileID: 508387481}
   - {fileID: 1862466330}
+  - {fileID: 14692494}
+  - {fileID: 1324177648}
+  - {fileID: 1458263114}
   m_Father: {fileID: 1619414032}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1140179941
@@ -41229,7 +41232,7 @@ Transform:
   m_Children:
   - {fileID: 1394412067}
   - {fileID: 766995825}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1140179940}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 27.985}
 --- !u!1 &1327798307
 GameObject:
@@ -214335,7 +214338,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1140179940}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 27.985}
 --- !u!1 &1460874752
 GameObject:
@@ -245230,6 +245233,7 @@ MonoBehaviour:
   autoAvoidSpawnToolOverlap: 1
   spawnToolSpacing: 8
   emptyCellColor: {r: 0.12, g: 0.12, b: 0.12, a: 0.88}
+  lockedCellColor: {r: 0.055, g: 0.055, b: 0.065, a: 0.98}
   occupiedCellColor: {r: 0.2, g: 0.3, b: 0.42, a: 0.9}
   selectedItemColor: {r: 0.88, g: 0.75, b: 0.33, a: 0.95}
   previewValidColor: {r: 0.25, g: 0.85, b: 0.4, a: 0.45}
@@ -248193,7 +248197,4 @@ SceneRoots:
   - {fileID: 2681658288889701223}
   - {fileID: 1619414032}
   - {fileID: 1013400194}
-  - {fileID: 14692494}
-  - {fileID: 1324177648}
-  - {fileID: 1458263114}
   - {fileID: 8875834496369153554}
