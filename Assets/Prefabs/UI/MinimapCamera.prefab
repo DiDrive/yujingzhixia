@@ -74,7 +74,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294574047
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 0a3f24dcc979953449e677f510a257c2, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: d4a72c1339eb0364cad598605ae5d8ba, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimapCamera: {fileID: 7263106122299786348}
-  targetTexture: {fileID: 8400000, guid: 0a3f24dcc979953449e677f510a257c2, type: 2}
+  targetTexture: {fileID: 8400000, guid: d4a72c1339eb0364cad598605ae5d8ba, type: 2}
   floorVisibilityController: {fileID: 0}
   worldMin: {x: -36, y: -9}
   worldMax: {x: 50, y: 37}

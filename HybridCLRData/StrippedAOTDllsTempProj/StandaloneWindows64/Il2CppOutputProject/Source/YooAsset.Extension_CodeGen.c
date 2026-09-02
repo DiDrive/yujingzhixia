@@ -1,0 +1,300 @@
+﻿#include "pch-c.h"
+#ifndef _MSC_VER
+# include <alloca.h>
+#else
+# include <malloc.h>
+#endif
+
+
+#include "codegen/il2cpp-codegen-metadata.h"
+
+
+
+
+
+extern void AssetReference_get_PackageName_m6C4F3B729C735BE4E2ACC8981D1AA7B023A6EF74 (void);
+extern void AssetReference_get_AssetGUID_mDF5A3A33F57AFBDE1A5A6867C01AA4BB6683054F (void);
+extern void AssetReference_get_Handle_mD0BCD6E8C971F933565842C950F5F1FB783259C2 (void);
+extern void AssetReference_RuntimeKeyIsValid_m1B59EB2353C5DD4C5E5C8A627D93AA74CAA44A30 (void);
+extern void AssetReference_LoadAssetAsync_m764647BDF4FBBBE5F53B3463DBF0F6BF0DDA19B1 (void);
+extern void AssetReference_ReleaseAsset_mD70443BDB24BBE1EA7DD5DFA34FC90F22E4BB076 (void);
+extern void AssetReference__ctor_m5C9C0E99A00797A61E533B80470DE29E75C800AA (void);
+extern void AssetReferenceGameObject_get_AssetType_m650DED733A15E87D5578AD5AC8357C633E4947F5 (void);
+extern void AssetReferenceGameObject__ctor_mC8526ABD66DD6678A47D719C6C015A1A4725D612 (void);
+extern void AssetReferenceSample_Start_m0219C77B186FFD307FB5BCBF5CBB53B9A21A4E6E (void);
+extern void AssetReferenceSample_OnDestroy_m42CD0E97BB5DD9F8E16F1828BD1D0C69B558269B (void);
+extern void AssetReferenceSample__ctor_mB6EF6163EA1C73E076439D2FFD3E2EB17DECF18E (void);
+extern void U3CStartU3Ed__2__ctor_mF06F3A15C70FB8CA78DAEAEBCCD34F2BB0387654 (void);
+extern void U3CStartU3Ed__2_System_IDisposable_Dispose_m1C8D80C47842AC8689E8FCBB8AE5AF747B406BD5 (void);
+extern void U3CStartU3Ed__2_MoveNext_m7332C3B862047828456DCD6305332863D4653D1C (void);
+extern void U3CStartU3Ed__2_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_mD6E859D0D39A29F8BD54B186FD5CF9FEE07D27DA (void);
+extern void U3CStartU3Ed__2_System_Collections_IEnumerator_Reset_m2BF7C01F4D5158F8C74F5A05098357B7A6F04A70 (void);
+extern void U3CStartU3Ed__2_System_Collections_IEnumerator_get_Current_m0D0B44D53E85E7A82B74C405A7EA9CE0AC4E3D3F (void);
+extern void AssetReferenceTexture2D_get_AssetType_mE47051B572979A5461924CDCEA16A9BA224D6F18 (void);
+extern void AssetReferenceTexture2D__ctor_m4515F824615735D692736DA65A25835B945BD5CC (void);
+extern void AssetReferenceTexture3D_get_AssetType_m5C3297D4576BC37B5C5D1959B4DEBB4B0FB34BDC (void);
+extern void AssetReferenceTexture3D__ctor_m13E0CC6C82F34DAF9D373AEFC71CECEA394BE345 (void);
+extern void BundleEncryptionSample_Xor_mA0E5EADBCF42576BD3DBB69C7181C10D99260510 (void);
+extern void MemoryEncryptor_Encrypt_mE603CC28941492928D27D91F3737F689212945FC (void);
+extern void MemoryEncryptor__ctor_m6A558ED47FE9D5D8438285D068FE043FF15F6419 (void);
+extern void MemoryDecryptor_YooAsset_IBundleMemoryDecryptor_GetDecryptedData_m5A9FBE70B26579E03A824AB2C341168F5C52EC9B (void);
+extern void MemoryDecryptor__ctor_mF22ABC31A0D7973F9B9DD47844B24FB30F29D4FC (void);
+extern void OffsetEncryptor_Encrypt_m67DBD754BF445EE8E2254DE459D0F4469F9840B6 (void);
+extern void OffsetEncryptor__ctor_m6F18ED39C090E891EAF18787C36FB90B85865558 (void);
+extern void OffsetDecryptor_YooAsset_IBundleOffsetDecryptor_GetFileOffset_m63C63E5E30ABB14B3F5CB8BF61DED8FFFB240F0F (void);
+extern void OffsetDecryptor__ctor_m3218E25D207C767430F922AD5970FEAA2FBD39CC (void);
+extern void StreamEncryptor_Encrypt_m6FC9C07771CA729F45CCD286BE92608D51E203F7 (void);
+extern void StreamEncryptor__ctor_m4ABC9C76B76275DCE009C311EAD889F7A41CA1FC (void);
+extern void StreamDecryptor_YooAsset_IBundleStreamDecryptor_CreateDecryptionStream_mAEEE51DADC32B7E0B4D9EBD1E2C3039D8BA9CE3C (void);
+extern void StreamDecryptor_YooAsset_IBundleStreamDecryptor_GetBufferSize_m9F918F55BB7F9D0BD8F679BCAFAA8B065F9334FD (void);
+extern void StreamDecryptor__ctor_m982F8F6E777FD59C49236366B34D962C0BB9092D (void);
+extern void XorFileStream__ctor_mFF77020DB954D77A6B238A8786431980F8409EA2 (void);
+extern void XorFileStream_Read_m2BF312F7806E677D8D6C886677623E1095332073 (void);
+extern void CacheRootHelper_GetDefaultCacheRoot_m728C678A502B5A76EE6400365481AD6E4DFDA014 (void);
+extern void CacheRootHelper_get_ManifestFolderName_mD9E32A69848500ABE0CC60AC8C028112A602AF64 (void);
+extern void AssetHandleExtension_WaitForAsyncOperationComplete_mE176E4D6B2FF097946BA219184E5E5E53B24B088 (void);
+extern void HandleBaseExtension_IsSucceed_mB1E2353FBA01C43B902B735304805250B76114E8 (void);
+extern void GetBuildinPackageVersionOperation_set_PackageVersion_m37E950CF1E7EA1CFF9F772939FDCB8AADE48AA18 (void);
+extern void GetBuildinPackageVersionOperation_get_PackageVersion_m22C637CA2A4D41E6A31590E11B08B0F4633FA94B (void);
+extern void GetBuildinPackageVersionOperation__ctor_mAB416F8C6CBC51FF57BA839845EE060205F4476C (void);
+extern void GetBuildinPackageVersionOperation_InternalStart_m81128B926B204662FBDE08C65F7FD6B31132DE13 (void);
+extern void GetBuildinPackageVersionOperation_InternalUpdate_mF79B25D35FD1F6CC071D32BA7C3122FB21EF5D9C (void);
+extern void GetBuildinPackageVersionOperation_InternalDispose_m8EB017912DA12AC2CAB95F865637B70D14510C30 (void);
+extern void GetBuildinPackageVersionOperation_GetBuildinYooRoot_m1F14687B2771556B28F13B766A821E4F8343EF13 (void);
+extern void GetBuildinPackageVersionOperation_GetBuildinPackageVersionFilePath_m72158EA50F7F06BC36A4A302BD19B19D93C11484 (void);
+extern void GetCacheBundleSizeOperation_set_TotalSize_m5CD6C7F614B3396C25B9D542E939C0E1365DDF80 (void);
+extern void GetCacheBundleSizeOperation_get_TotalSize_m0A4753CCDB089D6026CA534948B8AF79E46CF6EF (void);
+extern void GetCacheBundleSizeOperation__ctor_m62D9361B6413139CD3F80E70BE11E5D03E9B91B0 (void);
+extern void GetCacheBundleSizeOperation_InternalStart_m9974D2B9A7C27D0482CCD0F0E59E0384DDE0514E (void);
+extern void GetCacheBundleSizeOperation_InternalUpdate_m1E9FD44F98E7D011D9764E64013095F5A86A4FFE (void);
+extern void GetCacheBundleSizeOperation_GetCacheDirectoryRoot_m862949D7E5BB92DCBF83BE5BD1ED08F1ABA4F31B (void);
+extern void YooAssetsExtension_LoadGameObjectAsync_m02ABD7062296B6EA6E4524A43B575C40417C2D8C (void);
+extern void LoadGameObjectOperation_set_GameObjectInstance_mE2BDC7B2B3CD5CB7406CA9B2AFFE6CA50B499E50 (void);
+extern void LoadGameObjectOperation_get_GameObjectInstance_m1561783B36CB82B416C27EAC718E45D5B7EB36E3 (void);
+extern void LoadGameObjectOperation__ctor_m073248DF0E2EDF9536836665551FA3FCEE357DF6 (void);
+extern void LoadGameObjectOperation_InternalStart_m513B263268334584ADB03605A2133CD377C36DE6 (void);
+extern void LoadGameObjectOperation_InternalUpdate_mBBE10A9C2D1785F020214E4F78E72D4A6DEEF593 (void);
+extern void LoadGameObjectOperation_ReleaseHandle_mC3AF3A45708A08B9F92E58D002BBDA9EB9DF7BD7 (void);
+extern void OperationHelper_StartOperation_m4F868D66FA5F8CFA1E4DBD86B1B8D2E4B467C7C3 (void);
+extern void OperationMonitor_RegisterOperationCallback_m0CD25753FC3DF0C8A74895EA26CD9F789B339EB6 (void);
+extern void SpriteAtlasLoader_Awake_mB1127EB91574C6BE08EAF5D19897B0F01358C965 (void);
+extern void SpriteAtlasLoader_OnDestroy_mE5E572B272F4B3F8FF611EC52463AADE5D089DF3 (void);
+extern void SpriteAtlasLoader_RequestAtlas_m4EFE8CE0363295DCBABEC37A7E8F4CD4B8BE26B5 (void);
+extern void SpriteAtlasLoader__ctor_m63BB6145C290A7F767E3F498B5C75C8C335EC9A8 (void);
+extern void PanelManifest__ctor_m1539C38067ADEF1FEDA979755D87AAC6E25EFDAE (void);
+extern void UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_m9FD9ABB633E947A2E35E389AFD470BFF39E7F28B (void);
+extern void UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_mF96BE171BC0345589E63F5064552015A75D42551 (void);
+static Il2CppMethodPointer s_methodPointers[80] = 
+{
+	AssetReference_get_PackageName_m6C4F3B729C735BE4E2ACC8981D1AA7B023A6EF74,
+	AssetReference_get_AssetGUID_mDF5A3A33F57AFBDE1A5A6867C01AA4BB6683054F,
+	AssetReference_get_Handle_mD0BCD6E8C971F933565842C950F5F1FB783259C2,
+	NULL,
+	AssetReference_RuntimeKeyIsValid_m1B59EB2353C5DD4C5E5C8A627D93AA74CAA44A30,
+	AssetReference_LoadAssetAsync_m764647BDF4FBBBE5F53B3463DBF0F6BF0DDA19B1,
+	AssetReference_ReleaseAsset_mD70443BDB24BBE1EA7DD5DFA34FC90F22E4BB076,
+	AssetReference__ctor_m5C9C0E99A00797A61E533B80470DE29E75C800AA,
+	AssetReferenceGameObject_get_AssetType_m650DED733A15E87D5578AD5AC8357C633E4947F5,
+	AssetReferenceGameObject__ctor_mC8526ABD66DD6678A47D719C6C015A1A4725D612,
+	AssetReferenceSample_Start_m0219C77B186FFD307FB5BCBF5CBB53B9A21A4E6E,
+	AssetReferenceSample_OnDestroy_m42CD0E97BB5DD9F8E16F1828BD1D0C69B558269B,
+	AssetReferenceSample__ctor_mB6EF6163EA1C73E076439D2FFD3E2EB17DECF18E,
+	U3CStartU3Ed__2__ctor_mF06F3A15C70FB8CA78DAEAEBCCD34F2BB0387654,
+	U3CStartU3Ed__2_System_IDisposable_Dispose_m1C8D80C47842AC8689E8FCBB8AE5AF747B406BD5,
+	U3CStartU3Ed__2_MoveNext_m7332C3B862047828456DCD6305332863D4653D1C,
+	U3CStartU3Ed__2_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_mD6E859D0D39A29F8BD54B186FD5CF9FEE07D27DA,
+	U3CStartU3Ed__2_System_Collections_IEnumerator_Reset_m2BF7C01F4D5158F8C74F5A05098357B7A6F04A70,
+	U3CStartU3Ed__2_System_Collections_IEnumerator_get_Current_m0D0B44D53E85E7A82B74C405A7EA9CE0AC4E3D3F,
+	AssetReferenceTexture2D_get_AssetType_mE47051B572979A5461924CDCEA16A9BA224D6F18,
+	AssetReferenceTexture2D__ctor_m4515F824615735D692736DA65A25835B945BD5CC,
+	AssetReferenceTexture3D_get_AssetType_m5C3297D4576BC37B5C5D1959B4DEBB4B0FB34BDC,
+	AssetReferenceTexture3D__ctor_m13E0CC6C82F34DAF9D373AEFC71CECEA394BE345,
+	BundleEncryptionSample_Xor_mA0E5EADBCF42576BD3DBB69C7181C10D99260510,
+	MemoryEncryptor_Encrypt_mE603CC28941492928D27D91F3737F689212945FC,
+	MemoryEncryptor__ctor_m6A558ED47FE9D5D8438285D068FE043FF15F6419,
+	MemoryDecryptor_YooAsset_IBundleMemoryDecryptor_GetDecryptedData_m5A9FBE70B26579E03A824AB2C341168F5C52EC9B,
+	MemoryDecryptor__ctor_mF22ABC31A0D7973F9B9DD47844B24FB30F29D4FC,
+	OffsetEncryptor_Encrypt_m67DBD754BF445EE8E2254DE459D0F4469F9840B6,
+	OffsetEncryptor__ctor_m6F18ED39C090E891EAF18787C36FB90B85865558,
+	OffsetDecryptor_YooAsset_IBundleOffsetDecryptor_GetFileOffset_m63C63E5E30ABB14B3F5CB8BF61DED8FFFB240F0F,
+	OffsetDecryptor__ctor_m3218E25D207C767430F922AD5970FEAA2FBD39CC,
+	StreamEncryptor_Encrypt_m6FC9C07771CA729F45CCD286BE92608D51E203F7,
+	StreamEncryptor__ctor_m4ABC9C76B76275DCE009C311EAD889F7A41CA1FC,
+	StreamDecryptor_YooAsset_IBundleStreamDecryptor_CreateDecryptionStream_mAEEE51DADC32B7E0B4D9EBD1E2C3039D8BA9CE3C,
+	StreamDecryptor_YooAsset_IBundleStreamDecryptor_GetBufferSize_m9F918F55BB7F9D0BD8F679BCAFAA8B065F9334FD,
+	StreamDecryptor__ctor_m982F8F6E777FD59C49236366B34D962C0BB9092D,
+	XorFileStream__ctor_mFF77020DB954D77A6B238A8786431980F8409EA2,
+	XorFileStream_Read_m2BF312F7806E677D8D6C886677623E1095332073,
+	CacheRootHelper_GetDefaultCacheRoot_m728C678A502B5A76EE6400365481AD6E4DFDA014,
+	CacheRootHelper_get_ManifestFolderName_mD9E32A69848500ABE0CC60AC8C028112A602AF64,
+	AssetHandleExtension_WaitForAsyncOperationComplete_mE176E4D6B2FF097946BA219184E5E5E53B24B088,
+	HandleBaseExtension_IsSucceed_mB1E2353FBA01C43B902B735304805250B76114E8,
+	GetBuildinPackageVersionOperation_set_PackageVersion_m37E950CF1E7EA1CFF9F772939FDCB8AADE48AA18,
+	GetBuildinPackageVersionOperation_get_PackageVersion_m22C637CA2A4D41E6A31590E11B08B0F4633FA94B,
+	GetBuildinPackageVersionOperation__ctor_mAB416F8C6CBC51FF57BA839845EE060205F4476C,
+	GetBuildinPackageVersionOperation_InternalStart_m81128B926B204662FBDE08C65F7FD6B31132DE13,
+	GetBuildinPackageVersionOperation_InternalUpdate_mF79B25D35FD1F6CC071D32BA7C3122FB21EF5D9C,
+	GetBuildinPackageVersionOperation_InternalDispose_m8EB017912DA12AC2CAB95F865637B70D14510C30,
+	GetBuildinPackageVersionOperation_GetBuildinYooRoot_m1F14687B2771556B28F13B766A821E4F8343EF13,
+	GetBuildinPackageVersionOperation_GetBuildinPackageVersionFilePath_m72158EA50F7F06BC36A4A302BD19B19D93C11484,
+	GetCacheBundleSizeOperation_set_TotalSize_m5CD6C7F614B3396C25B9D542E939C0E1365DDF80,
+	GetCacheBundleSizeOperation_get_TotalSize_m0A4753CCDB089D6026CA534948B8AF79E46CF6EF,
+	GetCacheBundleSizeOperation__ctor_m62D9361B6413139CD3F80E70BE11E5D03E9B91B0,
+	GetCacheBundleSizeOperation_InternalStart_m9974D2B9A7C27D0482CCD0F0E59E0384DDE0514E,
+	GetCacheBundleSizeOperation_InternalUpdate_m1E9FD44F98E7D011D9764E64013095F5A86A4FFE,
+	GetCacheBundleSizeOperation_GetCacheDirectoryRoot_m862949D7E5BB92DCBF83BE5BD1ED08F1ABA4F31B,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	YooAssetsExtension_LoadGameObjectAsync_m02ABD7062296B6EA6E4524A43B575C40417C2D8C,
+	LoadGameObjectOperation_set_GameObjectInstance_mE2BDC7B2B3CD5CB7406CA9B2AFFE6CA50B499E50,
+	LoadGameObjectOperation_get_GameObjectInstance_m1561783B36CB82B416C27EAC718E45D5B7EB36E3,
+	LoadGameObjectOperation__ctor_m073248DF0E2EDF9536836665551FA3FCEE357DF6,
+	LoadGameObjectOperation_InternalStart_m513B263268334584ADB03605A2133CD377C36DE6,
+	LoadGameObjectOperation_InternalUpdate_mBBE10A9C2D1785F020214E4F78E72D4A6DEEF593,
+	LoadGameObjectOperation_ReleaseHandle_mC3AF3A45708A08B9F92E58D002BBDA9EB9DF7BD7,
+	OperationHelper_StartOperation_m4F868D66FA5F8CFA1E4DBD86B1B8D2E4B467C7C3,
+	OperationMonitor_RegisterOperationCallback_m0CD25753FC3DF0C8A74895EA26CD9F789B339EB6,
+	SpriteAtlasLoader_Awake_mB1127EB91574C6BE08EAF5D19897B0F01358C965,
+	SpriteAtlasLoader_OnDestroy_mE5E572B272F4B3F8FF611EC52463AADE5D089DF3,
+	SpriteAtlasLoader_RequestAtlas_m4EFE8CE0363295DCBABEC37A7E8F4CD4B8BE26B5,
+	SpriteAtlasLoader__ctor_m63BB6145C290A7F767E3F498B5C75C8C335EC9A8,
+	PanelManifest__ctor_m1539C38067ADEF1FEDA979755D87AAC6E25EFDAE,
+	UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_m9FD9ABB633E947A2E35E389AFD470BFF39E7F28B,
+	UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_mF96BE171BC0345589E63F5064552015A75D42551,
+};
+static const int32_t s_InvokerIndices[80] = 
+{
+	7989,
+	7989,
+	7989,
+	0,
+	7877,
+	7989,
+	8133,
+	8133,
+	7989,
+	8133,
+	7989,
+	8133,
+	8133,
+	6414,
+	8133,
+	7877,
+	7989,
+	8133,
+	7989,
+	7989,
+	8133,
+	7989,
+	8133,
+	13734,
+	4097,
+	8133,
+	5681,
+	8133,
+	4097,
+	8133,
+	5617,
+	8133,
+	4097,
+	8133,
+	5681,
+	5329,
+	8133,
+	1234,
+	1490,
+	14580,
+	14580,
+	13408,
+	13148,
+	6459,
+	7989,
+	6459,
+	8133,
+	8133,
+	8133,
+	7989,
+	7989,
+	6415,
+	7957,
+	6459,
+	8133,
+	8133,
+	7989,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	8629,
+	6459,
+	7989,
+	354,
+	8133,
+	8133,
+	8133,
+	12233,
+	14625,
+	8133,
+	8133,
+	3540,
+	8133,
+	8133,
+	14655,
+	8133,
+};
+static const Il2CppTokenRangePair s_rgctxIndices[1] = 
+{
+	{ 0x02000017, { 0, 10 } },
+};
+extern const uint32_t g_rgctx_LoadAssetsByTagOperation_1_t7635C618B55FDAA881CC7C8B2717A70AFC41954B;
+extern const uint32_t g_rgctx_List_1_t0976788546F1559DB4740BE1748E36BFE453A23B;
+extern const uint32_t g_rgctx_IReadOnlyList_1_tB65A753D843DB03D3FAF926565950C78849D8803;
+extern const uint32_t g_rgctx_ESteps_t3AC660BA095F14FD1D342C704F5C05472D2120E3;
+extern const uint32_t g_rgctx_List_1__ctor_m71B6004CBC86B74593960F8232B8D7494DD2A080;
+extern const uint32_t g_rgctx_TObject_t0D8501BB647FD0A19CCF6EB7DB5A412A961B3A31;
+extern const uint32_t g_rgctx_List_1_Add_mAF5CC643A8AA4E8CFD4D0BF9B021C16240F5A54C;
+extern const uint32_t g_rgctx_List_1_Clear_m0AFDD5F5FC55EA7A3CCD1DD7B2492AC72607ADDC;
+extern const uint32_t g_rgctx_LoadAssetsByTagOperation_1_SetFailed_m909E90E08A7121DD7F40AC5568BC31E935367685;
+extern const uint32_t g_rgctx_LoadAssetsByTagOperation_1_SetSucceed_m1AF82F475B0D166C43BBE16D1C43CE5EEF9E5C50;
+static const Il2CppRGCTXDefinition s_rgctxValues[10] = 
+{
+	{ (Il2CppRGCTXDataType)2, (const void *)&g_rgctx_LoadAssetsByTagOperation_1_t7635C618B55FDAA881CC7C8B2717A70AFC41954B },
+	{ (Il2CppRGCTXDataType)2, (const void *)&g_rgctx_List_1_t0976788546F1559DB4740BE1748E36BFE453A23B },
+	{ (Il2CppRGCTXDataType)2, (const void *)&g_rgctx_IReadOnlyList_1_tB65A753D843DB03D3FAF926565950C78849D8803 },
+	{ (Il2CppRGCTXDataType)2, (const void *)&g_rgctx_ESteps_t3AC660BA095F14FD1D342C704F5C05472D2120E3 },
+	{ (Il2CppRGCTXDataType)3, (const void *)&g_rgctx_List_1__ctor_m71B6004CBC86B74593960F8232B8D7494DD2A080 },
+	{ (Il2CppRGCTXDataType)2, (const void *)&g_rgctx_TObject_t0D8501BB647FD0A19CCF6EB7DB5A412A961B3A31 },
+	{ (Il2CppRGCTXDataType)3, (const void *)&g_rgctx_List_1_Add_mAF5CC643A8AA4E8CFD4D0BF9B021C16240F5A54C },
+	{ (Il2CppRGCTXDataType)3, (const void *)&g_rgctx_List_1_Clear_m0AFDD5F5FC55EA7A3CCD1DD7B2492AC72607ADDC },
+	{ (Il2CppRGCTXDataType)3, (const void *)&g_rgctx_LoadAssetsByTagOperation_1_SetFailed_m909E90E08A7121DD7F40AC5568BC31E935367685 },
+	{ (Il2CppRGCTXDataType)3, (const void *)&g_rgctx_LoadAssetsByTagOperation_1_SetSucceed_m1AF82F475B0D166C43BBE16D1C43CE5EEF9E5C50 },
+};
+IL2CPP_EXTERN_C const Il2CppCodeGenModule g_YooAsset_Extension_CodeGenModule;
+const Il2CppCodeGenModule g_YooAsset_Extension_CodeGenModule = 
+{
+	"YooAsset.Extension.dll",
+	80,
+	s_methodPointers,
+	0,
+	NULL,
+	s_InvokerIndices,
+	0,
+	NULL,
+	1,
+	s_rgctxIndices,
+	10,
+	s_rgctxValues,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+};
