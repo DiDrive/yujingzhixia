@@ -12072,7 +12072,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MethodInfoFormatter_1_DeserializeImpleme
 		(L_6)->SetAt(static_cast<il2cpp_array_size_t>(0), (Type_t*)L_8);
 		NullCheck(L_4);
 		Type_t* L_9;
-		L_9 = VirtualFuncInvoker1< Type_t*, TypeU5BU5D_t97234E1129B564EB38B8D85CAC2AD8B5B9522FFB* >::Invoke(118, L_4, L_6);
+		L_9 = VirtualFuncInvoker1< Type_t*, TypeU5BU5D_t97234E1129B564EB38B8D85CAC2AD8B5B9522FFB* >::Invoke(163, L_4, L_6);
 		RuntimeObject* L_10;
 		L_10 = Activator_CreateInstance_mFF030428C64FDDFACC74DFAC97388A1C628BFBCF(L_9, NULL);
 		V_9 = ((RuntimeObject*)Castclass((RuntimeObject*)L_10, il2cpp_rgctx_data(method->klass->rgctx_data, 1)));
@@ -12527,7 +12527,7 @@ IL_0215:
 		Type_t* L_100 = V_2;
 		NullCheck(L_100);
 		String_t* L_101;
-		L_101 = VirtualFuncInvoker0< String_t* >::Invoke(25, L_100);
+		L_101 = VirtualFuncInvoker0< String_t* >::Invoke(31, L_100);
 		NullCheck(L_99);
 		(L_99)->SetAt(static_cast<il2cpp_array_size_t>(5), (String_t*)L_101);
 		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_102 = L_99;
@@ -18705,7 +18705,7 @@ IL_003f:
 		L_10 = Type_GetTypeFromHandle_m6062B81682F79A4D6DF2640692EE6D9987858C57(L_9, NULL);
 		NullCheck(L_10);
 		Type_t* L_11;
-		L_11 = VirtualFuncInvoker0< Type_t* >::Invoke(45, L_10);
+		L_11 = VirtualFuncInvoker0< Type_t* >::Invoke(54, L_10);
 		RuntimeTypeHandle_t332A452B8B6179E4469B69525D0FE82A88030F7B L_12 = { reinterpret_cast<intptr_t> (il2cpp_rgctx_type(InitializedTypeInfo(method->klass)->rgctx_data, 6)) };
 		Type_t* L_13;
 		L_13 = Type_GetTypeFromHandle_m6062B81682F79A4D6DF2640692EE6D9987858C57(L_12, NULL);
@@ -18759,7 +18759,7 @@ IL_00a7:
 		L_29 = Type_GetTypeFromHandle_m6062B81682F79A4D6DF2640692EE6D9987858C57(L_28, NULL);
 		NullCheck(L_29);
 		int32_t L_30;
-		L_30 = VirtualFuncInvoker0< int32_t >::Invoke(46, L_29);
+		L_30 = VirtualFuncInvoker0< int32_t >::Invoke(55, L_29);
 		((MultiDimensionalArrayFormatter_2_tA39B0E4506275A0A07B12195526EB67FFA63292F_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 3)))->___ArrayRank = L_30;
 		int32_t L_31 = ((MultiDimensionalArrayFormatter_2_tA39B0E4506275A0A07B12195526EB67FFA63292F_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 3)))->___ArrayRank;
 		if ((((int32_t)L_31) > ((int32_t)1)))

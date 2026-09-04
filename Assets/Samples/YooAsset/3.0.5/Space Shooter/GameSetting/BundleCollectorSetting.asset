@@ -40,8 +40,16 @@ MonoBehaviour:
       AssetTags: 
       ActiveRuleName: EnableGroup
       Collectors:
-      - CollectPath: Assets/Scenes/StartScene.unity
+      - CollectPath: Assets/Scenes/RaidScene.unity
         CollectorGUID: 9fc0d4010bbf28b4594072e72b8655ab
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+      - CollectPath: Assets/Scenes/ShelterScene.unity
+        CollectorGUID: f79ab168dcb6b7d40ae8a815943a70c6
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory

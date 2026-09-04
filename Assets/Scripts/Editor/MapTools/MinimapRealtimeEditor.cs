@@ -141,7 +141,7 @@ public static class MinimapRealtimeSceneBuilder
     {
         if (EditorApplication.isPlayingOrWillChangePlaymode || BuildPipeline.isBuildingPlayer) return;
         var scene = SceneManager.GetActiveScene();
-        if (!scene.IsValid() || scene.path != "Assets/Scenes/StartScene.unity") return;
+        if (!scene.IsValid() || scene.path != "Assets/Scenes/RaidScene.unity") return;
         if (FindInScene<MinimapController>(scene) == null) return;
         UpgradeActiveScene(true);
     }

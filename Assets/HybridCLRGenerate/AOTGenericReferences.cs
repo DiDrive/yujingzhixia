@@ -5,6 +5,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// {{ AOT assemblies
 	public static readonly IReadOnlyList<string> PatchedAOTAssemblyList = new List<string>
 	{
+		"mscorlib.dll",
 	};
 	// }}
 
@@ -12,6 +13,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// }} 
 
 	// {{ AOT generic types
+	// System.Collections.Generic.IEnumerator<object>
 	// }}
 
 	public void RefMethods()

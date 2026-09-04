@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 [InitializeOnLoad]
 public static class LootSystemUnificationMigration
 {
-    private const string StartScenePath = "Assets/Scenes/StartScene.unity";
+    private const string StartScenePath = "Assets/Scenes/RaidScene.unity";
 
     static LootSystemUnificationMigration()
     {

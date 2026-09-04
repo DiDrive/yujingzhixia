@@ -1,18 +1,11 @@
 <linker>
   <assembly fullname="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="BackgroundScroller" preserve="all" />
     <type fullname="BuildingVisibilityZone2D" preserve="all" />
     <type fullname="CameraFollow2D" preserve="all" />
-    <type fullname="ConsoleToScreen" preserve="all" />
     <type fullname="ConsumableItemUseService" preserve="all" />
     <type fullname="EnemyChaseMovement2D" preserve="all" />
     <type fullname="EnemyHealth2D" preserve="all" />
     <type fullname="EnemyMeleeAttack2D" preserve="all" />
-    <type fullname="EntityAsteroid" preserve="all" />
-    <type fullname="EntityBullet" preserve="all" />
-    <type fullname="EntityEffect" preserve="all" />
-    <type fullname="EntityEnemy" preserve="all" />
-    <type fullname="EntityPlayer" preserve="all" />
     <type fullname="ExtractionPoint" preserve="all" />
     <type fullname="FloorRenderOverrideTrigger2D" preserve="all" />
     <type fullname="FloorSortingState" preserve="all" />
@@ -26,35 +19,29 @@
     <type fullname="GridInventoryService" preserve="all" />
     <type fullname="GridInventoryUnityUI" preserve="all" />
     <type fullname="InventoryService" preserve="all" />
-    <type fullname="LoadDll" preserve="all" />
     <type fullname="LoadFromFile" preserve="all" />
     <type fullname="LootTableDatabase" preserve="all" />
     <type fullname="MapSpawnPoint" preserve="all" />
     <type fullname="MinimapController" preserve="all" />
     <type fullname="MinimapMarker" preserve="all" />
     <type fullname="MinimapRealtimeRenderer" preserve="all" />
-    <type fullname="MyYooAsset" preserve="all" />
     <type fullname="NightAssaultSystem" preserve="all" />
     <type fullname="PersistentGameServices" preserve="all" />
     <type fullname="PlayerCombatController2D" preserve="all" />
     <type fullname="PlayerInteractor2D" preserve="all" />
     <type fullname="PlayerSurvivalHUD" preserve="all" />
-    <type fullname="SceneBattle" preserve="all" />
     <type fullname="SceneFlowController" preserve="all" />
-    <type fullname="SceneHome" preserve="all" />
     <type fullname="SearchableLootContainer" preserve="all" />
+    <type fullname="ShelterInteractionPoint" preserve="all" />
     <type fullname="ShelterModuleService" preserve="all" />
+    <type fullname="ShelterSceneController" preserve="all" />
     <type fullname="SpriteSortByY" preserve="all" />
     <type fullname="SurvivalSystem" preserve="all" />
-    <type fullname="UIBattleWindow" preserve="all" />
-    <type fullname="UIHomeWindow" preserve="all" />
-    <type fullname="UILoadingWindow" preserve="all" />
     <type fullname="WorkbenchService" preserve="all" />
     <type fullname="WorldInteractionPromptUI" preserve="all" />
     <type fullname="WorldLootItem" preserve="all" />
     <type fullname="ZombieController2D" preserve="all" />
     <type fullname="ZombieCorpseLootController" preserve="all" />
-    <type fullname="RoomBoundary" preserve="nothing" serialized="true" />
     <type fullname="GridContainerDefinition" preserve="nothing" serialized="true" />
     <type fullname="GridInventoryUnityUI/GridItemVisual" preserve="nothing" serialized="true" />
     <type fullname="GridItemDefinition" preserve="nothing" serialized="true" />
@@ -65,6 +52,18 @@
     <type fullname="WorkbenchRecipe" preserve="nothing" serialized="true" />
     <type fullname="Gameplay.Combat.MeleeAttackSettings" preserve="nothing" serialized="true" />
     <type fullname="Gameplay.Combat.RangedAttackSettings" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="Unity.Cinemachine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="Unity.Cinemachine.CinemachineBrain" preserve="all" />
+    <type fullname="Unity.Cinemachine.CinemachineCamera" preserve="all" />
+    <type fullname="Unity.Cinemachine.CinemachineShot" preserve="all" />
+    <type fullname="Unity.Cinemachine.CinemachineTrack" preserve="all" />
+    <type fullname="Unity.Cinemachine.CameraTarget" preserve="nothing" serialized="true" />
+    <type fullname="Unity.Cinemachine.CinemachineBlendDefinition" preserve="nothing" serialized="true" />
+    <type fullname="Unity.Cinemachine.CinemachineBrain/LensModeOverrideSettings" preserve="nothing" serialized="true" />
+    <type fullname="Unity.Cinemachine.LensSettings" preserve="nothing" serialized="true" />
+    <type fullname="Unity.Cinemachine.LensSettings/PhysicalSettings" preserve="nothing" serialized="true" />
+    <type fullname="Unity.Cinemachine.PrioritySettings" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="Unity.TextMeshPro, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="TMPro.TextMeshProUGUI" preserve="all" />
@@ -77,27 +76,36 @@
     <type fullname="TMPro.TMP_FontFeatureTable" preserve="nothing" serialized="true" />
     <type fullname="TMPro.TMP_FontWeightPair" preserve="nothing" serialized="true" />
   </assembly>
+  <assembly fullname="Unity.Timeline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.Timeline.AnimationPlayableAsset" preserve="all" />
+    <type fullname="UnityEngine.Timeline.AnimationTrack" preserve="all" />
+    <type fullname="UnityEngine.Timeline.MarkerTrack" preserve="all" />
+    <type fullname="UnityEngine.Timeline.SignalAsset" preserve="all" />
+    <type fullname="UnityEngine.Timeline.SignalEmitter" preserve="all" />
+    <type fullname="UnityEngine.Timeline.SignalReceiver" preserve="all" />
+    <type fullname="UnityEngine.Timeline.SignalTrack" preserve="all" />
+    <type fullname="UnityEngine.Timeline.TimelineAsset" preserve="all" />
+    <type fullname="UnityEngine.Timeline.SignalReceiver/EventKeyValue" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.Timeline.MarkerList" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.Timeline.TimelineAsset/EditorSettings" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.Timeline.TimelineClip" preserve="nothing" serialized="true" />
+  </assembly>
   <assembly fullname="UnityEngine.AnimationModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.AnimationClip" preserve="all" />
     <type fullname="UnityEngine.Animator" preserve="all" />
     <type fullname="UnityEngine.RuntimeAnimatorController" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="UnityEngine.AudioClip" preserve="all" />
     <type fullname="UnityEngine.AudioListener" preserve="all" />
-    <type fullname="UnityEngine.AudioSource" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.Camera" preserve="all" />
     <type fullname="UnityEngine.Cubemap" preserve="all" />
     <type fullname="UnityEngine.GameObject" preserve="all" />
     <type fullname="UnityEngine.Light" preserve="all" />
-    <type fullname="UnityEngine.LightingSettings" preserve="all" />
     <type fullname="UnityEngine.LightmapSettings" preserve="all" />
-    <type fullname="UnityEngine.LightProbes" preserve="all" />
     <type fullname="UnityEngine.LODGroup" preserve="all" />
     <type fullname="UnityEngine.Material" preserve="all" />
-    <type fullname="UnityEngine.Mesh" preserve="all" />
     <type fullname="UnityEngine.MeshFilter" preserve="all" />
     <type fullname="UnityEngine.MeshRenderer" preserve="all" />
     <type fullname="UnityEngine.Object" preserve="all" />
@@ -106,24 +114,23 @@
     <type fullname="UnityEngine.RenderSettings" preserve="all" />
     <type fullname="UnityEngine.RenderTexture" preserve="all" />
     <type fullname="UnityEngine.Shader" preserve="all" />
-    <type fullname="UnityEngine.ShaderVariantCollection" preserve="all" />
     <type fullname="UnityEngine.Sprite" preserve="all" />
     <type fullname="UnityEngine.SpriteRenderer" preserve="all" />
     <type fullname="UnityEngine.TextAsset" preserve="all" />
     <type fullname="UnityEngine.Texture2D" preserve="all" />
     <type fullname="UnityEngine.Transform" preserve="all" />
-    <type fullname="UnityEngine.U2D.SpriteAtlas" preserve="all" />
     <type fullname="UnityEngine.Events.ArgumentCache" preserve="nothing" serialized="true" />
     <type fullname="UnityEngine.Events.PersistentCallGroup" preserve="nothing" serialized="true" />
     <type fullname="UnityEngine.Events.PersistentListenerMode" preserve="nothing" serialized="true" />
     <type fullname="UnityEngine.RectOffset" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.Events.UnityEvent" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.ExposedReference`1[Unity.Cinemachine.CinemachineVirtualCameraBase]" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="UnityEngine.DirectorModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.Playables.PlayableDirector" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.GridModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.Grid" preserve="all" />
-  </assembly>
-  <assembly fullname="UnityEngine.ParticleSystemModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="UnityEngine.ParticleSystem" preserve="all" />
-    <type fullname="UnityEngine.ParticleSystemRenderer" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.BoxCollider2D" preserve="all" />
@@ -134,10 +141,6 @@
   </assembly>
   <assembly fullname="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.BoxCollider" preserve="all" />
-    <type fullname="UnityEngine.CapsuleCollider" preserve="all" />
-    <type fullname="UnityEngine.MeshCollider" preserve="all" />
-    <type fullname="UnityEngine.Rigidbody" preserve="all" />
-    <type fullname="UnityEngine.SphereCollider" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.Font" preserve="all" />

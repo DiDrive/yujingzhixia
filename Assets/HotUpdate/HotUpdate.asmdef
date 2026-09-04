@@ -1,7 +1,9 @@
 {
     "name": "HotUpdate",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "YooAsset"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

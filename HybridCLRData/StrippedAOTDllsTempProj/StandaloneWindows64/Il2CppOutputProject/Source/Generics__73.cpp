@@ -5441,7 +5441,7 @@ IL_0038:
 		Type_t* L_11 = V_0;
 		NullCheck(L_10);
 		bool L_12;
-		L_12 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_10, L_11);
+		L_12 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_10, L_11);
 		V_3 = L_12;
 		bool L_13 = V_3;
 		if (!L_13)
@@ -5890,7 +5890,7 @@ IL_0038:
 		Type_t* L_11 = V_0;
 		NullCheck(L_10);
 		bool L_12;
-		L_12 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_10, L_11);
+		L_12 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_10, L_11);
 		V_3 = L_12;
 		bool L_13 = V_3;
 		if (!L_13)
@@ -6339,7 +6339,7 @@ IL_0038:
 		Type_t* L_11 = V_0;
 		NullCheck(L_10);
 		bool L_12;
-		L_12 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_10, L_11);
+		L_12 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_10, L_11);
 		V_3 = L_12;
 		bool L_13 = V_3;
 		if (!L_13)
@@ -6781,7 +6781,7 @@ IL_0038:
 		Type_t* L_11 = V_0;
 		NullCheck(L_10);
 		bool L_12;
-		L_12 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_10, L_11);
+		L_12 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_10, L_11);
 		V_3 = L_12;
 		bool L_13 = V_3;
 		if (!L_13)
@@ -7230,7 +7230,7 @@ IL_0038:
 		Type_t* L_11 = V_0;
 		NullCheck(L_10);
 		bool L_12;
-		L_12 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_10, L_11);
+		L_12 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_10, L_11);
 		V_3 = L_12;
 		bool L_13 = V_3;
 		if (!L_13)
@@ -7679,7 +7679,7 @@ IL_0038:
 		Type_t* L_11 = V_0;
 		NullCheck(L_10);
 		bool L_12;
-		L_12 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_10, L_11);
+		L_12 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_10, L_11);
 		V_3 = L_12;
 		bool L_13 = V_3;
 		if (!L_13)
@@ -8128,7 +8128,7 @@ IL_0038:
 		Type_t* L_11 = V_0;
 		NullCheck(L_10);
 		bool L_12;
-		L_12 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_10, L_11);
+		L_12 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_10, L_11);
 		V_3 = L_12;
 		bool L_13 = V_3;
 		if (!L_13)
@@ -8577,7 +8577,7 @@ IL_0038:
 		Type_t* L_11 = V_0;
 		NullCheck(L_10);
 		bool L_12;
-		L_12 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_10, L_11);
+		L_12 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_10, L_11);
 		V_3 = L_12;
 		bool L_13 = V_3;
 		if (!L_13)
@@ -9026,7 +9026,7 @@ IL_0038:
 		Type_t* L_11 = V_0;
 		NullCheck(L_10);
 		bool L_12;
-		L_12 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_10, L_11);
+		L_12 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_10, L_11);
 		V_3 = L_12;
 		bool L_13 = V_3;
 		if (!L_13)
@@ -9475,7 +9475,7 @@ IL_0038:
 		Type_t* L_11 = V_0;
 		NullCheck(L_10);
 		bool L_12;
-		L_12 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_10, L_11);
+		L_12 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_10, L_11);
 		V_3 = L_12;
 		bool L_13 = V_3;
 		if (!L_13)
@@ -9924,7 +9924,7 @@ IL_0038:
 		Type_t* L_11 = V_0;
 		NullCheck(L_10);
 		bool L_12;
-		L_12 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_10, L_11);
+		L_12 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_10, L_11);
 		V_3 = L_12;
 		bool L_13 = V_3;
 		if (!L_13)
@@ -10537,7 +10537,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TypeTraits_1__cctor_mE5FDCC6209D64766A47
 		Type_t* L_12 = V_0;
 		NullCheck(L_12);
 		bool L_13;
-		L_13 = VirtualFuncInvoker0< bool >::Invoke(68, L_12);
+		L_13 = VirtualFuncInvoker0< bool >::Invoke(88, L_12);
 		((TypeTraits_1_t0DF62A72B3297A00D56AC85CFB01E8C3E9460D97_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)))->___U3CIsEnumU3Ek__BackingField = L_13;
 		bool L_14;
 		L_14 = TypeTraits_1_get_IsEnum_mD53773D45BA656D8858D26416A2CAB173D11A4DB_inline(il2cpp_rgctx_method(InitializedTypeInfo(method->klass)->rgctx_data, 3));
@@ -10585,7 +10585,7 @@ IL_0061:
 		L_23 = Type_GetTypeFromHandle_m6062B81682F79A4D6DF2640692EE6D9987858C57(L_22, NULL);
 		NullCheck(L_23);
 		int32_t L_24;
-		L_24 = VirtualFuncInvoker0< int32_t >::Invoke(46, L_23);
+		L_24 = VirtualFuncInvoker0< int32_t >::Invoke(55, L_23);
 		G_B6_0 = ((((int32_t)((((int32_t)L_24) == ((int32_t)1))? 1 : 0)) == ((int32_t)0))? 1 : 0);
 		goto IL_009f;
 	}
@@ -10672,7 +10672,7 @@ IL_0109:
 		Type_t* L_42 = V_0;
 		NullCheck(L_42);
 		bool L_43;
-		L_43 = VirtualFuncInvoker0< bool >::Invoke(39, L_42);
+		L_43 = VirtualFuncInvoker0< bool >::Invoke(47, L_42);
 		if (!L_43)
 		{
 			goto IL_013d;
@@ -10682,7 +10682,7 @@ IL_0109:
 		Type_t* L_44 = V_0;
 		NullCheck(L_44);
 		Type_t* L_45;
-		L_45 = VirtualFuncInvoker0< Type_t* >::Invoke(47, L_44);
+		L_45 = VirtualFuncInvoker0< Type_t* >::Invoke(56, L_44);
 		RuntimeTypeHandle_t332A452B8B6179E4469B69525D0FE82A88030F7B L_46 = { reinterpret_cast<intptr_t> (LazyLoadReference_1_t662BC5881742261DC74D175FD3F4AD4C2534B7B7_0_0_0_var) };
 		il2cpp_codegen_runtime_class_init_inline(Type_t_il2cpp_TypeInfo_var);
 		Type_t* L_47;
@@ -10708,7 +10708,7 @@ IL_013e:
 		Type_t* L_51 = V_0;
 		NullCheck(L_50);
 		bool L_52;
-		L_52 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_50, L_51);
+		L_52 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_50, L_51);
 		((TypeTraits_1_t0DF62A72B3297A00D56AC85CFB01E8C3E9460D97_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)))->___U3CIsUnityObjectU3Ek__BackingField = L_52;
 		return;
 	}
@@ -10870,7 +10870,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TypeTraits_1__cctor_m039642B1C99B10E8ABC
 		Type_t* L_12 = V_0;
 		NullCheck(L_12);
 		bool L_13;
-		L_13 = VirtualFuncInvoker0< bool >::Invoke(68, L_12);
+		L_13 = VirtualFuncInvoker0< bool >::Invoke(88, L_12);
 		((TypeTraits_1_t4BD624776DB5B1CA6F4CD8522DD3007FEDF0CCCD_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)))->___U3CIsEnumU3Ek__BackingField = L_13;
 		bool L_14;
 		L_14 = TypeTraits_1_get_IsEnum_m064C8481EBFB30F1A0163B488A04E7C60BAD8AAB_inline(il2cpp_rgctx_method(InitializedTypeInfo(method->klass)->rgctx_data, 3));
@@ -10918,7 +10918,7 @@ IL_0061:
 		L_23 = Type_GetTypeFromHandle_m6062B81682F79A4D6DF2640692EE6D9987858C57(L_22, NULL);
 		NullCheck(L_23);
 		int32_t L_24;
-		L_24 = VirtualFuncInvoker0< int32_t >::Invoke(46, L_23);
+		L_24 = VirtualFuncInvoker0< int32_t >::Invoke(55, L_23);
 		G_B6_0 = ((((int32_t)((((int32_t)L_24) == ((int32_t)1))? 1 : 0)) == ((int32_t)0))? 1 : 0);
 		goto IL_009f;
 	}
@@ -11005,7 +11005,7 @@ IL_0109:
 		Type_t* L_42 = V_0;
 		NullCheck(L_42);
 		bool L_43;
-		L_43 = VirtualFuncInvoker0< bool >::Invoke(39, L_42);
+		L_43 = VirtualFuncInvoker0< bool >::Invoke(47, L_42);
 		if (!L_43)
 		{
 			goto IL_013d;
@@ -11015,7 +11015,7 @@ IL_0109:
 		Type_t* L_44 = V_0;
 		NullCheck(L_44);
 		Type_t* L_45;
-		L_45 = VirtualFuncInvoker0< Type_t* >::Invoke(47, L_44);
+		L_45 = VirtualFuncInvoker0< Type_t* >::Invoke(56, L_44);
 		RuntimeTypeHandle_t332A452B8B6179E4469B69525D0FE82A88030F7B L_46 = { reinterpret_cast<intptr_t> (LazyLoadReference_1_t662BC5881742261DC74D175FD3F4AD4C2534B7B7_0_0_0_var) };
 		il2cpp_codegen_runtime_class_init_inline(Type_t_il2cpp_TypeInfo_var);
 		Type_t* L_47;
@@ -11041,7 +11041,7 @@ IL_013e:
 		Type_t* L_51 = V_0;
 		NullCheck(L_50);
 		bool L_52;
-		L_52 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_50, L_51);
+		L_52 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_50, L_51);
 		((TypeTraits_1_t4BD624776DB5B1CA6F4CD8522DD3007FEDF0CCCD_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)))->___U3CIsUnityObjectU3Ek__BackingField = L_52;
 		return;
 	}
@@ -11203,7 +11203,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TypeTraits_1__cctor_m82EB7B0F7F7A8A75A72
 		Type_t* L_12 = V_0;
 		NullCheck(L_12);
 		bool L_13;
-		L_13 = VirtualFuncInvoker0< bool >::Invoke(68, L_12);
+		L_13 = VirtualFuncInvoker0< bool >::Invoke(88, L_12);
 		((TypeTraits_1_tF91BA2C79345F433195944D0618AB02D92236B21_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)))->___U3CIsEnumU3Ek__BackingField = L_13;
 		bool L_14;
 		L_14 = TypeTraits_1_get_IsEnum_m3C380B6FA2712CD33B42B6FE01BBA82BBD4F21CA_inline(il2cpp_rgctx_method(InitializedTypeInfo(method->klass)->rgctx_data, 3));
@@ -11251,7 +11251,7 @@ IL_0061:
 		L_23 = Type_GetTypeFromHandle_m6062B81682F79A4D6DF2640692EE6D9987858C57(L_22, NULL);
 		NullCheck(L_23);
 		int32_t L_24;
-		L_24 = VirtualFuncInvoker0< int32_t >::Invoke(46, L_23);
+		L_24 = VirtualFuncInvoker0< int32_t >::Invoke(55, L_23);
 		G_B6_0 = ((((int32_t)((((int32_t)L_24) == ((int32_t)1))? 1 : 0)) == ((int32_t)0))? 1 : 0);
 		goto IL_009f;
 	}
@@ -11338,7 +11338,7 @@ IL_0109:
 		Type_t* L_42 = V_0;
 		NullCheck(L_42);
 		bool L_43;
-		L_43 = VirtualFuncInvoker0< bool >::Invoke(39, L_42);
+		L_43 = VirtualFuncInvoker0< bool >::Invoke(47, L_42);
 		if (!L_43)
 		{
 			goto IL_013d;
@@ -11348,7 +11348,7 @@ IL_0109:
 		Type_t* L_44 = V_0;
 		NullCheck(L_44);
 		Type_t* L_45;
-		L_45 = VirtualFuncInvoker0< Type_t* >::Invoke(47, L_44);
+		L_45 = VirtualFuncInvoker0< Type_t* >::Invoke(56, L_44);
 		RuntimeTypeHandle_t332A452B8B6179E4469B69525D0FE82A88030F7B L_46 = { reinterpret_cast<intptr_t> (LazyLoadReference_1_t662BC5881742261DC74D175FD3F4AD4C2534B7B7_0_0_0_var) };
 		il2cpp_codegen_runtime_class_init_inline(Type_t_il2cpp_TypeInfo_var);
 		Type_t* L_47;
@@ -11374,7 +11374,7 @@ IL_013e:
 		Type_t* L_51 = V_0;
 		NullCheck(L_50);
 		bool L_52;
-		L_52 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_50, L_51);
+		L_52 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_50, L_51);
 		((TypeTraits_1_tF91BA2C79345F433195944D0618AB02D92236B21_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)))->___U3CIsUnityObjectU3Ek__BackingField = L_52;
 		return;
 	}
@@ -11536,7 +11536,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TypeTraits_1__cctor_mAE87A6DC8FD4A59880D
 		Type_t* L_12 = V_0;
 		NullCheck(L_12);
 		bool L_13;
-		L_13 = VirtualFuncInvoker0< bool >::Invoke(68, L_12);
+		L_13 = VirtualFuncInvoker0< bool >::Invoke(88, L_12);
 		((TypeTraits_1_tC1A46C3724D2DAD269AF6BD39D20DE59150FDF28_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)))->___U3CIsEnumU3Ek__BackingField = L_13;
 		bool L_14;
 		L_14 = TypeTraits_1_get_IsEnum_mA14A53C3F7A022C0C43718B742A3F9EEC15EEA55_inline(il2cpp_rgctx_method(InitializedTypeInfo(method->klass)->rgctx_data, 3));
@@ -11584,7 +11584,7 @@ IL_0061:
 		L_23 = Type_GetTypeFromHandle_m6062B81682F79A4D6DF2640692EE6D9987858C57(L_22, NULL);
 		NullCheck(L_23);
 		int32_t L_24;
-		L_24 = VirtualFuncInvoker0< int32_t >::Invoke(46, L_23);
+		L_24 = VirtualFuncInvoker0< int32_t >::Invoke(55, L_23);
 		G_B6_0 = ((((int32_t)((((int32_t)L_24) == ((int32_t)1))? 1 : 0)) == ((int32_t)0))? 1 : 0);
 		goto IL_009f;
 	}
@@ -11671,7 +11671,7 @@ IL_0109:
 		Type_t* L_42 = V_0;
 		NullCheck(L_42);
 		bool L_43;
-		L_43 = VirtualFuncInvoker0< bool >::Invoke(39, L_42);
+		L_43 = VirtualFuncInvoker0< bool >::Invoke(47, L_42);
 		if (!L_43)
 		{
 			goto IL_013d;
@@ -11681,7 +11681,7 @@ IL_0109:
 		Type_t* L_44 = V_0;
 		NullCheck(L_44);
 		Type_t* L_45;
-		L_45 = VirtualFuncInvoker0< Type_t* >::Invoke(47, L_44);
+		L_45 = VirtualFuncInvoker0< Type_t* >::Invoke(56, L_44);
 		RuntimeTypeHandle_t332A452B8B6179E4469B69525D0FE82A88030F7B L_46 = { reinterpret_cast<intptr_t> (LazyLoadReference_1_t662BC5881742261DC74D175FD3F4AD4C2534B7B7_0_0_0_var) };
 		il2cpp_codegen_runtime_class_init_inline(Type_t_il2cpp_TypeInfo_var);
 		Type_t* L_47;
@@ -11707,7 +11707,7 @@ IL_013e:
 		Type_t* L_51 = V_0;
 		NullCheck(L_50);
 		bool L_52;
-		L_52 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_50, L_51);
+		L_52 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_50, L_51);
 		((TypeTraits_1_tC1A46C3724D2DAD269AF6BD39D20DE59150FDF28_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)))->___U3CIsUnityObjectU3Ek__BackingField = L_52;
 		return;
 	}
@@ -11869,7 +11869,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TypeTraits_1__cctor_m69596D1722B67FA8BBF
 		Type_t* L_12 = V_0;
 		NullCheck(L_12);
 		bool L_13;
-		L_13 = VirtualFuncInvoker0< bool >::Invoke(68, L_12);
+		L_13 = VirtualFuncInvoker0< bool >::Invoke(88, L_12);
 		((TypeTraits_1_tFB0FF557412A3562B89AFBD03F8113908FA09E96_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)))->___U3CIsEnumU3Ek__BackingField = L_13;
 		bool L_14;
 		L_14 = TypeTraits_1_get_IsEnum_m9B26321F4EEB60F69C58D11F79A77C531D022559_inline(il2cpp_rgctx_method(InitializedTypeInfo(method->klass)->rgctx_data, 3));
@@ -11917,7 +11917,7 @@ IL_0061:
 		L_23 = Type_GetTypeFromHandle_m6062B81682F79A4D6DF2640692EE6D9987858C57(L_22, NULL);
 		NullCheck(L_23);
 		int32_t L_24;
-		L_24 = VirtualFuncInvoker0< int32_t >::Invoke(46, L_23);
+		L_24 = VirtualFuncInvoker0< int32_t >::Invoke(55, L_23);
 		G_B6_0 = ((((int32_t)((((int32_t)L_24) == ((int32_t)1))? 1 : 0)) == ((int32_t)0))? 1 : 0);
 		goto IL_009f;
 	}
@@ -12004,7 +12004,7 @@ IL_0109:
 		Type_t* L_42 = V_0;
 		NullCheck(L_42);
 		bool L_43;
-		L_43 = VirtualFuncInvoker0< bool >::Invoke(39, L_42);
+		L_43 = VirtualFuncInvoker0< bool >::Invoke(47, L_42);
 		if (!L_43)
 		{
 			goto IL_013d;
@@ -12014,7 +12014,7 @@ IL_0109:
 		Type_t* L_44 = V_0;
 		NullCheck(L_44);
 		Type_t* L_45;
-		L_45 = VirtualFuncInvoker0< Type_t* >::Invoke(47, L_44);
+		L_45 = VirtualFuncInvoker0< Type_t* >::Invoke(56, L_44);
 		RuntimeTypeHandle_t332A452B8B6179E4469B69525D0FE82A88030F7B L_46 = { reinterpret_cast<intptr_t> (LazyLoadReference_1_t662BC5881742261DC74D175FD3F4AD4C2534B7B7_0_0_0_var) };
 		il2cpp_codegen_runtime_class_init_inline(Type_t_il2cpp_TypeInfo_var);
 		Type_t* L_47;
@@ -12040,7 +12040,7 @@ IL_013e:
 		Type_t* L_51 = V_0;
 		NullCheck(L_50);
 		bool L_52;
-		L_52 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_50, L_51);
+		L_52 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_50, L_51);
 		((TypeTraits_1_tFB0FF557412A3562B89AFBD03F8113908FA09E96_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)))->___U3CIsUnityObjectU3Ek__BackingField = L_52;
 		return;
 	}
@@ -12202,7 +12202,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TypeTraits_1__cctor_mFB15E62341B22382C14
 		Type_t* L_12 = V_0;
 		NullCheck(L_12);
 		bool L_13;
-		L_13 = VirtualFuncInvoker0< bool >::Invoke(68, L_12);
+		L_13 = VirtualFuncInvoker0< bool >::Invoke(88, L_12);
 		((TypeTraits_1_t2CC90C31519F2DAF95C7F643DE417BCFE97C698C_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)))->___U3CIsEnumU3Ek__BackingField = L_13;
 		bool L_14;
 		L_14 = TypeTraits_1_get_IsEnum_m76E86BC6B4AF61838AAA1BC007CD16A20D902D97_inline(il2cpp_rgctx_method(InitializedTypeInfo(method->klass)->rgctx_data, 3));
@@ -12250,7 +12250,7 @@ IL_0061:
 		L_23 = Type_GetTypeFromHandle_m6062B81682F79A4D6DF2640692EE6D9987858C57(L_22, NULL);
 		NullCheck(L_23);
 		int32_t L_24;
-		L_24 = VirtualFuncInvoker0< int32_t >::Invoke(46, L_23);
+		L_24 = VirtualFuncInvoker0< int32_t >::Invoke(55, L_23);
 		G_B6_0 = ((((int32_t)((((int32_t)L_24) == ((int32_t)1))? 1 : 0)) == ((int32_t)0))? 1 : 0);
 		goto IL_009f;
 	}
@@ -12337,7 +12337,7 @@ IL_0109:
 		Type_t* L_42 = V_0;
 		NullCheck(L_42);
 		bool L_43;
-		L_43 = VirtualFuncInvoker0< bool >::Invoke(39, L_42);
+		L_43 = VirtualFuncInvoker0< bool >::Invoke(47, L_42);
 		if (!L_43)
 		{
 			goto IL_013d;
@@ -12347,7 +12347,7 @@ IL_0109:
 		Type_t* L_44 = V_0;
 		NullCheck(L_44);
 		Type_t* L_45;
-		L_45 = VirtualFuncInvoker0< Type_t* >::Invoke(47, L_44);
+		L_45 = VirtualFuncInvoker0< Type_t* >::Invoke(56, L_44);
 		RuntimeTypeHandle_t332A452B8B6179E4469B69525D0FE82A88030F7B L_46 = { reinterpret_cast<intptr_t> (LazyLoadReference_1_t662BC5881742261DC74D175FD3F4AD4C2534B7B7_0_0_0_var) };
 		il2cpp_codegen_runtime_class_init_inline(Type_t_il2cpp_TypeInfo_var);
 		Type_t* L_47;
@@ -12373,7 +12373,7 @@ IL_013e:
 		Type_t* L_51 = V_0;
 		NullCheck(L_50);
 		bool L_52;
-		L_52 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_50, L_51);
+		L_52 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_50, L_51);
 		((TypeTraits_1_t2CC90C31519F2DAF95C7F643DE417BCFE97C698C_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)))->___U3CIsUnityObjectU3Ek__BackingField = L_52;
 		return;
 	}
@@ -12535,7 +12535,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TypeTraits_1__cctor_m73D7806AFFABC6E622F
 		Type_t* L_12 = V_0;
 		NullCheck(L_12);
 		bool L_13;
-		L_13 = VirtualFuncInvoker0< bool >::Invoke(68, L_12);
+		L_13 = VirtualFuncInvoker0< bool >::Invoke(88, L_12);
 		((TypeTraits_1_t12A4EFA4F288B8AEB9D8AF24C08B0E6BEC4A5283_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)))->___U3CIsEnumU3Ek__BackingField = L_13;
 		bool L_14;
 		L_14 = TypeTraits_1_get_IsEnum_m6E42FE6A2733731FD34A8D0DF2E5A4EBA887EA32_inline(il2cpp_rgctx_method(InitializedTypeInfo(method->klass)->rgctx_data, 3));
@@ -12583,7 +12583,7 @@ IL_0061:
 		L_23 = Type_GetTypeFromHandle_m6062B81682F79A4D6DF2640692EE6D9987858C57(L_22, NULL);
 		NullCheck(L_23);
 		int32_t L_24;
-		L_24 = VirtualFuncInvoker0< int32_t >::Invoke(46, L_23);
+		L_24 = VirtualFuncInvoker0< int32_t >::Invoke(55, L_23);
 		G_B6_0 = ((((int32_t)((((int32_t)L_24) == ((int32_t)1))? 1 : 0)) == ((int32_t)0))? 1 : 0);
 		goto IL_009f;
 	}
@@ -12670,7 +12670,7 @@ IL_0109:
 		Type_t* L_42 = V_0;
 		NullCheck(L_42);
 		bool L_43;
-		L_43 = VirtualFuncInvoker0< bool >::Invoke(39, L_42);
+		L_43 = VirtualFuncInvoker0< bool >::Invoke(47, L_42);
 		if (!L_43)
 		{
 			goto IL_013d;
@@ -12680,7 +12680,7 @@ IL_0109:
 		Type_t* L_44 = V_0;
 		NullCheck(L_44);
 		Type_t* L_45;
-		L_45 = VirtualFuncInvoker0< Type_t* >::Invoke(47, L_44);
+		L_45 = VirtualFuncInvoker0< Type_t* >::Invoke(56, L_44);
 		RuntimeTypeHandle_t332A452B8B6179E4469B69525D0FE82A88030F7B L_46 = { reinterpret_cast<intptr_t> (LazyLoadReference_1_t662BC5881742261DC74D175FD3F4AD4C2534B7B7_0_0_0_var) };
 		il2cpp_codegen_runtime_class_init_inline(Type_t_il2cpp_TypeInfo_var);
 		Type_t* L_47;
@@ -12706,7 +12706,7 @@ IL_013e:
 		Type_t* L_51 = V_0;
 		NullCheck(L_50);
 		bool L_52;
-		L_52 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_50, L_51);
+		L_52 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_50, L_51);
 		((TypeTraits_1_t12A4EFA4F288B8AEB9D8AF24C08B0E6BEC4A5283_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)))->___U3CIsUnityObjectU3Ek__BackingField = L_52;
 		return;
 	}
@@ -12868,7 +12868,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TypeTraits_1__cctor_m6CCE6FE01D21D9920B7
 		Type_t* L_12 = V_0;
 		NullCheck(L_12);
 		bool L_13;
-		L_13 = VirtualFuncInvoker0< bool >::Invoke(68, L_12);
+		L_13 = VirtualFuncInvoker0< bool >::Invoke(88, L_12);
 		((TypeTraits_1_t318641E17032D16283D6562F31C5AB80FE005BD6_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)))->___U3CIsEnumU3Ek__BackingField = L_13;
 		bool L_14;
 		L_14 = TypeTraits_1_get_IsEnum_m7F5965E2B684FCDD1B7E06E4393ACBA01E8115E8_inline(il2cpp_rgctx_method(InitializedTypeInfo(method->klass)->rgctx_data, 3));
@@ -12916,7 +12916,7 @@ IL_0061:
 		L_23 = Type_GetTypeFromHandle_m6062B81682F79A4D6DF2640692EE6D9987858C57(L_22, NULL);
 		NullCheck(L_23);
 		int32_t L_24;
-		L_24 = VirtualFuncInvoker0< int32_t >::Invoke(46, L_23);
+		L_24 = VirtualFuncInvoker0< int32_t >::Invoke(55, L_23);
 		G_B6_0 = ((((int32_t)((((int32_t)L_24) == ((int32_t)1))? 1 : 0)) == ((int32_t)0))? 1 : 0);
 		goto IL_009f;
 	}
@@ -13003,7 +13003,7 @@ IL_0109:
 		Type_t* L_42 = V_0;
 		NullCheck(L_42);
 		bool L_43;
-		L_43 = VirtualFuncInvoker0< bool >::Invoke(39, L_42);
+		L_43 = VirtualFuncInvoker0< bool >::Invoke(47, L_42);
 		if (!L_43)
 		{
 			goto IL_013d;
@@ -13013,7 +13013,7 @@ IL_0109:
 		Type_t* L_44 = V_0;
 		NullCheck(L_44);
 		Type_t* L_45;
-		L_45 = VirtualFuncInvoker0< Type_t* >::Invoke(47, L_44);
+		L_45 = VirtualFuncInvoker0< Type_t* >::Invoke(56, L_44);
 		RuntimeTypeHandle_t332A452B8B6179E4469B69525D0FE82A88030F7B L_46 = { reinterpret_cast<intptr_t> (LazyLoadReference_1_t662BC5881742261DC74D175FD3F4AD4C2534B7B7_0_0_0_var) };
 		il2cpp_codegen_runtime_class_init_inline(Type_t_il2cpp_TypeInfo_var);
 		Type_t* L_47;
@@ -13039,7 +13039,7 @@ IL_013e:
 		Type_t* L_51 = V_0;
 		NullCheck(L_50);
 		bool L_52;
-		L_52 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_50, L_51);
+		L_52 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_50, L_51);
 		((TypeTraits_1_t318641E17032D16283D6562F31C5AB80FE005BD6_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)))->___U3CIsUnityObjectU3Ek__BackingField = L_52;
 		return;
 	}
@@ -13201,7 +13201,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TypeTraits_1__cctor_m466AB701E2F0E31D507
 		Type_t* L_12 = V_0;
 		NullCheck(L_12);
 		bool L_13;
-		L_13 = VirtualFuncInvoker0< bool >::Invoke(68, L_12);
+		L_13 = VirtualFuncInvoker0< bool >::Invoke(88, L_12);
 		((TypeTraits_1_tB2BACC988B95FD4748EEAD9E106CEA7F11DBBE4B_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)))->___U3CIsEnumU3Ek__BackingField = L_13;
 		bool L_14;
 		L_14 = TypeTraits_1_get_IsEnum_m85967F8CB9FAD027F007800E553FF4D41214B16B_inline(il2cpp_rgctx_method(InitializedTypeInfo(method->klass)->rgctx_data, 3));
@@ -13249,7 +13249,7 @@ IL_0061:
 		L_23 = Type_GetTypeFromHandle_m6062B81682F79A4D6DF2640692EE6D9987858C57(L_22, NULL);
 		NullCheck(L_23);
 		int32_t L_24;
-		L_24 = VirtualFuncInvoker0< int32_t >::Invoke(46, L_23);
+		L_24 = VirtualFuncInvoker0< int32_t >::Invoke(55, L_23);
 		G_B6_0 = ((((int32_t)((((int32_t)L_24) == ((int32_t)1))? 1 : 0)) == ((int32_t)0))? 1 : 0);
 		goto IL_009f;
 	}
@@ -13336,7 +13336,7 @@ IL_0109:
 		Type_t* L_42 = V_0;
 		NullCheck(L_42);
 		bool L_43;
-		L_43 = VirtualFuncInvoker0< bool >::Invoke(39, L_42);
+		L_43 = VirtualFuncInvoker0< bool >::Invoke(47, L_42);
 		if (!L_43)
 		{
 			goto IL_013d;
@@ -13346,7 +13346,7 @@ IL_0109:
 		Type_t* L_44 = V_0;
 		NullCheck(L_44);
 		Type_t* L_45;
-		L_45 = VirtualFuncInvoker0< Type_t* >::Invoke(47, L_44);
+		L_45 = VirtualFuncInvoker0< Type_t* >::Invoke(56, L_44);
 		RuntimeTypeHandle_t332A452B8B6179E4469B69525D0FE82A88030F7B L_46 = { reinterpret_cast<intptr_t> (LazyLoadReference_1_t662BC5881742261DC74D175FD3F4AD4C2534B7B7_0_0_0_var) };
 		il2cpp_codegen_runtime_class_init_inline(Type_t_il2cpp_TypeInfo_var);
 		Type_t* L_47;
@@ -13372,7 +13372,7 @@ IL_013e:
 		Type_t* L_51 = V_0;
 		NullCheck(L_50);
 		bool L_52;
-		L_52 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_50, L_51);
+		L_52 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_50, L_51);
 		((TypeTraits_1_tB2BACC988B95FD4748EEAD9E106CEA7F11DBBE4B_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)))->___U3CIsUnityObjectU3Ek__BackingField = L_52;
 		return;
 	}
@@ -13534,7 +13534,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TypeTraits_1__cctor_m8496348DEC16B34B214
 		Type_t* L_12 = V_0;
 		NullCheck(L_12);
 		bool L_13;
-		L_13 = VirtualFuncInvoker0< bool >::Invoke(68, L_12);
+		L_13 = VirtualFuncInvoker0< bool >::Invoke(88, L_12);
 		((TypeTraits_1_tE403F840B1E4A05D3004758D60018F70BE11D92D_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)))->___U3CIsEnumU3Ek__BackingField = L_13;
 		bool L_14;
 		L_14 = TypeTraits_1_get_IsEnum_mBABCE38129A0281F81AC4493B9E09F7B56F24F12_inline(il2cpp_rgctx_method(InitializedTypeInfo(method->klass)->rgctx_data, 3));
@@ -13582,7 +13582,7 @@ IL_0061:
 		L_23 = Type_GetTypeFromHandle_m6062B81682F79A4D6DF2640692EE6D9987858C57(L_22, NULL);
 		NullCheck(L_23);
 		int32_t L_24;
-		L_24 = VirtualFuncInvoker0< int32_t >::Invoke(46, L_23);
+		L_24 = VirtualFuncInvoker0< int32_t >::Invoke(55, L_23);
 		G_B6_0 = ((((int32_t)((((int32_t)L_24) == ((int32_t)1))? 1 : 0)) == ((int32_t)0))? 1 : 0);
 		goto IL_009f;
 	}
@@ -13669,7 +13669,7 @@ IL_0109:
 		Type_t* L_42 = V_0;
 		NullCheck(L_42);
 		bool L_43;
-		L_43 = VirtualFuncInvoker0< bool >::Invoke(39, L_42);
+		L_43 = VirtualFuncInvoker0< bool >::Invoke(47, L_42);
 		if (!L_43)
 		{
 			goto IL_013d;
@@ -13679,7 +13679,7 @@ IL_0109:
 		Type_t* L_44 = V_0;
 		NullCheck(L_44);
 		Type_t* L_45;
-		L_45 = VirtualFuncInvoker0< Type_t* >::Invoke(47, L_44);
+		L_45 = VirtualFuncInvoker0< Type_t* >::Invoke(56, L_44);
 		RuntimeTypeHandle_t332A452B8B6179E4469B69525D0FE82A88030F7B L_46 = { reinterpret_cast<intptr_t> (LazyLoadReference_1_t662BC5881742261DC74D175FD3F4AD4C2534B7B7_0_0_0_var) };
 		il2cpp_codegen_runtime_class_init_inline(Type_t_il2cpp_TypeInfo_var);
 		Type_t* L_47;
@@ -13705,7 +13705,7 @@ IL_013e:
 		Type_t* L_51 = V_0;
 		NullCheck(L_50);
 		bool L_52;
-		L_52 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_50, L_51);
+		L_52 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_50, L_51);
 		((TypeTraits_1_tE403F840B1E4A05D3004758D60018F70BE11D92D_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)))->___U3CIsUnityObjectU3Ek__BackingField = L_52;
 		return;
 	}
@@ -13867,7 +13867,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TypeTraits_1__cctor_m99A17ABA6317B67B9C3
 		Type_t* L_12 = V_0;
 		NullCheck(L_12);
 		bool L_13;
-		L_13 = VirtualFuncInvoker0< bool >::Invoke(68, L_12);
+		L_13 = VirtualFuncInvoker0< bool >::Invoke(88, L_12);
 		((TypeTraits_1_tB439768C3A79904448564C831E2894C0B5B57EAB_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)))->___U3CIsEnumU3Ek__BackingField = L_13;
 		bool L_14;
 		L_14 = TypeTraits_1_get_IsEnum_mF62B0BF7F3358055F2E91FFB2FD71296870F351C_inline(il2cpp_rgctx_method(InitializedTypeInfo(method->klass)->rgctx_data, 3));
@@ -13915,7 +13915,7 @@ IL_0061:
 		L_23 = Type_GetTypeFromHandle_m6062B81682F79A4D6DF2640692EE6D9987858C57(L_22, NULL);
 		NullCheck(L_23);
 		int32_t L_24;
-		L_24 = VirtualFuncInvoker0< int32_t >::Invoke(46, L_23);
+		L_24 = VirtualFuncInvoker0< int32_t >::Invoke(55, L_23);
 		G_B6_0 = ((((int32_t)((((int32_t)L_24) == ((int32_t)1))? 1 : 0)) == ((int32_t)0))? 1 : 0);
 		goto IL_009f;
 	}
@@ -14002,7 +14002,7 @@ IL_0109:
 		Type_t* L_42 = V_0;
 		NullCheck(L_42);
 		bool L_43;
-		L_43 = VirtualFuncInvoker0< bool >::Invoke(39, L_42);
+		L_43 = VirtualFuncInvoker0< bool >::Invoke(47, L_42);
 		if (!L_43)
 		{
 			goto IL_013d;
@@ -14012,7 +14012,7 @@ IL_0109:
 		Type_t* L_44 = V_0;
 		NullCheck(L_44);
 		Type_t* L_45;
-		L_45 = VirtualFuncInvoker0< Type_t* >::Invoke(47, L_44);
+		L_45 = VirtualFuncInvoker0< Type_t* >::Invoke(56, L_44);
 		RuntimeTypeHandle_t332A452B8B6179E4469B69525D0FE82A88030F7B L_46 = { reinterpret_cast<intptr_t> (LazyLoadReference_1_t662BC5881742261DC74D175FD3F4AD4C2534B7B7_0_0_0_var) };
 		il2cpp_codegen_runtime_class_init_inline(Type_t_il2cpp_TypeInfo_var);
 		Type_t* L_47;
@@ -14038,7 +14038,7 @@ IL_013e:
 		Type_t* L_51 = V_0;
 		NullCheck(L_50);
 		bool L_52;
-		L_52 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_50, L_51);
+		L_52 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_50, L_51);
 		((TypeTraits_1_tB439768C3A79904448564C831E2894C0B5B57EAB_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)))->___U3CIsUnityObjectU3Ek__BackingField = L_52;
 		return;
 	}
@@ -14200,7 +14200,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TypeTraits_1__cctor_m8F0C92890B8DA4265DF
 		Type_t* L_12 = V_0;
 		NullCheck(L_12);
 		bool L_13;
-		L_13 = VirtualFuncInvoker0< bool >::Invoke(68, L_12);
+		L_13 = VirtualFuncInvoker0< bool >::Invoke(88, L_12);
 		((TypeTraits_1_tEDDDB467882FFCC085E037FD167FB3E7EFC39B7D_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)))->___U3CIsEnumU3Ek__BackingField = L_13;
 		bool L_14;
 		L_14 = ((  bool (*) (const RuntimeMethod*))il2cpp_codegen_get_direct_method_pointer(il2cpp_rgctx_method(InitializedTypeInfo(method->klass)->rgctx_data, 3)))(il2cpp_rgctx_method(InitializedTypeInfo(method->klass)->rgctx_data, 3));
@@ -14248,7 +14248,7 @@ IL_0061:
 		L_23 = Type_GetTypeFromHandle_m6062B81682F79A4D6DF2640692EE6D9987858C57(L_22, NULL);
 		NullCheck(L_23);
 		int32_t L_24;
-		L_24 = VirtualFuncInvoker0< int32_t >::Invoke(46, L_23);
+		L_24 = VirtualFuncInvoker0< int32_t >::Invoke(55, L_23);
 		G_B6_0 = ((((int32_t)((((int32_t)L_24) == ((int32_t)1))? 1 : 0)) == ((int32_t)0))? 1 : 0);
 		goto IL_009f;
 	}
@@ -14335,7 +14335,7 @@ IL_0109:
 		Type_t* L_42 = V_0;
 		NullCheck(L_42);
 		bool L_43;
-		L_43 = VirtualFuncInvoker0< bool >::Invoke(39, L_42);
+		L_43 = VirtualFuncInvoker0< bool >::Invoke(47, L_42);
 		if (!L_43)
 		{
 			goto IL_013d;
@@ -14345,7 +14345,7 @@ IL_0109:
 		Type_t* L_44 = V_0;
 		NullCheck(L_44);
 		Type_t* L_45;
-		L_45 = VirtualFuncInvoker0< Type_t* >::Invoke(47, L_44);
+		L_45 = VirtualFuncInvoker0< Type_t* >::Invoke(56, L_44);
 		RuntimeTypeHandle_t332A452B8B6179E4469B69525D0FE82A88030F7B L_46 = { reinterpret_cast<intptr_t> (LazyLoadReference_1_t662BC5881742261DC74D175FD3F4AD4C2534B7B7_0_0_0_var) };
 		il2cpp_codegen_runtime_class_init_inline(Type_t_il2cpp_TypeInfo_var);
 		Type_t* L_47;
@@ -14371,7 +14371,7 @@ IL_013e:
 		Type_t* L_51 = V_0;
 		NullCheck(L_50);
 		bool L_52;
-		L_52 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_50, L_51);
+		L_52 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_50, L_51);
 		((TypeTraits_1_tEDDDB467882FFCC085E037FD167FB3E7EFC39B7D_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)))->___U3CIsUnityObjectU3Ek__BackingField = L_52;
 		return;
 	}

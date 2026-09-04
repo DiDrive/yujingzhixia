@@ -9,14 +9,14 @@ using UnityEngine.SceneManagement;
 public sealed class SceneFlowController : MonoBehaviour
 {
     [Tooltip("局内地图场景名。开始新一轮出击时加载此场景。")]
-    [SerializeField] private string raidSceneName = "StartScene";
+    [SerializeField] private string raidSceneName = "RaidScene";
     [Tooltip("基地场景名。成功撤离后加载此场景。")]
     [SerializeField] private string shelterSceneName = "ShelterScene";
     [Tooltip("场景切换期间是否在 Console 输出流程信息。")]
     [SerializeField] private bool logTransitions = true;
 
-    private bool loading;
-    private static bool pendingNewRun;
+    private bool loading;//是否正在加载场景
+    private static bool pendingNewRun;//是否待启动新游戏
 
     private static SceneFlowController instance;
     public static SceneFlowController Instance
@@ -92,16 +92,24 @@ public sealed class SceneFlowController : MonoBehaviour
             FindObjectOfType<GameStateMachine>()?.ReturnShelterBeforeNight();
         }
 
-        if (logTransitions) Debug.Log($"正在切换场景：{SceneManager.GetActiveScene().name} -> {sceneName}", this);
-        var operation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
-        if (operation == null)
-        {
+        // if (logTransitions) Debug.Log($"正在切换场景：{SceneManager.GetActiveScene().name} -> {sceneName}", this);
+        // var operation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+        // if (operation == null)
+        // {
+        //     loading = false;
+        //     Debug.LogError($"无法加载场景 {sceneName}。请确认场景已加入 Build Settings。", this);
+        //     yield break;
+        // }
+
+        // while (!operation.isDone) yield return null;
+        // loading = false;
+        
+        if(MyYooAsset.Instance == null){
             loading = false;
-            Debug.LogError($"无法加载场景 {sceneName}。请确认场景已加入 Build Settings。", this);
+            Debug.LogError($"MyYooAsset 未加载，不能进入游戏场景", this);
             yield break;
         }
-
-        while (!operation.isDone) yield return null;
-        loading = false;
+        yield return MyYooAsset.Instance.LoadYooAssetScene(sceneName,LoadSceneMode.Single);
+        loading = false;//场景加载完成，重置加载状态
     }
 }

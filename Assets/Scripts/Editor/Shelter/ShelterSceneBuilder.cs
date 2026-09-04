@@ -16,7 +16,7 @@ using UnityEngine.UI;
 [InitializeOnLoad]
 public static class ShelterSceneBuilder
 {
-    private const string StartScenePath = "Assets/Scenes/StartScene.unity";
+    private const string StartScenePath = "Assets/Scenes/RaidScene.unity";
     private const string ShelterScenePath = "Assets/Scenes/ShelterScene.unity";
     private const string CorePrefabPath = "Assets/Prefabs/Core/PersistentGameCore.prefab";
     private const string MainBagPrefabPath = "Assets/Prefabs/Bag/InventoryUI_main_bag.prefab";
@@ -38,7 +38,7 @@ public static class ShelterSceneBuilder
     {
         if (!EditorUtility.DisplayDialog(
                 "重新构建基地灰盒",
-                "这会覆盖 ShelterScene，但不会删除或覆盖 StartScene 中的地图内容。是否继续？",
+                "这会覆盖 ShelterScene，但不会删除或覆盖 RaidScene 中的地图内容。是否继续？",
                 "重新构建",
                 "取消")) return;
 
@@ -110,7 +110,7 @@ public static class ShelterSceneBuilder
             EnsureBuildSettings();
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-            Debug.Log("基地系统已建立：撤离可切换到 ShelterScene，基地可从出击点返回 StartScene。");
+            Debug.Log("基地系统已建立：撤离可切换到 ShelterScene，基地可从出击点返回 RaidScene。");
         }
         catch (Exception exception)
         {
@@ -150,7 +150,7 @@ public static class ShelterSceneBuilder
 
         var persistence = flowRoot.GetComponent<PersistentGameServices>() ?? flowRoot.AddComponent<PersistentGameServices>();
         var flow = flowRoot.GetComponent<SceneFlowController>() ?? flowRoot.AddComponent<SceneFlowController>();
-        flow.Configure("StartScene", "ShelterScene");
+        flow.Configure("RaidScene", "ShelterScene");
 
         // 旧场景把纯数据 GridInventoryService 放在 Canvas/GridSystems 下。
         // UI 随场景卸载而网格数据必须常驻，因此把它提升为独立根节点；现有序列化引用不会因此失效。

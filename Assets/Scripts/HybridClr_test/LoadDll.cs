@@ -13,12 +13,21 @@ public class LoadDll : MonoBehaviour
     public bool IsLoadSucceeded { get; private set; }
 
     /// <summary>
+    /// 热更新入口是否执行完成。
+    /// </summary>
+    public bool IsEntrySucceeded { get; private set; }
+
+    private Assembly _hotUpdateAssembly;
+
+    /// <summary>
     /// 由MyYooAsset在Package初始化、Manifest加载和资源下载完成后调用。
     /// 不使用Start()，避免YooAsset尚未初始化完成就访问资源包。
     /// </summary>
     public IEnumerator LoadHotUpdateDll(ResourcePackage package)
     {
         IsLoadSucceeded = false;
+        IsEntrySucceeded = false;
+        _hotUpdateAssembly = null;
 
         if (package == null)
         {
@@ -77,29 +86,80 @@ public class LoadDll : MonoBehaviour
         }
 #endif
 
-        Type type = hotUpdateAss.GetType("Hello");
-        if (type == null)
+        Type entryType = hotUpdateAss.GetType("GameEntry");
+        if (entryType == null)
         {
-            Debug.LogError("热更新程序集内没有找到Hello类型");
+            Debug.LogError("热更新程序集内没有找到GameEntry类型");
             yield break;
         }
 
-        MethodInfo method = type.GetMethod("Run", BindingFlags.Public | BindingFlags.Static);
-        if (method == null)
+        MethodInfo entryMethod = entryType.GetMethod(
+            "Run",
+            BindingFlags.Public | BindingFlags.Static);
+        if (entryMethod == null)
         {
-            Debug.LogError("Hello内没有找到public static Run方法");
+            Debug.LogError("GameEntry内没有找到public static Run(ResourcePackage)方法");
             yield break;
         }
 
+        _hotUpdateAssembly = hotUpdateAss;
+        IsLoadSucceeded = true;
+        Debug.Log("HotUpdate.dll已就绪，等待执行GameEntry.Run");
+    }
+
+    /// <summary>
+    /// 通过反射调用热更新入口。AOT程序集不直接引用任何热更新类型。
+    /// </summary>
+    public IEnumerator RunHotUpdateEntry(ResourcePackage package)
+    {
+        IsEntrySucceeded = false;
+
+        if (!IsLoadSucceeded || _hotUpdateAssembly == null)
+        {
+            Debug.LogError("HotUpdate.dll尚未加载，不能执行热更新入口");
+            yield break;
+        }
+
+        Type entryType = _hotUpdateAssembly.GetType("GameEntry");
+        MethodInfo entryMethod = entryType?.GetMethod(
+            "Run",
+            BindingFlags.Public | BindingFlags.Static);
+
+        if (entryMethod == null)
+        {
+            Debug.LogError("没有找到热更新入口GameEntry.Run");
+            yield break;
+        }
+
+        IEnumerator entryRoutine;
         try
         {
-            method.Invoke(null, null);
-            IsLoadSucceeded = true;
-            Debug.Log("Hello.Run调用完成");
+            entryRoutine = entryMethod.Invoke(null, new object[] { package }) as IEnumerator;
         }
         catch (Exception exception)
         {
-            Debug.LogError($"Hello.Run执行失败：{exception}");
+            Debug.LogError($"调用GameEntry.Run失败：{exception}");
+            yield break;
         }
+
+        if (entryRoutine == null)
+        {
+            Debug.LogError("GameEntry.Run必须返回IEnumerator");
+            yield break;
+        }
+
+        yield return entryRoutine;
+
+        PropertyInfo succeededProperty = entryType.GetProperty(
+            "Succeeded",
+            BindingFlags.Public | BindingFlags.Static);
+        IsEntrySucceeded = succeededProperty != null &&
+                           succeededProperty.PropertyType == typeof(bool) &&
+                           (bool)succeededProperty.GetValue(null);
+
+        if (IsEntrySucceeded)
+            Debug.Log("热更新入口GameEntry.Run执行完成");
+        else
+            Debug.LogError("热更新入口GameEntry.Run执行失败");
     }
 }

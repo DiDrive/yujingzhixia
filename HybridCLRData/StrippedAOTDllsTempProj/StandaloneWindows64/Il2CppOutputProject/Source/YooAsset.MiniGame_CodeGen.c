@@ -21,8 +21,8 @@ static Il2CppMethodPointer s_methodPointers[2] =
 };
 static const int32_t s_InvokerIndices[2] = 
 {
-	14656,
-	8133,
+	14690,
+	8150,
 };
 IL2CPP_EXTERN_C const Il2CppCodeGenModule g_YooAsset_MiniGame_CodeGenModule;
 const Il2CppCodeGenModule g_YooAsset_MiniGame_CodeGenModule = 

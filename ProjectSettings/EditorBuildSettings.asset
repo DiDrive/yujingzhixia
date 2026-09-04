@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/ShelterScene.unity
     guid: f79ab168dcb6b7d40ae8a815943a70c6
-  - enabled: 1
-    path: Assets/Scenes/StartScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 0
-    path: Assets/Samples/YooAsset/3.0.5/Space Shooter/Boot.unity
-    guid: 74f3a1e5a49ff2441917b85cabc1d732
+    path: Assets/Scenes/RaidScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/BootScene.unity
+    guid: 0f4e25ae46b6d814b85d61113afd9e79
   m_configObjects: {}

@@ -67,7 +67,7 @@ public static class PlayerSurvivalHUDSceneBuilder
         if (EditorPrefs.GetBool(key, false)) return;
 
         var activeScene = SceneManager.GetActiveScene();
-        if (!activeScene.IsValid() || activeScene.path != "Assets/Scenes/StartScene.unity") return;
+        if (!activeScene.IsValid() || activeScene.path != "Assets/Scenes/RaidScene.unity") return;
 
         var existing = UnityEngine.Object.FindObjectOfType<PlayerSurvivalHUD>(true);
         if (existing != null)
@@ -89,7 +89,7 @@ public static class PlayerSurvivalHUDSceneBuilder
 
     private static void OnSceneSaved(Scene scene)
     {
-        if (scene.path != "Assets/Scenes/StartScene.unity") return;
+        if (scene.path != "Assets/Scenes/RaidScene.unity") return;
         var existing = UnityEngine.Object.FindObjectOfType<PlayerSurvivalHUD>(true);
         if (existing != null && existing.HasRequiredReferences)
             EditorPrefs.SetBool(GetInstallKey(), true);
@@ -128,7 +128,7 @@ public static class PlayerSurvivalHUDSceneBuilder
         var canvas = FindMainCanvas();
         if (canvas == null)
         {
-            if (!silent) EditorUtility.DisplayDialog("人物 HUD", "没有找到可用的主 Canvas，请先打开 StartScene。", "知道了");
+            if (!silent) EditorUtility.DisplayDialog("人物 HUD", "没有找到可用的主 Canvas，请先打开 RaidScene。", "知道了");
             return null;
         }
         buildFont = FindHudFont(canvas);

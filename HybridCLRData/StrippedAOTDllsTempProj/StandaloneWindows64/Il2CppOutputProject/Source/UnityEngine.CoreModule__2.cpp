@@ -15552,7 +15552,7 @@ IL_001c:
 		Type_t* L_6 = ___0_type;
 		NullCheck(L_6);
 		Type_t* L_7;
-		L_7 = VirtualFuncInvoker0< Type_t* >::Invoke(108, L_6);
+		L_7 = VirtualFuncInvoker0< Type_t* >::Invoke(148, L_6);
 		___0_type = L_7;
 	}
 
@@ -15657,7 +15657,7 @@ IL_0008:
 		Type_t* L_4 = ___0_klass;
 		NullCheck(L_4);
 		Type_t* L_5;
-		L_5 = VirtualFuncInvoker0< Type_t* >::Invoke(108, L_4);
+		L_5 = VirtualFuncInvoker0< Type_t* >::Invoke(148, L_4);
 		V_2 = L_5;
 		RequireComponentU5BU5D_t29B8922A4CC605C50E015637033A7A4B0EF564E9* L_6 = V_1;
 		V_3 = L_6;
@@ -16039,7 +16039,7 @@ IL_0017:
 		Type_t* L_5 = ___0_klass;
 		NullCheck(L_5);
 		Type_t* L_6;
-		L_6 = VirtualFuncInvoker0< Type_t* >::Invoke(108, L_5);
+		L_6 = VirtualFuncInvoker0< Type_t* >::Invoke(148, L_5);
 		___0_klass = L_6;
 	}
 
@@ -17589,7 +17589,7 @@ IL_0018:
 		ObjectU5BU5D_t8061030B0A12A55D5AD8652A20C922FE99450918* L_9 = V_0;
 		NullCheck(L_6);
 		RuntimeObject* L_10;
-		L_10 = VirtualFuncInvoker8< RuntimeObject*, String_t*, int32_t, Binder_t91BFCE95A7057FADF4D8A1A342AFE52872246235*, RuntimeObject*, ObjectU5BU5D_t8061030B0A12A55D5AD8652A20C922FE99450918*, ParameterModifierU5BU5D_t685261AD991B1E6582A0E53243DEE3B745E13364*, CultureInfo_t9BA817D41AD55AC8BD07480DD8AC22F8FFA378E0*, StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* >::Invoke(109, L_6, L_7, ((int32_t)308), (Binder_t91BFCE95A7057FADF4D8A1A342AFE52872246235*)NULL, L_8, L_9, (ParameterModifierU5BU5D_t685261AD991B1E6582A0E53243DEE3B745E13364*)NULL, (CultureInfo_t9BA817D41AD55AC8BD07480DD8AC22F8FFA378E0*)NULL, (StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248*)NULL);
+		L_10 = VirtualFuncInvoker8< RuntimeObject*, String_t*, int32_t, Binder_t91BFCE95A7057FADF4D8A1A342AFE52872246235*, RuntimeObject*, ObjectU5BU5D_t8061030B0A12A55D5AD8652A20C922FE99450918*, ParameterModifierU5BU5D_t685261AD991B1E6582A0E53243DEE3B745E13364*, CultureInfo_t9BA817D41AD55AC8BD07480DD8AC22F8FFA378E0*, StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* >::Invoke(151, L_6, L_7, ((int32_t)308), (Binder_t91BFCE95A7057FADF4D8A1A342AFE52872246235*)NULL, L_8, L_9, (ParameterModifierU5BU5D_t685261AD991B1E6582A0E53243DEE3B745E13364*)NULL, (CultureInfo_t9BA817D41AD55AC8BD07480DD8AC22F8FFA378E0*)NULL, (StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248*)NULL);
 		V_2 = L_10;
 		goto IL_0032;
 	}
@@ -17968,7 +17968,7 @@ IL_00a7:
 		Type_t* L_33 = ___0_enumType;
 		NullCheck(L_33);
 		FieldInfoU5BU5D_t50D47CBECF1AEB152F555803E3329D9E34DBF8D8* L_34;
-		L_34 = VirtualFuncInvoker1< FieldInfoU5BU5D_t50D47CBECF1AEB152F555803E3329D9E34DBF8D8*, int32_t >::Invoke(84, L_33, ((int32_t)24));
+		L_34 = VirtualFuncInvoker1< FieldInfoU5BU5D_t50D47CBECF1AEB152F555803E3329D9E34DBF8D8*, int32_t >::Invoke(114, L_33, ((int32_t)24));
 		V_2 = L_34;
 		List_1_t2EC26D0ED018C658813F1744B58498EF88D4A3C7* L_35 = (List_1_t2EC26D0ED018C658813F1744B58498EF88D4A3C7*)il2cpp_codegen_object_new(List_1_t2EC26D0ED018C658813F1744B58498EF88D4A3C7_il2cpp_TypeInfo_var);
 		List_1__ctor_mA9DDF7BE6D217D447049C8BEE35CD8A1EF93F3CE(L_35, List_1__ctor_mA9DDF7BE6D217D447049C8BEE35CD8A1EF93F3CE_RuntimeMethod_var);
@@ -22272,7 +22272,7 @@ IL_0050:
 		Type_t* L_14 = V_4;
 		NullCheck(L_14);
 		String_t* L_15;
-		L_15 = VirtualFuncInvoker0< String_t* >::Invoke(23, L_14);
+		L_15 = VirtualFuncInvoker0< String_t* >::Invoke(29, L_14);
 		V_5 = L_15;
 		String_t* L_16 = V_5;
 		bool L_17;
@@ -22422,7 +22422,7 @@ IL_00fd:
 		Type_t* L_63 = V_4;
 		NullCheck(L_63);
 		String_t* L_64;
-		L_64 = VirtualFuncInvoker0< String_t* >::Invoke(23, L_63);
+		L_64 = VirtualFuncInvoker0< String_t* >::Invoke(29, L_63);
 		bool L_65;
 		L_65 = String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1(L_64, _stringLiteralCFEF3227A766442073C70EFE7DC19B6BA9C63006, NULL);
 		if (L_65)
@@ -22448,7 +22448,7 @@ IL_0157:
 		Type_t* L_69 = V_4;
 		NullCheck(L_69);
 		String_t* L_70;
-		L_70 = VirtualFuncInvoker0< String_t* >::Invoke(23, L_69);
+		L_70 = VirtualFuncInvoker0< String_t* >::Invoke(29, L_69);
 		bool L_71;
 		L_71 = String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1(L_70, _stringLiteralCFEF3227A766442073C70EFE7DC19B6BA9C63006, NULL);
 		if (L_71)
@@ -22474,7 +22474,7 @@ IL_0180:
 		Type_t* L_75 = V_4;
 		NullCheck(L_75);
 		String_t* L_76;
-		L_76 = VirtualFuncInvoker0< String_t* >::Invoke(23, L_75);
+		L_76 = VirtualFuncInvoker0< String_t* >::Invoke(29, L_75);
 		bool L_77;
 		L_77 = String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1(L_76, _stringLiteralCFEF3227A766442073C70EFE7DC19B6BA9C63006, NULL);
 		if (L_77)
@@ -22500,7 +22500,7 @@ IL_01a6:
 		Type_t* L_81 = V_4;
 		NullCheck(L_81);
 		String_t* L_82;
-		L_82 = VirtualFuncInvoker0< String_t* >::Invoke(23, L_81);
+		L_82 = VirtualFuncInvoker0< String_t* >::Invoke(29, L_81);
 		bool L_83;
 		L_83 = String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1(L_82, _stringLiteralBBC2A8FA40339CF6B9A8FCC9206726EA012A8886, NULL);
 		if (L_83)
@@ -22538,7 +22538,7 @@ IL_01cc:
 		Type_t* L_90 = V_4;
 		NullCheck(L_90);
 		String_t* L_91;
-		L_91 = VirtualFuncInvoker0< String_t* >::Invoke(23, L_90);
+		L_91 = VirtualFuncInvoker0< String_t* >::Invoke(29, L_90);
 		bool L_92;
 		L_92 = String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1(L_91, _stringLiteralCFEF3227A766442073C70EFE7DC19B6BA9C63006, NULL);
 		G_B26_0 = ((int32_t)(L_92));
@@ -26520,7 +26520,7 @@ IL_0038:
 		L_14 = Object_GetType_mE10A8FC1E57F3DF29972CCBC026C2DC3942263B3(L_13, NULL);
 		NullCheck(L_14);
 		Type_t* L_15;
-		L_15 = VirtualFuncInvoker0< Type_t* >::Invoke(45, L_14);
+		L_15 = VirtualFuncInvoker0< Type_t* >::Invoke(54, L_14);
 		int32_t L_16;
 		L_16 = UnsafeUtility_SizeOf_m8495884C739B0E573EDD53047B8F259F9A15BD46(L_15, NULL);
 		ComputeBuffer_InternalSetData_m0F23DBED5DD30640EC4DFDF0309BCB2D1AAA9089(__this, L_10, 0, 0, L_12, L_16, NULL);
@@ -26653,7 +26653,7 @@ IL_007b:
 		L_34 = Object_GetType_mE10A8FC1E57F3DF29972CCBC026C2DC3942263B3(L_33, NULL);
 		NullCheck(L_34);
 		Type_t* L_35;
-		L_35 = VirtualFuncInvoker0< Type_t* >::Invoke(45, L_34);
+		L_35 = VirtualFuncInvoker0< Type_t* >::Invoke(54, L_34);
 		il2cpp_codegen_runtime_class_init_inline(Marshal_tD976A56A90263C3CE2B780D4B1CADADE2E70B4A7_il2cpp_TypeInfo_var);
 		int32_t L_36;
 		L_36 = Marshal_SizeOf_mED64846722033D6F60C2973CA604B7C2D7D4A1B7(L_35, NULL);

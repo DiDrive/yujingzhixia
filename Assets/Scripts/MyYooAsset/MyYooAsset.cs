@@ -23,16 +23,23 @@ public class MyYooAsset : MonoBehaviour
     public int filedRetryNum = 3; //失败重试次数
     public ResourceDownloaderOperation downloader;//下载器操作对象
 
-    private AssetHandle _testSpriteHandle;//测试Sprite加载句柄
-
     [SerializeField]
     private bool clearDownloadCacheForTest = false;//是否在测试时清理下载缓存
 
     [SerializeField]
     private LoadDll hotUpdateDllLoader;//热更新DLL加载器
+
+    public static MyYooAsset Instance { get; private set; }
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if(Instance !=null && Instance != this){
+            Destroy(transform.root.gameObject);
+            return;
+        }
+        Instance = this;
+        // MyYooAsset和LoadDll都是BootstrapRoot的子节点。
+        // DontDestroyOnLoad只对根对象生效，因此保留整棵启动层对象。
+        DontDestroyOnLoad(transform.root.gameObject);
     }
     // Start is called before the first frame update
     IEnumerator Start()
@@ -121,33 +128,35 @@ public class MyYooAsset : MonoBehaviour
         downloader =  package.CreateResourceDownloader(optionsDownloader);
         if(downloader.TotalDownloadCount==0){
             Debug.LogWarning("没有文件需要下载");
-            yield return UpdateDone();
-            yield break;
         }else{
             int downloadCount = downloader.TotalDownloadCount;
             long bytes =downloader.TotalDownloadBytes;
             Debug.Log($"需要下载{downloadCount}个文件,大小是{bytes/1024/1024}MB");
+            //开始下载
+            downloader.DownloadProgressChanged += ProgressCallback;
+            downloader.DownloadError += DownloadErrorCallback;
+            downloader.StartDownload();
+            yield return downloader;
+            if(downloader.Status != EOperationStatus.Succeeded){
+                Debug.LogWarning(downloader.Error);
+                yield break;
+            }else{
+                Debug.Log($"下载完成...........");
+                //UpdateDone();
+            }
         }
-
-        //开始下载
-        downloader.DownloadProgressChanged += ProgressCallback;
-        downloader.DownloadError += DownloadErrorCallback;
-        downloader.StartDownload();
-        yield return downloader;
-        if(downloader.Status != EOperationStatus.Succeeded){
-            Debug.LogWarning(downloader.Error);
-            yield break;
-        }else{
-            Debug.Log($"下载完成...........");
-            //UpdateDone();
-        }
-
 
         //清理文件
         var clearoptions = new ClearCacheOptions(ClearCacheMethods.ClearUnusedBundleFiles);
         var clearOperation = package.ClearCacheAsync(clearoptions);
-        clearOperation.Completed += ClearCacheOperation_Completed;
-
+        yield return clearOperation;
+        if(clearOperation.Status != EOperationStatus.Succeeded){
+            Debug.LogWarning($"清理无用缓存失败：{clearOperation.Error}");
+            yield break;
+        }else{
+            Debug.Log($"清除缓存完成...........");
+        }
+       yield return UpdateDone();
     }
 
     /// <summary>
@@ -189,73 +198,83 @@ private IEnumerator UpdateDone()
 
     if (!hotUpdateDllLoader.IsLoadSucceeded)
     {
-        Debug.LogError("热更新DLL加载或Hello.Run执行失败，停止后续流程");
+        Debug.LogError("HotUpdate.dll 加载失败，不能进入游戏场景");
         yield break;
     }
+    Debug.Log($"HotUpdate.dll 加载成功...........");
 
-    // 使用构建报告里的资源地址
-    _testSpriteHandle = package.LoadAssetAsync<Sprite>("bandage");
+    // 从这里开始交给HotUpdate.dll。AOT层只认识反射调用器，不引用GameEntry类型。
+    yield return hotUpdateDllLoader.RunHotUpdateEntry(package);
 
-    // 等待异步加载完成
-    yield return _testSpriteHandle;
-
-    if (_testSpriteHandle.Status != EOperationStatus.Succeeded)
+    if (!hotUpdateDllLoader.IsEntrySucceeded)
     {
-        Debug.LogError(
-            $"Sprite 加载失败：{_testSpriteHandle.Error}");
+        Debug.LogError("热更新入口执行失败，停止启动流程");
         yield break;
     }
-
-    Sprite sprite = _testSpriteHandle.AssetObject as Sprite;
-
-    if (sprite == null)
-    {
-        Debug.LogError("资源操作成功，但 AssetObject 转换为 Sprite 失败");
-        yield break;
-    }
-
-    GameObject test = new GameObject("YooAssetSpriteTest");
-    SpriteRenderer renderer = test.AddComponent<SpriteRenderer>();
-    renderer.sprite = sprite;
-
-
-    Debug.Log($"Sprite 加载成功：{sprite.name}");
-
-    //LoadScene("StartScene");
-    LoadSubObject("Arrow");
-    UnloadUnusedAssets();
 }
 
     /// <summary>
     /// 清理文件完成回调
     /// </summary>
-    private void ClearCacheOperation_Completed(AsyncOperationBase obj)
-    {
-        StartCoroutine(UpdateDone());
-    }
+    // private void ClearCacheOperation_Completed(AsyncOperationBase obj)
+    // {
+    //     StartCoroutine(UpdateDone());
+    // }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     /// <summary>
-    /// 场景加载
+    /// 销毁时，将实例设为null
     /// </summary>
-    public async void LoadScene(string scenename, UnityEngine.SceneManagement.LoadSceneMode sceneMode = UnityEngine.SceneManagement.LoadSceneMode.Single)
+    private void OnDestroy()
     {
-        bool suspendLoad = false;//是否激活场景
-        var physicsMode =LocalPhysicsMode.None;
-        if (string.IsNullOrEmpty(scenename))
-        {
-            Debug.LogError("场景名称不能为空");
-            return;
+        if(Instance == this){
+            Instance = null;
         }
-        SceneHandle handle = package.LoadSceneAsync(scenename, sceneMode,physicsMode, suspendLoad);
-        await handle;
-        Debug.Log($"场景加载完成:{handle.SceneName}");
     }
+
+    /// <summary>
+    /// 加载YooAsset场景
+    /// </summary>
+    public IEnumerator LoadYooAssetScene(
+    string sceneName,
+    LoadSceneMode loadMode = LoadSceneMode.Single)
+{
+    if (string.IsNullOrWhiteSpace(sceneName))
+    {
+        Debug.LogError("场景名称不能为空");
+        yield break;
+    }
+
+    if (package == null)
+    {
+        Debug.LogError("YooAsset Package 尚未初始化");
+        yield break;
+    }
+
+    Debug.Log($"开始加载 YooAsset 场景：{sceneName}");
+
+    SceneHandle handle = package.LoadSceneAsync(
+        sceneName,
+        loadMode,
+        LocalPhysicsMode.None,
+        true);
+
+    yield return handle;
+
+    if (handle.Status != EOperationStatus.Succeeded)
+    {
+        Debug.LogError(
+            $"场景加载失败：{sceneName}\n{handle.Error}");
+        yield break;
+    }
+
+    Debug.Log($"场景加载完成：{handle.SceneName}");
+}
+
 
 
     /// <summary>

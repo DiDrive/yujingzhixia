@@ -8602,7 +8602,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR VolumeParameterU5BU2CU5D_tA6890806B6A24026841
 		L_0 = VolumeDebugSettings_1_get_selectedComponentType_m2E4AEBF732995355C1820B03B3342CA4AF77F81F(__this, il2cpp_rgctx_method(method->klass->rgctx_data, 15));
 		NullCheck(L_0);
 		FieldInfoU5BU5D_t50D47CBECF1AEB152F555803E3329D9E34DBF8D8* L_1;
-		L_1 = VirtualFuncInvoker1< FieldInfoU5BU5D_t50D47CBECF1AEB152F555803E3329D9E34DBF8D8*, int32_t >::Invoke(84, L_0, (int32_t)((int32_t)52));
+		L_1 = VirtualFuncInvoker1< FieldInfoU5BU5D_t50D47CBECF1AEB152F555803E3329D9E34DBF8D8*, int32_t >::Invoke(114, L_0, (int32_t)((int32_t)52));
 		il2cpp_codegen_runtime_class_init_inline(il2cpp_rgctx_data(method->klass->rgctx_data, 19));
 		Func_2_t03668587D04B8ECC3E6CE9EF3B2852118286E630* L_2 = ((U3CU3Ec_t0C8B5DB0FF89E90637B78D3803BB3516821A41D3_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_rgctx_data(method->klass->rgctx_data, 19)))->___U3CU3E9__37_0;
 		Func_2_t03668587D04B8ECC3E6CE9EF3B2852118286E630* L_3 = L_2;

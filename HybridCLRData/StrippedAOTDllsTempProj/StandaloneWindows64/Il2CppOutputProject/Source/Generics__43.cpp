@@ -16436,7 +16436,7 @@ IL_002b:
 		L_8 = Type_GetTypeFromHandle_m6062B81682F79A4D6DF2640692EE6D9987858C57(L_7, NULL);
 		NullCheck(L_6);
 		bool L_9;
-		L_9 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_6, L_8);
+		L_9 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_6, L_8);
 		if (L_9)
 		{
 			goto IL_0061;
@@ -16452,7 +16452,7 @@ IL_002b:
 		L_13 = Type_GetTypeFromHandle_m6062B81682F79A4D6DF2640692EE6D9987858C57(L_12, NULL);
 		NullCheck(L_11);
 		bool L_14;
-		L_14 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_11, L_13);
+		L_14 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_11, L_13);
 		if (!L_14)
 		{
 			goto IL_006d;
@@ -16479,7 +16479,7 @@ IL_006d:
 		L_19 = Type_GetTypeFromHandle_m6062B81682F79A4D6DF2640692EE6D9987858C57(L_18, NULL);
 		NullCheck(L_17);
 		bool L_20;
-		L_20 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(21, L_17, L_19);
+		L_20 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_17, L_19);
 		if (!L_20)
 		{
 			goto IL_0094;

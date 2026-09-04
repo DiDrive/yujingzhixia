@@ -11717,7 +11717,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SerializableEnum__ctor_m0EC8862E7D14F1C0
 		Type_t* L_0 = ___0_enumType;
 		NullCheck(L_0);
 		String_t* L_1;
-		L_1 = VirtualFuncInvoker0< String_t* >::Invoke(24, L_0);
+		L_1 = VirtualFuncInvoker0< String_t* >::Invoke(30, L_0);
 		__this->___m_EnumTypeAsString = L_1;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___m_EnumTypeAsString), (void*)L_1);
 		Type_t* L_2 = ___0_enumType;
