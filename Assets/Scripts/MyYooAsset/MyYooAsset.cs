@@ -29,6 +29,14 @@ public class MyYooAsset : MonoBehaviour
     [SerializeField]
     private LoadDll hotUpdateDllLoader;//热更新DLL加载器
 
+    [SerializeField]
+    private BootUpdateUI updateUI;//BootScene中可编辑的更新界面
+
+    private bool isUpdating;
+    private bool yooAssetsInitialized;
+    private bool packageInitialized;
+    private bool readyToEnter;
+
     public static MyYooAsset Instance { get; private set; }
     private void Awake()
     {
@@ -41,12 +49,48 @@ public class MyYooAsset : MonoBehaviour
         // DontDestroyOnLoad只对根对象生效，因此保留整棵启动层对象。
         DontDestroyOnLoad(transform.root.gameObject);
     }
-    // Start is called before the first frame update
-    IEnumerator Start()
+    private void Start()
     {
-        
+        if (updateUI == null)
+            updateUI = FindObjectOfType<BootUpdateUI>(true);
+
+        updateUI?.Bind(this);
+        BeginUpdate();
+    }
+
+    public void RetryUpdate()
+    {
+        BeginUpdate();
+    }
+
+    public void EnterGame()
+    {
+        if (!readyToEnter || isUpdating)
+            return;
+
+        readyToEnter = false;
+        StartCoroutine(EnterGameFlow());
+    }
+
+    private void BeginUpdate()
+    {
+        if (isUpdating) return;
+        readyToEnter = false;
+        StartCoroutine(UpdateFlow());
+    }
+
+    private IEnumerator UpdateFlow()
+    {
+        isUpdating = true;
+        updateUI?.Bind(this);
+        updateUI?.ShowPreparing();
+
         //初始化YooAsset
-        YooAssets.Initialize();
+        if (!yooAssetsInitialized)
+        {
+            YooAssets.Initialize();
+            yooAssetsInitialized = true;
+        }
         YooAssets.TryGetPackage(packageName,out package);
         if (package == null){
             package = YooAssets.CreatePackage(packageName);
@@ -67,37 +111,45 @@ public class MyYooAsset : MonoBehaviour
         cacheFs.AddParameter(EFileSystemParameter.AssetBundleDecryptor, new BundleEncryption.Decryptor());
         createParameters.CacheFileSystemParameters = cacheFs;
         
-        //执行初始化操作
-        InitializePackageOperation initializeOperation = package.InitializePackageAsync(createParameters);
-        yield return initializeOperation;
+        //执行初始化操作。重试远程步骤时不重复初始化已经成功的Package。
+        if (!packageInitialized)
+        {
+            updateUI?.ShowStage("正在初始化资源系统", packageName);
+            InitializePackageOperation initializeOperation = package.InitializePackageAsync(createParameters);
+            yield return initializeOperation;
 
-        if(initializeOperation.Status != EOperationStatus.Succeeded){
-            Debug.LogWarning(initializeOperation.Error);
-            yield break;
-        }else{
-            Debug.Log("初始化成功........");
+            if(initializeOperation.Status != EOperationStatus.Succeeded){
+                FinishWithError("资源系统初始化", initializeOperation.Error);
+                yield break;
+            }else{
+                packageInitialized = true;
+                Debug.Log("初始化成功........");
+            }
         }
 
         //获取资源版本
+        updateUI?.ShowStage("正在检查资源版本", defaultHostServer);
         Debug.Log("开始请求远程资源版本...");
         var versionOptions = new RequestPackageVersionOptions();
         var operation = package.RequestPackageVersionAsync(versionOptions);
         yield return operation;
         Debug.Log($"远程版本请求结束，状态：{operation.Status}");
         if(operation.Status != EOperationStatus.Succeeded){
-            Debug.LogError($"获取远程版本失败：{operation.Error}");
+            FinishWithError("获取资源版本", operation.Error);
             yield break;
         }else{
             Debug.Log($"获取版本:{operation.PackageVersion}");
             packageVersion = operation.PackageVersion;
+            updateUI?.ShowVersion(packageVersion);
         }
 
         //获取文件清单
+        updateUI?.ShowStage("正在获取资源清单", $"版本 {packageVersion}");
         var options = new LoadPackageManifestOptions(packageVersion, 60);//加载文件清单选项,超时时间60秒
         var loadOperationManifest = package.LoadPackageManifestAsync(options);//加载文件清单操作
         yield return loadOperationManifest;
         if(loadOperationManifest.Status != EOperationStatus.Succeeded){
-            Debug.LogWarning(loadOperationManifest.Error);
+            FinishWithError("获取资源清单", loadOperationManifest.Error);
             yield break;
         }else{
             Debug.Log($"获取文件清单成功...........");
@@ -116,7 +168,7 @@ public class MyYooAsset : MonoBehaviour
 
             if (clearAllOperation.Status != EOperationStatus.Succeeded)
             {
-                Debug.LogError($"清除下载缓存失败：{clearAllOperation.Error}");
+                FinishWithError("清除测试缓存", clearAllOperation.Error);
                 yield break;
             }
 
@@ -128,17 +180,21 @@ public class MyYooAsset : MonoBehaviour
         downloader =  package.CreateResourceDownloader(optionsDownloader);
         if(downloader.TotalDownloadCount==0){
             Debug.LogWarning("没有文件需要下载");
+            updateUI?.ShowStage("资源已经是最新版本", "正在验证游戏内容……");
         }else{
             int downloadCount = downloader.TotalDownloadCount;
             long bytes =downloader.TotalDownloadBytes;
             Debug.Log($"需要下载{downloadCount}个文件,大小是{bytes/1024/1024}MB");
+            updateUI?.ShowDownloadPlan(downloadCount, bytes);
             //开始下载
             downloader.DownloadProgressChanged += ProgressCallback;
             downloader.DownloadError += DownloadErrorCallback;
             downloader.StartDownload();
             yield return downloader;
+            downloader.DownloadProgressChanged -= ProgressCallback;
+            downloader.DownloadError -= DownloadErrorCallback;
             if(downloader.Status != EOperationStatus.Succeeded){
-                Debug.LogWarning(downloader.Error);
+                FinishWithError("下载资源", downloader.Error);
                 yield break;
             }else{
                 Debug.Log($"下载完成...........");
@@ -146,17 +202,27 @@ public class MyYooAsset : MonoBehaviour
             }
         }
 
-        //清理文件
+        //清理失败不阻断启动；新Manifest和资源已经可用。
+        updateUI?.ShowStage("正在清理旧资源", "请稍候……");
         var clearoptions = new ClearCacheOptions(ClearCacheMethods.ClearUnusedBundleFiles);
         var clearOperation = package.ClearCacheAsync(clearoptions);
         yield return clearOperation;
         if(clearOperation.Status != EOperationStatus.Succeeded){
             Debug.LogWarning($"清理无用缓存失败：{clearOperation.Error}");
-            yield break;
         }else{
             Debug.Log($"清除缓存完成...........");
         }
-       yield return UpdateDone();
+        yield return UpdateDone();
+        isUpdating = false;
+        if (readyToEnter)
+        {
+            bool waitingForClick = updateUI != null && updateUI.ShowReadyToEnter();
+            if (!waitingForClick)
+            {
+                Debug.LogWarning("启动界面没有绑定进入游戏按钮，将继续自动进入游戏");
+                EnterGame();
+            }
+        }
     }
 
     /// <summary>
@@ -168,6 +234,12 @@ public class MyYooAsset : MonoBehaviour
         Debug.Log($"下载进度:{args.CurrentDownloadCount}/{args.TotalDownloadCount},"+
         $"{args.CurrentDownloadBytes/1024f/1024f:F2}/{args.TotalDownloadBytes/1024f/1024f:F2}MB,"+
         $"进度{args.Progress:P1}");
+        updateUI?.ShowDownloadProgress(
+            args.CurrentDownloadCount,
+            args.TotalDownloadCount,
+            args.CurrentDownloadBytes,
+            args.TotalDownloadBytes,
+            args.Progress);
     
     }
     /// <summary>
@@ -178,11 +250,28 @@ public class MyYooAsset : MonoBehaviour
         Debug.LogError($"下载错误:{args.ErrorInfo}");
     }
 
+    private void FinishWithError(string stage, string error)
+    {
+        isUpdating = false;
+        readyToEnter = false;
+        var message = string.IsNullOrWhiteSpace(error) ? "未知错误" : error;
+        Debug.LogError($"{stage}失败：{message}");
+        updateUI?.ShowError(stage, message);
+    }
+
     /// <summary>
     /// 热更新完成
     /// </summary>
 private IEnumerator UpdateDone()
 {
+    updateUI?.ShowStage("正在加载游戏配置", "物品与掉落数据");
+    yield return GameContentService.InitializeAsync(package);
+
+    if (!GameContentService.IsReady)
+    {
+        FinishWithError("游戏配置初始化", GameContentService.Error);
+        yield break;
+    }
     // 此时Package初始化、Manifest加载和资源下载流程都已完成。
     // 在这里加载HotUpdate.dll，避免LoadDll.Start抢在YooAsset初始化之前执行。
     if (hotUpdateDllLoader == null)
@@ -190,27 +279,38 @@ private IEnumerator UpdateDone()
 
     if (hotUpdateDllLoader == null)
     {
-        Debug.LogError("没有找到LoadDll组件，无法加载热更新DLL");
+        FinishWithError("加载热更新代码", "没有找到LoadDll组件");
         yield break;
     }
 
+    updateUI?.ShowStage("正在加载热更新代码", "HotUpdate.dll");
     yield return hotUpdateDllLoader.LoadHotUpdateDll(package);
 
     if (!hotUpdateDllLoader.IsLoadSucceeded)
     {
-        Debug.LogError("HotUpdate.dll 加载失败，不能进入游戏场景");
+        FinishWithError("加载热更新代码", "HotUpdate.dll 加载失败，请查看日志");
         yield break;
     }
     Debug.Log($"HotUpdate.dll 加载成功...........");
+
+    readyToEnter = true;
+}
+
+private IEnumerator EnterGameFlow()
+{
+    isUpdating = true;
+    updateUI?.ShowEnteringGame();
 
     // 从这里开始交给HotUpdate.dll。AOT层只认识反射调用器，不引用GameEntry类型。
     yield return hotUpdateDllLoader.RunHotUpdateEntry(package);
 
     if (!hotUpdateDllLoader.IsEntrySucceeded)
     {
-        Debug.LogError("热更新入口执行失败，停止启动流程");
+        FinishWithError("进入游戏", "热更新入口执行失败，请查看日志");
         yield break;
     }
+
+    isUpdating = false;
 }
 
     /// <summary>
@@ -232,6 +332,7 @@ private IEnumerator UpdateDone()
     private void OnDestroy()
     {
         if(Instance == this){
+            GameContentService.Release();
             Instance = null;
         }
     }

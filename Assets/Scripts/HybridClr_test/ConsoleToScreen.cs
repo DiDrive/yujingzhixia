@@ -13,7 +13,15 @@ public class ConsoleToScreen : MonoBehaviour
 
     public int fontSize = 15;
 
-    void OnEnable() { Application.logMessageReceived += Log; }
+    [Tooltip("仅排查启动问题时开启。正式运行时请保持关闭，日志仍会写入Unity Console和Player.log。")]
+    public bool showOnScreenLogs = false;
+
+    void OnEnable()
+    {
+        if (showOnScreenLogs)
+            Application.logMessageReceived += Log;
+    }
+
     void OnDisable() { Application.logMessageReceived -= Log; }
 
     public void Log(string logString, string stackTrace, LogType type)
@@ -47,6 +55,9 @@ public class ConsoleToScreen : MonoBehaviour
 
     void OnGUI()
     {
+        if (!showOnScreenLogs)
+            return;
+
         GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity,
            new Vector3(Screen.width / 1200.0f, Screen.height / 800.0f, 1.0f));
         GUI.Label(new Rect(10, 10, 800, 370), _logStr, new GUIStyle() { fontSize = Math.Max(10, fontSize) });

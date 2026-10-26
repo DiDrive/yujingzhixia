@@ -1,0 +1,1127 @@
+{
+  "documentation": "字段说明：tableId 是调用名称；minRolls/maxRolls 是一次掉落抽取次数范围；allowDuplicates 表示同一物品能否在一次抽取中重复选中；minQuantity/maxQuantity 是选中后的数量范围；weight 是相对权重而不是百分比。description 仅作说明，不参与计算。",
+  "tables": [
+    {
+      "description": "通用生存物资表。LootPoint、SearchableLootContainer 的默认值以及 GameBootstrap 调试发放会使用它；预制体可通过 lootTableId 覆盖。",
+      "tableId": "survival_basic",
+      "minRolls": 2,
+      "maxRolls": 4,
+      "allowDuplicates": true,
+      "entries": [
+        {
+          "itemId": "food_canned",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 35
+        },
+        {
+          "itemId": "water_bottle",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 30
+        },
+        {
+          "itemId": "bandage",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 20
+        },
+        {
+          "itemId": "cloth_raw",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 15
+        },
+        {
+          "itemId": "dry_dog_food",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 8
+        },
+        {
+          "itemId": "watermelon",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 5
+        }
+      ]
+    },
+    {
+      "description": "平民僵尸尸体掉落表。ZombieCorpseLootController 默认使用，搜索僵尸尸体时从这里抽取。",
+      "tableId": "zombie_civilian",
+      "minRolls": 1,
+      "maxRolls": 3,
+      "allowDuplicates": false,
+      "entries": [
+        {
+          "itemId": "cloth_raw",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 35
+        },
+        {
+          "itemId": "bandage",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 18
+        },
+        {
+          "itemId": "batteries",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 14
+        },
+        {
+          "itemId": "energy_bar",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 12
+        },
+        {
+          "itemId": "receipt",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 10
+        },
+        {
+          "itemId": "credit_card_1",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 6
+        }
+      ]
+    },
+    {
+      "description": "基础医疗物资表，供医疗箱或医疗区域使用。目前项目中没有预制体或场景直接引用，需要把目标容器的 lootTableId 设置为 medical_basic 后才会生效。",
+      "tableId": "medical_basic",
+      "minRolls": 1,
+      "maxRolls": 3,
+      "allowDuplicates": true,
+      "entries": [
+        {
+          "itemId": "bandage",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 75
+        },
+        {
+          "itemId": "cloth_raw",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 25
+        },
+        {
+          "itemId": "medical_box",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 10
+        }
+      ]
+    },
+    {
+      "description": "基础材料资源表，供材料箱或资源点使用。目前项目中没有预制体或场景直接引用，需要把目标容器的 lootTableId 设置为 resource_basic 后才会生效。",
+      "tableId": "resource_basic",
+      "minRolls": 2,
+      "maxRolls": 4,
+      "allowDuplicates": true,
+      "entries": [
+        {
+          "itemId": "cloth_raw",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 70
+        },
+        {
+          "itemId": "aluminum_foil",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 30
+        }
+      ]
+    },
+    {
+      "description": "夜袭胜利奖励表。NightAssaultSystem 在夜袭胜利结算时使用，当前固定抽取 3 次。",
+      "tableId": "night_assault_reward",
+      "minRolls": 3,
+      "maxRolls": 3,
+      "allowDuplicates": true,
+      "entries": [
+        {
+          "itemId": "cloth_raw",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 45
+        },
+        {
+          "itemId": "aluminum_foil",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 25
+        },
+        {
+          "itemId": "bandage",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 15
+        },
+        {
+          "itemId": "food_canned",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 8
+        },
+        {
+          "itemId": "water_bottle",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 7
+        }
+      ]
+    },
+    {
+      "description": "全物品调试表，用于检查物品配置和搜索界面，不建议作为正式掉落表。当前 SearchableContainer_Survival 预制体指向此表。",
+      "tableId": "debug_all_items",
+      "minRolls": 2,
+      "maxRolls": 6,
+      "allowDuplicates": false,
+      "entries": [
+        {
+          "itemId": "food_canned",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "water_bottle",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "bandage",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "cloth_raw",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "aluminum_foil",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "dry_dog_food",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "watermelon",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 10000
+        },
+        {
+          "itemId": "medical_box",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "american_cheese_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "bacon",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "baking_powder",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "ball_pen",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "banana",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "bandage_box",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "barbeque_sauce",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "basket_metal",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "basket_yellow",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "bathroom_cleaner",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "batteries",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "bell_pepper",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "bell_pepper_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "body_lotion",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "bowl",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "bubble_gum",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "butter",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "butter2",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "cabbage",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "cabbage_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "candy_bar",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "cereal1",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "cereal2",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "chopping_board",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "cleaning_brush",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "cleaning_gloves",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "cleaning_gloves_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "coffee_bag",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "cookies",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "cooking_oil",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "credit_card_1",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "credit_card_2",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "credit_card_3",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "detergent",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "egg_box",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "egg_brown",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "egg_brown_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "egg_white",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "egg_white_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "energy_bar",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "eraser",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "eraser_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "fish",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "fish_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "flour",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "fruit_cocktail_can",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "frying_pan",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "frying_pan_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "glue",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "glue_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "glue_stick",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "grape_soda",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "green_apple",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "green_apple_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "green_grape",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "green_grape_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "hand_sanitiser",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "hot_cocoa_mix",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "jam_strawberry",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "ketchup",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "kitchen_knife_set",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "kitchen_knife_set_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "kitchen_soap",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "light_bulb",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "light_bulb_box",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "marshmallows",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "meat1",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "meat1_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "meat2",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "meat2_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "milk_bottle",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "milk_chocolate",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "milk_gallon",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "milk_pack",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "milk_plastic",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "mushroom_white",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "mushroom_white_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "mustard",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "olive_oil",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "orange_juice",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "paper_bag",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "peanut_butter",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "pencil_box",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "plain_yogurt",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "potato",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "potato_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "potatochip_blue",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "potatochip_green",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "potatochip_yellow",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "power_strip_typea",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "power_strip_typef",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "receipt",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "red_apple",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "red_apple_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "red_grape",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "red_grape_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "rolling_pin",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "rubber_duck",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "rubber_ducktopus",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "salmon",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "salmon_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "salt",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "sausage_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "scissors",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "scissors_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "scrub_brush",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "scrub_sponge",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "shampoo",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "sliced_bread_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "snack1",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "snack2",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "soap",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "soap_box",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "soft_drink_blue",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "soft_drink_green",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "soft_drink_red",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "soft_drink_yellow",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "spatula",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "spatula_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "strawberry",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "strawberry_ice_cream",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "strawberry_jam",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "strawberry_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "sugar",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "sun_cream_tube",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "teakettle",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "toilet_paper",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "toothbrush",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "toothbrush_set",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "toothpaste",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "toothpaste_box",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "tuna_can",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "vanilla_or_lemon_ice_cream",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "water",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "watermelon1",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "watermelon2",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "wax",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "wet_wipe",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "whisk",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "whisk_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "white_cheese",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "white_cheese_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "white_cheese_piece",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "white_cheese_piece_p",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "wine_red",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "wine_white",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "wine_white2",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        },
+        {
+          "itemId": "wine_white3",
+          "minQuantity": 1,
+          "maxQuantity": 5,
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

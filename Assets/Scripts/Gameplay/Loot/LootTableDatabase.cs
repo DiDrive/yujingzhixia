@@ -14,6 +14,8 @@ public class LootTableJsonEntry
 [Serializable]
 public class LootTableJsonDefinition
 {
+    [Tooltip("仅用于说明这张掉落表的用途，不参与掉落计算。")]
+    public string description;
     public string tableId;
     public int minRolls = 1;
     public int maxRolls = 3;
@@ -24,6 +26,8 @@ public class LootTableJsonDefinition
 [Serializable]
 public class LootTableJsonRoot
 {
+    [Tooltip("掉落表格式说明，仅供策划和开发人员阅读。")]
+    public string documentation;
     public List<LootTableJsonDefinition> tables = new();
 }
 
@@ -43,14 +47,32 @@ public class LootTableDatabase : MonoBehaviour
     public void Reload()
     {
         tableById.Clear();
-        var source = lootTablesJson != null ? lootTablesJson : Resources.Load<TextAsset>("Data/loot_tables");
-        if (source != null && !string.IsNullOrWhiteSpace(source.text))
+        var json = GameContentService.LootTablesJson;
+
+        #if UNITY_EDITOR
+        // 仅用于直接打开业务场景调试。
+        if (string.IsNullOrWhiteSpace(json))
         {
-            var root = JsonUtility.FromJson<LootTableJsonRoot>(source.text);
+            var source = lootTablesJson != null
+                ? lootTablesJson
+                : Resources.Load<TextAsset>("Data/loot_tables");
+
+            if (source != null)
+                json = source.text;
+        }
+        #endif
+
+        if (string.IsNullOrWhiteSpace(json))
+        {
+            Debug.LogError("无法读取掉落表 JSON");
+        }
+        else
+        {
+            var root =
+                JsonUtility.FromJson<LootTableJsonRoot>(json);
+
             RegisterTables(root?.tables);
         }
-
-        RegisterTables(fallbackTables);
     }
 
     public List<ItemStack> Roll(string tableId, int minRollsOverride = -1, int maxRollsOverride = -1)

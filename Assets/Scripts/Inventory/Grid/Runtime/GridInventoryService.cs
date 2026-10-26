@@ -103,7 +103,14 @@ public class GridInventoryService : MonoBehaviour
             });
         }
 
-        if (preferJsonItemDefinitions)
+        if (GameContentService.IsReady)
+        {
+            if (!TryLoadItemDefinitionsFromJson(true))
+            {
+                Debug.LogError("YooAsset 物品配置加载失败");
+            }
+        }
+        else if (preferJsonItemDefinitions)
         {
             TryLoadItemDefinitionsFromJson(true);
         }
@@ -1018,6 +1025,10 @@ public class GridInventoryService : MonoBehaviour
         return result;
     }
 
+    /// <summary>
+    /// 构建玩家容器优先级列表，按 quickTransferPriorityContainerIds 中的顺序排列，若未在列表中则按注册顺序排列。
+    /// </summary>
+    /// <returns></returns>
     private List<string> BuildPlayerContainerPriority()
     {
         var result = new List<string>();
@@ -1037,6 +1048,11 @@ public class GridInventoryService : MonoBehaviour
         return result;
     }
 
+    /// <summary>
+    /// 检查指定容器是否属于玩家。
+    /// </summary>
+    /// <param name="containerId">容器ID。</param>
+    /// <returns>是否属于玩家。</returns>
     private bool IsPlayerContainer(string containerId)
     {
         return !string.IsNullOrWhiteSpace(containerId) &&
@@ -1044,6 +1060,12 @@ public class GridInventoryService : MonoBehaviour
                ownerType == GridContainerOwnerType.Player;
     }
 
+    /// <summary>
+    /// 尝试将物品实例放置到指定容器的第一个可用位置。
+    /// </summary>
+    /// <param name="instanceId"></param>
+    /// <param name="containerId"></param>
+    /// <returns></returns>
     private bool TryPlaceFirstFit(string instanceId, string containerId)
     {
         if (!itemInstanceById.TryGetValue(instanceId, out var instance)) return false;
@@ -1056,6 +1078,13 @@ public class GridInventoryService : MonoBehaviour
         return TryPlace(instanceId, containerId, placement.row, placement.column, placement.rotation);
     }
 
+    /// <summary>
+    /// 尝试将指定数量的物品添加到指定的容器列表中，优先合并已有堆叠，若无法合并则创建新堆叠。
+    /// </summary>
+    /// <param name="itemId"></param>
+    /// <param name="amount"></param>
+    /// <param name="targetContainerIds"></param>
+    /// <returns></returns>
     private bool TryAddItemToContainers(string itemId, int amount, List<string> targetContainerIds)
     {
         if (string.IsNullOrWhiteSpace(itemId) || amount <= 0 || targetContainerIds == null || targetContainerIds.Count == 0) return false;
@@ -1121,6 +1150,11 @@ public class GridInventoryService : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// 回滚添加物品操作，将已修改的堆叠数量恢复为快照中的值，并移除新创建的物品实例。
+    /// </summary>
+    /// <param name="snapshots"></param>
+    /// <param name="createdInstanceIds"></param>
     private void RollbackAddOperation(List<StackCountSnapshot> snapshots, List<string> createdInstanceIds)
     {
         for (var i = 0; i < snapshots.Count; i++)
@@ -1134,14 +1168,36 @@ public class GridInventoryService : MonoBehaviour
         RollbackCreatedInstances(createdInstanceIds);
     }
 
+    /// <summary>
+    /// 尝试从 JSON 文件加载物品定义。JSON 文件路径为 Resources/Data/item_definitions.json。
+    /// </summary>
+    /// <param name="replaceExisting">是否替换已存在的物品定义</param>
+    /// <returns></returns>
     public bool TryLoadItemDefinitionsFromJson(bool replaceExisting)
     {
-        var source = itemDefinitionsJson != null
-            ? itemDefinitionsJson
-            : Resources.Load<TextAsset>("Data/item_definitions");
-        if (source == null || string.IsNullOrWhiteSpace(source.text)) return false;
+        var json = GameContentService.ItemDefinitionsJson;
 
-        var table = JsonUtility.FromJson<ItemDefinitionJsonTable>(source.text);
+        #if UNITY_EDITOR
+        // 允许直接打开 RaidScene 调试。
+        // 正常启动必须从 BootScene 进入并使用 YooAsset 配置。
+        if (string.IsNullOrWhiteSpace(json))
+        {
+            var source = itemDefinitionsJson != null
+                ? itemDefinitionsJson
+                : Resources.Load<TextAsset>("Data/item_definitions");
+
+            if (source != null)
+                json = source.text;
+        }
+        #endif
+
+        if (string.IsNullOrWhiteSpace(json))
+        {
+            Debug.LogError("无法读取物品定义 JSON");
+            return false;
+        }
+
+        var table = JsonUtility.FromJson<ItemDefinitionJsonTable>(json);
         if (table?.items == null || table.items.Count == 0) return false;
         if (replaceExisting) itemDefinitions.Clear();
         var knownIds = new HashSet<string>(itemDefinitions.Select(item => item.itemId));
