@@ -13,7 +13,7 @@ using UnityEngine.UI;
 public static class SyncFoodInventoryItems
 {
     private const string FoodFolder = "Assets/Resources/Characters/food";
-    private const string ItemDefinitionsJsonPath = "Assets/GameRes/Configs/item_definitions.json";
+    private const string ItemDefinitionsJsonPath = "Assets/GameRes/Config/item_definitions.json";
 
     [System.Serializable]
     private sealed class ItemDefinitionJsonFile

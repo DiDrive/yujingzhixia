@@ -9019,7 +9019,7 @@ IL_0040_1:
 				MethodInfo_t* L_16 = V_3;
 				NullCheck(L_16);
 				Type_t* L_17;
-				L_17 = VirtualFuncInvoker0< Type_t* >::Invoke(39, L_16);
+				L_17 = VirtualFuncInvoker0< Type_t* >::Invoke(44, L_16);
 				NullCheck(L_15);
 				bool L_18;
 				L_18 = VirtualFuncInvoker1< bool, Type_t* >::Invoke(27, L_15, L_17);
@@ -10091,7 +10091,7 @@ FINALLY_01c8:
 					MethodInfo_t* L_15 = V_3;
 					NullCheck(L_15);
 					Type_t* L_16;
-					L_16 = VirtualFuncInvoker0< Type_t* >::Invoke(39, L_15);
+					L_16 = VirtualFuncInvoker0< Type_t* >::Invoke(44, L_15);
 					RuntimeTypeHandle_t332A452B8B6179E4469B69525D0FE82A88030F7B L_17 = { reinterpret_cast<intptr_t> (Boolean_t09A6377A54BE2F9E6985A8149F19234FD7DDFE22_0_0_0_var) };
 					il2cpp_codegen_runtime_class_init_inline(Type_t_il2cpp_TypeInfo_var);
 					Type_t* L_18;
@@ -10160,7 +10160,7 @@ IL_0154_1:
 					MethodInfo_t* L_31 = V_7;
 					NullCheck(L_31);
 					Type_t* L_32;
-					L_32 = VirtualFuncInvoker0< Type_t* >::Invoke(39, L_31);
+					L_32 = VirtualFuncInvoker0< Type_t* >::Invoke(44, L_31);
 					RuntimeTypeHandle_t332A452B8B6179E4469B69525D0FE82A88030F7B L_33 = { reinterpret_cast<intptr_t> (((RuntimeType*)il2cpp_codegen_initialize_runtime_metadata_inline((uintptr_t*)&Boolean_t09A6377A54BE2F9E6985A8149F19234FD7DDFE22_0_0_0_var))) };
 					il2cpp_codegen_runtime_class_init_inline(((RuntimeClass*)il2cpp_codegen_initialize_runtime_metadata_inline((uintptr_t*)&Type_t_il2cpp_TypeInfo_var)));
 					Type_t* L_34;
@@ -12025,7 +12025,7 @@ IL_0022:
 		MethodInfo_t* L_10 = V_2;
 		NullCheck(L_10);
 		Type_t* L_11;
-		L_11 = VirtualFuncInvoker0< Type_t* >::Invoke(39, L_10);
+		L_11 = VirtualFuncInvoker0< Type_t* >::Invoke(44, L_10);
 		return L_11;
 	}
 
@@ -24308,7 +24308,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* MemberAliasMethodInfo_get_Retu
 		MethodInfo_t* L_0 = __this->___aliasedMethod;
 		NullCheck(L_0);
 		RuntimeObject* L_1;
-		L_1 = VirtualFuncInvoker0< RuntimeObject* >::Invoke(43, L_0);
+		L_1 = VirtualFuncInvoker0< RuntimeObject* >::Invoke(48, L_0);
 		return L_1;
 	}
 }
@@ -24338,7 +24338,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Type_t* MemberAliasMethodInfo_get_ReturnType_
 		MethodInfo_t* L_0 = __this->___aliasedMethod;
 		NullCheck(L_0);
 		Type_t* L_1;
-		L_1 = VirtualFuncInvoker0< Type_t* >::Invoke(39, L_0);
+		L_1 = VirtualFuncInvoker0< Type_t* >::Invoke(44, L_0);
 		return L_1;
 	}
 }
@@ -24375,7 +24375,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MethodInfo_t* MemberAliasMethodInfo_GetBaseDe
 		MethodInfo_t* L_0 = __this->___aliasedMethod;
 		NullCheck(L_0);
 		MethodInfo_t* L_1;
-		L_1 = VirtualFuncInvoker0< MethodInfo_t* >::Invoke(42, L_0);
+		L_1 = VirtualFuncInvoker0< MethodInfo_t* >::Invoke(47, L_0);
 		return L_1;
 	}
 }

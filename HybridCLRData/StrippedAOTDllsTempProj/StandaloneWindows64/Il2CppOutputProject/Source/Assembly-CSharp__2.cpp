@@ -8489,7 +8489,7 @@ IL_0026:
 		L_7 = GridInventoryService_get_ItemInstances_mE90B12CC8E1BCF526A3F9E4EDE2A5E0029EF6AC6_inline(L_6, NULL);
 		NullCheck(L_7);
 		RuntimeObject* L_8;
-		L_8 = InterfaceFuncInvoker0< RuntimeObject* >::Invoke(1, IReadOnlyDictionary_2_t9CF572460440EAB2747C12D21CEC4C8AE1445A01_il2cpp_TypeInfo_var, L_7);
+		L_8 = InterfaceFuncInvoker0< RuntimeObject* >::Invoke(2, IReadOnlyDictionary_2_t9CF572460440EAB2747C12D21CEC4C8AE1445A01_il2cpp_TypeInfo_var, L_7);
 		NullCheck(L_8);
 		RuntimeObject* L_9;
 		L_9 = InterfaceFuncInvoker0< RuntimeObject* >::Invoke(0, IEnumerable_1_tF64F5B342BCB4FAA002C8138E096134E9B9F5306_il2cpp_TypeInfo_var, L_8);

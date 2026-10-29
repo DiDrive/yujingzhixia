@@ -7,11 +7,11 @@
   <Project Path="YooAsset.Extension.Editor.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
   <Project Path="PrimeTween.Demo.csproj" />
+  <Project Path="HotUpdate.csproj" />
   <Project Path="YooAsset.MiniGame.csproj" />
   <Project Path="UniFramework.Machine.csproj" />
   <Project Path="UniFramework.Event.csproj" />
   <Project Path="Sirenix.OdinInspector.CompatibilityLayer.csproj" />
-  <Project Path="HotUpdate.csproj" />
   <Project Path="PrimeTween.Installer.csproj" />
   <Project Path="Bezi.Editor.csproj" />
   <Project Path="Sirenix.OdinInspector.Modules.UnityMathematics.csproj" />

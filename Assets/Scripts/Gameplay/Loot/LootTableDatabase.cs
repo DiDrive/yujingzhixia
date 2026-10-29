@@ -39,6 +39,9 @@ public class LootTableDatabase : MonoBehaviour
     [SerializeField] private List<LootTableJsonDefinition> fallbackTables = new();
     private readonly Dictionary<string, LootTableJsonDefinition> tableById = new();
 
+    // 保留原始 JSON 给 HotUpdate.dll 使用；热更新程序集自行解析，避免依赖本程序集的 DTO。
+    private string loadedLootTablesJson;
+
     private void Awake()
     {
         Reload();
@@ -64,10 +67,12 @@ public class LootTableDatabase : MonoBehaviour
 
         if (string.IsNullOrWhiteSpace(json))
         {
+            loadedLootTablesJson = null;
             Debug.LogError("无法读取掉落表 JSON");
         }
         else
         {
+            loadedLootTablesJson = json;
             var root =
                 JsonUtility.FromJson<LootTableJsonRoot>(json);
 
@@ -76,6 +81,28 @@ public class LootTableDatabase : MonoBehaviour
     }
 
     public List<ItemStack> Roll(string tableId, int minRollsOverride = -1, int maxRollsOverride = -1)
+    {
+        // 优先走热更新实现。桥接失败才回退，空列表本身仍可能是合法的热更新结果。
+        if (HotUpdateLootBridge.TryRoll(
+                loadedLootTablesJson,
+                tableId,
+                minRollsOverride,
+                maxRollsOverride,
+                out List<ItemStack> hotUpdateResult))
+        {
+            return hotUpdateResult;
+        }
+
+        return RollWithBuiltInFallback(tableId, minRollsOverride, maxRollsOverride);
+    }
+
+    /// <summary>
+    /// 客户端内置的保底实现。热更新程序集缺失或调用失败时继续保证游戏可运行。
+    /// </summary>
+    private List<ItemStack> RollWithBuiltInFallback(
+        string tableId,
+        int minRollsOverride,
+        int maxRollsOverride)
     {
         var result = new List<ItemStack>();
         if (string.IsNullOrWhiteSpace(tableId) || !tableById.TryGetValue(tableId, out var table)) return result;

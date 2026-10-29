@@ -36,6 +36,9 @@ public class MyYooAsset : MonoBehaviour
     private bool yooAssetsInitialized;
     private bool packageInitialized;
     private bool readyToEnter;
+    private bool waitingForDownloadConfirmation;
+    private bool downloadConfirmed;
+    private bool downloadCancelled;
 
     public static MyYooAsset Instance { get; private set; }
     private void Awake()
@@ -72,6 +75,36 @@ public class MyYooAsset : MonoBehaviour
         StartCoroutine(EnterGameFlow());
     }
 
+    /// <summary>
+    /// 玩家确认本次更新后，放行正在等待的更新协程。
+    /// </summary>
+    public void ConfirmDownload()
+    {
+        if (!waitingForDownloadConfirmation)
+            return;
+
+        downloadConfirmed = true;
+        waitingForDownloadConfirmation = false;
+    }
+
+    /// <summary>
+    /// 玩家拒绝更新。先终止更新流程，再退出游戏。
+    /// </summary>
+    public void CancelUpdateAndExit()
+    {
+        if (waitingForDownloadConfirmation)
+        {
+            downloadCancelled = true;
+            waitingForDownloadConfirmation = false;
+        }
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+
     private void BeginUpdate()
     {
         if (isUpdating) return;
@@ -82,6 +115,9 @@ public class MyYooAsset : MonoBehaviour
     private IEnumerator UpdateFlow()
     {
         isUpdating = true;
+        waitingForDownloadConfirmation = false;
+        downloadConfirmed = false;
+        downloadCancelled = false;
         updateUI?.Bind(this);
         updateUI?.ShowPreparing();
 
@@ -185,7 +221,29 @@ public class MyYooAsset : MonoBehaviour
             int downloadCount = downloader.TotalDownloadCount;
             long bytes =downloader.TotalDownloadBytes;
             Debug.Log($"需要下载{downloadCount}个文件,大小是{bytes/1024/1024}MB");
-            updateUI?.ShowDownloadPlan(downloadCount, bytes);
+
+            // 创建下载器只会统计更新量，不会开始传输。先把更新量交给玩家确认。
+            waitingForDownloadConfirmation = true;
+            bool canWaitForUser = updateUI != null &&
+                                  updateUI.ShowDownloadConfirmation(downloadCount, bytes);
+            if (!canWaitForUser)
+            {
+                // 旧场景或按钮未绑定时保持兼容，避免客户端永远停在启动页。
+                Debug.LogWarning("更新确认按钮未完整绑定，将直接开始下载资源");
+                downloadConfirmed = true;
+                waitingForDownloadConfirmation = false;
+            }
+
+            while (waitingForDownloadConfirmation)
+                yield return null;
+
+            if (downloadCancelled || !downloadConfirmed)
+            {
+                isUpdating = false;
+                yield break;
+            }
+
+            updateUI?.ShowStage("正在开始下载", $"共 {downloadCount} 个文件");
             //开始下载
             downloader.DownloadProgressChanged += ProgressCallback;
             downloader.DownloadError += DownloadErrorCallback;
@@ -253,6 +311,7 @@ public class MyYooAsset : MonoBehaviour
     private void FinishWithError(string stage, string error)
     {
         isUpdating = false;
+        waitingForDownloadConfirmation = false;
         readyToEnter = false;
         var message = string.IsNullOrWhiteSpace(error) ? "未知错误" : error;
         Debug.LogError($"{stage}失败：{message}");
@@ -264,7 +323,7 @@ public class MyYooAsset : MonoBehaviour
     /// </summary>
 private IEnumerator UpdateDone()
 {
-    updateUI?.ShowStage("正在加载游戏配置", "物品与掉落数据");
+    updateUI?.ShowStage("正在加载游戏配置", "物品、掉落与生存数据");
     yield return GameContentService.InitializeAsync(package);
 
     if (!GameContentService.IsReady)

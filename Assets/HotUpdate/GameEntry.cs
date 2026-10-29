@@ -25,6 +25,14 @@ public static class GameEntry
 
         Debug.Log("进入HotUpdate.GameEntry，业务层开始启动");
 
+        // 在加载远程业务场景前验证热更新程序集自身和 AOT 调用协议。
+        // 检查失败时保持 Succeeded=false，让基础客户端停留在错误界面而不是带病进入游戏。
+        if (!HotUpdateStartupSelfCheck.Run(out string selfCheckError))
+        {
+            Debug.LogError($"GameEntry启动失败：热更新自检未通过\n{selfCheckError}");
+            yield break;
+        }
+
         // 保留原来的热更新代码验证。以后可以删除Hello，把业务初始化放在这里。
         Hello.Run();
 

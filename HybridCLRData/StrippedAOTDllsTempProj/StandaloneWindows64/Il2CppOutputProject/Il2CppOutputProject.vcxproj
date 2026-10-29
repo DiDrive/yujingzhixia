@@ -80,6 +80,8 @@
     </ClCompile>
     <ClCompile Include="Source\GenericMethods__2.cpp">
     </ClCompile>
+    <ClCompile Include="Source\GenericMethods__20.cpp">
+    </ClCompile>
     <ClCompile Include="Source\GenericMethods__3.cpp">
     </ClCompile>
     <ClCompile Include="Source\GenericMethods__4.cpp">
@@ -255,6 +257,18 @@
     <ClCompile Include="Source\Generics__80.cpp">
     </ClCompile>
     <ClCompile Include="Source\Generics__81.cpp">
+    </ClCompile>
+    <ClCompile Include="Source\Generics__82.cpp">
+    </ClCompile>
+    <ClCompile Include="Source\Generics__83.cpp">
+    </ClCompile>
+    <ClCompile Include="Source\Generics__84.cpp">
+    </ClCompile>
+    <ClCompile Include="Source\Generics__85.cpp">
+    </ClCompile>
+    <ClCompile Include="Source\Generics__86.cpp">
+    </ClCompile>
+    <ClCompile Include="Source\Generics__87.cpp">
     </ClCompile>
     <ClCompile Include="Source\Generics__9.cpp">
     </ClCompile>

@@ -1,0 +1,24 @@
+{
+  "_description": "玩家生存属性的远程平衡配置。修改后重新构建并发布 YooAsset，无需重新构建客户端。",
+  "_units": {
+    "decay": "每游戏分钟减少的属性值",
+    "hpLoss": "满足危险条件时每游戏分钟损失的生命值",
+    "threshold": "当前属性小于等于阈值时触发对应规则"
+  },
+  "schemaVersion": 1,
+  "balanceVersion": "survival-v1",
+  "maxHunger": 100.0,
+  "maxThirst": 100.0,
+  "maxFatigue": 100.0,
+  "maxHp": 100.0,
+  "decayOnlyDuringRun": true,
+  "decayDuringNightAssault": true,
+  "hungerDecayPerMinute": 1.5,
+  "thirstDecayPerMinute": 1.25,
+  "fatigueDecayPerMinute": 0.625,
+  "warningThreshold": 30.0,
+  "criticalThreshold": 10.0,
+  "hpLossPerMinuteWhenHungry": 3.0,
+  "hpLossPerMinuteWhenThirsty": 5.0,
+  "hpLossPerMinuteWhenInfected": 2.0
+}

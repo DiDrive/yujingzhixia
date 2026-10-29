@@ -8,14 +8,17 @@ using YooAsset;
 /// </summary>
 public static class GameContentService
 {
-    public const string ItemDefinitionsLocation = "item_definitions";
-    public const string LootTablesLocation = "loot_tables";
+    public const string ItemDefinitionsLocation = "item_definitions";   // 物品配置 JSON 文件路径
+    public const string LootTablesLocation = "loot_tables";             // 掉落配置 JSON 文件路径
+    public const string SurvivalRulesLocation = "survival_rules";       // 生存规则配置 JSON 文件路径
 
     private static AssetHandle itemDefinitionsHandle;
     private static AssetHandle lootTablesHandle;
+    private static AssetHandle survivalRulesHandle;
 
     public static string ItemDefinitionsJson { get; private set; }
     public static string LootTablesJson { get; private set; }
+    public static string SurvivalRulesJson { get; private set; }
 
     public static bool IsReady { get; private set; }
     public static string Error { get; private set; }
@@ -89,12 +92,41 @@ public static class GameContentService
         }
 
         LootTablesJson = lootTablesAsset.text;
+
+        survivalRulesHandle =
+            package.LoadAssetAsync<TextAsset>(SurvivalRulesLocation);
+
+        yield return survivalRulesHandle;
+
+        if (survivalRulesHandle.Status != EOperationStatus.Succeeded)
+        {
+            Error =
+                $"加载生存规则配置失败：{survivalRulesHandle.Error}";
+            Debug.LogError(Error);
+            Release();
+            yield break;
+        }
+
+        var survivalRulesAsset =
+            survivalRulesHandle.AssetObject as TextAsset;
+
+        if (survivalRulesAsset == null ||
+            string.IsNullOrWhiteSpace(survivalRulesAsset.text))
+        {
+            Error = "生存规则配置内容为空";
+            Debug.LogError(Error);
+            Release();
+            yield break;
+        }
+
+        SurvivalRulesJson = survivalRulesAsset.text;
         IsReady = true;
 
         Debug.Log(
             $"游戏配置加载完成：" +
             $"items={ItemDefinitionsJson.Length}字符，" +
-            $"loot={LootTablesJson.Length}字符");
+            $"loot={LootTablesJson.Length}字符，" +
+            $"survival={SurvivalRulesJson.Length}字符");
     }
 
     public static void Release()
@@ -111,8 +143,15 @@ public static class GameContentService
             lootTablesHandle = null;
         }
 
+        if (survivalRulesHandle != null)
+        {
+            survivalRulesHandle.Release();
+            survivalRulesHandle = null;
+        }
+
         ItemDefinitionsJson = null;
         LootTablesJson = null;
+        SurvivalRulesJson = null;
         IsReady = false;
     }
 }

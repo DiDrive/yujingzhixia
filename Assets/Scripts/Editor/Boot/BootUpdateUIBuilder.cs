@@ -83,12 +83,19 @@ public static class BootUpdateUIBuilder
             new Vector2(0f, -76f), new Vector2(640f, 28f), FontStyle.Normal);
         version.color = new Color32(130, 145, 152, 255);
 
+        var confirmUpdate = CreateButton("ConfirmUpdateButton", panel.transform, font, "确认更新",
+            new Vector2(-110f, -130f));
+        confirmUpdate.targetGraphic.color = new Color32(213, 120, 52, 255);
+        var cancelUpdate = CreateButton("CancelUpdateButton", panel.transform, font, "取消并退出",
+            new Vector2(110f, -130f));
         var enter = CreateButton("EnterButton", panel.transform, font, "进入游戏",
             new Vector2(0f, -130f));
         var retry = CreateButton("RetryButton", panel.transform, font, "重试",
             new Vector2(-110f, -130f));
         var exit = CreateButton("ExitButton", panel.transform, font, "退出游戏",
             new Vector2(110f, -130f));
+        confirmUpdate.gameObject.SetActive(false);
+        cancelUpdate.gameObject.SetActive(false);
         enter.gameObject.SetActive(false);
         retry.gameObject.SetActive(false);
         exit.gameObject.SetActive(false);
@@ -101,6 +108,8 @@ public static class BootUpdateUIBuilder
         viewObject.FindProperty("detailText").objectReferenceValue = detail;
         viewObject.FindProperty("versionText").objectReferenceValue = version;
         viewObject.FindProperty("progressFill").objectReferenceValue = progressFill;
+        viewObject.FindProperty("confirmUpdateButton").objectReferenceValue = confirmUpdate;
+        viewObject.FindProperty("cancelUpdateButton").objectReferenceValue = cancelUpdate;
         viewObject.FindProperty("enterButton").objectReferenceValue = enter;
         viewObject.FindProperty("retryButton").objectReferenceValue = retry;
         viewObject.FindProperty("exitButton").objectReferenceValue = exit;

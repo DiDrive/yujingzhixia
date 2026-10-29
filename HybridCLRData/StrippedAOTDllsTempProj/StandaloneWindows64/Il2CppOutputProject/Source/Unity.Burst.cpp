@@ -6061,7 +6061,7 @@ IL_00b1:
 		L_50 = Object_GetType_mE10A8FC1E57F3DF29972CCBC026C2DC3942263B3(L_49, NULL);
 		NullCheck(L_48);
 		Delegate_t* L_51;
-		L_51 = VirtualFuncInvoker1< Delegate_t*, Type_t* >::Invoke(44, L_48, L_50);
+		L_51 = VirtualFuncInvoker1< Delegate_t*, Type_t* >::Invoke(49, L_48, L_50);
 		___0_delegateObj = L_51;
 	}
 

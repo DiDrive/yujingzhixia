@@ -140,6 +140,16 @@ public class ConsumableItemUseService : MonoBehaviour
     private bool HasAnyUsefulEffect(IReadOnlyList<GridItemUseEffect> effects)
     {
         if (survivalSystem == null || effects == null) return false;
+
+        // 热更新规则优先；调用不可用时继续执行下方客户端内置判断。
+        if (HotUpdateSurvivalBridge.TryHasUsefulEffect(
+                survivalSystem,
+                effects,
+                out bool hotUpdateResult))
+        {
+            return hotUpdateResult;
+        }
+
         for (var i = 0; i < effects.Count; i++)
         {
             var effect = effects[i];
@@ -174,6 +184,11 @@ public class ConsumableItemUseService : MonoBehaviour
     private void ApplyEffects(IReadOnlyList<GridItemUseEffect> effects)
     {
         if (effects == null) return;
+
+        // 热更新层成功施加后不再重复执行内置效果。
+        if (HotUpdateSurvivalBridge.TryApplyEffects(survivalSystem, effects))
+            return;
+
         for (var i = 0; i < effects.Count; i++)
         {
             var effect = effects[i];

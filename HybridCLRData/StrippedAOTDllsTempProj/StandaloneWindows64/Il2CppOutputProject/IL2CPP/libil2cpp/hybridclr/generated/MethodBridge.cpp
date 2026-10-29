@@ -13023,6 +13023,13 @@ static void __M2N_i4ur4(const MethodInfo* method, uint16_t* argVarIndexs, StackO
 }
 
 
+static void __M2N_i4ur4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, float __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4ur4i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, float __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -13058,6 +13065,13 @@ static void __M2N_i4ur8(const MethodInfo* method, uint16_t* argVarIndexs, StackO
 }
 
 
+static void __M2N_i4ur8i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, double __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<double>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4ur8i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, double __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -13083,6 +13097,13 @@ static void __M2N_i4us0(const MethodInfo* method, uint16_t* argVarIndexs, StackO
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_0__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_0__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us0i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_0__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_0__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -13135,6 +13156,13 @@ static void __M2N_i4us117(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us117i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_117__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_117__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us117i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_117__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -13160,6 +13188,13 @@ static void __M2N_i4us120(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_120__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_120__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us120i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_120__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_120__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -13198,6 +13233,13 @@ static void __M2N_i4us1216(const MethodInfo* method, uint16_t* argVarIndexs, Sta
 }
 
 
+static void __M2N_i4us121i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_121__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_121__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us121i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_121__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -13223,6 +13265,13 @@ static void __M2N_i4us122(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_122__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_122__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us122i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_122__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_122__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -13254,6 +13303,13 @@ static void __M2N_i4us125(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us125i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_125__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_125__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us125i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_125__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -13279,6 +13335,13 @@ static void __M2N_i4us126(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_126__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_126__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us126i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_126__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_126__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -13310,6 +13373,13 @@ static void __M2N_i4us134(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us134i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_134__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_134__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us134i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_134__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -13335,6 +13405,13 @@ static void __M2N_i4us135(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_135__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_135__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us135i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_135__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_135__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -13401,6 +13478,13 @@ static void __M2N_i4us156(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us156i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_156__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_156__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us156i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_156__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -13426,6 +13510,13 @@ static void __M2N_i4us158(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_158__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_158__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us158i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_158__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_158__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -13457,6 +13548,13 @@ static void __M2N_i4us159(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us159i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_159__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_159__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us159i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_159__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -13482,6 +13580,13 @@ static void __M2N_i4us160(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_160__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_160__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us160i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_160__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_160__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -13513,6 +13618,13 @@ static void __M2N_i4us161(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us161i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_161__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_161__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us161i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_161__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -13538,6 +13650,13 @@ static void __M2N_i4us165(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_165__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_165__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us165i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_165__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_165__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -13569,6 +13688,13 @@ static void __M2N_i4us166(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us166i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_166__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_166__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us166i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_166__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -13594,6 +13720,13 @@ static void __M2N_i4us167(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_167__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_167__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us167i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_167__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_167__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -13660,6 +13793,13 @@ static void __M2N_i4us179(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us179i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_179__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_179__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us179i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_179__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -13695,6 +13835,13 @@ static void __M2N_i4us181(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us181i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_181__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_181__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us181i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_181__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -13720,6 +13867,13 @@ static void __M2N_i4us182(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_182__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_182__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us182i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_182__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_182__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -13751,6 +13905,13 @@ static void __M2N_i4us183(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us183i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_183__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_183__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us183i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_183__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -13776,6 +13937,13 @@ static void __M2N_i4us184(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_184__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_184__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us184i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_184__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_184__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -13807,6 +13975,13 @@ static void __M2N_i4us185(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us185i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_185__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_185__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us185i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_185__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -13832,6 +14007,13 @@ static void __M2N_i4us186(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_186__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_186__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us186i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_186__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_186__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -13863,6 +14045,13 @@ static void __M2N_i4us187(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us187i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_187__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_187__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us187i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_187__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -13888,6 +14077,13 @@ static void __M2N_i4us189(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_189__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_189__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us189i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_189__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_189__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -13961,6 +14157,13 @@ static void __M2N_i4us193(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us193i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_193__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_193__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us193i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_193__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -13986,6 +14189,13 @@ static void __M2N_i4us195(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_195__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_195__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us195i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_195__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_195__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -14017,6 +14227,13 @@ static void __M2N_i4us196(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us196i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_196__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_196__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us196i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_196__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -14045,6 +14262,13 @@ static void __M2N_i4us197(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us197i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_197__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_197__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us197i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_197__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -14070,6 +14294,13 @@ static void __M2N_i4us198(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_198__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_198__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us198i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_198__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_198__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -14115,6 +14346,13 @@ static void __M2N_i4us205(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us205i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_205__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_205__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us205i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_205__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -14140,6 +14378,13 @@ static void __M2N_i4us206(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_206__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_206__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us206i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_206__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_206__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -14171,6 +14416,13 @@ static void __M2N_i4us207(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us207i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_207__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_207__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us207i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_207__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -14196,6 +14448,13 @@ static void __M2N_i4us211(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_211__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_211__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us211i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_211__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_211__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -14227,6 +14486,13 @@ static void __M2N_i4us212(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us212i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_212__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_212__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us212i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_212__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -14255,6 +14521,13 @@ static void __M2N_i4us213(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us213i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_213__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_213__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us213i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_213__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -14280,6 +14553,13 @@ static void __M2N_i4us214(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_214__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_214__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us214i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_214__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_214__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -14325,6 +14605,13 @@ static void __M2N_i4us219(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us219i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_219__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_219__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us219i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_219__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -14353,6 +14640,13 @@ static void __M2N_i4us223(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us223i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_223__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_223__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us223i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_223__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -14378,6 +14672,13 @@ static void __M2N_i4us229(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_229__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_229__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us229i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_229__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_229__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -14416,6 +14717,13 @@ static void __M2N_i4us233(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us233i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_233__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_233__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us233i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_233__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -14444,6 +14752,13 @@ static void __M2N_i4us237(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us237i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_237__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_237__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us237i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_237__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -14462,6 +14777,13 @@ static void __M2N_i4us237u(const MethodInfo* method, uint16_t* argVarIndexs, Sta
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_237__ __arg1, uintptr_t __arg2, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_237__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
+static void __M2N_i4us23i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_23__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_23__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -14521,6 +14843,13 @@ static void __M2N_i4us242(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us242i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_242__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_242__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us242i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_242__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -14546,6 +14875,13 @@ static void __M2N_i4us244(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_244__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_244__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us244i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_244__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_244__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -14577,6 +14913,13 @@ static void __M2N_i4us245(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us245i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_245__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_245__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us245i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_245__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -14602,6 +14945,13 @@ static void __M2N_i4us246(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_246__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_246__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us246i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_246__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_246__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -14633,6 +14983,13 @@ static void __M2N_i4us247(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us247i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_247__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_247__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us247i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_247__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -14658,6 +15015,13 @@ static void __M2N_i4us248(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_248__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_248__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us248i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_248__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_248__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -14689,6 +15053,13 @@ static void __M2N_i4us249(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us249i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_249__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_249__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us249i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_249__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -14714,6 +15085,13 @@ static void __M2N_i4us252(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_252__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_252__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us252i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_252__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_252__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -14745,6 +15123,13 @@ static void __M2N_i4us253(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us253i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_253__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_253__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us253i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_253__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -14770,6 +15155,13 @@ static void __M2N_i4us254(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_254__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_254__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us254i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_254__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_254__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -14801,6 +15193,13 @@ static void __M2N_i4us261(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us261i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_261__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_261__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us261i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_261__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -14826,6 +15225,13 @@ static void __M2N_i4us262(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_262__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_262__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us262i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_262__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_262__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -14857,6 +15263,13 @@ static void __M2N_i4us264(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us264i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_264__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_264__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us264i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_264__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -14882,6 +15295,13 @@ static void __M2N_i4us265(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_265__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_265__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us265i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_265__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_265__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -14931,6 +15351,13 @@ static void __M2N_i4us267(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_267__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_267__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us267i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_267__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_267__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -15116,6 +15543,13 @@ static void __M2N_i4us299(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us29i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_29__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_29__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us29i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_29__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -15183,6 +15617,13 @@ static void __M2N_i4us360(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_360__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_360__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us3i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_3__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_3__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -15256,6 +15697,13 @@ static void __M2N_i4us42(const MethodInfo* method, uint16_t* argVarIndexs, Stack
 }
 
 
+static void __M2N_i4us42i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_42__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_42__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us42i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_42__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -15281,6 +15729,13 @@ static void __M2N_i4us43(const MethodInfo* method, uint16_t* argVarIndexs, Stack
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_43__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_43__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us43i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_43__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_43__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -15550,6 +16005,13 @@ static void __M2N_i4us505(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_i4us50i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_50__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_50__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us50i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_50__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -15603,6 +16065,13 @@ static void __M2N_i4us53(const MethodInfo* method, uint16_t* argVarIndexs, Stack
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_53__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_53__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us53i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_53__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_53__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -15697,6 +16166,13 @@ static void __M2N_i4us60(const MethodInfo* method, uint16_t* argVarIndexs, Stack
 }
 
 
+static void __M2N_i4us60i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_60__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_60__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us60i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_60__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -15732,6 +16208,13 @@ static void __M2N_i4us62(const MethodInfo* method, uint16_t* argVarIndexs, Stack
 }
 
 
+static void __M2N_i4us62i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_62__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_62__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us62i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_62__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -15760,6 +16243,13 @@ static void __M2N_i4us63(const MethodInfo* method, uint16_t* argVarIndexs, Stack
 }
 
 
+static void __M2N_i4us63i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_63__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_63__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us63i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_63__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -15785,6 +16275,13 @@ static void __M2N_i4us64(const MethodInfo* method, uint16_t* argVarIndexs, Stack
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_64__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_64__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us64i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_64__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_64__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -15858,6 +16355,13 @@ static void __M2N_i4us70(const MethodInfo* method, uint16_t* argVarIndexs, Stack
 }
 
 
+static void __M2N_i4us70i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_70__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_70__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us70i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_70__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -15883,6 +16387,13 @@ static void __M2N_i4us71(const MethodInfo* method, uint16_t* argVarIndexs, Stack
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_71__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_71__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us71i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_71__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_71__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -15914,6 +16425,13 @@ static void __M2N_i4us72(const MethodInfo* method, uint16_t* argVarIndexs, Stack
 }
 
 
+static void __M2N_i4us72i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_72__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_72__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us72i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_72__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -15939,6 +16457,13 @@ static void __M2N_i4us73(const MethodInfo* method, uint16_t* argVarIndexs, Stack
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_73__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_73__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us73i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_73__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_73__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -15977,6 +16502,13 @@ static void __M2N_i4us76(const MethodInfo* method, uint16_t* argVarIndexs, Stack
 }
 
 
+static void __M2N_i4us76i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_76__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_76__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us76i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_76__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -16002,6 +16534,13 @@ static void __M2N_i4us77(const MethodInfo* method, uint16_t* argVarIndexs, Stack
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_77__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_77__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us77i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_77__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_77__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -16054,6 +16593,13 @@ static void __M2N_i4us82(const MethodInfo* method, uint16_t* argVarIndexs, Stack
 }
 
 
+static void __M2N_i4us82i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_82__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_82__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us82i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_82__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -16089,6 +16635,13 @@ static void __M2N_i4us85(const MethodInfo* method, uint16_t* argVarIndexs, Stack
 }
 
 
+static void __M2N_i4us85i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_85__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_85__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
 static void __M2N_i4us85i4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_85__ __arg1, int32_t __arg2, int32_t __arg3, const MethodInfo* method);
@@ -16114,6 +16667,13 @@ static void __M2N_i4us86(const MethodInfo* method, uint16_t* argVarIndexs, Stack
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_86__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_86__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us86i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_86__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_86__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -16163,6 +16723,13 @@ static void __M2N_i4us95(const MethodInfo* method, uint16_t* argVarIndexs, Stack
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_95__ __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_95__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4us95i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, __struct_95__ __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_95__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -16296,6 +16863,13 @@ static void __M2N_i4uu4(const MethodInfo* method, uint16_t* argVarIndexs, StackO
 {
     typedef int32_t (*NativeMethod)(uintptr_t __arg0, uint32_t __arg1, const MethodInfo* method);
     *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<uint32_t>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_i4uu4i4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef int32_t (*NativeMethod)(uintptr_t __arg0, uint32_t __arg1, int32_t __arg2, const MethodInfo* method);
+    *(int32_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<uint32_t>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), method);
 }
 
 
@@ -18823,6 +19397,20 @@ static void __M2N_r4r4r4u1(const MethodInfo* method, uint16_t* argVarIndexs, Sta
 {
     typedef float (*NativeMethod)(float __arg0, float __arg1, uint8_t __arg2, const MethodInfo* method);
     *(float*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<uint8_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
+static void __M2N_r4r4r4ur4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef float (*NativeMethod)(float __arg0, float __arg1, uintptr_t __arg2, float __arg3, const MethodInfo* method);
+    *(float*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[2]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[3]), method);
+}
+
+
+static void __M2N_r4r4r4ur4r4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef float (*NativeMethod)(float __arg0, float __arg1, uintptr_t __arg2, float __arg3, float __arg4, const MethodInfo* method);
+    *(float*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[2]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[3]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[4]), method);
 }
 
 
@@ -35759,6 +36347,13 @@ static void __M2N_s4r4(const MethodInfo* method, uint16_t* argVarIndexs, StackOb
 }
 
 
+static void __M2N_s4r4r4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef __struct_4__ (*NativeMethod)(float __arg0, float __arg1, const MethodInfo* method);
+    *(__struct_4__*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[1]), method);
+}
+
+
 static void __M2N_s4r4r4r4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef __struct_4__ (*NativeMethod)(float __arg0, float __arg1, float __arg2, const MethodInfo* method);
@@ -35770,6 +36365,27 @@ static void __M2N_s4r4r4r4r4(const MethodInfo* method, uint16_t* argVarIndexs, S
 {
     typedef __struct_4__ (*NativeMethod)(float __arg0, float __arg1, float __arg2, float __arg3, const MethodInfo* method);
     *(__struct_4__*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[2]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[3]), method);
+}
+
+
+static void __M2N_s4r4r4r4r4r4r4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef __struct_4__ (*NativeMethod)(float __arg0, float __arg1, float __arg2, float __arg3, float __arg4, float __arg5, const MethodInfo* method);
+    *(__struct_4__*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[2]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[3]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[4]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[5]), method);
+}
+
+
+static void __M2N_s4r4r4r4r4r4r4r4r4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef __struct_4__ (*NativeMethod)(float __arg0, float __arg1, float __arg2, float __arg3, float __arg4, float __arg5, float __arg6, float __arg7, const MethodInfo* method);
+    *(__struct_4__*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[2]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[3]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[4]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[5]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[6]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[7]), method);
+}
+
+
+static void __M2N_s4r4r4r4u1(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef __struct_4__ (*NativeMethod)(float __arg0, float __arg1, float __arg2, uint8_t __arg3, const MethodInfo* method);
+    *(__struct_4__*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[2]), M2NFromValueOrAddress<uint8_t>(localVarBase+argVarIndexs[3]), method);
 }
 
 
@@ -51061,6 +51677,13 @@ static void __M2N_uus117(const MethodInfo* method, uint16_t* argVarIndexs, Stack
 }
 
 
+static void __M2N_uus120(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_120__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_120__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
 static void __M2N_uus1201(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_1201__ __arg1, const MethodInfo* method);
@@ -51089,10 +51712,52 @@ static void __M2N_uus1205(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_uus121(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_121__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_121__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
 static void __M2N_uus1211(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_1211__ __arg1, const MethodInfo* method);
     *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_1211__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus122(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_122__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_122__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus125(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_125__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_125__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus126(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_126__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_126__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus134(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_134__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_134__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus135(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_135__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_135__>(localVarBase+argVarIndexs[1]), method);
 }
 
 
@@ -51117,6 +51782,41 @@ static void __M2N_uus1520(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_uus156(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_156__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_156__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus158(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_158__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_158__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus159(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_159__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_159__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus160(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_160__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_160__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus161(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_161__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_161__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
 static void __M2N_uus1636(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_1636__ __arg1, const MethodInfo* method);
@@ -51124,10 +51824,94 @@ static void __M2N_uus1636(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_uus165(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_165__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_165__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus166(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_166__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_166__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus167(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_167__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_167__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus169(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_169__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_169__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus179(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_179__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_179__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus181(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_181__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_181__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus182(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_182__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_182__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus183(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_183__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_183__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus184(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_184__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_184__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus185(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_185__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_185__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus186(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_186__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_186__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
 static void __M2N_uus187(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_187__ __arg1, const MethodInfo* method);
     *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_187__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus189(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_189__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_189__>(localVarBase+argVarIndexs[1]), method);
 }
 
 
@@ -51145,10 +51929,122 @@ static void __M2N_uus190u4(const MethodInfo* method, uint16_t* argVarIndexs, Sta
 }
 
 
+static void __M2N_uus192(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_192__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_192__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus193(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_193__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_193__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus195(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_195__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_195__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus196(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_196__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_196__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus197(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_197__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_197__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus198(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_198__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_198__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
 static void __M2N_uus2(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_2__ __arg1, const MethodInfo* method);
     *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_2__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus205(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_205__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_205__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus206(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_206__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_206__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus207(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_207__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_207__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus211(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_211__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_211__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus212(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_212__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_212__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus213(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_213__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_213__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus214(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_214__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_214__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus219(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_219__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_219__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus223(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_223__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_223__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus229(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_229__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_229__>(localVarBase+argVarIndexs[1]), method);
 }
 
 
@@ -51163,6 +52059,13 @@ static void __M2N_uus233(const MethodInfo* method, uint16_t* argVarIndexs, Stack
 {
     typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_233__ __arg1, const MethodInfo* method);
     *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_233__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus237(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_237__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_237__>(localVarBase+argVarIndexs[1]), method);
 }
 
 
@@ -51198,6 +52101,111 @@ static void __M2N_uus23u1(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 {
     typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_23__ __arg1, uint8_t __arg2, const MethodInfo* method);
     *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_23__>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<uint8_t>(localVarBase+argVarIndexs[2]), method);
+}
+
+
+static void __M2N_uus242(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_242__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_242__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus244(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_244__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_244__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus245(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_245__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_245__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus246(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_246__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_246__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus247(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_247__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_247__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus248(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_248__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_248__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus249(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_249__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_249__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus252(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_252__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_252__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus253(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_253__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_253__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus254(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_254__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_254__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus261(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_261__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_261__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus262(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_262__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_262__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus264(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_264__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_264__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus265(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_265__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_265__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus267(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_267__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_267__>(localVarBase+argVarIndexs[1]), method);
 }
 
 
@@ -51411,6 +52419,13 @@ static void __M2N_uus4s23r4u4i4s4u1u(const MethodInfo* method, uint16_t* argVarI
 }
 
 
+static void __M2N_uus50(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_50__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_50__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
 static void __M2N_uus501(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_501__ __arg1, const MethodInfo* method);
@@ -51488,10 +52503,24 @@ static void __M2N_uus55uu(const MethodInfo* method, uint16_t* argVarIndexs, Stac
 }
 
 
+static void __M2N_uus60(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_60__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_60__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
 static void __M2N_uus62(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_62__ __arg1, const MethodInfo* method);
     *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_62__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus63(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_63__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_63__>(localVarBase+argVarIndexs[1]), method);
 }
 
 
@@ -51516,6 +52545,20 @@ static void __M2N_uus68u(const MethodInfo* method, uint16_t* argVarIndexs, Stack
 }
 
 
+static void __M2N_uus70(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_70__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_70__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus71(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_71__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_71__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
 static void __M2N_uus72(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_72__ __arg1, const MethodInfo* method);
@@ -51523,10 +52566,38 @@ static void __M2N_uus72(const MethodInfo* method, uint16_t* argVarIndexs, StackO
 }
 
 
+static void __M2N_uus73(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_73__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_73__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus76(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_76__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_76__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus77(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_77__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_77__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
 static void __M2N_uus8(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
 {
     typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_8__ __arg1, const MethodInfo* method);
     *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_8__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus82(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_82__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_82__>(localVarBase+argVarIndexs[1]), method);
 }
 
 
@@ -51541,6 +52612,13 @@ static void __M2N_uus86(const MethodInfo* method, uint16_t* argVarIndexs, StackO
 {
     typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_86__ __arg1, const MethodInfo* method);
     *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_86__>(localVarBase+argVarIndexs[1]), method);
+}
+
+
+static void __M2N_uus95(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef uintptr_t (*NativeMethod)(uintptr_t __arg0, __struct_95__ __arg1, const MethodInfo* method);
+    *(uintptr_t*)ret = ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<__struct_95__>(localVarBase+argVarIndexs[1]), method);
 }
 
 
@@ -53578,6 +54656,13 @@ static void __M2N_vui4i4i4ui4i4i4(const MethodInfo* method, uint16_t* argVarInde
 {
     typedef void (*NativeMethod)(uintptr_t __arg0, int32_t __arg1, int32_t __arg2, int32_t __arg3, uintptr_t __arg4, int32_t __arg5, int32_t __arg6, int32_t __arg7, const MethodInfo* method);
     ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[3]), M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[4]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[5]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[6]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[7]), method);
+}
+
+
+static void __M2N_vui4i4i8i8r4(const MethodInfo* method, uint16_t* argVarIndexs, StackObject* localVarBase, void* ret)
+{
+    typedef void (*NativeMethod)(uintptr_t __arg0, int32_t __arg1, int32_t __arg2, int64_t __arg3, int64_t __arg4, float __arg5, const MethodInfo* method);
+    ((NativeMethod)(method->methodPointerCallByInterp))(M2NFromValueOrAddress<uintptr_t>(localVarBase+argVarIndexs[0]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[1]), M2NFromValueOrAddress<int32_t>(localVarBase+argVarIndexs[2]), M2NFromValueOrAddress<int64_t>(localVarBase+argVarIndexs[3]), M2NFromValueOrAddress<int64_t>(localVarBase+argVarIndexs[4]), M2NFromValueOrAddress<float>(localVarBase+argVarIndexs[5]), method);
 }
 
 
@@ -63258,15 +64343,18 @@ const Managed2NativeMethodInfo hybridclr::interpreter::g_managed2nativeStub[] =
 	{"i4uii", __M2N_i4uii},
 	{"i4uiu", __M2N_i4uiu},
 	{"i4ur4", __M2N_i4ur4},
+	{"i4ur4i4", __M2N_i4ur4i4},
 	{"i4ur4i4i4", __M2N_i4ur4i4i4},
 	{"i4ur4r4", __M2N_i4ur4r4},
 	{"i4ur4u", __M2N_i4ur4u},
 	{"i4ur4u2", __M2N_i4ur4u2},
 	{"i4ur8", __M2N_i4ur8},
+	{"i4ur8i4", __M2N_i4ur8i4},
 	{"i4ur8i4i4", __M2N_i4ur8i4i4},
 	{"i4ur8r8", __M2N_i4ur8r8},
 	{"i4ur8u", __M2N_i4ur8u},
 	{"i4us0", __M2N_i4us0},
+	{"i4us0i4", __M2N_i4us0i4},
 	{"i4us0i4i4", __M2N_i4us0i4i4},
 	{"i4us0s0", __M2N_i4us0s0},
 	{"i4us0u", __M2N_i4us0u},
@@ -63274,35 +64362,43 @@ const Managed2NativeMethodInfo hybridclr::interpreter::g_managed2nativeStub[] =
 	{"i4us10", __M2N_i4us10},
 	{"i4us102", __M2N_i4us102},
 	{"i4us117", __M2N_i4us117},
+	{"i4us117i4", __M2N_i4us117i4},
 	{"i4us117i4i4", __M2N_i4us117i4i4},
 	{"i4us117s117", __M2N_i4us117s117},
 	{"i4us117u", __M2N_i4us117u},
 	{"i4us120", __M2N_i4us120},
+	{"i4us120i4", __M2N_i4us120i4},
 	{"i4us120i4i4", __M2N_i4us120i4i4},
 	{"i4us120s120", __M2N_i4us120s120},
 	{"i4us120u", __M2N_i4us120u},
 	{"i4us121", __M2N_i4us121},
 	{"i4us1216", __M2N_i4us1216},
+	{"i4us121i4", __M2N_i4us121i4},
 	{"i4us121i4i4", __M2N_i4us121i4i4},
 	{"i4us121s121", __M2N_i4us121s121},
 	{"i4us121u", __M2N_i4us121u},
 	{"i4us122", __M2N_i4us122},
+	{"i4us122i4", __M2N_i4us122i4},
 	{"i4us122i4i4", __M2N_i4us122i4i4},
 	{"i4us122s122", __M2N_i4us122s122},
 	{"i4us122u", __M2N_i4us122u},
 	{"i4us125", __M2N_i4us125},
+	{"i4us125i4", __M2N_i4us125i4},
 	{"i4us125i4i4", __M2N_i4us125i4i4},
 	{"i4us125s125", __M2N_i4us125s125},
 	{"i4us125u", __M2N_i4us125u},
 	{"i4us126", __M2N_i4us126},
+	{"i4us126i4", __M2N_i4us126i4},
 	{"i4us126i4i4", __M2N_i4us126i4i4},
 	{"i4us126s126", __M2N_i4us126s126},
 	{"i4us126u", __M2N_i4us126u},
 	{"i4us134", __M2N_i4us134},
+	{"i4us134i4", __M2N_i4us134i4},
 	{"i4us134i4i4", __M2N_i4us134i4i4},
 	{"i4us134s134", __M2N_i4us134s134},
 	{"i4us134u", __M2N_i4us134u},
 	{"i4us135", __M2N_i4us135},
+	{"i4us135i4", __M2N_i4us135i4},
 	{"i4us135i4i4", __M2N_i4us135i4i4},
 	{"i4us135s135", __M2N_i4us135s135},
 	{"i4us135u", __M2N_i4us135u},
@@ -63312,34 +64408,42 @@ const Managed2NativeMethodInfo hybridclr::interpreter::g_managed2nativeStub[] =
 	{"i4us154", __M2N_i4us154},
 	{"i4us154s154", __M2N_i4us154s154},
 	{"i4us156", __M2N_i4us156},
+	{"i4us156i4", __M2N_i4us156i4},
 	{"i4us156i4i4", __M2N_i4us156i4i4},
 	{"i4us156s156", __M2N_i4us156s156},
 	{"i4us156u", __M2N_i4us156u},
 	{"i4us158", __M2N_i4us158},
+	{"i4us158i4", __M2N_i4us158i4},
 	{"i4us158i4i4", __M2N_i4us158i4i4},
 	{"i4us158s158", __M2N_i4us158s158},
 	{"i4us158u", __M2N_i4us158u},
 	{"i4us159", __M2N_i4us159},
+	{"i4us159i4", __M2N_i4us159i4},
 	{"i4us159i4i4", __M2N_i4us159i4i4},
 	{"i4us159s159", __M2N_i4us159s159},
 	{"i4us159u", __M2N_i4us159u},
 	{"i4us160", __M2N_i4us160},
+	{"i4us160i4", __M2N_i4us160i4},
 	{"i4us160i4i4", __M2N_i4us160i4i4},
 	{"i4us160s160", __M2N_i4us160s160},
 	{"i4us160u", __M2N_i4us160u},
 	{"i4us161", __M2N_i4us161},
+	{"i4us161i4", __M2N_i4us161i4},
 	{"i4us161i4i4", __M2N_i4us161i4i4},
 	{"i4us161s161", __M2N_i4us161s161},
 	{"i4us161u", __M2N_i4us161u},
 	{"i4us165", __M2N_i4us165},
+	{"i4us165i4", __M2N_i4us165i4},
 	{"i4us165i4i4", __M2N_i4us165i4i4},
 	{"i4us165s165", __M2N_i4us165s165},
 	{"i4us165u", __M2N_i4us165u},
 	{"i4us166", __M2N_i4us166},
+	{"i4us166i4", __M2N_i4us166i4},
 	{"i4us166i4i4", __M2N_i4us166i4i4},
 	{"i4us166s166", __M2N_i4us166s166},
 	{"i4us166u", __M2N_i4us166u},
 	{"i4us167", __M2N_i4us167},
+	{"i4us167i4", __M2N_i4us167i4},
 	{"i4us167i4i4", __M2N_i4us167i4i4},
 	{"i4us167s167", __M2N_i4us167s167},
 	{"i4us167u", __M2N_i4us167u},
@@ -63349,39 +64453,48 @@ const Managed2NativeMethodInfo hybridclr::interpreter::g_managed2nativeStub[] =
 	{"i4us169s169", __M2N_i4us169s169},
 	{"i4us169u", __M2N_i4us169u},
 	{"i4us179", __M2N_i4us179},
+	{"i4us179i4", __M2N_i4us179i4},
 	{"i4us179i4i4", __M2N_i4us179i4i4},
 	{"i4us179s179", __M2N_i4us179s179},
 	{"i4us179u", __M2N_i4us179u},
 	{"i4us180", __M2N_i4us180},
 	{"i4us181", __M2N_i4us181},
+	{"i4us181i4", __M2N_i4us181i4},
 	{"i4us181i4i4", __M2N_i4us181i4i4},
 	{"i4us181s181", __M2N_i4us181s181},
 	{"i4us181u", __M2N_i4us181u},
 	{"i4us182", __M2N_i4us182},
+	{"i4us182i4", __M2N_i4us182i4},
 	{"i4us182i4i4", __M2N_i4us182i4i4},
 	{"i4us182s182", __M2N_i4us182s182},
 	{"i4us182u", __M2N_i4us182u},
 	{"i4us183", __M2N_i4us183},
+	{"i4us183i4", __M2N_i4us183i4},
 	{"i4us183i4i4", __M2N_i4us183i4i4},
 	{"i4us183s183", __M2N_i4us183s183},
 	{"i4us183u", __M2N_i4us183u},
 	{"i4us184", __M2N_i4us184},
+	{"i4us184i4", __M2N_i4us184i4},
 	{"i4us184i4i4", __M2N_i4us184i4i4},
 	{"i4us184s184", __M2N_i4us184s184},
 	{"i4us184u", __M2N_i4us184u},
 	{"i4us185", __M2N_i4us185},
+	{"i4us185i4", __M2N_i4us185i4},
 	{"i4us185i4i4", __M2N_i4us185i4i4},
 	{"i4us185s185", __M2N_i4us185s185},
 	{"i4us185u", __M2N_i4us185u},
 	{"i4us186", __M2N_i4us186},
+	{"i4us186i4", __M2N_i4us186i4},
 	{"i4us186i4i4", __M2N_i4us186i4i4},
 	{"i4us186s186", __M2N_i4us186s186},
 	{"i4us186u", __M2N_i4us186u},
 	{"i4us187", __M2N_i4us187},
+	{"i4us187i4", __M2N_i4us187i4},
 	{"i4us187i4i4", __M2N_i4us187i4i4},
 	{"i4us187s187", __M2N_i4us187s187},
 	{"i4us187u", __M2N_i4us187u},
 	{"i4us189", __M2N_i4us189},
+	{"i4us189i4", __M2N_i4us189i4},
 	{"i4us189i4i4", __M2N_i4us189i4i4},
 	{"i4us189s189", __M2N_i4us189s189},
 	{"i4us189u", __M2N_i4us189u},
@@ -63392,78 +64505,96 @@ const Managed2NativeMethodInfo hybridclr::interpreter::g_managed2nativeStub[] =
 	{"i4us192s192", __M2N_i4us192s192},
 	{"i4us192u", __M2N_i4us192u},
 	{"i4us193", __M2N_i4us193},
+	{"i4us193i4", __M2N_i4us193i4},
 	{"i4us193i4i4", __M2N_i4us193i4i4},
 	{"i4us193s193", __M2N_i4us193s193},
 	{"i4us193u", __M2N_i4us193u},
 	{"i4us195", __M2N_i4us195},
+	{"i4us195i4", __M2N_i4us195i4},
 	{"i4us195i4i4", __M2N_i4us195i4i4},
 	{"i4us195s195", __M2N_i4us195s195},
 	{"i4us195u", __M2N_i4us195u},
 	{"i4us196", __M2N_i4us196},
+	{"i4us196i4", __M2N_i4us196i4},
 	{"i4us196i4i4", __M2N_i4us196i4i4},
 	{"i4us196s196", __M2N_i4us196s196},
 	{"i4us196u", __M2N_i4us196u},
 	{"i4us197", __M2N_i4us197},
+	{"i4us197i4", __M2N_i4us197i4},
 	{"i4us197i4i4", __M2N_i4us197i4i4},
 	{"i4us197s197", __M2N_i4us197s197},
 	{"i4us197u", __M2N_i4us197u},
 	{"i4us198", __M2N_i4us198},
+	{"i4us198i4", __M2N_i4us198i4},
 	{"i4us198i4i4", __M2N_i4us198i4i4},
 	{"i4us198s198", __M2N_i4us198s198},
 	{"i4us198u", __M2N_i4us198u},
 	{"i4us1s1", __M2N_i4us1s1},
 	{"i4us2", __M2N_i4us2},
 	{"i4us205", __M2N_i4us205},
+	{"i4us205i4", __M2N_i4us205i4},
 	{"i4us205i4i4", __M2N_i4us205i4i4},
 	{"i4us205s205", __M2N_i4us205s205},
 	{"i4us205u", __M2N_i4us205u},
 	{"i4us206", __M2N_i4us206},
+	{"i4us206i4", __M2N_i4us206i4},
 	{"i4us206i4i4", __M2N_i4us206i4i4},
 	{"i4us206s206", __M2N_i4us206s206},
 	{"i4us206u", __M2N_i4us206u},
 	{"i4us207", __M2N_i4us207},
+	{"i4us207i4", __M2N_i4us207i4},
 	{"i4us207i4i4", __M2N_i4us207i4i4},
 	{"i4us207s207", __M2N_i4us207s207},
 	{"i4us207u", __M2N_i4us207u},
 	{"i4us211", __M2N_i4us211},
+	{"i4us211i4", __M2N_i4us211i4},
 	{"i4us211i4i4", __M2N_i4us211i4i4},
 	{"i4us211s211", __M2N_i4us211s211},
 	{"i4us211u", __M2N_i4us211u},
 	{"i4us212", __M2N_i4us212},
+	{"i4us212i4", __M2N_i4us212i4},
 	{"i4us212i4i4", __M2N_i4us212i4i4},
 	{"i4us212s212", __M2N_i4us212s212},
 	{"i4us212u", __M2N_i4us212u},
 	{"i4us213", __M2N_i4us213},
+	{"i4us213i4", __M2N_i4us213i4},
 	{"i4us213i4i4", __M2N_i4us213i4i4},
 	{"i4us213s213", __M2N_i4us213s213},
 	{"i4us213u", __M2N_i4us213u},
 	{"i4us214", __M2N_i4us214},
+	{"i4us214i4", __M2N_i4us214i4},
 	{"i4us214i4i4", __M2N_i4us214i4i4},
 	{"i4us214s214", __M2N_i4us214s214},
 	{"i4us214u", __M2N_i4us214u},
 	{"i4us216", __M2N_i4us216},
 	{"i4us217", __M2N_i4us217},
 	{"i4us219", __M2N_i4us219},
+	{"i4us219i4", __M2N_i4us219i4},
 	{"i4us219i4i4", __M2N_i4us219i4i4},
 	{"i4us219s219", __M2N_i4us219s219},
 	{"i4us219u", __M2N_i4us219u},
 	{"i4us223", __M2N_i4us223},
+	{"i4us223i4", __M2N_i4us223i4},
 	{"i4us223i4i4", __M2N_i4us223i4i4},
 	{"i4us223s223", __M2N_i4us223s223},
 	{"i4us223u", __M2N_i4us223u},
 	{"i4us229", __M2N_i4us229},
+	{"i4us229i4", __M2N_i4us229i4},
 	{"i4us229i4i4", __M2N_i4us229i4i4},
 	{"i4us229s229", __M2N_i4us229s229},
 	{"i4us229u", __M2N_i4us229u},
 	{"i4us23", __M2N_i4us23},
 	{"i4us233", __M2N_i4us233},
+	{"i4us233i4", __M2N_i4us233i4},
 	{"i4us233i4i4", __M2N_i4us233i4i4},
 	{"i4us233s233", __M2N_i4us233s233},
 	{"i4us233u", __M2N_i4us233u},
 	{"i4us237", __M2N_i4us237},
+	{"i4us237i4", __M2N_i4us237i4},
 	{"i4us237i4i4", __M2N_i4us237i4i4},
 	{"i4us237s237", __M2N_i4us237s237},
 	{"i4us237u", __M2N_i4us237u},
+	{"i4us23i4", __M2N_i4us23i4},
 	{"i4us23i4i4", __M2N_i4us23i4i4},
 	{"i4us23i4u1", __M2N_i4us23i4u1},
 	{"i4us23s23", __M2N_i4us23s23},
@@ -63472,58 +64603,72 @@ const Managed2NativeMethodInfo hybridclr::interpreter::g_managed2nativeStub[] =
 	{"i4us23u", __M2N_i4us23u},
 	{"i4us23u1", __M2N_i4us23u1},
 	{"i4us242", __M2N_i4us242},
+	{"i4us242i4", __M2N_i4us242i4},
 	{"i4us242i4i4", __M2N_i4us242i4i4},
 	{"i4us242s242", __M2N_i4us242s242},
 	{"i4us242u", __M2N_i4us242u},
 	{"i4us244", __M2N_i4us244},
+	{"i4us244i4", __M2N_i4us244i4},
 	{"i4us244i4i4", __M2N_i4us244i4i4},
 	{"i4us244s244", __M2N_i4us244s244},
 	{"i4us244u", __M2N_i4us244u},
 	{"i4us245", __M2N_i4us245},
+	{"i4us245i4", __M2N_i4us245i4},
 	{"i4us245i4i4", __M2N_i4us245i4i4},
 	{"i4us245s245", __M2N_i4us245s245},
 	{"i4us245u", __M2N_i4us245u},
 	{"i4us246", __M2N_i4us246},
+	{"i4us246i4", __M2N_i4us246i4},
 	{"i4us246i4i4", __M2N_i4us246i4i4},
 	{"i4us246s246", __M2N_i4us246s246},
 	{"i4us246u", __M2N_i4us246u},
 	{"i4us247", __M2N_i4us247},
+	{"i4us247i4", __M2N_i4us247i4},
 	{"i4us247i4i4", __M2N_i4us247i4i4},
 	{"i4us247s247", __M2N_i4us247s247},
 	{"i4us247u", __M2N_i4us247u},
 	{"i4us248", __M2N_i4us248},
+	{"i4us248i4", __M2N_i4us248i4},
 	{"i4us248i4i4", __M2N_i4us248i4i4},
 	{"i4us248s248", __M2N_i4us248s248},
 	{"i4us248u", __M2N_i4us248u},
 	{"i4us249", __M2N_i4us249},
+	{"i4us249i4", __M2N_i4us249i4},
 	{"i4us249i4i4", __M2N_i4us249i4i4},
 	{"i4us249s249", __M2N_i4us249s249},
 	{"i4us249u", __M2N_i4us249u},
 	{"i4us252", __M2N_i4us252},
+	{"i4us252i4", __M2N_i4us252i4},
 	{"i4us252i4i4", __M2N_i4us252i4i4},
 	{"i4us252s252", __M2N_i4us252s252},
 	{"i4us252u", __M2N_i4us252u},
 	{"i4us253", __M2N_i4us253},
+	{"i4us253i4", __M2N_i4us253i4},
 	{"i4us253i4i4", __M2N_i4us253i4i4},
 	{"i4us253s253", __M2N_i4us253s253},
 	{"i4us253u", __M2N_i4us253u},
 	{"i4us254", __M2N_i4us254},
+	{"i4us254i4", __M2N_i4us254i4},
 	{"i4us254i4i4", __M2N_i4us254i4i4},
 	{"i4us254s254", __M2N_i4us254s254},
 	{"i4us254u", __M2N_i4us254u},
 	{"i4us261", __M2N_i4us261},
+	{"i4us261i4", __M2N_i4us261i4},
 	{"i4us261i4i4", __M2N_i4us261i4i4},
 	{"i4us261s261", __M2N_i4us261s261},
 	{"i4us261u", __M2N_i4us261u},
 	{"i4us262", __M2N_i4us262},
+	{"i4us262i4", __M2N_i4us262i4},
 	{"i4us262i4i4", __M2N_i4us262i4i4},
 	{"i4us262s262", __M2N_i4us262s262},
 	{"i4us262u", __M2N_i4us262u},
 	{"i4us264", __M2N_i4us264},
+	{"i4us264i4", __M2N_i4us264i4},
 	{"i4us264i4i4", __M2N_i4us264i4i4},
 	{"i4us264s264", __M2N_i4us264s264},
 	{"i4us264u", __M2N_i4us264u},
 	{"i4us265", __M2N_i4us265},
+	{"i4us265i4", __M2N_i4us265i4},
 	{"i4us265i4i4", __M2N_i4us265i4i4},
 	{"i4us265s265", __M2N_i4us265s265},
 	{"i4us265u", __M2N_i4us265u},
@@ -63531,6 +64676,7 @@ const Managed2NativeMethodInfo hybridclr::interpreter::g_managed2nativeStub[] =
 	{"i4us266i4", __M2N_i4us266i4},
 	{"i4us266i4i4", __M2N_i4us266i4i4},
 	{"i4us267", __M2N_i4us267},
+	{"i4us267i4", __M2N_i4us267i4},
 	{"i4us267i4i4", __M2N_i4us267i4i4},
 	{"i4us267s267", __M2N_i4us267s267},
 	{"i4us267u", __M2N_i4us267u},
@@ -63557,6 +64703,7 @@ const Managed2NativeMethodInfo hybridclr::interpreter::g_managed2nativeStub[] =
 	{"i4us297", __M2N_i4us297},
 	{"i4us298", __M2N_i4us298},
 	{"i4us299", __M2N_i4us299},
+	{"i4us29i4", __M2N_i4us29i4},
 	{"i4us29i4i4", __M2N_i4us29i4i4},
 	{"i4us29s29", __M2N_i4us29s29},
 	{"i4us29u", __M2N_i4us29u},
@@ -63567,6 +64714,7 @@ const Managed2NativeMethodInfo hybridclr::interpreter::g_managed2nativeStub[] =
 	{"i4us3", __M2N_i4us3},
 	{"i4us301", __M2N_i4us301},
 	{"i4us360", __M2N_i4us360},
+	{"i4us3i4", __M2N_i4us3i4},
 	{"i4us3i4i4", __M2N_i4us3i4i4},
 	{"i4us3i4uu1", __M2N_i4us3i4uu1},
 	{"i4us3s3", __M2N_i4us3s3},
@@ -63577,10 +64725,12 @@ const Managed2NativeMethodInfo hybridclr::interpreter::g_managed2nativeStub[] =
 	{"i4us3uu1", __M2N_i4us3uu1},
 	{"i4us4", __M2N_i4us4},
 	{"i4us42", __M2N_i4us42},
+	{"i4us42i4", __M2N_i4us42i4},
 	{"i4us42i4i4", __M2N_i4us42i4i4},
 	{"i4us42s42", __M2N_i4us42s42},
 	{"i4us42u", __M2N_i4us42u},
 	{"i4us43", __M2N_i4us43},
+	{"i4us43i4", __M2N_i4us43i4},
 	{"i4us43i4i4", __M2N_i4us43i4i4},
 	{"i4us43s43", __M2N_i4us43s43},
 	{"i4us43u", __M2N_i4us43u},
@@ -63619,6 +64769,7 @@ const Managed2NativeMethodInfo hybridclr::interpreter::g_managed2nativeStub[] =
 	{"i4us503", __M2N_i4us503},
 	{"i4us504", __M2N_i4us504},
 	{"i4us505", __M2N_i4us505},
+	{"i4us50i4", __M2N_i4us50i4},
 	{"i4us50i4i4", __M2N_i4us50i4i4},
 	{"i4us50s50", __M2N_i4us50s50},
 	{"i4us50u", __M2N_i4us50u},
@@ -63627,6 +64778,7 @@ const Managed2NativeMethodInfo hybridclr::interpreter::g_managed2nativeStub[] =
 	{"i4us52i4i4", __M2N_i4us52i4i4},
 	{"i4us52s52", __M2N_i4us52s52},
 	{"i4us53", __M2N_i4us53},
+	{"i4us53i4", __M2N_i4us53i4},
 	{"i4us53i4i4", __M2N_i4us53i4i4},
 	{"i4us53s53", __M2N_i4us53s53},
 	{"i4us53u", __M2N_i4us53u},
@@ -63640,19 +64792,23 @@ const Managed2NativeMethodInfo hybridclr::interpreter::g_managed2nativeStub[] =
 	{"i4us59", __M2N_i4us59},
 	{"i4us590uu", __M2N_i4us590uu},
 	{"i4us60", __M2N_i4us60},
+	{"i4us60i4", __M2N_i4us60i4},
 	{"i4us60i4i4", __M2N_i4us60i4i4},
 	{"i4us60s60", __M2N_i4us60s60},
 	{"i4us60u", __M2N_i4us60u},
 	{"i4us61", __M2N_i4us61},
 	{"i4us62", __M2N_i4us62},
+	{"i4us62i4", __M2N_i4us62i4},
 	{"i4us62i4i4", __M2N_i4us62i4i4},
 	{"i4us62s62", __M2N_i4us62s62},
 	{"i4us62u", __M2N_i4us62u},
 	{"i4us63", __M2N_i4us63},
+	{"i4us63i4", __M2N_i4us63i4},
 	{"i4us63i4i4", __M2N_i4us63i4i4},
 	{"i4us63s63", __M2N_i4us63s63},
 	{"i4us63u", __M2N_i4us63u},
 	{"i4us64", __M2N_i4us64},
+	{"i4us64i4", __M2N_i4us64i4},
 	{"i4us64i4i4", __M2N_i4us64i4i4},
 	{"i4us64s64", __M2N_i4us64s64},
 	{"i4us64u", __M2N_i4us64u},
@@ -63663,27 +64819,33 @@ const Managed2NativeMethodInfo hybridclr::interpreter::g_managed2nativeStub[] =
 	{"i4us68s68", __M2N_i4us68s68},
 	{"i4us68u", __M2N_i4us68u},
 	{"i4us70", __M2N_i4us70},
+	{"i4us70i4", __M2N_i4us70i4},
 	{"i4us70i4i4", __M2N_i4us70i4i4},
 	{"i4us70s70", __M2N_i4us70s70},
 	{"i4us70u", __M2N_i4us70u},
 	{"i4us71", __M2N_i4us71},
+	{"i4us71i4", __M2N_i4us71i4},
 	{"i4us71i4i4", __M2N_i4us71i4i4},
 	{"i4us71s71", __M2N_i4us71s71},
 	{"i4us71u", __M2N_i4us71u},
 	{"i4us72", __M2N_i4us72},
+	{"i4us72i4", __M2N_i4us72i4},
 	{"i4us72i4i4", __M2N_i4us72i4i4},
 	{"i4us72s72", __M2N_i4us72s72},
 	{"i4us72u", __M2N_i4us72u},
 	{"i4us73", __M2N_i4us73},
+	{"i4us73i4", __M2N_i4us73i4},
 	{"i4us73i4i4", __M2N_i4us73i4i4},
 	{"i4us73s73", __M2N_i4us73s73},
 	{"i4us73u", __M2N_i4us73u},
 	{"i4us74", __M2N_i4us74},
 	{"i4us76", __M2N_i4us76},
+	{"i4us76i4", __M2N_i4us76i4},
 	{"i4us76i4i4", __M2N_i4us76i4i4},
 	{"i4us76s76", __M2N_i4us76s76},
 	{"i4us76u", __M2N_i4us76u},
 	{"i4us77", __M2N_i4us77},
+	{"i4us77i4", __M2N_i4us77i4},
 	{"i4us77i4i4", __M2N_i4us77i4i4},
 	{"i4us77s77", __M2N_i4us77s77},
 	{"i4us77u", __M2N_i4us77u},
@@ -63691,15 +64853,18 @@ const Managed2NativeMethodInfo hybridclr::interpreter::g_managed2nativeStub[] =
 	{"i4us8", __M2N_i4us8},
 	{"i4us81", __M2N_i4us81},
 	{"i4us82", __M2N_i4us82},
+	{"i4us82i4", __M2N_i4us82i4},
 	{"i4us82i4i4", __M2N_i4us82i4i4},
 	{"i4us82s82", __M2N_i4us82s82},
 	{"i4us82u", __M2N_i4us82u},
 	{"i4us84", __M2N_i4us84},
 	{"i4us85", __M2N_i4us85},
+	{"i4us85i4", __M2N_i4us85i4},
 	{"i4us85i4i4", __M2N_i4us85i4i4},
 	{"i4us85s85", __M2N_i4us85s85},
 	{"i4us85u", __M2N_i4us85u},
 	{"i4us86", __M2N_i4us86},
+	{"i4us86i4", __M2N_i4us86i4},
 	{"i4us86i4i4", __M2N_i4us86i4i4},
 	{"i4us86s86", __M2N_i4us86s86},
 	{"i4us86u", __M2N_i4us86u},
@@ -63707,6 +64872,7 @@ const Managed2NativeMethodInfo hybridclr::interpreter::g_managed2nativeStub[] =
 	{"i4us89", __M2N_i4us89},
 	{"i4us9", __M2N_i4us9},
 	{"i4us95", __M2N_i4us95},
+	{"i4us95i4", __M2N_i4us95i4},
 	{"i4us95i4i4", __M2N_i4us95i4i4},
 	{"i4us95s95", __M2N_i4us95s95},
 	{"i4us95u", __M2N_i4us95u},
@@ -63726,6 +64892,7 @@ const Managed2NativeMethodInfo hybridclr::interpreter::g_managed2nativeStub[] =
 	{"i4uu2u2u2", __M2N_i4uu2u2u2},
 	{"i4uu2u2u2u2u2u2u2u2", __M2N_i4uu2u2u2u2u2u2u2u2},
 	{"i4uu4", __M2N_i4uu4},
+	{"i4uu4i4", __M2N_i4uu4i4},
 	{"i4uu4i4i4", __M2N_i4uu4i4i4},
 	{"i4uu4s4u4s4", __M2N_i4uu4s4u4s4},
 	{"i4uu4u", __M2N_i4uu4u},
@@ -64087,6 +65254,8 @@ const Managed2NativeMethodInfo hybridclr::interpreter::g_managed2nativeStub[] =
 	{"r4r4r4s625i4", __M2N_r4r4r4s625i4},
 	{"r4r4r4s626i4", __M2N_r4r4r4s626i4},
 	{"r4r4r4u1", __M2N_r4r4r4u1},
+	{"r4r4r4ur4", __M2N_r4r4r4ur4},
+	{"r4r4r4ur4r4", __M2N_r4r4r4ur4r4},
 	{"r4r4r4ur4r4r4", __M2N_r4r4r4ur4r4r4},
 	{"r4r4s625i4", __M2N_r4r4s625i4},
 	{"r4r4s626i4", __M2N_r4r4s626i4},
@@ -66506,8 +67675,12 @@ const Managed2NativeMethodInfo hybridclr::interpreter::g_managed2nativeStub[] =
 	{"s4i4", __M2N_s4i4},
 	{"s4i4s4uu", __M2N_s4i4s4uu},
 	{"s4r4", __M2N_s4r4},
+	{"s4r4r4", __M2N_s4r4r4},
 	{"s4r4r4r4", __M2N_s4r4r4r4},
 	{"s4r4r4r4r4", __M2N_s4r4r4r4r4},
+	{"s4r4r4r4r4r4r4", __M2N_s4r4r4r4r4r4r4},
+	{"s4r4r4r4r4r4r4r4r4", __M2N_s4r4r4r4r4r4r4r4r4},
+	{"s4r4r4r4u1", __M2N_s4r4r4r4u1},
 	{"s4r4r4s23", __M2N_s4r4r4s23},
 	{"s4r4r4uu", __M2N_s4r4r4uu},
 	{"s4r4s23r4", __M2N_s4r4s23r4},
@@ -68692,26 +69865,82 @@ const Managed2NativeMethodInfo hybridclr::interpreter::g_managed2nativeStub[] =
 	{"uus1104", __M2N_uus1104},
 	{"uus1132uu", __M2N_uus1132uu},
 	{"uus117", __M2N_uus117},
+	{"uus120", __M2N_uus120},
 	{"uus1201", __M2N_uus1201},
 	{"uus1202", __M2N_uus1202},
 	{"uus1204", __M2N_uus1204},
 	{"uus1205", __M2N_uus1205},
+	{"uus121", __M2N_uus121},
 	{"uus1211", __M2N_uus1211},
+	{"uus122", __M2N_uus122},
+	{"uus125", __M2N_uus125},
+	{"uus126", __M2N_uus126},
+	{"uus134", __M2N_uus134},
+	{"uus135", __M2N_uus135},
 	{"uus136", __M2N_uus136},
 	{"uus1518", __M2N_uus1518},
 	{"uus1520", __M2N_uus1520},
+	{"uus156", __M2N_uus156},
+	{"uus158", __M2N_uus158},
+	{"uus159", __M2N_uus159},
+	{"uus160", __M2N_uus160},
+	{"uus161", __M2N_uus161},
 	{"uus1636", __M2N_uus1636},
+	{"uus165", __M2N_uus165},
+	{"uus166", __M2N_uus166},
+	{"uus167", __M2N_uus167},
+	{"uus169", __M2N_uus169},
+	{"uus179", __M2N_uus179},
+	{"uus181", __M2N_uus181},
+	{"uus182", __M2N_uus182},
+	{"uus183", __M2N_uus183},
+	{"uus184", __M2N_uus184},
+	{"uus185", __M2N_uus185},
+	{"uus186", __M2N_uus186},
 	{"uus187", __M2N_uus187},
+	{"uus189", __M2N_uus189},
 	{"uus190", __M2N_uus190},
 	{"uus190u4", __M2N_uus190u4},
+	{"uus192", __M2N_uus192},
+	{"uus193", __M2N_uus193},
+	{"uus195", __M2N_uus195},
+	{"uus196", __M2N_uus196},
+	{"uus197", __M2N_uus197},
+	{"uus198", __M2N_uus198},
 	{"uus2", __M2N_uus2},
+	{"uus205", __M2N_uus205},
+	{"uus206", __M2N_uus206},
+	{"uus207", __M2N_uus207},
+	{"uus211", __M2N_uus211},
+	{"uus212", __M2N_uus212},
+	{"uus213", __M2N_uus213},
+	{"uus214", __M2N_uus214},
+	{"uus219", __M2N_uus219},
+	{"uus223", __M2N_uus223},
+	{"uus229", __M2N_uus229},
 	{"uus23", __M2N_uus23},
 	{"uus233", __M2N_uus233},
+	{"uus237", __M2N_uus237},
 	{"uus23i4", __M2N_uus23i4},
 	{"uus23i4i4i4i4i4i4u1u1u1u1i4r4i4u1u1i4i4u", __M2N_uus23i4i4i4i4i4i4u1u1u1u1i4r4i4u1u1i4i4u},
 	{"uus23s23r4i4uu", __M2N_uus23s23r4i4uu},
 	{"uus23u", __M2N_uus23u},
 	{"uus23u1", __M2N_uus23u1},
+	{"uus242", __M2N_uus242},
+	{"uus244", __M2N_uus244},
+	{"uus245", __M2N_uus245},
+	{"uus246", __M2N_uus246},
+	{"uus247", __M2N_uus247},
+	{"uus248", __M2N_uus248},
+	{"uus249", __M2N_uus249},
+	{"uus252", __M2N_uus252},
+	{"uus253", __M2N_uus253},
+	{"uus254", __M2N_uus254},
+	{"uus261", __M2N_uus261},
+	{"uus262", __M2N_uus262},
+	{"uus264", __M2N_uus264},
+	{"uus265", __M2N_uus265},
+	{"uus267", __M2N_uus267},
 	{"uus280", __M2N_uus280},
 	{"uus282uu", __M2N_uus282uu},
 	{"uus29", __M2N_uus29},
@@ -68742,6 +69971,7 @@ const Managed2NativeMethodInfo hybridclr::interpreter::g_managed2nativeStub[] =
 	{"uus4s23r4u4i4s4", __M2N_uus4s23r4u4i4s4},
 	{"uus4s23r4u4i4s4u1", __M2N_uus4s23r4u4i4s4u1},
 	{"uus4s23r4u4i4s4u1u", __M2N_uus4s23r4u4i4s4u1u},
+	{"uus50", __M2N_uus50},
 	{"uus501", __M2N_uus501},
 	{"uus52", __M2N_uus52},
 	{"uus525i4", __M2N_uus525i4},
@@ -68753,14 +69983,23 @@ const Managed2NativeMethodInfo hybridclr::interpreter::g_managed2nativeStub[] =
 	{"uus55", __M2N_uus55},
 	{"uus55i4", __M2N_uus55i4},
 	{"uus55uu", __M2N_uus55uu},
+	{"uus60", __M2N_uus60},
 	{"uus62", __M2N_uus62},
+	{"uus63", __M2N_uus63},
 	{"uus64", __M2N_uus64},
 	{"uus68", __M2N_uus68},
 	{"uus68u", __M2N_uus68u},
+	{"uus70", __M2N_uus70},
+	{"uus71", __M2N_uus71},
 	{"uus72", __M2N_uus72},
+	{"uus73", __M2N_uus73},
+	{"uus76", __M2N_uus76},
+	{"uus77", __M2N_uus77},
 	{"uus8", __M2N_uus8},
+	{"uus82", __M2N_uus82},
 	{"uus85", __M2N_uus85},
 	{"uus86", __M2N_uus86},
+	{"uus95", __M2N_uus95},
 	{"uus972i4", __M2N_uus972i4},
 	{"uuu", __M2N_uuu},
 	{"uuu1", __M2N_uuu1},
@@ -69052,6 +70291,7 @@ const Managed2NativeMethodInfo hybridclr::interpreter::g_managed2nativeStub[] =
 	{"vui4i4i4u1u1u1", __M2N_vui4i4i4u1u1u1},
 	{"vui4i4i4ui4", __M2N_vui4i4i4ui4},
 	{"vui4i4i4ui4i4i4", __M2N_vui4i4i4ui4i4i4},
+	{"vui4i4i8i8r4", __M2N_vui4i4i8i8r4},
 	{"vui4i4r4", __M2N_vui4i4r4},
 	{"vui4i4r4i1i4u1r4r4u1s9", __M2N_vui4i4r4i1i4u1r4r4u1s9},
 	{"vui4i4r4s5i4u1r4r4u1s9", __M2N_vui4i4r4s5i4u1r4r4u1s9},
@@ -100265,6 +101505,34 @@ static uintptr_t __N2M_ui8(int64_t __arg0, const MethodInfo* method)
 }
 
 
+static uintptr_t __N2M_ur4(float __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(float*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_ur8(double __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(double*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
 static uintptr_t __N2M_us0(__struct_0__ __arg0, const MethodInfo* method)
 {
     
@@ -100310,6 +101578,622 @@ static uintptr_t __N2M_us1104(__struct_1104__ __arg0, const MethodInfo* method)
 }
 
 
+static uintptr_t __N2M_us117(__struct_117__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_117__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us120(__struct_120__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_120__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us121(__struct_121__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_121__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us122(__struct_122__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_122__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us125(__struct_125__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_125__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us126(__struct_126__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_126__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us134(__struct_134__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_134__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us135(__struct_135__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_135__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us156(__struct_156__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_156__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us158(__struct_158__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_158__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us159(__struct_159__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_159__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us160(__struct_160__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_160__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us161(__struct_161__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_161__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us165(__struct_165__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_165__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us166(__struct_166__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_166__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us167(__struct_167__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_167__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us169(__struct_169__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_169__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us179(__struct_179__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_179__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us181(__struct_181__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_181__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us182(__struct_182__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_182__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us183(__struct_183__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_183__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us184(__struct_184__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_184__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us185(__struct_185__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_185__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us186(__struct_186__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_186__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us187(__struct_187__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_187__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us189(__struct_189__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_189__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us192(__struct_192__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_192__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us193(__struct_193__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_193__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us195(__struct_195__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_195__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us196(__struct_196__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_196__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us197(__struct_197__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_197__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us198(__struct_198__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_198__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us2(__struct_2__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_2__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us205(__struct_205__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_205__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us206(__struct_206__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_206__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us207(__struct_207__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_207__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us211(__struct_211__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_211__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us212(__struct_212__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_212__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us213(__struct_213__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_213__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us214(__struct_214__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_214__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us219(__struct_219__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_219__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us223(__struct_223__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_223__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us229(__struct_229__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_229__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us23(__struct_23__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_23__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
 static uintptr_t __N2M_us233(__struct_233__ __arg0, const MethodInfo* method)
 {
     
@@ -100324,6 +102208,230 @@ static uintptr_t __N2M_us233(__struct_233__ __arg0, const MethodInfo* method)
 }
 
 
+static uintptr_t __N2M_us237(__struct_237__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_237__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us242(__struct_242__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_242__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us244(__struct_244__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_244__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us245(__struct_245__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_245__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us246(__struct_246__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_246__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us247(__struct_247__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_247__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us248(__struct_248__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_248__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us249(__struct_249__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_249__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us252(__struct_252__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_252__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us253(__struct_253__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_253__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us254(__struct_254__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_254__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us261(__struct_261__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_261__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us262(__struct_262__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_262__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us264(__struct_264__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_264__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us265(__struct_265__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_265__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us267(__struct_267__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_267__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
 static uintptr_t __N2M_us29(__struct_29__ __arg0, const MethodInfo* method)
 {
     
@@ -100333,6 +102441,20 @@ static uintptr_t __N2M_us29(__struct_29__ __arg0, const MethodInfo* method)
 
     StackObject args[__TOTAL_ARG_SIZE__];
 	*(__struct_29__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us3(__struct_3__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_3__*)(args + __ARG_OFFSET_0__) = __arg0;
 
     uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
 }
@@ -100494,6 +102616,20 @@ static uintptr_t __N2M_us48(__struct_48__ __arg0, const MethodInfo* method)
 }
 
 
+static uintptr_t __N2M_us50(__struct_50__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_50__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
 static uintptr_t __N2M_us501(__struct_501__ __arg0, const MethodInfo* method)
 {
     
@@ -100542,6 +102678,104 @@ static uintptr_t __N2M_us54r4i4(__struct_54__ __arg0, float __arg1, int32_t __ar
 }
 
 
+static uintptr_t __N2M_us60(__struct_60__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_60__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us62(__struct_62__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_62__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us63(__struct_63__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_63__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us64(__struct_64__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_64__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us68(__struct_68__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_68__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us70(__struct_70__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_70__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us71(__struct_71__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_71__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
 static uintptr_t __N2M_us72(__struct_72__ __arg0, const MethodInfo* method)
 {
     
@@ -100551,6 +102785,62 @@ static uintptr_t __N2M_us72(__struct_72__ __arg0, const MethodInfo* method)
 
     StackObject args[__TOTAL_ARG_SIZE__];
 	*(__struct_72__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us73(__struct_73__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_73__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us76(__struct_76__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_76__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us77(__struct_77__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_77__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us82(__struct_82__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_82__*)(args + __ARG_OFFSET_0__) = __arg0;
 
     uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
 }
@@ -100579,6 +102869,20 @@ static uintptr_t __N2M_us86(__struct_86__ __arg0, const MethodInfo* method)
 
     StackObject args[__TOTAL_ARG_SIZE__];
 	*(__struct_86__*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_us95(__struct_95__ __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(__struct_95__*)(args + __ARG_OFFSET_0__) = __arg0;
 
     uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
 }
@@ -100621,6 +102925,20 @@ static uintptr_t __N2M_uu2(uint16_t __arg0, const MethodInfo* method)
 
     StackObject args[__TOTAL_ARG_SIZE__];
 	args[__ARG_OFFSET_0__].u64 = __arg0;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uu4(uint32_t __arg0, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uint32_t*)(args + __ARG_OFFSET_0__) = __arg0;
 
     uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
 }
@@ -101125,6 +103443,23 @@ static uintptr_t __N2M_uus117(uintptr_t __arg0, __struct_117__ __arg1, const Met
 }
 
 
+static uintptr_t __N2M_uus120(uintptr_t __arg0, __struct_120__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_120__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
 static uintptr_t __N2M_uus1201(uintptr_t __arg0, __struct_1201__ __arg1, const MethodInfo* method)
 {
     
@@ -101193,6 +103528,108 @@ static uintptr_t __N2M_uus1205(uintptr_t __arg0, __struct_1205__ __arg1, const M
 }
 
 
+static uintptr_t __N2M_uus121(uintptr_t __arg0, __struct_121__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_121__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus122(uintptr_t __arg0, __struct_122__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_122__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus125(uintptr_t __arg0, __struct_125__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_125__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus126(uintptr_t __arg0, __struct_126__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_126__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus134(uintptr_t __arg0, __struct_134__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_134__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus135(uintptr_t __arg0, __struct_135__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_135__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
 static uintptr_t __N2M_uus1520(uintptr_t __arg0, __struct_1520__ __arg1, const MethodInfo* method)
 {
     
@@ -101205,6 +103642,278 @@ static uintptr_t __N2M_uus1520(uintptr_t __arg0, __struct_1520__ __arg1, const M
     StackObject args[__TOTAL_ARG_SIZE__];
 	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
 	*(__struct_1520__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus156(uintptr_t __arg0, __struct_156__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_156__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus158(uintptr_t __arg0, __struct_158__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_158__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus159(uintptr_t __arg0, __struct_159__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_159__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus160(uintptr_t __arg0, __struct_160__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_160__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus161(uintptr_t __arg0, __struct_161__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_161__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus165(uintptr_t __arg0, __struct_165__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_165__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus166(uintptr_t __arg0, __struct_166__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_166__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus167(uintptr_t __arg0, __struct_167__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_167__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus169(uintptr_t __arg0, __struct_169__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_169__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus179(uintptr_t __arg0, __struct_179__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_179__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus181(uintptr_t __arg0, __struct_181__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_181__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus182(uintptr_t __arg0, __struct_182__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_182__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus183(uintptr_t __arg0, __struct_183__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_183__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus184(uintptr_t __arg0, __struct_184__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_184__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus185(uintptr_t __arg0, __struct_185__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_185__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus186(uintptr_t __arg0, __struct_186__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_186__*)(args + __ARG_OFFSET_1__) = __arg1;
 
     uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
 }
@@ -101227,6 +103936,23 @@ static uintptr_t __N2M_uus187(uintptr_t __arg0, __struct_187__ __arg1, const Met
 }
 
 
+static uintptr_t __N2M_uus189(uintptr_t __arg0, __struct_189__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_189__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
 static uintptr_t __N2M_uus190(uintptr_t __arg0, __struct_190__ __arg1, const MethodInfo* method)
 {
     
@@ -101244,6 +103970,108 @@ static uintptr_t __N2M_uus190(uintptr_t __arg0, __struct_190__ __arg1, const Met
 }
 
 
+static uintptr_t __N2M_uus192(uintptr_t __arg0, __struct_192__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_192__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus193(uintptr_t __arg0, __struct_193__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_193__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus195(uintptr_t __arg0, __struct_195__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_195__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus196(uintptr_t __arg0, __struct_196__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_196__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus197(uintptr_t __arg0, __struct_197__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_197__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus198(uintptr_t __arg0, __struct_198__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_198__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
 static uintptr_t __N2M_uus2(uintptr_t __arg0, __struct_2__ __arg1, const MethodInfo* method)
 {
     
@@ -101256,6 +104084,176 @@ static uintptr_t __N2M_uus2(uintptr_t __arg0, __struct_2__ __arg1, const MethodI
     StackObject args[__TOTAL_ARG_SIZE__];
 	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
 	*(__struct_2__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus205(uintptr_t __arg0, __struct_205__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_205__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus206(uintptr_t __arg0, __struct_206__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_206__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus207(uintptr_t __arg0, __struct_207__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_207__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus211(uintptr_t __arg0, __struct_211__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_211__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus212(uintptr_t __arg0, __struct_212__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_212__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus213(uintptr_t __arg0, __struct_213__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_213__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus214(uintptr_t __arg0, __struct_214__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_214__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus219(uintptr_t __arg0, __struct_219__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_219__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus223(uintptr_t __arg0, __struct_223__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_223__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus229(uintptr_t __arg0, __struct_229__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_229__*)(args + __ARG_OFFSET_1__) = __arg1;
 
     uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
 }
@@ -101290,6 +104288,23 @@ static uintptr_t __N2M_uus233(uintptr_t __arg0, __struct_233__ __arg1, const Met
     StackObject args[__TOTAL_ARG_SIZE__];
 	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
 	*(__struct_233__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus237(uintptr_t __arg0, __struct_237__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_237__*)(args + __ARG_OFFSET_1__) = __arg1;
 
     uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
 }
@@ -101342,6 +104357,261 @@ static uintptr_t __N2M_uus23u(uintptr_t __arg0, __struct_23__ __arg1, uintptr_t 
 	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
 	*(__struct_23__*)(args + __ARG_OFFSET_1__) = __arg1;
 	*(uintptr_t*)(args + __ARG_OFFSET_2__) = __arg2;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus242(uintptr_t __arg0, __struct_242__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_242__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus244(uintptr_t __arg0, __struct_244__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_244__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus245(uintptr_t __arg0, __struct_245__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_245__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus246(uintptr_t __arg0, __struct_246__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_246__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus247(uintptr_t __arg0, __struct_247__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_247__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus248(uintptr_t __arg0, __struct_248__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_248__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus249(uintptr_t __arg0, __struct_249__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_249__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus252(uintptr_t __arg0, __struct_252__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_252__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus253(uintptr_t __arg0, __struct_253__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_253__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus254(uintptr_t __arg0, __struct_254__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_254__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus261(uintptr_t __arg0, __struct_261__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_261__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus262(uintptr_t __arg0, __struct_262__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_262__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus264(uintptr_t __arg0, __struct_264__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_264__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus265(uintptr_t __arg0, __struct_265__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_265__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus267(uintptr_t __arg0, __struct_267__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_267__*)(args + __ARG_OFFSET_1__) = __arg1;
 
     uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
 }
@@ -101598,6 +104868,23 @@ static uintptr_t __N2M_uus49(uintptr_t __arg0, __struct_49__ __arg1, const Metho
 }
 
 
+static uintptr_t __N2M_uus50(uintptr_t __arg0, __struct_50__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_50__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
 static uintptr_t __N2M_uus501(uintptr_t __arg0, __struct_501__ __arg1, const MethodInfo* method)
 {
     
@@ -101790,6 +105077,23 @@ static uintptr_t __N2M_uus55uu(uintptr_t __arg0, __struct_55__ __arg1, uintptr_t
 }
 
 
+static uintptr_t __N2M_uus60(uintptr_t __arg0, __struct_60__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_60__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
 static uintptr_t __N2M_uus62(uintptr_t __arg0, __struct_62__ __arg1, const MethodInfo* method)
 {
     
@@ -101802,6 +105106,57 @@ static uintptr_t __N2M_uus62(uintptr_t __arg0, __struct_62__ __arg1, const Metho
     StackObject args[__TOTAL_ARG_SIZE__];
 	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
 	*(__struct_62__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus63(uintptr_t __arg0, __struct_63__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_63__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus64(uintptr_t __arg0, __struct_64__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_64__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus68(uintptr_t __arg0, __struct_68__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_68__*)(args + __ARG_OFFSET_1__) = __arg1;
 
     uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
 }
@@ -101827,6 +105182,40 @@ static uintptr_t __N2M_uus68u(uintptr_t __arg0, __struct_68__ __arg1, uintptr_t 
 }
 
 
+static uintptr_t __N2M_uus70(uintptr_t __arg0, __struct_70__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_70__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus71(uintptr_t __arg0, __struct_71__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_71__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
 static uintptr_t __N2M_uus72(uintptr_t __arg0, __struct_72__ __arg1, const MethodInfo* method)
 {
     
@@ -101839,6 +105228,74 @@ static uintptr_t __N2M_uus72(uintptr_t __arg0, __struct_72__ __arg1, const Metho
     StackObject args[__TOTAL_ARG_SIZE__];
 	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
 	*(__struct_72__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus73(uintptr_t __arg0, __struct_73__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_73__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus76(uintptr_t __arg0, __struct_76__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_76__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus77(uintptr_t __arg0, __struct_77__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_77__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus82(uintptr_t __arg0, __struct_82__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_82__*)(args + __ARG_OFFSET_1__) = __arg1;
 
     uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
 }
@@ -101873,6 +105330,23 @@ static uintptr_t __N2M_uus86(uintptr_t __arg0, __struct_86__ __arg1, const Metho
     StackObject args[__TOTAL_ARG_SIZE__];
 	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
 	*(__struct_86__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uintptr_t __N2M_uus95(uintptr_t __arg0, __struct_95__ __arg1, const MethodInfo* method)
+{
+    
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_95__*)(args + __ARG_OFFSET_1__) = __arg1;
 
     uintptr_t ret; Interpreter::Execute(method, args, &ret); return ret;
 }
@@ -116209,11 +119683,74 @@ const Native2ManagedMethodInfo hybridclr::interpreter::g_native2managedStub[] =
 	{"ui4", (Il2CppMethodPointer)__N2M_ui4},
 	{"ui4u", (Il2CppMethodPointer)__N2M_ui4u},
 	{"ui8", (Il2CppMethodPointer)__N2M_ui8},
+	{"ur4", (Il2CppMethodPointer)__N2M_ur4},
+	{"ur8", (Il2CppMethodPointer)__N2M_ur8},
 	{"us0", (Il2CppMethodPointer)__N2M_us0},
 	{"us0i4", (Il2CppMethodPointer)__N2M_us0i4},
 	{"us1104", (Il2CppMethodPointer)__N2M_us1104},
+	{"us117", (Il2CppMethodPointer)__N2M_us117},
+	{"us120", (Il2CppMethodPointer)__N2M_us120},
+	{"us121", (Il2CppMethodPointer)__N2M_us121},
+	{"us122", (Il2CppMethodPointer)__N2M_us122},
+	{"us125", (Il2CppMethodPointer)__N2M_us125},
+	{"us126", (Il2CppMethodPointer)__N2M_us126},
+	{"us134", (Il2CppMethodPointer)__N2M_us134},
+	{"us135", (Il2CppMethodPointer)__N2M_us135},
+	{"us156", (Il2CppMethodPointer)__N2M_us156},
+	{"us158", (Il2CppMethodPointer)__N2M_us158},
+	{"us159", (Il2CppMethodPointer)__N2M_us159},
+	{"us160", (Il2CppMethodPointer)__N2M_us160},
+	{"us161", (Il2CppMethodPointer)__N2M_us161},
+	{"us165", (Il2CppMethodPointer)__N2M_us165},
+	{"us166", (Il2CppMethodPointer)__N2M_us166},
+	{"us167", (Il2CppMethodPointer)__N2M_us167},
+	{"us169", (Il2CppMethodPointer)__N2M_us169},
+	{"us179", (Il2CppMethodPointer)__N2M_us179},
+	{"us181", (Il2CppMethodPointer)__N2M_us181},
+	{"us182", (Il2CppMethodPointer)__N2M_us182},
+	{"us183", (Il2CppMethodPointer)__N2M_us183},
+	{"us184", (Il2CppMethodPointer)__N2M_us184},
+	{"us185", (Il2CppMethodPointer)__N2M_us185},
+	{"us186", (Il2CppMethodPointer)__N2M_us186},
+	{"us187", (Il2CppMethodPointer)__N2M_us187},
+	{"us189", (Il2CppMethodPointer)__N2M_us189},
+	{"us192", (Il2CppMethodPointer)__N2M_us192},
+	{"us193", (Il2CppMethodPointer)__N2M_us193},
+	{"us195", (Il2CppMethodPointer)__N2M_us195},
+	{"us196", (Il2CppMethodPointer)__N2M_us196},
+	{"us197", (Il2CppMethodPointer)__N2M_us197},
+	{"us198", (Il2CppMethodPointer)__N2M_us198},
+	{"us2", (Il2CppMethodPointer)__N2M_us2},
+	{"us205", (Il2CppMethodPointer)__N2M_us205},
+	{"us206", (Il2CppMethodPointer)__N2M_us206},
+	{"us207", (Il2CppMethodPointer)__N2M_us207},
+	{"us211", (Il2CppMethodPointer)__N2M_us211},
+	{"us212", (Il2CppMethodPointer)__N2M_us212},
+	{"us213", (Il2CppMethodPointer)__N2M_us213},
+	{"us214", (Il2CppMethodPointer)__N2M_us214},
+	{"us219", (Il2CppMethodPointer)__N2M_us219},
+	{"us223", (Il2CppMethodPointer)__N2M_us223},
+	{"us229", (Il2CppMethodPointer)__N2M_us229},
+	{"us23", (Il2CppMethodPointer)__N2M_us23},
 	{"us233", (Il2CppMethodPointer)__N2M_us233},
+	{"us237", (Il2CppMethodPointer)__N2M_us237},
+	{"us242", (Il2CppMethodPointer)__N2M_us242},
+	{"us244", (Il2CppMethodPointer)__N2M_us244},
+	{"us245", (Il2CppMethodPointer)__N2M_us245},
+	{"us246", (Il2CppMethodPointer)__N2M_us246},
+	{"us247", (Il2CppMethodPointer)__N2M_us247},
+	{"us248", (Il2CppMethodPointer)__N2M_us248},
+	{"us249", (Il2CppMethodPointer)__N2M_us249},
+	{"us252", (Il2CppMethodPointer)__N2M_us252},
+	{"us253", (Il2CppMethodPointer)__N2M_us253},
+	{"us254", (Il2CppMethodPointer)__N2M_us254},
+	{"us261", (Il2CppMethodPointer)__N2M_us261},
+	{"us262", (Il2CppMethodPointer)__N2M_us262},
+	{"us264", (Il2CppMethodPointer)__N2M_us264},
+	{"us265", (Il2CppMethodPointer)__N2M_us265},
+	{"us267", (Il2CppMethodPointer)__N2M_us267},
 	{"us29", (Il2CppMethodPointer)__N2M_us29},
+	{"us3", (Il2CppMethodPointer)__N2M_us3},
 	{"us3s3s1131", (Il2CppMethodPointer)__N2M_us3s3s1131},
 	{"us3s3s1132", (Il2CppMethodPointer)__N2M_us3s3s1132},
 	{"us3s3s496", (Il2CppMethodPointer)__N2M_us3s3s496},
@@ -116223,15 +119760,29 @@ const Native2ManagedMethodInfo hybridclr::interpreter::g_native2managedStub[] =
 	{"us42", (Il2CppMethodPointer)__N2M_us42},
 	{"us43", (Il2CppMethodPointer)__N2M_us43},
 	{"us48", (Il2CppMethodPointer)__N2M_us48},
+	{"us50", (Il2CppMethodPointer)__N2M_us50},
 	{"us501", (Il2CppMethodPointer)__N2M_us501},
 	{"us53", (Il2CppMethodPointer)__N2M_us53},
 	{"us54r4i4", (Il2CppMethodPointer)__N2M_us54r4i4},
+	{"us60", (Il2CppMethodPointer)__N2M_us60},
+	{"us62", (Il2CppMethodPointer)__N2M_us62},
+	{"us63", (Il2CppMethodPointer)__N2M_us63},
+	{"us64", (Il2CppMethodPointer)__N2M_us64},
+	{"us68", (Il2CppMethodPointer)__N2M_us68},
+	{"us70", (Il2CppMethodPointer)__N2M_us70},
+	{"us71", (Il2CppMethodPointer)__N2M_us71},
 	{"us72", (Il2CppMethodPointer)__N2M_us72},
+	{"us73", (Il2CppMethodPointer)__N2M_us73},
+	{"us76", (Il2CppMethodPointer)__N2M_us76},
+	{"us77", (Il2CppMethodPointer)__N2M_us77},
+	{"us82", (Il2CppMethodPointer)__N2M_us82},
 	{"us85", (Il2CppMethodPointer)__N2M_us85},
 	{"us86", (Il2CppMethodPointer)__N2M_us86},
+	{"us95", (Il2CppMethodPointer)__N2M_us95},
 	{"uu", (Il2CppMethodPointer)__N2M_uu},
 	{"uu1", (Il2CppMethodPointer)__N2M_uu1},
 	{"uu2", (Il2CppMethodPointer)__N2M_uu2},
+	{"uu4", (Il2CppMethodPointer)__N2M_uu4},
 	{"uu4u4u", (Il2CppMethodPointer)__N2M_uu4u4u},
 	{"uui", (Il2CppMethodPointer)__N2M_uui},
 	{"uui4", (Il2CppMethodPointer)__N2M_uui4},
@@ -116255,18 +119806,74 @@ const Native2ManagedMethodInfo hybridclr::interpreter::g_native2managedStub[] =
 	{"uus10i4", (Il2CppMethodPointer)__N2M_uus10i4},
 	{"uus1104", (Il2CppMethodPointer)__N2M_uus1104},
 	{"uus117", (Il2CppMethodPointer)__N2M_uus117},
+	{"uus120", (Il2CppMethodPointer)__N2M_uus120},
 	{"uus1201", (Il2CppMethodPointer)__N2M_uus1201},
 	{"uus1202", (Il2CppMethodPointer)__N2M_uus1202},
 	{"uus1204", (Il2CppMethodPointer)__N2M_uus1204},
 	{"uus1205", (Il2CppMethodPointer)__N2M_uus1205},
+	{"uus121", (Il2CppMethodPointer)__N2M_uus121},
+	{"uus122", (Il2CppMethodPointer)__N2M_uus122},
+	{"uus125", (Il2CppMethodPointer)__N2M_uus125},
+	{"uus126", (Il2CppMethodPointer)__N2M_uus126},
+	{"uus134", (Il2CppMethodPointer)__N2M_uus134},
+	{"uus135", (Il2CppMethodPointer)__N2M_uus135},
 	{"uus1520", (Il2CppMethodPointer)__N2M_uus1520},
+	{"uus156", (Il2CppMethodPointer)__N2M_uus156},
+	{"uus158", (Il2CppMethodPointer)__N2M_uus158},
+	{"uus159", (Il2CppMethodPointer)__N2M_uus159},
+	{"uus160", (Il2CppMethodPointer)__N2M_uus160},
+	{"uus161", (Il2CppMethodPointer)__N2M_uus161},
+	{"uus165", (Il2CppMethodPointer)__N2M_uus165},
+	{"uus166", (Il2CppMethodPointer)__N2M_uus166},
+	{"uus167", (Il2CppMethodPointer)__N2M_uus167},
+	{"uus169", (Il2CppMethodPointer)__N2M_uus169},
+	{"uus179", (Il2CppMethodPointer)__N2M_uus179},
+	{"uus181", (Il2CppMethodPointer)__N2M_uus181},
+	{"uus182", (Il2CppMethodPointer)__N2M_uus182},
+	{"uus183", (Il2CppMethodPointer)__N2M_uus183},
+	{"uus184", (Il2CppMethodPointer)__N2M_uus184},
+	{"uus185", (Il2CppMethodPointer)__N2M_uus185},
+	{"uus186", (Il2CppMethodPointer)__N2M_uus186},
 	{"uus187", (Il2CppMethodPointer)__N2M_uus187},
+	{"uus189", (Il2CppMethodPointer)__N2M_uus189},
 	{"uus190", (Il2CppMethodPointer)__N2M_uus190},
+	{"uus192", (Il2CppMethodPointer)__N2M_uus192},
+	{"uus193", (Il2CppMethodPointer)__N2M_uus193},
+	{"uus195", (Il2CppMethodPointer)__N2M_uus195},
+	{"uus196", (Il2CppMethodPointer)__N2M_uus196},
+	{"uus197", (Il2CppMethodPointer)__N2M_uus197},
+	{"uus198", (Il2CppMethodPointer)__N2M_uus198},
 	{"uus2", (Il2CppMethodPointer)__N2M_uus2},
+	{"uus205", (Il2CppMethodPointer)__N2M_uus205},
+	{"uus206", (Il2CppMethodPointer)__N2M_uus206},
+	{"uus207", (Il2CppMethodPointer)__N2M_uus207},
+	{"uus211", (Il2CppMethodPointer)__N2M_uus211},
+	{"uus212", (Il2CppMethodPointer)__N2M_uus212},
+	{"uus213", (Il2CppMethodPointer)__N2M_uus213},
+	{"uus214", (Il2CppMethodPointer)__N2M_uus214},
+	{"uus219", (Il2CppMethodPointer)__N2M_uus219},
+	{"uus223", (Il2CppMethodPointer)__N2M_uus223},
+	{"uus229", (Il2CppMethodPointer)__N2M_uus229},
 	{"uus23", (Il2CppMethodPointer)__N2M_uus23},
 	{"uus233", (Il2CppMethodPointer)__N2M_uus233},
+	{"uus237", (Il2CppMethodPointer)__N2M_uus237},
 	{"uus23s23r4i4uu", (Il2CppMethodPointer)__N2M_uus23s23r4i4uu},
 	{"uus23u", (Il2CppMethodPointer)__N2M_uus23u},
+	{"uus242", (Il2CppMethodPointer)__N2M_uus242},
+	{"uus244", (Il2CppMethodPointer)__N2M_uus244},
+	{"uus245", (Il2CppMethodPointer)__N2M_uus245},
+	{"uus246", (Il2CppMethodPointer)__N2M_uus246},
+	{"uus247", (Il2CppMethodPointer)__N2M_uus247},
+	{"uus248", (Il2CppMethodPointer)__N2M_uus248},
+	{"uus249", (Il2CppMethodPointer)__N2M_uus249},
+	{"uus252", (Il2CppMethodPointer)__N2M_uus252},
+	{"uus253", (Il2CppMethodPointer)__N2M_uus253},
+	{"uus254", (Il2CppMethodPointer)__N2M_uus254},
+	{"uus261", (Il2CppMethodPointer)__N2M_uus261},
+	{"uus262", (Il2CppMethodPointer)__N2M_uus262},
+	{"uus264", (Il2CppMethodPointer)__N2M_uus264},
+	{"uus265", (Il2CppMethodPointer)__N2M_uus265},
+	{"uus267", (Il2CppMethodPointer)__N2M_uus267},
 	{"uus29", (Il2CppMethodPointer)__N2M_uus29},
 	{"uus3", (Il2CppMethodPointer)__N2M_uus3},
 	{"uus3s3s1131", (Il2CppMethodPointer)__N2M_uus3s3s1131},
@@ -116280,6 +119887,7 @@ const Native2ManagedMethodInfo hybridclr::interpreter::g_native2managedStub[] =
 	{"uus44", (Il2CppMethodPointer)__N2M_uus44},
 	{"uus48", (Il2CppMethodPointer)__N2M_uus48},
 	{"uus49", (Il2CppMethodPointer)__N2M_uus49},
+	{"uus50", (Il2CppMethodPointer)__N2M_uus50},
 	{"uus501", (Il2CppMethodPointer)__N2M_uus501},
 	{"uus52", (Il2CppMethodPointer)__N2M_uus52},
 	{"uus53", (Il2CppMethodPointer)__N2M_uus53},
@@ -116289,11 +119897,22 @@ const Native2ManagedMethodInfo hybridclr::interpreter::g_native2managedStub[] =
 	{"uus54ur4i4uu", (Il2CppMethodPointer)__N2M_uus54ur4i4uu},
 	{"uus55", (Il2CppMethodPointer)__N2M_uus55},
 	{"uus55uu", (Il2CppMethodPointer)__N2M_uus55uu},
+	{"uus60", (Il2CppMethodPointer)__N2M_uus60},
 	{"uus62", (Il2CppMethodPointer)__N2M_uus62},
+	{"uus63", (Il2CppMethodPointer)__N2M_uus63},
+	{"uus64", (Il2CppMethodPointer)__N2M_uus64},
+	{"uus68", (Il2CppMethodPointer)__N2M_uus68},
 	{"uus68u", (Il2CppMethodPointer)__N2M_uus68u},
+	{"uus70", (Il2CppMethodPointer)__N2M_uus70},
+	{"uus71", (Il2CppMethodPointer)__N2M_uus71},
 	{"uus72", (Il2CppMethodPointer)__N2M_uus72},
+	{"uus73", (Il2CppMethodPointer)__N2M_uus73},
+	{"uus76", (Il2CppMethodPointer)__N2M_uus76},
+	{"uus77", (Il2CppMethodPointer)__N2M_uus77},
+	{"uus82", (Il2CppMethodPointer)__N2M_uus82},
 	{"uus85", (Il2CppMethodPointer)__N2M_uus85},
 	{"uus86", (Il2CppMethodPointer)__N2M_uus86},
+	{"uus95", (Il2CppMethodPointer)__N2M_uus95},
 	{"uuu", (Il2CppMethodPointer)__N2M_uuu},
 	{"uuu1", (Il2CppMethodPointer)__N2M_uuu1},
 	{"uuu2", (Il2CppMethodPointer)__N2M_uuu2},
@@ -121332,6 +124951,160 @@ static __struct_0__ __N2M_AdjustorThunk_s0ui4(uintptr_t __arg0, int32_t __arg1, 
 }
 
 
+static __struct_100__ __N2M_AdjustorThunk_s100u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_100__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_101__ __N2M_AdjustorThunk_s101u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_101__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_102__ __N2M_AdjustorThunk_s102u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_102__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_103__ __N2M_AdjustorThunk_s103u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_103__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_104__ __N2M_AdjustorThunk_s104u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_104__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_105__ __N2M_AdjustorThunk_s105u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_105__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_106__ __N2M_AdjustorThunk_s106u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_106__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_108__ __N2M_AdjustorThunk_s108u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_108__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_109__ __N2M_AdjustorThunk_s109u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_109__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_111__ __N2M_AdjustorThunk_s111u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_111__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_112__ __N2M_AdjustorThunk_s112u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_112__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
 static __struct_1130__ __N2M_AdjustorThunk_s1130uuu1(uintptr_t __arg0, uintptr_t __arg1, uint8_t __arg2, const MethodInfo* method)
 {
     __arg0 += sizeof(Il2CppObject);
@@ -121383,6 +125156,62 @@ static __struct_1132__ __N2M_AdjustorThunk_s1132ui4(uintptr_t __arg0, int32_t __
 }
 
 
+static __struct_113__ __N2M_AdjustorThunk_s113u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_113__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_114__ __N2M_AdjustorThunk_s114u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_114__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_115__ __N2M_AdjustorThunk_s115u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_115__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_116__ __N2M_AdjustorThunk_s116u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_116__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
 static __struct_117__ __N2M_AdjustorThunk_s117u(uintptr_t __arg0, const MethodInfo* method)
 {
     __arg0 += sizeof(Il2CppObject);
@@ -121411,6 +125240,20 @@ static __struct_117__ __N2M_AdjustorThunk_s117ui4(uintptr_t __arg0, int32_t __ar
 	*(int32_t*)(args + __ARG_OFFSET_1__) = __arg1;
 
     __struct_117__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_119__ __N2M_AdjustorThunk_s119u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_119__ ret; Interpreter::Execute(method, args, &ret); return ret;
 }
 
 
@@ -121507,6 +125350,34 @@ static __struct_122__ __N2M_AdjustorThunk_s122ui4(uintptr_t __arg0, int32_t __ar
 }
 
 
+static __struct_123__ __N2M_AdjustorThunk_s123u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_123__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_124__ __N2M_AdjustorThunk_s124u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_124__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
 static __struct_125__ __N2M_AdjustorThunk_s125u(uintptr_t __arg0, const MethodInfo* method)
 {
     __arg0 += sizeof(Il2CppObject);
@@ -121569,6 +125440,76 @@ static __struct_126__ __N2M_AdjustorThunk_s126ui4(uintptr_t __arg0, int32_t __ar
 }
 
 
+static __struct_128__ __N2M_AdjustorThunk_s128u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_128__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_129__ __N2M_AdjustorThunk_s129u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_129__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_131__ __N2M_AdjustorThunk_s131u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_131__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_132__ __N2M_AdjustorThunk_s132u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_132__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_133__ __N2M_AdjustorThunk_s133u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_133__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
 static __struct_134__ __N2M_AdjustorThunk_s134u(uintptr_t __arg0, const MethodInfo* method)
 {
     __arg0 += sizeof(Il2CppObject);
@@ -121628,6 +125569,174 @@ static __struct_135__ __N2M_AdjustorThunk_s135ui4(uintptr_t __arg0, int32_t __ar
 	*(int32_t*)(args + __ARG_OFFSET_1__) = __arg1;
 
     __struct_135__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_136__ __N2M_AdjustorThunk_s136u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_136__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_137__ __N2M_AdjustorThunk_s137u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_137__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_138__ __N2M_AdjustorThunk_s138u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_138__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_140__ __N2M_AdjustorThunk_s140u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_140__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_141__ __N2M_AdjustorThunk_s141u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_141__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_142__ __N2M_AdjustorThunk_s142u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_142__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_143__ __N2M_AdjustorThunk_s143u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_143__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_144__ __N2M_AdjustorThunk_s144u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_144__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_145__ __N2M_AdjustorThunk_s145u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_145__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_146__ __N2M_AdjustorThunk_s146u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_146__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_147__ __N2M_AdjustorThunk_s147u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_147__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_149__ __N2M_AdjustorThunk_s149u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_149__ ret; Interpreter::Execute(method, args, &ret); return ret;
 }
 
 
@@ -124564,6 +128673,34 @@ static __struct_77__ __N2M_AdjustorThunk_s77us389ui4(uintptr_t __arg0, __struct_
 }
 
 
+static __struct_7__ __N2M_AdjustorThunk_s7u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_7__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_81__ __N2M_AdjustorThunk_s81u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_81__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
 static __struct_82__ __N2M_AdjustorThunk_s82u(uintptr_t __arg0, const MethodInfo* method)
 {
     __arg0 += sizeof(Il2CppObject);
@@ -124657,6 +128794,48 @@ static __struct_86__ __N2M_AdjustorThunk_s86ui4(uintptr_t __arg0, int32_t __arg1
 }
 
 
+static __struct_90__ __N2M_AdjustorThunk_s90u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_90__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_92__ __N2M_AdjustorThunk_s92u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_92__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_94__ __N2M_AdjustorThunk_s94u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_94__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
 static __struct_95__ __N2M_AdjustorThunk_s95u(uintptr_t __arg0, const MethodInfo* method)
 {
     __arg0 += sizeof(Il2CppObject);
@@ -124688,6 +128867,20 @@ static __struct_95__ __N2M_AdjustorThunk_s95ui4(uintptr_t __arg0, int32_t __arg1
 }
 
 
+static __struct_96__ __N2M_AdjustorThunk_s96u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_96__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
 static __struct_974__ __N2M_AdjustorThunk_s974uu(uintptr_t __arg0, uintptr_t __arg1, const MethodInfo* method)
 {
     __arg0 += sizeof(Il2CppObject);
@@ -124702,6 +128895,48 @@ static __struct_974__ __N2M_AdjustorThunk_s974uu(uintptr_t __arg0, uintptr_t __a
 	*(uintptr_t*)(args + __ARG_OFFSET_1__) = __arg1;
 
     __struct_974__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_97__ __N2M_AdjustorThunk_s97u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_97__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_98__ __N2M_AdjustorThunk_s98u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_98__ ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static __struct_99__ __N2M_AdjustorThunk_s99u(uintptr_t __arg0, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+
+    __struct_99__ ret; Interpreter::Execute(method, args, &ret); return ret;
 }
 
 
@@ -125435,6 +129670,40 @@ static uint8_t __N2M_AdjustorThunk_u1us10(uintptr_t __arg0, __struct_10__ __arg1
 }
 
 
+static uint8_t __N2M_AdjustorThunk_u1us100(uintptr_t __arg0, __struct_100__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_100__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us101(uintptr_t __arg0, __struct_101__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_101__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
 static uint8_t __N2M_AdjustorThunk_u1us102(uintptr_t __arg0, __struct_102__ __arg1, const MethodInfo* method)
 {
     __arg0 += sizeof(Il2CppObject);
@@ -125447,6 +129716,108 @@ static uint8_t __N2M_AdjustorThunk_u1us102(uintptr_t __arg0, __struct_102__ __ar
     StackObject args[__TOTAL_ARG_SIZE__];
 	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
 	*(__struct_102__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us103(uintptr_t __arg0, __struct_103__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_103__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us104(uintptr_t __arg0, __struct_104__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_104__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us105(uintptr_t __arg0, __struct_105__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_105__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us106(uintptr_t __arg0, __struct_106__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_106__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us108(uintptr_t __arg0, __struct_108__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_108__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us109(uintptr_t __arg0, __struct_109__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_109__*)(args + __ARG_OFFSET_1__) = __arg1;
 
     uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
 }
@@ -125484,6 +129855,108 @@ static uint8_t __N2M_AdjustorThunk_u1us10u(uintptr_t __arg0, __struct_10__ __arg
 	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
 	*(__struct_10__*)(args + __ARG_OFFSET_1__) = __arg1;
 	*(uintptr_t*)(args + __ARG_OFFSET_2__) = __arg2;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us111(uintptr_t __arg0, __struct_111__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_111__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us112(uintptr_t __arg0, __struct_112__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_112__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us113(uintptr_t __arg0, __struct_113__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_113__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us114(uintptr_t __arg0, __struct_114__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_114__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us115(uintptr_t __arg0, __struct_115__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_115__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us116(uintptr_t __arg0, __struct_116__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_116__*)(args + __ARG_OFFSET_1__) = __arg1;
 
     uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
 }
@@ -125574,6 +130047,40 @@ static uint8_t __N2M_AdjustorThunk_u1us122(uintptr_t __arg0, __struct_122__ __ar
 }
 
 
+static uint8_t __N2M_AdjustorThunk_u1us123(uintptr_t __arg0, __struct_123__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_123__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us124(uintptr_t __arg0, __struct_124__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_124__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
 static uint8_t __N2M_AdjustorThunk_u1us125(uintptr_t __arg0, __struct_125__ __arg1, const MethodInfo* method)
 {
     __arg0 += sizeof(Il2CppObject);
@@ -125608,6 +130115,91 @@ static uint8_t __N2M_AdjustorThunk_u1us126(uintptr_t __arg0, __struct_126__ __ar
 }
 
 
+static uint8_t __N2M_AdjustorThunk_u1us128(uintptr_t __arg0, __struct_128__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_128__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us129(uintptr_t __arg0, __struct_129__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_129__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us131(uintptr_t __arg0, __struct_131__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_131__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us132(uintptr_t __arg0, __struct_132__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_132__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us133(uintptr_t __arg0, __struct_133__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_133__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
 static uint8_t __N2M_AdjustorThunk_u1us134(uintptr_t __arg0, __struct_134__ __arg1, const MethodInfo* method)
 {
     __arg0 += sizeof(Il2CppObject);
@@ -125637,6 +130229,210 @@ static uint8_t __N2M_AdjustorThunk_u1us135(uintptr_t __arg0, __struct_135__ __ar
     StackObject args[__TOTAL_ARG_SIZE__];
 	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
 	*(__struct_135__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us136(uintptr_t __arg0, __struct_136__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_136__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us137(uintptr_t __arg0, __struct_137__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_137__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us138(uintptr_t __arg0, __struct_138__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_138__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us140(uintptr_t __arg0, __struct_140__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_140__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us141(uintptr_t __arg0, __struct_141__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_141__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us142(uintptr_t __arg0, __struct_142__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_142__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us143(uintptr_t __arg0, __struct_143__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_143__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us144(uintptr_t __arg0, __struct_144__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_144__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us145(uintptr_t __arg0, __struct_145__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_145__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us146(uintptr_t __arg0, __struct_146__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_146__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us147(uintptr_t __arg0, __struct_147__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_147__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us149(uintptr_t __arg0, __struct_149__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_149__*)(args + __ARG_OFFSET_1__) = __arg1;
 
     uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
 }
@@ -129739,6 +134535,23 @@ static uint8_t __N2M_AdjustorThunk_u1us8(uintptr_t __arg0, __struct_8__ __arg1, 
 }
 
 
+static uint8_t __N2M_AdjustorThunk_u1us81(uintptr_t __arg0, __struct_81__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_81__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
 static uint8_t __N2M_AdjustorThunk_u1us82(uintptr_t __arg0, __struct_82__ __arg1, const MethodInfo* method)
 {
     __arg0 += sizeof(Il2CppObject);
@@ -129807,6 +134620,57 @@ static uint8_t __N2M_AdjustorThunk_u1us9(uintptr_t __arg0, __struct_9__ __arg1, 
 }
 
 
+static uint8_t __N2M_AdjustorThunk_u1us90(uintptr_t __arg0, __struct_90__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_90__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us92(uintptr_t __arg0, __struct_92__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_92__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us94(uintptr_t __arg0, __struct_94__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_94__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
 static uint8_t __N2M_AdjustorThunk_u1us95(uintptr_t __arg0, __struct_95__ __arg1, const MethodInfo* method)
 {
     __arg0 += sizeof(Il2CppObject);
@@ -129836,6 +134700,57 @@ static uint8_t __N2M_AdjustorThunk_u1us96(uintptr_t __arg0, __struct_96__ __arg1
     StackObject args[__TOTAL_ARG_SIZE__];
 	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
 	*(__struct_96__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us97(uintptr_t __arg0, __struct_97__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_97__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us98(uintptr_t __arg0, __struct_98__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_98__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
+}
+
+
+static uint8_t __N2M_AdjustorThunk_u1us99(uintptr_t __arg0, __struct_99__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_99__*)(args + __ARG_OFFSET_1__) = __arg1;
 
     uint8_t ret; Interpreter::Execute(method, args, &ret); return ret;
 }
@@ -133379,6 +138294,74 @@ static void __N2M_AdjustorThunk_vus0(uintptr_t __arg0, __struct_0__ __arg1, cons
 }
 
 
+static void __N2M_AdjustorThunk_vus100(uintptr_t __arg0, __struct_100__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_100__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus101(uintptr_t __arg0, __struct_101__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_101__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus102(uintptr_t __arg0, __struct_102__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_102__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus103(uintptr_t __arg0, __struct_103__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_103__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
 static void __N2M_AdjustorThunk_vus1036(uintptr_t __arg0, __struct_1036__ __arg1, const MethodInfo* method)
 {
     __arg0 += sizeof(Il2CppObject);
@@ -133391,6 +138374,142 @@ static void __N2M_AdjustorThunk_vus1036(uintptr_t __arg0, __struct_1036__ __arg1
     StackObject args[__TOTAL_ARG_SIZE__];
 	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
 	*(__struct_1036__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus104(uintptr_t __arg0, __struct_104__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_104__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus105(uintptr_t __arg0, __struct_105__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_105__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus106(uintptr_t __arg0, __struct_106__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_106__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus108(uintptr_t __arg0, __struct_108__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_108__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus109(uintptr_t __arg0, __struct_109__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_109__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus111(uintptr_t __arg0, __struct_111__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_111__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus112(uintptr_t __arg0, __struct_112__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_112__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus113(uintptr_t __arg0, __struct_113__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_113__*)(args + __ARG_OFFSET_1__) = __arg1;
 
     Interpreter::Execute(method, args, nullptr);
 }
@@ -133433,6 +138552,57 @@ static void __N2M_AdjustorThunk_vus1134(uintptr_t __arg0, __struct_1134__ __arg1
 }
 
 
+static void __N2M_AdjustorThunk_vus114(uintptr_t __arg0, __struct_114__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_114__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus115(uintptr_t __arg0, __struct_115__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_115__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus116(uintptr_t __arg0, __struct_116__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_116__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
 static void __N2M_AdjustorThunk_vus117(uintptr_t __arg0, __struct_117__ __arg1, const MethodInfo* method)
 {
     __arg0 += sizeof(Il2CppObject);
@@ -133445,6 +138615,23 @@ static void __N2M_AdjustorThunk_vus117(uintptr_t __arg0, __struct_117__ __arg1, 
     StackObject args[__TOTAL_ARG_SIZE__];
 	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
 	*(__struct_117__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus119(uintptr_t __arg0, __struct_119__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_119__*)(args + __ARG_OFFSET_1__) = __arg1;
 
     Interpreter::Execute(method, args, nullptr);
 }
@@ -133501,6 +138688,40 @@ static void __N2M_AdjustorThunk_vus122(uintptr_t __arg0, __struct_122__ __arg1, 
 }
 
 
+static void __N2M_AdjustorThunk_vus123(uintptr_t __arg0, __struct_123__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_123__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus124(uintptr_t __arg0, __struct_124__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_124__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
 static void __N2M_AdjustorThunk_vus125(uintptr_t __arg0, __struct_125__ __arg1, const MethodInfo* method)
 {
     __arg0 += sizeof(Il2CppObject);
@@ -133535,6 +138756,91 @@ static void __N2M_AdjustorThunk_vus126(uintptr_t __arg0, __struct_126__ __arg1, 
 }
 
 
+static void __N2M_AdjustorThunk_vus128(uintptr_t __arg0, __struct_128__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_128__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus129(uintptr_t __arg0, __struct_129__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_129__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus131(uintptr_t __arg0, __struct_131__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_131__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus132(uintptr_t __arg0, __struct_132__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_132__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus133(uintptr_t __arg0, __struct_133__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_133__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
 static void __N2M_AdjustorThunk_vus134(uintptr_t __arg0, __struct_134__ __arg1, const MethodInfo* method)
 {
     __arg0 += sizeof(Il2CppObject);
@@ -133564,6 +138870,210 @@ static void __N2M_AdjustorThunk_vus135(uintptr_t __arg0, __struct_135__ __arg1, 
     StackObject args[__TOTAL_ARG_SIZE__];
 	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
 	*(__struct_135__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus136(uintptr_t __arg0, __struct_136__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_136__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus137(uintptr_t __arg0, __struct_137__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_137__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus138(uintptr_t __arg0, __struct_138__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_138__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus140(uintptr_t __arg0, __struct_140__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_140__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus141(uintptr_t __arg0, __struct_141__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_141__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus142(uintptr_t __arg0, __struct_142__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_142__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus143(uintptr_t __arg0, __struct_143__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_143__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus144(uintptr_t __arg0, __struct_144__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_144__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus145(uintptr_t __arg0, __struct_145__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_145__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus146(uintptr_t __arg0, __struct_146__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_146__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus147(uintptr_t __arg0, __struct_147__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_147__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus149(uintptr_t __arg0, __struct_149__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_149__*)(args + __ARG_OFFSET_1__) = __arg1;
 
     Interpreter::Execute(method, args, nullptr);
 }
@@ -135190,6 +140700,23 @@ static void __N2M_AdjustorThunk_vus68(uintptr_t __arg0, __struct_68__ __arg1, co
 }
 
 
+static void __N2M_AdjustorThunk_vus7(uintptr_t __arg0, __struct_7__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_7__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
 static void __N2M_AdjustorThunk_vus70(uintptr_t __arg0, __struct_70__ __arg1, const MethodInfo* method)
 {
     __arg0 += sizeof(Il2CppObject);
@@ -135358,6 +140885,23 @@ static void __N2M_AdjustorThunk_vus77uu(uintptr_t __arg0, __struct_77__ __arg1, 
 }
 
 
+static void __N2M_AdjustorThunk_vus81(uintptr_t __arg0, __struct_81__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_81__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
 static void __N2M_AdjustorThunk_vus82(uintptr_t __arg0, __struct_82__ __arg1, const MethodInfo* method)
 {
     __arg0 += sizeof(Il2CppObject);
@@ -135409,6 +140953,57 @@ static void __N2M_AdjustorThunk_vus86(uintptr_t __arg0, __struct_86__ __arg1, co
 }
 
 
+static void __N2M_AdjustorThunk_vus90(uintptr_t __arg0, __struct_90__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_90__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus92(uintptr_t __arg0, __struct_92__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_92__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus94(uintptr_t __arg0, __struct_94__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_94__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
 static void __N2M_AdjustorThunk_vus95(uintptr_t __arg0, __struct_95__ __arg1, const MethodInfo* method)
 {
     __arg0 += sizeof(Il2CppObject);
@@ -135421,6 +141016,40 @@ static void __N2M_AdjustorThunk_vus95(uintptr_t __arg0, __struct_95__ __arg1, co
     StackObject args[__TOTAL_ARG_SIZE__];
 	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
 	*(__struct_95__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus96(uintptr_t __arg0, __struct_96__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_96__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus97(uintptr_t __arg0, __struct_97__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_97__*)(args + __ARG_OFFSET_1__) = __arg1;
 
     Interpreter::Execute(method, args, nullptr);
 }
@@ -135441,6 +141070,40 @@ static void __N2M_AdjustorThunk_vus974u(uintptr_t __arg0, __struct_974__ __arg1,
 	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
 	*(__struct_974__*)(args + __ARG_OFFSET_1__) = __arg1;
 	*(uintptr_t*)(args + __ARG_OFFSET_2__) = __arg2;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus98(uintptr_t __arg0, __struct_98__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_98__*)(args + __ARG_OFFSET_1__) = __arg1;
+
+    Interpreter::Execute(method, args, nullptr);
+}
+
+
+static void __N2M_AdjustorThunk_vus99(uintptr_t __arg0, __struct_99__ __arg1, const MethodInfo* method)
+{
+    __arg0 += sizeof(Il2CppObject);
+	constexpr int __ARG_OFFSET_0__ = 0;
+	constexpr int __ARG_SIZE_0__ = (sizeof(__arg0) + 7)/8;
+	constexpr int __ARG_OFFSET_1__ = __ARG_OFFSET_0__ + __ARG_SIZE_0__;
+	constexpr int __ARG_SIZE_1__ = (sizeof(__arg1) + 7)/8;
+	constexpr int __TOTAL_ARG_SIZE__ = __ARG_OFFSET_1__ + __ARG_SIZE_1__;
+
+    StackObject args[__TOTAL_ARG_SIZE__];
+	*(uintptr_t*)(args + __ARG_OFFSET_0__) = __arg0;
+	*(__struct_99__*)(args + __ARG_OFFSET_1__) = __arg1;
 
     Interpreter::Execute(method, args, nullptr);
 }
@@ -136371,25 +142034,60 @@ const NativeAdjustThunkMethodInfo hybridclr::interpreter::g_adjustThunkStub[] =
 	{"r8uu", (Il2CppMethodPointer)__N2M_AdjustorThunk_r8uu},
 	{"s0u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s0u},
 	{"s0ui4", (Il2CppMethodPointer)__N2M_AdjustorThunk_s0ui4},
+	{"s100u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s100u},
+	{"s101u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s101u},
+	{"s102u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s102u},
+	{"s103u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s103u},
+	{"s104u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s104u},
+	{"s105u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s105u},
+	{"s106u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s106u},
+	{"s108u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s108u},
+	{"s109u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s109u},
+	{"s111u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s111u},
+	{"s112u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s112u},
 	{"s1130uuu1", (Il2CppMethodPointer)__N2M_AdjustorThunk_s1130uuu1},
 	{"s1131u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s1131u},
 	{"s1132ui4", (Il2CppMethodPointer)__N2M_AdjustorThunk_s1132ui4},
+	{"s113u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s113u},
+	{"s114u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s114u},
+	{"s115u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s115u},
+	{"s116u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s116u},
 	{"s117u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s117u},
 	{"s117ui4", (Il2CppMethodPointer)__N2M_AdjustorThunk_s117ui4},
+	{"s119u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s119u},
 	{"s120u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s120u},
 	{"s120ui4", (Il2CppMethodPointer)__N2M_AdjustorThunk_s120ui4},
 	{"s121u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s121u},
 	{"s121ui4", (Il2CppMethodPointer)__N2M_AdjustorThunk_s121ui4},
 	{"s122u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s122u},
 	{"s122ui4", (Il2CppMethodPointer)__N2M_AdjustorThunk_s122ui4},
+	{"s123u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s123u},
+	{"s124u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s124u},
 	{"s125u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s125u},
 	{"s125ui4", (Il2CppMethodPointer)__N2M_AdjustorThunk_s125ui4},
 	{"s126u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s126u},
 	{"s126ui4", (Il2CppMethodPointer)__N2M_AdjustorThunk_s126ui4},
+	{"s128u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s128u},
+	{"s129u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s129u},
+	{"s131u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s131u},
+	{"s132u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s132u},
+	{"s133u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s133u},
 	{"s134u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s134u},
 	{"s134ui4", (Il2CppMethodPointer)__N2M_AdjustorThunk_s134ui4},
 	{"s135u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s135u},
 	{"s135ui4", (Il2CppMethodPointer)__N2M_AdjustorThunk_s135ui4},
+	{"s136u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s136u},
+	{"s137u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s137u},
+	{"s138u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s138u},
+	{"s140u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s140u},
+	{"s141u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s141u},
+	{"s142u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s142u},
+	{"s143u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s143u},
+	{"s144u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s144u},
+	{"s145u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s145u},
+	{"s146u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s146u},
+	{"s147u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s147u},
+	{"s149u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s149u},
 	{"s156u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s156u},
 	{"s156ui4", (Il2CppMethodPointer)__N2M_AdjustorThunk_s156ui4},
 	{"s158u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s158u},
@@ -136580,15 +142278,24 @@ const NativeAdjustThunkMethodInfo hybridclr::interpreter::g_adjustThunkStub[] =
 	{"s77ui4", (Il2CppMethodPointer)__N2M_AdjustorThunk_s77ui4},
 	{"s77us389u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s77us389u},
 	{"s77us389ui4", (Il2CppMethodPointer)__N2M_AdjustorThunk_s77us389ui4},
+	{"s7u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s7u},
+	{"s81u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s81u},
 	{"s82u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s82u},
 	{"s82ui4", (Il2CppMethodPointer)__N2M_AdjustorThunk_s82ui4},
 	{"s85u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s85u},
 	{"s85ui4", (Il2CppMethodPointer)__N2M_AdjustorThunk_s85ui4},
 	{"s86u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s86u},
 	{"s86ui4", (Il2CppMethodPointer)__N2M_AdjustorThunk_s86ui4},
+	{"s90u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s90u},
+	{"s92u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s92u},
+	{"s94u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s94u},
 	{"s95u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s95u},
 	{"s95ui4", (Il2CppMethodPointer)__N2M_AdjustorThunk_s95ui4},
+	{"s96u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s96u},
 	{"s974uu", (Il2CppMethodPointer)__N2M_AdjustorThunk_s974uu},
+	{"s97u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s97u},
+	{"s98u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s98u},
+	{"s99u", (Il2CppMethodPointer)__N2M_AdjustorThunk_s99u},
 	{"u1u", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1u},
 	{"u1ui", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1ui},
 	{"u1ui1", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1ui1},
@@ -136618,18 +142325,51 @@ const NativeAdjustThunkMethodInfo hybridclr::interpreter::g_adjustThunkStub[] =
 	{"u1ur8", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1ur8},
 	{"u1us0", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us0},
 	{"u1us10", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us10},
+	{"u1us100", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us100},
+	{"u1us101", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us101},
 	{"u1us102", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us102},
+	{"u1us103", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us103},
+	{"u1us104", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us104},
+	{"u1us105", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us105},
+	{"u1us106", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us106},
+	{"u1us108", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us108},
+	{"u1us109", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us109},
 	{"u1us1094", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us1094},
 	{"u1us10u", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us10u},
+	{"u1us111", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us111},
+	{"u1us112", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us112},
+	{"u1us113", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us113},
+	{"u1us114", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us114},
+	{"u1us115", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us115},
+	{"u1us116", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us116},
 	{"u1us117", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us117},
 	{"u1us119", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us119},
 	{"u1us120", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us120},
 	{"u1us121", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us121},
 	{"u1us122", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us122},
+	{"u1us123", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us123},
+	{"u1us124", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us124},
 	{"u1us125", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us125},
 	{"u1us126", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us126},
+	{"u1us128", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us128},
+	{"u1us129", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us129},
+	{"u1us131", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us131},
+	{"u1us132", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us132},
+	{"u1us133", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us133},
 	{"u1us134", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us134},
 	{"u1us135", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us135},
+	{"u1us136", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us136},
+	{"u1us137", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us137},
+	{"u1us138", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us138},
+	{"u1us140", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us140},
+	{"u1us141", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us141},
+	{"u1us142", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us142},
+	{"u1us143", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us143},
+	{"u1us144", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us144},
+	{"u1us145", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us145},
+	{"u1us146", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us146},
+	{"u1us147", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us147},
+	{"u1us149", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us149},
 	{"u1us156", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us156},
 	{"u1us158", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us158},
 	{"u1us159", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us159},
@@ -136868,12 +142608,19 @@ const NativeAdjustThunkMethodInfo hybridclr::interpreter::g_adjustThunkStub[] =
 	{"u1us76", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us76},
 	{"u1us77", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us77},
 	{"u1us8", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us8},
+	{"u1us81", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us81},
 	{"u1us82", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us82},
 	{"u1us85", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us85},
 	{"u1us86", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us86},
 	{"u1us9", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us9},
+	{"u1us90", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us90},
+	{"u1us92", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us92},
+	{"u1us94", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us94},
 	{"u1us95", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us95},
 	{"u1us96", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us96},
+	{"u1us97", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us97},
+	{"u1us98", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us98},
+	{"u1us99", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1us99},
 	{"u1uu", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1uu},
 	{"u1uu1", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1uu1},
 	{"u1uu2", (Il2CppMethodPointer)__N2M_AdjustorThunk_u1uu2},
@@ -137044,17 +142791,52 @@ const NativeAdjustThunkMethodInfo hybridclr::interpreter::g_adjustThunkStub[] =
 	{"vur4", (Il2CppMethodPointer)__N2M_AdjustorThunk_vur4},
 	{"vur8", (Il2CppMethodPointer)__N2M_AdjustorThunk_vur8},
 	{"vus0", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus0},
+	{"vus100", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus100},
+	{"vus101", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus101},
+	{"vus102", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus102},
+	{"vus103", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus103},
 	{"vus1036", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus1036},
+	{"vus104", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus104},
+	{"vus105", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus105},
+	{"vus106", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus106},
+	{"vus108", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus108},
+	{"vus109", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus109},
+	{"vus111", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus111},
+	{"vus112", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus112},
+	{"vus113", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus113},
 	{"vus1130s3", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus1130s3},
 	{"vus1134", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus1134},
+	{"vus114", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus114},
+	{"vus115", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus115},
+	{"vus116", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus116},
 	{"vus117", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus117},
+	{"vus119", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus119},
 	{"vus120", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus120},
 	{"vus121", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus121},
 	{"vus122", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus122},
+	{"vus123", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus123},
+	{"vus124", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus124},
 	{"vus125", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus125},
 	{"vus126", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus126},
+	{"vus128", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus128},
+	{"vus129", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus129},
+	{"vus131", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus131},
+	{"vus132", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus132},
+	{"vus133", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus133},
 	{"vus134", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus134},
 	{"vus135", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus135},
+	{"vus136", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus136},
+	{"vus137", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus137},
+	{"vus138", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus138},
+	{"vus140", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus140},
+	{"vus141", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus141},
+	{"vus142", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus142},
+	{"vus143", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus143},
+	{"vus144", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus144},
+	{"vus145", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus145},
+	{"vus146", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus146},
+	{"vus147", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus147},
+	{"vus149", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus149},
 	{"vus156", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus156},
 	{"vus158", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus158},
 	{"vus159", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus159},
@@ -137147,6 +142929,7 @@ const NativeAdjustThunkMethodInfo hybridclr::interpreter::g_adjustThunkStub[] =
 	{"vus63", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus63},
 	{"vus64", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus64},
 	{"vus68", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus68},
+	{"vus7", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus7},
 	{"vus70", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus70},
 	{"vus71", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus71},
 	{"vus72", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus72},
@@ -137156,11 +142939,19 @@ const NativeAdjustThunkMethodInfo hybridclr::interpreter::g_adjustThunkStub[] =
 	{"vus77s1114", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus77s1114},
 	{"vus77s1114u", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus77s1114u},
 	{"vus77uu", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus77uu},
+	{"vus81", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus81},
 	{"vus82", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus82},
 	{"vus85", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus85},
 	{"vus86", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus86},
+	{"vus90", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus90},
+	{"vus92", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus92},
+	{"vus94", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus94},
 	{"vus95", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus95},
+	{"vus96", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus96},
+	{"vus97", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus97},
 	{"vus974u", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus974u},
+	{"vus98", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus98},
+	{"vus99", (Il2CppMethodPointer)__N2M_AdjustorThunk_vus99},
 	{"vuu", (Il2CppMethodPointer)__N2M_AdjustorThunk_vuu},
 	{"vuu1", (Il2CppMethodPointer)__N2M_AdjustorThunk_vuu1},
 	{"vuu2", (Il2CppMethodPointer)__N2M_AdjustorThunk_vuu2},

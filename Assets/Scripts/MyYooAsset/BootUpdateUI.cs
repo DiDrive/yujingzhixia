@@ -12,6 +12,8 @@ public sealed class BootUpdateUI : MonoBehaviour
     [SerializeField] private Text detailText;
     [SerializeField] private Text versionText;
     [SerializeField] private Image progressFill;
+    [SerializeField] private Button confirmUpdateButton;
+    [SerializeField] private Button cancelUpdateButton;
     [SerializeField] private Button enterButton;
     [SerializeField] private Button retryButton;
     [SerializeField] private Button exitButton;
@@ -23,6 +25,8 @@ public sealed class BootUpdateUI : MonoBehaviour
         if (rootGroup == null)
             rootGroup = GetComponent<CanvasGroup>();
 
+        confirmUpdateButton?.onClick.AddListener(OnConfirmUpdateClicked);
+        cancelUpdateButton?.onClick.AddListener(OnCancelUpdateClicked);
         enterButton?.onClick.AddListener(OnEnterClicked);
         retryButton?.onClick.AddListener(OnRetryClicked);
         exitButton?.onClick.AddListener(OnExitClicked);
@@ -31,6 +35,8 @@ public sealed class BootUpdateUI : MonoBehaviour
 
     private void OnDestroy()
     {
+        confirmUpdateButton?.onClick.RemoveListener(OnConfirmUpdateClicked);
+        cancelUpdateButton?.onClick.RemoveListener(OnCancelUpdateClicked);
         enterButton?.onClick.RemoveListener(OnEnterClicked);
         retryButton?.onClick.RemoveListener(OnRetryClicked);
         exitButton?.onClick.RemoveListener(OnExitClicked);
@@ -66,12 +72,23 @@ public sealed class BootUpdateUI : MonoBehaviour
             : $"资源版本：{version}");
     }
 
-    public void ShowDownloadPlan(int fileCount, long totalBytes)
+    /// <summary>
+    /// 显示本次更新量并等待玩家选择。返回 false 表示确认按钮没有正确绑定，
+    /// 调用方应采用兼容策略继续下载，避免启动流程永久卡住。
+    /// </summary>
+    public bool ShowDownloadConfirmation(int fileCount, long totalBytes)
     {
         ShowStage(
             "发现资源更新",
-            $"需要下载 {fileCount} 个文件，共 {FormatBytes(totalBytes)}");
+            $"本次需要下载 {fileCount} 个文件，共 {FormatBytes(totalBytes)}。是否立即更新？");
         SetProgress(0f);
+
+        if (confirmUpdateButton != null)
+            confirmUpdateButton.gameObject.SetActive(true);
+        if (cancelUpdateButton != null)
+            cancelUpdateButton.gameObject.SetActive(true);
+
+        return confirmUpdateButton != null && cancelUpdateButton != null;
     }
 
     public void ShowDownloadProgress(
@@ -139,12 +156,35 @@ public sealed class BootUpdateUI : MonoBehaviour
 
     private void HideButtons()
     {
+        if (confirmUpdateButton != null)
+            confirmUpdateButton.gameObject.SetActive(false);
+        if (cancelUpdateButton != null)
+            cancelUpdateButton.gameObject.SetActive(false);
         if (enterButton != null)
             enterButton.gameObject.SetActive(false);
         if (retryButton != null)
             retryButton.gameObject.SetActive(false);
         if (exitButton != null)
             exitButton.gameObject.SetActive(false);
+    }
+
+    private void OnConfirmUpdateClicked()
+    {
+        HideButtons();
+        updater?.ConfirmDownload();
+    }
+
+    private void OnCancelUpdateClicked()
+    {
+        HideButtons();
+
+        if (updater != null)
+        {
+            updater.CancelUpdateAndExit();
+            return;
+        }
+
+        QuitApplication();
     }
 
     private void OnEnterClicked()
@@ -159,6 +199,11 @@ public sealed class BootUpdateUI : MonoBehaviour
     }
 
     private static void OnExitClicked()
+    {
+        QuitApplication();
+    }
+
+    private static void QuitApplication()
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
