@@ -98,6 +98,26 @@ public static class SearchableLootRuntimeStateStore
         if (!string.IsNullOrWhiteSpace(persistentId)) StateById.Remove(persistentId);
     }
 
+    /// <summary>导出所有会话状态的深拷贝，供正式存档槽序列化。</summary>
+    public static List<SearchableLootContainerState> CaptureAll()
+    {
+        var result = new List<SearchableLootContainerState>();
+        foreach (var pair in StateById)
+        {
+            if (pair.Value != null) result.Add(pair.Value.Clone());
+        }
+        result.Sort((left, right) => string.CompareOrdinal(left.persistentId, right.persistentId));
+        return result;
+    }
+
+    /// <summary>用磁盘存档替换当前会话状态。</summary>
+    public static void RestoreAll(IEnumerable<SearchableLootContainerState> states)
+    {
+        StateById.Clear();
+        if (states == null) return;
+        foreach (var state in states) Save(state);
+    }
+
     /// <summary>开始新一局或清空存档时调用，避免上一局容器状态带入下一局。</summary>
     public static void ClearAll()
     {

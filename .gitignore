@@ -89,6 +89,14 @@ InitTestScene*.unity*
 # /Assets/AddressableAssetsData/OSX/addressables_content_state.bin
 /[Aa]ssets/AddressableAssetsData/*/*.bin*
 
+# Local release/build outputs. These are reproducible and must not be committed.
+/Bundles/
+/PlayerBuilds/
+/ReleaseStaging/
+/HybridCLRData/hybridclr_repo/
+/HybridCLRData/il2cpp_plus_repo/
+/HybridCLRData/StrippedAOTDllsTempProj/
+
 # Visual Scripting auto-generated files
 /[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Flow/UnitOptions.db
 /[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Flow/UnitOptions.db.meta

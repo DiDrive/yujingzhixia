@@ -176,6 +176,15 @@ public static class RemoteUpdateBuildPipeline
     {
         CompileDllCommand.CompileDll(SupportedTarget, false);
 
+        CopyGeneratedHotUpdateDll();
+    }
+
+    /// <summary>
+    /// 将 HybridCLR 已经生成的 HotUpdate.dll 复制到 YooAsset 收集目录。
+    /// 基础客户端构建会在自动执行 Generate/All 后调用这里。
+    /// </summary>
+    internal static void CopyGeneratedHotUpdateDll()
+    {
         string outputDirectory = SettingsUtil.GetHotUpdateDllsOutputDirByTarget(SupportedTarget);
         string bytesSource = Path.Combine(outputDirectory, HotUpdateAssemblyName + ".dll.bytes");
         string dllSource = Path.Combine(outputDirectory, HotUpdateAssemblyName + ".dll");
@@ -199,13 +208,15 @@ public static class RemoteUpdateBuildPipeline
             throw new IOException("HotUpdate.dll 复制后的 SHA256 不一致，已停止构建。");
     }
 
-    private static string ValidateHotUpdateDll()
+    internal static string ValidateHotUpdateDll()
     {
         RequireFile(HotUpdateDestination, "YooAsset 收集目录中的 HotUpdate.dll.bytes");
         return CalculateSha256(ToAbsolutePath(HotUpdateDestination));
     }
 
-    private static string BuildYooAssetPackage(string packageVersion)
+    internal static string BuildYooAssetPackage(
+        string packageVersion,
+        EBundledCopyOption bundledCopyOption = EBundledCopyOption.None)
     {
         string projectRoot = GetProjectRoot();
         string outputRoot = Path.Combine(projectRoot, BundleOutputRootName);
@@ -223,7 +234,7 @@ public static class RemoteUpdateBuildPipeline
             EnableSharePackRule = true,
             VerifyBuildingResult = true,
             FileNameStyle = EFileNameStyle.HashName,
-            BundledCopyOption = EBundledCopyOption.None,
+            BundledCopyOption = bundledCopyOption,
             BundledCopyParams = string.Empty,
             CompressOption = ECompressOption.LZ4,
             ClearBuildCacheFiles = false,
@@ -247,7 +258,7 @@ public static class RemoteUpdateBuildPipeline
         return packRuleResult.GetBundleName(packageName, uniqueBundleName);
     }
 
-    private static void ValidatePackageOutput(string packageDirectory, string packageVersion)
+    internal static void ValidatePackageOutput(string packageDirectory, string packageVersion)
     {
         if (!Directory.Exists(packageDirectory))
             throw new DirectoryNotFoundException("YooAsset 返回的构建目录不存在：" + packageDirectory);
@@ -269,7 +280,7 @@ public static class RemoteUpdateBuildPipeline
             throw new InvalidDataException("构建目录中没有找到任何 .bundle 文件。");
     }
 
-    private static BuildOutput CreateStagingDirectory(
+    internal static BuildOutput CreateStagingDirectory(
         BuildOptions options,
         string packageDirectory,
         string hotUpdateHash)
@@ -423,7 +434,7 @@ public static class RemoteUpdateBuildPipeline
             packageVersion);
     }
 
-    private static string GetStagingDirectory(string playerBaseline, string packageVersion)
+    internal static string GetStagingDirectory(string playerBaseline, string packageVersion)
     {
         return Path.Combine(GetProjectRoot(), StagingRootName, "PC", playerBaseline, packageVersion);
     }

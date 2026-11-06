@@ -120,6 +120,12 @@ public class RuntimeDebugPanel : MonoBehaviour
     /// </summary>
     private void DrawActions()
     {
+        GUILayout.Label("Save System V1");
+        if (GUILayout.Button("Save Slot 0")) InvokeSaveAction(() => SaveGameService.Instance != null && SaveGameService.Instance.Save("debug-panel"), "Save Slot 0");
+        if (GUILayout.Button("Load Slot 0")) InvokeSaveAction(() => SaveGameService.Instance != null && SaveGameService.Instance.Load(), "Load Slot 0");
+        if (GUILayout.Button("Clear Slot 0")) InvokeSaveAction(() => SaveGameService.Instance != null && SaveGameService.Instance.DeleteSave(), "Clear Slot 0");
+        GUILayout.Space(8f);
+        GUILayout.Label("Gameplay Debug");
         if (GUILayout.Button("Start Run")) InvokeAction(() => bootstrap.DebugStartRun(), "Start Run");
         if (GUILayout.Button("Eat")) InvokeAction(() => bootstrap.DebugEat(), "Eat");
         if (GUILayout.Button("Drink")) InvokeAction(() => bootstrap.DebugDrink(), "Drink");
@@ -163,6 +169,12 @@ public class RuntimeDebugPanel : MonoBehaviour
 
         action?.Invoke();
         PushLog($"{actionName} executed");
+    }
+
+    private void InvokeSaveAction(System.Func<bool> action, string actionName)
+    {
+        var succeeded = action != null && action();
+        PushLog($"{actionName}: {(succeeded ? "OK" : "Failed")}");
     }
 
     /// <summary>

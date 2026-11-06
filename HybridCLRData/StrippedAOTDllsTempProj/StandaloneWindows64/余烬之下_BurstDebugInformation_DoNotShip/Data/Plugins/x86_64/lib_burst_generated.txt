@@ -11,6 +11,7 @@ Library: D:\unity_project\余烬之下\Temp\BurstOutput\Data\Plugins\x86_64\lib_
 --linker-options=PdbAltPath="余烬之下_Data/Plugins/x86_64/lib_burst_generated.pdb"
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=D:\unity_project\余烬之下\Temp\Burst
+--debug=Full
 --force-disable-frame-info-registration
 --key-folder=C:/Program Files/Unity/Hub/Editor/2022.3.62f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport
 --decode-folder=D:\unity_project\余烬之下\Library\Burst
@@ -58,6 +59,7 @@ Library: D:\unity_project\余烬之下\Temp\BurstOutput\Data\Plugins\x86_64\lib_
 --linker-options=PdbAltPath="余烬之下_Data/Plugins/x86_64/lib_burst_generated.pdb"
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=D:\unity_project\余烬之下\Temp\Burst
+--debug=Full
 --force-disable-frame-info-registration
 --key-folder=C:/Program Files/Unity/Hub/Editor/2022.3.62f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport
 --decode-folder=D:\unity_project\余烬之下\Library\Burst

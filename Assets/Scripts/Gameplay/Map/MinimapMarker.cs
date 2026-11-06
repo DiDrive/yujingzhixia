@@ -93,13 +93,13 @@ public class MinimapMarker : MonoBehaviour
     private void Awake()
     {
         ResolveReferences();
-        discovered = discoveredAtStart;
+        RestoreDiscoveryState();
     }
 
     private void OnEnable()
     {
         if (!Application.isPlaying) return;
-        discovered = discoveredAtStart;
+        RestoreDiscoveryState();
     }
 
     private void OnValidate()
@@ -119,19 +119,22 @@ public class MinimapMarker : MonoBehaviour
 
         var offset = (Vector2)(playerPosition - transform.position);
         if (offset.sqrMagnitude <= discoveryRadius * discoveryRadius)
-            discovered = true;
+            Discover();
     }
 
     /// <summary>供任务、交互或剧情系统直接发现标记。</summary>
     public void Discover()
     {
         discovered = true;
+        MinimapDiscoveryStateStore.MarkDiscovered(MarkerId);
     }
 
     /// <summary>开始新一局时恢复初始发现状态。</summary>
     public void ResetDiscovery()
     {
         discovered = discoveredAtStart;
+        if (discovered) MinimapDiscoveryStateStore.MarkDiscovered(MarkerId);
+        else MinimapDiscoveryStateStore.Unmark(MarkerId);
     }
 
     /// <summary>
@@ -168,6 +171,12 @@ public class MinimapMarker : MonoBehaviour
             floorSortingState = GetComponentInParent<FloorSortingState>();
         if (extractionPoint == null)
             extractionPoint = GetComponent<ExtractionPoint>();
+    }
+
+    private void RestoreDiscoveryState()
+    {
+        discovered = discoveredAtStart || MinimapDiscoveryStateStore.Contains(MarkerId);
+        if (discovered) MinimapDiscoveryStateStore.MarkDiscovered(MarkerId);
     }
 
     private void OnDrawGizmos()

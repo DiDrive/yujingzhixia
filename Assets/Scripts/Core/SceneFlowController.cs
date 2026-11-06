@@ -84,6 +84,7 @@ public sealed class SceneFlowController : MonoBehaviour
         if (startsNewRun)
         {
             SearchableLootRuntimeStateStore.ClearAll();
+            MinimapDiscoveryStateStore.ClearAll();
             FindObjectOfType<GridInventoryService>()?.ClearTransientWorldContainers();
             FindObjectOfType<GameStateMachine>()?.StartRun();
         }
@@ -91,6 +92,8 @@ public sealed class SceneFlowController : MonoBehaviour
         {
             FindObjectOfType<GameStateMachine>()?.ReturnShelterBeforeNight();
         }
+
+        SaveGameService.Instance?.Save(startsNewRun ? "before-raid" : "return-to-shelter");
 
         // if (logTransitions) Debug.Log($"正在切换场景：{SceneManager.GetActiveScene().name} -> {sceneName}", this);
         // var operation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);

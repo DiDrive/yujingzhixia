@@ -880,7 +880,16 @@
     <ClCompile Include="Source\Generics__87.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Generics__88.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Generics__89.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Generics__9.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Generics__90.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\Il2CppCCFieldValuesTable.cpp">
@@ -1009,6 +1018,9 @@
     <ClCompile Include="Source\Unity.Burst__2.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Unity.Burst__3.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Unity.Collections.LowLevel.ILSupport.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -1034,6 +1046,9 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\Unity.Mathematics__11.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unity.Mathematics__12.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\Unity.Mathematics__2.cpp">
@@ -1100,6 +1115,9 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\Unity.TextMeshPro__6.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Unity.TextMeshPro__7.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\Unity.Timeline.cpp">
@@ -1273,6 +1291,9 @@
     <ClCompile Include="Source\UnityEngine.UI__3.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\UnityEngine.UI__4.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
     <ClCompile Include="Source\UnityEngine.UnityAnalyticsModule.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -1316,6 +1337,9 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\YooAsset__4.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\YooAsset__5.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\__Generated.cpp">

@@ -26,7 +26,7 @@ public class GridInventoryService : MonoBehaviour
     [SerializeField] private List<GridContainerDefinition> containerDefinitions = new();
     [Tooltip("物品定义列表。")]
     [SerializeField] private List<GridItemDefinition> itemDefinitions = new();
-    [Tooltip("可选的物品 JSON 表。为空时会尝试读取 Resources/Data/item_definitions.json。场景中已有定义时默认不会覆盖。")]
+    [Tooltip("可选的物品 JSON 表。正式流程由 YooAsset 加载；编辑器直接运行场景时从 Assets/GameRes/Config 读取。")]
     [SerializeField] private TextAsset itemDefinitionsJson;
     [Tooltip("启动时优先用 JSON 覆盖 Inspector 中的物品定义。正式转表后再开启。")]
     [SerializeField] private bool preferJsonItemDefinitions;
@@ -699,6 +699,195 @@ public class GridInventoryService : MonoBehaviour
     }
 
     /// <summary>
+    /// 导出玩家容器和基地 Storage 容器。世界掉落与尸体由各自的稳定状态协议保存。
+    /// </summary>
+    public GridInventorySaveData CapturePersistentSaveData()
+    {
+        EnsureInitialized();
+        var snapshot = new GridInventorySaveData();
+        var containerIds = containerOwnerById
+            .Where(pair => pair.Value == GridContainerOwnerType.Player ||
+                           pair.Value == GridContainerOwnerType.Storage)
+            .Select(pair => pair.Key)
+            .OrderBy(id => id)
+            .ToArray();
+
+        for (var i = 0; i < containerIds.Length; i++)
+        {
+            var containerId = containerIds[i];
+            if (!containerDefinitionById.TryGetValue(containerId, out var definition)) continue;
+            var savedContainer = new GridInventoryContainerSaveData
+            {
+                containerId = containerId,
+                rows = definition.rows,
+                columns = definition.columns,
+                ownerType = definition.ownerType,
+                unlockedCellCount = GetUnlockedCellCount(containerId)
+            };
+
+            if (containerItemInstanceIds.TryGetValue(containerId, out var instanceIds))
+            {
+                var instances = instanceIds
+                    .Where(itemInstanceById.ContainsKey)
+                    .Select(id => itemInstanceById[id])
+                    .OrderBy(item => item.originRow)
+                    .ThenBy(item => item.originColumn)
+                    .ThenBy(item => item.itemId)
+                    .ToArray();
+                for (var itemIndex = 0; itemIndex < instances.Length; itemIndex++)
+                {
+                    var item = instances[itemIndex];
+                    savedContainer.items.Add(new GridInventoryItemSaveData
+                    {
+                        itemId = item.itemId,
+                        stackCount = item.stackCount,
+                        rotation = item.rotation,
+                        row = item.originRow,
+                        column = item.originColumn
+                    });
+                }
+            }
+
+            snapshot.containers.Add(savedContainer);
+        }
+
+        return snapshot;
+    }
+
+    /// <summary>
+    /// 事务式恢复持久容器。失败时尽力回滚到调用前状态，避免损坏当前运行数据。
+    /// </summary>
+    public bool RestorePersistentSaveData(GridInventorySaveData data, out string error)
+    {
+        EnsureInitialized();
+        var backup = CapturePersistentSaveData();
+        if (TryRestorePersistentSaveData(data, out error)) return true;
+
+        if (!TryRestorePersistentSaveData(backup, out var rollbackError))
+            Debug.LogError("背包读档失败后的内存回滚也失败：" + rollbackError, this);
+        return false;
+    }
+
+    private bool TryRestorePersistentSaveData(GridInventorySaveData data, out string error)
+    {
+        error = null;
+        if (data?.containers == null)
+        {
+            error = "inventory.containers 为空。";
+            return false;
+        }
+
+        var seenContainerIds = new HashSet<string>(StringComparer.Ordinal);
+        for (var i = 0; i < data.containers.Count; i++)
+        {
+            var saved = data.containers[i];
+            if (saved == null || string.IsNullOrWhiteSpace(saved.containerId))
+            {
+                error = $"第 {i} 个容器缺少 ID。";
+                return false;
+            }
+            if (!seenContainerIds.Add(saved.containerId))
+            {
+                error = "存档包含重复容器：" + saved.containerId;
+                return false;
+            }
+            if (saved.rows <= 0 || saved.columns <= 0 ||
+                (saved.ownerType != GridContainerOwnerType.Player &&
+                 saved.ownerType != GridContainerOwnerType.Storage))
+            {
+                error = "存档容器参数无效：" + saved.containerId;
+                return false;
+            }
+
+            if (containerDefinitionById.TryGetValue(saved.containerId, out var existing))
+            {
+                if (existing.rows != saved.rows || existing.columns != saved.columns ||
+                    (existing.ownerType != GridContainerOwnerType.Player &&
+                     existing.ownerType != GridContainerOwnerType.Storage))
+                {
+                    error = $"容器结构不兼容：{saved.containerId}。";
+                    return false;
+                }
+            }
+            else if (!RegisterRuntimeContainer(
+                         saved.containerId,
+                         saved.rows,
+                         saved.columns,
+                         saved.ownerType,
+                         false,
+                         null,
+                         saved.unlockedCellCount))
+            {
+                error = "无法创建存档中的容器：" + saved.containerId;
+                return false;
+            }
+
+            if (saved.items == null) continue;
+            for (var itemIndex = 0; itemIndex < saved.items.Count; itemIndex++)
+            {
+                var item = saved.items[itemIndex];
+                if (item == null || string.IsNullOrWhiteSpace(item.itemId) || item.stackCount <= 0 ||
+                    !itemDefinitionById.TryGetValue(item.itemId, out var definition) ||
+                    (definition.maxStack > 0 && item.stackCount > definition.maxStack))
+                {
+                    error = $"容器 {saved.containerId} 的第 {itemIndex} 个物品无效或定义已不存在。";
+                    return false;
+                }
+            }
+        }
+
+        var persistentContainerIds = containerOwnerById
+            .Where(pair => pair.Value == GridContainerOwnerType.Player ||
+                           pair.Value == GridContainerOwnerType.Storage)
+            .Select(pair => pair.Key)
+            .ToArray();
+        for (var i = 0; i < persistentContainerIds.Length; i++)
+        {
+            if (!containerItemInstanceIds.TryGetValue(persistentContainerIds[i], out var ids)) continue;
+            var copy = ids.ToArray();
+            for (var itemIndex = 0; itemIndex < copy.Length; itemIndex++)
+                RemoveInstanceInternal(copy[itemIndex]);
+        }
+
+        for (var i = 0; i < data.containers.Count; i++)
+        {
+            var saved = data.containers[i];
+            SetUnlockedCellCountFromSave(saved.containerId, saved.unlockedCellCount);
+            if (saved.items == null) continue;
+            var items = saved.items
+                .OrderBy(item => item.row)
+                .ThenBy(item => item.column)
+                .ThenBy(item => item.itemId)
+                .ToArray();
+            for (var itemIndex = 0; itemIndex < items.Length; itemIndex++)
+            {
+                var item = items[itemIndex];
+                if (TrySpawnToCell(
+                        item.itemId,
+                        saved.containerId,
+                        item.row,
+                        item.column,
+                        item.rotation,
+                        item.stackCount)) continue;
+
+                error = $"无法恢复 {saved.containerId} 中的 {item.itemId}，位置=({item.row},{item.column})。";
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private void SetUnlockedCellCountFromSave(string containerId, int savedCount)
+    {
+        if (!occupancyByContainerId.TryGetValue(containerId, out var occupancy)) return;
+        var total = occupancy.Rows * occupancy.Columns;
+        var normalized = savedCount <= 0 ? total : Mathf.Clamp(savedCount, 1, total);
+        unlockedCellCountByContainerId[containerId] = normalized;
+        occupancy.SetUnlockedCellCount(normalized);
+    }
+
+    /// <summary>
     /// 尝试获取容器的行数和列数。
     /// </summary>
     /// <param name="containerId">容器ID。</param>
@@ -1169,7 +1358,7 @@ public class GridInventoryService : MonoBehaviour
     }
 
     /// <summary>
-    /// 尝试从 JSON 文件加载物品定义。JSON 文件路径为 Resources/Data/item_definitions.json。
+    /// 尝试从 JSON 文件加载物品定义。正式流程使用 YooAsset；编辑器直开场景时读取源配置。
     /// </summary>
     /// <param name="replaceExisting">是否替换已存在的物品定义</param>
     /// <returns></returns>
@@ -1184,7 +1373,12 @@ public class GridInventoryService : MonoBehaviour
         {
             var source = itemDefinitionsJson != null
                 ? itemDefinitionsJson
-                : Resources.Load<TextAsset>("Data/item_definitions");
+                : UnityEditor.AssetDatabase.LoadAssetAtPath<TextAsset>(
+                    "Assets/GameRes/Config/item_definitions.json");
+
+            // 兼容尚未迁移到 GameRes 的旧工程布局。
+            if (source == null)
+                source = Resources.Load<TextAsset>("Data/item_definitions");
 
             if (source != null)
                 json = source.text;

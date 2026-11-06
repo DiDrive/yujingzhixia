@@ -59,6 +59,18 @@ public class GameStateMachine : MonoBehaviour
         ChangeState(GamePhase.Shelter);
     }
 
+    /// <summary>从稳定存档协议恢复阶段，并继续通过事件通知现有监听者。</summary>
+    public void RestoreSavedPhase(GamePhase savedPhase)
+    {
+        if (!System.Enum.IsDefined(typeof(GamePhase), savedPhase))
+        {
+            Debug.LogWarning($"忽略无效的存档阶段值：{(int)savedPhase}。", this);
+            return;
+        }
+
+        ChangeState(savedPhase);
+    }
+
     private void ChangeState(GamePhase next)
     {
         if (next == current) return;

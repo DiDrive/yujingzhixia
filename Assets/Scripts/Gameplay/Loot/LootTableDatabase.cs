@@ -33,7 +33,7 @@ public class LootTableJsonRoot
 
 public class LootTableDatabase : MonoBehaviour
 {
-    [Tooltip("可选的掉落表 JSON 文件。为空时自动读取 Resources/Data/loot_tables.json。")]
+    [Tooltip("可选的掉落表 JSON 文件。正式流程由 YooAsset 加载；编辑器直接运行场景时从 Assets/GameRes/Config 读取。")]
     [SerializeField] private TextAsset lootTablesJson;
     [Tooltip("JSON 中没有对应 tableId 时可使用的 Inspector 备用掉落表。")]
     [SerializeField] private List<LootTableJsonDefinition> fallbackTables = new();
@@ -58,7 +58,12 @@ public class LootTableDatabase : MonoBehaviour
         {
             var source = lootTablesJson != null
                 ? lootTablesJson
-                : Resources.Load<TextAsset>("Data/loot_tables");
+                : UnityEditor.AssetDatabase.LoadAssetAtPath<TextAsset>(
+                    "Assets/GameRes/Config/loot_tables.json");
+
+            // 兼容尚未迁移到 GameRes 的旧工程布局。
+            if (source == null)
+                source = Resources.Load<TextAsset>("Data/loot_tables");
 
             if (source != null)
                 json = source.text;

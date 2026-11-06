@@ -100,6 +100,32 @@ public class SurvivalSystem : MonoBehaviour, IDamageable
     public float FatigueNormalized => Normalize(fatigue, maxFatigue);
     public float HpNormalized => Normalize(hp, maxHp);
 
+    /// <summary>导出不依赖热更新运行时类型的稳定存档数据。</summary>
+    public SurvivalSaveData CaptureSaveData()
+    {
+        return new SurvivalSaveData
+        {
+            hunger = hunger,
+            thirst = thirst,
+            fatigue = fatigue,
+            hp = hp,
+            infected = infected
+        };
+    }
+
+    /// <summary>恢复生存状态；上限与规则仍以当前资源配置为准。</summary>
+    public void RestoreSaveData(SurvivalSaveData data)
+    {
+        if (data == null) return;
+        hunger = data.hunger;
+        thirst = data.thirst;
+        fatigue = data.fatigue;
+        hp = data.hp;
+        infected = data.infected;
+        ClampAllStats();
+        RecalculateModifiers();
+    }
+
     private void Awake()
     {
         if (gameStateMachine == null) gameStateMachine = FindObjectOfType<GameStateMachine>();

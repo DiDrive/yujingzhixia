@@ -104,6 +104,15 @@ public class SearchableLootContainer : MonoBehaviour, IWorldInteractable
     public bool IsContainerUiOpen => IsContainerUiOpenInternal();
 
     /// <summary>
+    /// 磁盘存档晚于场景 Awake 恢复完成时，由存档服务再次把持久状态应用到当前容器。
+    /// </summary>
+    public void RestorePersistentState()
+    {
+        ResolveServices();
+        if (EnsureRegistered()) RestoreRuntimeState();
+    }
+
+    /// <summary>
     /// 把本组件配置成运行时生成的容器（例如僵尸尸体）。调用时组件所在物体应保持未激活，
     /// 从而确保 Awake/OnEnable 使用新的唯一 ID、楼层和共享场景 UI 完成注册。
     /// </summary>
@@ -131,7 +140,7 @@ public class SearchableLootContainer : MonoBehaviour, IWorldInteractable
     {
         ResolveSceneUiView();
         ResolveServices();
-        if (EnsureRegistered()) RestoreRuntimeState();
+        RestorePersistentState();
     }
 
     private void OnEnable()
