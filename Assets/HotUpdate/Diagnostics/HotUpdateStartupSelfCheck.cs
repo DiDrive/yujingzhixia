@@ -9,7 +9,7 @@ using UnityEngine;
 /// </summary>
 public static class HotUpdateRuntimeInfo
 {
-    public const string BusinessVersion = "1.1.0";
+    public const string BusinessVersion = "1.2.0";
     public const int ApiVersion = 2;
 }
 

@@ -9,7 +9,7 @@ using YooAsset;
 /// </summary>
 public static class GameEntry
 {
-    private const string FirstSceneLocation = "RaidScene";
+    private const string FirstSceneLocation = "ShelterScene";
 
     public static bool Succeeded { get; private set; }
 

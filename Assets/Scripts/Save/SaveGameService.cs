@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// 正式存档槽 V1。负责稳定 DTO、磁盘原子替换、备份恢复和核心服务状态装配。
+/// 正式存档槽 V1.1。负责稳定 DTO、磁盘原子替换、备份恢复、局内事务和核心服务状态装配。
 /// </summary>
 [DefaultExecutionOrder(-1000)]
 public sealed class SaveGameService : MonoBehaviour
@@ -14,7 +14,19 @@ public sealed class SaveGameService : MonoBehaviour
     private const string SaveFileName = "slot_0.json";
     private const string BackupExtension = ".bak";
     private const string TempExtension = ".tmp";
+    private const string RunCheckpointExtension = ".runbase";
+    private const string RunMarkerExtension = ".run";
+    private const string RunStatusActive = "active";
+    private const string RunStatusCommitting = "committing";
     private const float AutomaticSaveDebounceSeconds = 2f;
+
+    [Serializable]
+    private sealed class RunTransactionMarker
+    {
+        public string runId;
+        public string status;
+        public string startedAtUtc;
+    }
 
     private static SaveGameService instance;
     private bool loadCompleted;
@@ -27,7 +39,11 @@ public sealed class SaveGameService : MonoBehaviour
     public static SaveGameService Instance => instance;
     public bool LoadCompleted => loadCompleted;
     public string SavePath => Path.Combine(Application.persistentDataPath, SaveDirectoryName, SaveFileName);
-    public bool HasSave => File.Exists(SavePath) || File.Exists(SavePath + BackupExtension);
+    public string RunCheckpointPath => SavePath + RunCheckpointExtension;
+    public string RunMarkerPath => SavePath + RunMarkerExtension;
+    public bool HasActiveRun => File.Exists(RunMarkerPath);
+    public bool HasSave => File.Exists(SavePath) || File.Exists(SavePath + BackupExtension) ||
+                           (HasActiveRun && File.Exists(RunCheckpointPath));
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void EnsureRuntimeInstance()
@@ -129,6 +145,17 @@ public sealed class SaveGameService : MonoBehaviour
     [ContextMenu("Save Slot 0")]
     public bool Save(string reason = "manual")
     {
+        return SaveInternal(reason, false);
+    }
+
+    private bool SaveInternal(string reason, bool allowDuringRun)
+    {
+        if (HasActiveRun && !allowDuringRun)
+        {
+            Debug.LogWarning("永久存档已暂停：当前处于未结算的局内事务中。", this);
+            return false;
+        }
+
         var inventory = ResolveService<GridInventoryService>();
         var survival = ResolveService<SurvivalSystem>();
         var stateMachine = ResolveService<GameStateMachine>();
@@ -208,8 +235,79 @@ public sealed class SaveGameService : MonoBehaviour
         MinimapDiscoveryStateStore.RestoreAll(data.discoveredMarkerIds);
         ApplyDiscoveredMarkersToScene();
         loadCompleted = true;
+        RecoverInterruptedRunIfNeeded(sourcePath);
         Debug.Log($"读档完成：{sourcePath}，保存时间={data.savedAtUtc}", this);
         return true;
+    }
+
+    /// <summary>从基地出击前固定永久进度，并创建本轮局内事务标记。</summary>
+    public bool BeginRunTransaction()
+    {
+        if (HasSave && !loadCompleted)
+        {
+            Debug.LogWarning("无法开始出击：永久存档尚未完成读取。", this);
+            return false;
+        }
+
+        if (HasActiveRun)
+        {
+            Debug.LogWarning("无法开始出击：已有未完成的局内事务。", this);
+            return false;
+        }
+
+        if (!SaveInternal("before-raid-base", true)) return false;
+
+        try
+        {
+            WriteTextAtomically(RunCheckpointPath, File.ReadAllText(SavePath), null);
+            WriteRunMarker(new RunTransactionMarker
+            {
+                runId = Guid.NewGuid().ToString("N"),
+                status = RunStatusActive,
+                startedAtUtc = DateTime.UtcNow.ToString("O")
+            });
+            Debug.Log($"局内事务已开始，基地快照：{RunCheckpointPath}", this);
+            return true;
+        }
+        catch (Exception exception)
+        {
+            DeleteIfExists(RunMarkerPath);
+            DeleteIfExists(RunMarkerPath + TempExtension);
+            DeleteIfExists(RunCheckpointPath);
+            DeleteIfExists(RunCheckpointPath + TempExtension);
+            Debug.LogError("创建出击前快照失败：\n" + exception, this);
+            return false;
+        }
+    }
+
+    /// <summary>撤离成功后把当前背包与基地数据提交为新的永久存档。</summary>
+    public bool CommitRunTransaction()
+    {
+        if (!HasActiveRun)
+            return SaveInternal("return-to-shelter", true);
+
+        try
+        {
+            var marker = ReadRunMarker();
+            marker.status = RunStatusCommitting;
+            WriteRunMarker(marker);
+
+            if (!SaveInternal("raid-extraction-commit", true))
+            {
+                marker.status = RunStatusActive;
+                WriteRunMarker(marker);
+                return false;
+            }
+
+            CleanupRunTransactionFiles();
+            Debug.Log("局内事务提交完成，撤离物资已写入永久存档。", this);
+            return true;
+        }
+        catch (Exception exception)
+        {
+            Debug.LogError("提交局内事务失败：\n" + exception, this);
+            return false;
+        }
     }
 
     [ContextMenu("Delete Slot 0")]
@@ -220,6 +318,7 @@ public sealed class SaveGameService : MonoBehaviour
             DeleteIfExists(SavePath);
             DeleteIfExists(SavePath + BackupExtension);
             DeleteIfExists(SavePath + TempExtension);
+            CleanupRunTransactionFiles();
             loadCompleted = false;
             SearchableLootRuntimeStateStore.ClearAll();
             MinimapDiscoveryStateStore.ClearAll();
@@ -238,7 +337,10 @@ public sealed class SaveGameService : MonoBehaviour
         data = null;
         sourcePath = null;
         error = null;
-        var candidates = new[] { SavePath, SavePath + BackupExtension };
+        var marker = ReadRunMarker();
+        var candidates = HasActiveRun && marker.status != RunStatusCommitting
+            ? new[] { RunCheckpointPath, SavePath, SavePath + BackupExtension }
+            : new[] { SavePath, SavePath + BackupExtension, RunCheckpointPath };
         for (var i = 0; i < candidates.Length; i++)
         {
             var path = candidates[i];
@@ -267,17 +369,24 @@ public sealed class SaveGameService : MonoBehaviour
 
     private void WriteAtomically(string json)
     {
-        var path = SavePath;
+        WriteTextAtomically(SavePath, json, SavePath + BackupExtension);
+    }
+
+    private static void WriteTextAtomically(string path, string text, string backupPath)
+    {
         var directory = Path.GetDirectoryName(path);
         if (string.IsNullOrWhiteSpace(directory)) throw new InvalidOperationException("存档目录无效。");
         Directory.CreateDirectory(directory);
 
         var tempPath = path + TempExtension;
-        var backupPath = path + BackupExtension;
-        File.WriteAllText(tempPath, json);
+        File.WriteAllText(tempPath, text);
         if (File.Exists(path))
         {
-            File.Replace(tempPath, path, backupPath, true);
+            var keepBackup = !string.IsNullOrWhiteSpace(backupPath);
+            var effectiveBackupPath = keepBackup ? backupPath : path + ".replace.bak";
+            DeleteIfExists(effectiveBackupPath);
+            File.Replace(tempPath, path, effectiveBackupPath, true);
+            if (!keepBackup) DeleteIfExists(effectiveBackupPath);
         }
         else
         {
@@ -294,11 +403,69 @@ public sealed class SaveGameService : MonoBehaviour
     {
         // 已存在旧档时必须先成功读档，绝不能用尚未初始化好的空状态覆盖它。
         if (loadRoutineRunning || (HasSave && !loadCompleted)) return false;
+        // 局内物资必须撤离成功后才能进入永久档；暂停、失焦、周期保存和强退均不得提交。
+        if (HasActiveRun) return false;
         if (Time.realtimeSinceStartup - lastSaveRealtime < AutomaticSaveDebounceSeconds) return false;
         if (ResolveService<GridInventoryService>() == null ||
             ResolveService<SurvivalSystem>() == null ||
             ResolveService<GameStateMachine>() == null) return false;
         return Save(reason);
+    }
+
+    private void WriteRunMarker(RunTransactionMarker marker)
+    {
+        if (marker == null) throw new ArgumentNullException(nameof(marker));
+        WriteTextAtomically(RunMarkerPath, JsonUtility.ToJson(marker, true), null);
+    }
+
+    private RunTransactionMarker ReadRunMarker()
+    {
+        if (!File.Exists(RunMarkerPath))
+            return new RunTransactionMarker { status = RunStatusActive };
+
+        try
+        {
+            var marker = JsonUtility.FromJson<RunTransactionMarker>(File.ReadAllText(RunMarkerPath));
+            if (marker != null && !string.IsNullOrWhiteSpace(marker.status)) return marker;
+        }
+        catch (Exception exception)
+        {
+            Debug.LogWarning("局内事务标记损坏，将按未完成出击回滚：" + exception.Message, this);
+        }
+
+        return new RunTransactionMarker { status = RunStatusActive };
+    }
+
+    private void RecoverInterruptedRunIfNeeded(string loadedSourcePath)
+    {
+        if (!HasActiveRun) return;
+
+        try
+        {
+            if (string.Equals(loadedSourcePath, RunCheckpointPath, StringComparison.OrdinalIgnoreCase))
+            {
+                WriteTextAtomically(SavePath, File.ReadAllText(RunCheckpointPath), SavePath + BackupExtension);
+                Debug.LogWarning("检测到未完成的局内流程，已回滚到出击前基地快照。", this);
+            }
+            else
+            {
+                Debug.Log("检测到提交阶段中断，已使用完整永久存档完成恢复。", this);
+            }
+
+            CleanupRunTransactionFiles();
+        }
+        catch (Exception exception)
+        {
+            Debug.LogError("清理中断的局内事务失败：\n" + exception, this);
+        }
+    }
+
+    private void CleanupRunTransactionFiles()
+    {
+        DeleteIfExists(RunMarkerPath);
+        DeleteIfExists(RunMarkerPath + TempExtension);
+        DeleteIfExists(RunCheckpointPath);
+        DeleteIfExists(RunCheckpointPath + TempExtension);
     }
 
     private static T ResolveService<T>() where T : Component
@@ -310,8 +477,7 @@ public sealed class SaveGameService : MonoBehaviour
 
     private static GamePhase ResolvePhaseForActiveScene(GamePhase savedPhase)
     {
-        // V1 的启动入口固定先加载 RaidScene。场景路由接入存档前，不能把 Shelter 阶段
-        // 直接套在局内场景上；否则生存衰减、输入和流程 UI 会处于互相矛盾的状态。
+        // 业务入口默认加载基地；直接打开任意业务场景调试时，仍以实际场景约束流程状态。
         if (FindObjectOfType<ShelterSceneController>() != null)
             return GamePhase.Shelter;
 

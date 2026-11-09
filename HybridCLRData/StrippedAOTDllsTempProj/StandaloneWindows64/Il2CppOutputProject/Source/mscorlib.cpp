@@ -2933,6 +2933,7 @@ inline String_t* Span_1_ToString_m12316C6CDC05E2F49EA4BDAD78FD7F1718E6E980 (Span
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Kernel32_GetFileAttributesExPrivate_m33BFCF7A4B139B0E641754F050770699CF1B0E50 (String_t* ___0_name, uint32_t ___1_fileInfoLevel, WIN32_FILE_ATTRIBUTE_DATA_tD093F8658579DA72CCD2E158A681DDE37834F73B* ___2_lpFileInformation, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Kernel32_MoveFileExPrivate_m002B024E5378E8B99CC3025768F1B7A50FFC52F0 (String_t* ___0_src, String_t* ___1_dst, uint32_t ___2_flags, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Kernel32_RemoveDirectoryPrivate_mEAF362079E3CCD01C57565EE75CF0776E28ED724 (String_t* ___0_path, const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Kernel32_ReplaceFilePrivate_mF1295E77590C63F19CCE319F1E4A1E2A46A23083 (String_t* ___0_replacedFileName, String_t* ___1_replacementFileName, String_t* ___2_backupFileName, int32_t ___3_dwReplaceFlags, intptr_t ___4_lpExclude, intptr_t ___5_lpReserved, const RuntimeMethod* method) ;
 inline void ReadOnlySpan_1__ctor_mB16A8EC9CCDE68A166108BE32B6DDA7D7C88BC17_inline (ReadOnlySpan_1_t59614EA6E51A945A32B02AB17FBCBDF9A5C419C1* __this, void* ___0_pointer, int32_t ___1_length, const RuntimeMethod* method)
 {
 	((  void (*) (ReadOnlySpan_1_t59614EA6E51A945A32B02AB17FBCBDF9A5C419C1*, void*, int32_t, const RuntimeMethod*))ReadOnlySpan_1__ctor_mB16A8EC9CCDE68A166108BE32B6DDA7D7C88BC17_gshared_inline)(__this, ___0_pointer, ___1_length, method);
@@ -3621,6 +3622,9 @@ IL2CPP_EXTERN_C int32_t DEFAULT_CALL MoveFileExW(Il2CppChar*, Il2CppChar*, uint3
 #endif
 #if FORCE_PINVOKE_INTERNAL || FORCE_PINVOKE_kernel32_INTERNAL
 IL2CPP_EXTERN_C int32_t DEFAULT_CALL RemoveDirectoryW(Il2CppChar*);
+#endif
+#if FORCE_PINVOKE_INTERNAL || FORCE_PINVOKE_kernel32_INTERNAL
+IL2CPP_EXTERN_C int32_t DEFAULT_CALL ReplaceFileW(Il2CppChar*, Il2CppChar*, Il2CppChar*, int32_t, intptr_t, intptr_t);
 #endif
 #if FORCE_PINVOKE_INTERNAL || FORCE_PINVOKE_kernel32_INTERNAL
 IL2CPP_EXTERN_C int32_t DEFAULT_CALL SetThreadErrorMode(uint32_t, uint32_t*);
@@ -4958,6 +4962,79 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Kernel32_RemoveDirectory_m083629B313F356
 		bool L_3;
 		L_3 = Kernel32_RemoveDirectoryPrivate_mEAF362079E3CCD01C57565EE75CF0776E28ED724(L_2, NULL);
 		return L_3;
+	}
+}
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Kernel32_ReplaceFilePrivate_mF1295E77590C63F19CCE319F1E4A1E2A46A23083 (String_t* ___0_replacedFileName, String_t* ___1_replacementFileName, String_t* ___2_backupFileName, int32_t ___3_dwReplaceFlags, intptr_t ___4_lpExclude, intptr_t ___5_lpReserved, const RuntimeMethod* method) 
+{
+	typedef int32_t (DEFAULT_CALL *PInvokeFunc) (Il2CppChar*, Il2CppChar*, Il2CppChar*, int32_t, intptr_t, intptr_t);
+	#if !FORCE_PINVOKE_INTERNAL && !FORCE_PINVOKE_kernel32_INTERNAL
+	static PInvokeFunc il2cppPInvokeFunc;
+	if (il2cppPInvokeFunc == NULL)
+	{
+		int parameterSize = sizeof(Il2CppChar*) + sizeof(Il2CppChar*) + sizeof(Il2CppChar*) + sizeof(int32_t) + sizeof(intptr_t) + sizeof(intptr_t);
+		il2cppPInvokeFunc = il2cpp_codegen_resolve_pinvoke<PInvokeFunc>(IL2CPP_NATIVE_STRING("kernel32.dll"), "ReplaceFileW", IL2CPP_CALL_DEFAULT, CHARSET_UNICODE, parameterSize, false);
+		IL2CPP_ASSERT(il2cppPInvokeFunc != NULL);
+	}
+	#endif
+
+	Il2CppChar* ____0_replacedFileName_marshaled = NULL;
+	if (___0_replacedFileName != NULL)
+	{
+		____0_replacedFileName_marshaled = &___0_replacedFileName->____firstChar;
+	}
+
+	Il2CppChar* ____1_replacementFileName_marshaled = NULL;
+	if (___1_replacementFileName != NULL)
+	{
+		____1_replacementFileName_marshaled = &___1_replacementFileName->____firstChar;
+	}
+
+	Il2CppChar* ____2_backupFileName_marshaled = NULL;
+	if (___2_backupFileName != NULL)
+	{
+		____2_backupFileName_marshaled = &___2_backupFileName->____firstChar;
+	}
+
+	#if FORCE_PINVOKE_INTERNAL || FORCE_PINVOKE_kernel32_INTERNAL
+	int32_t returnValue = reinterpret_cast<PInvokeFunc>(ReplaceFileW)(____0_replacedFileName_marshaled, ____1_replacementFileName_marshaled, ____2_backupFileName_marshaled, ___3_dwReplaceFlags, ___4_lpExclude, ___5_lpReserved);
+	#else
+	int32_t returnValue = il2cppPInvokeFunc(____0_replacedFileName_marshaled, ____1_replacementFileName_marshaled, ____2_backupFileName_marshaled, ___3_dwReplaceFlags, ___4_lpExclude, ___5_lpReserved);
+	#endif
+	il2cpp_codegen_marshal_store_last_error();
+
+	return static_cast<bool>(returnValue);
+}
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Kernel32_ReplaceFile_m23BF898D2DC8FA8FACB1FC7C4E1657C16674973B (String_t* ___0_replacedFileName, String_t* ___1_replacementFileName, String_t* ___2_backupFileName, int32_t ___3_dwReplaceFlags, intptr_t ___4_lpExclude, intptr_t ___5_lpReserved, const RuntimeMethod* method) 
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&PathInternal_t40910AF78E21C3A6C83D095423B3EADE9AC5261C_il2cpp_TypeInfo_var);
+		s_Il2CppMethodInitialized = true;
+	}
+	{
+		String_t* L_0 = ___0_replacedFileName;
+		il2cpp_codegen_runtime_class_init_inline(PathInternal_t40910AF78E21C3A6C83D095423B3EADE9AC5261C_il2cpp_TypeInfo_var);
+		String_t* L_1;
+		L_1 = PathInternal_EnsureExtendedPrefixIfNeeded_m21B2789AA85AA22861D01CABB704013F5E2103D3(L_0, NULL);
+		___0_replacedFileName = L_1;
+		String_t* L_2 = ___1_replacementFileName;
+		String_t* L_3;
+		L_3 = PathInternal_EnsureExtendedPrefixIfNeeded_m21B2789AA85AA22861D01CABB704013F5E2103D3(L_2, NULL);
+		___1_replacementFileName = L_3;
+		String_t* L_4 = ___2_backupFileName;
+		String_t* L_5;
+		L_5 = PathInternal_EnsureExtendedPrefixIfNeeded_m21B2789AA85AA22861D01CABB704013F5E2103D3(L_4, NULL);
+		___2_backupFileName = L_5;
+		String_t* L_6 = ___0_replacedFileName;
+		String_t* L_7 = ___1_replacementFileName;
+		String_t* L_8 = ___2_backupFileName;
+		int32_t L_9 = ___3_dwReplaceFlags;
+		intptr_t L_10 = ___4_lpExclude;
+		intptr_t L_11 = ___5_lpReserved;
+		bool L_12;
+		L_12 = Kernel32_ReplaceFilePrivate_mF1295E77590C63F19CCE319F1E4A1E2A46A23083(L_6, L_7, L_8, L_9, L_10, L_11, NULL);
+		return L_12;
 	}
 }
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Kernel32_SetThreadErrorMode_mDE6DC1CB22D61EEF3A5BE8066B5B248C764EDF03 (uint32_t ___0_dwNewMode, uint32_t* ___1_lpOldMode, const RuntimeMethod* method) 
@@ -40869,7 +40946,7 @@ IL_0019:
 		int32_t L_9 = ___1_length;
 		Span_1_tEDDF15FCF9EC6DEBA0F696BAACDDBAB9D92C252D L_10;
 		memset((&L_10), 0, sizeof(L_10));
-		Span_1__ctor_mC9BE2938B716B46BB6B9070B94DBE5CE814BC0E2_inline((&L_10), L_8, L_9, il2cpp_rgctx_method(InitializedTypeInfo(method->klass)->rgctx_data, 19));
+		Span_1__ctor_mC9BE2938B716B46BB6B9070B94DBE5CE814BC0E2_inline((&L_10), L_8, L_9, il2cpp_rgctx_method(InitializedTypeInfo(method->klass)->rgctx_data, 17));
 		return L_10;
 	}
 }
@@ -41146,7 +41223,7 @@ IL_000e:
 		int32_t L_7 = ___0_start;
 		Span_1_tEDDF15FCF9EC6DEBA0F696BAACDDBAB9D92C252D L_8;
 		memset((&L_8), 0, sizeof(L_8));
-		Span_1__ctor_mC9BE2938B716B46BB6B9070B94DBE5CE814BC0E2_inline((&L_8), L_5, ((int32_t)il2cpp_codegen_subtract(L_6, L_7)), il2cpp_rgctx_method(InitializedTypeInfo(method->klass)->rgctx_data, 19));
+		Span_1__ctor_mC9BE2938B716B46BB6B9070B94DBE5CE814BC0E2_inline((&L_8), L_5, ((int32_t)il2cpp_codegen_subtract(L_6, L_7)), il2cpp_rgctx_method(InitializedTypeInfo(method->klass)->rgctx_data, 17));
 		return L_8;
 	}
 }

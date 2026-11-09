@@ -79,21 +79,40 @@ public sealed class SceneFlowController : MonoBehaviour
     {
         if (string.IsNullOrWhiteSpace(sceneName)) yield break;
         loading = true;
-        pendingNewRun = startsNewRun;
+
+        if (MyYooAsset.Instance == null)
+        {
+            loading = false;
+            Debug.LogError("MyYooAsset 未加载，不能进入游戏场景", this);
+            yield break;
+        }
 
         if (startsNewRun)
         {
+            if (SaveGameService.Instance == null || !SaveGameService.Instance.BeginRunTransaction())
+            {
+                loading = false;
+                Debug.LogError("无法创建出击前存档快照，本次场景切换已取消。", this);
+                yield break;
+            }
+
             SearchableLootRuntimeStateStore.ClearAll();
             MinimapDiscoveryStateStore.ClearAll();
             FindObjectOfType<GridInventoryService>()?.ClearTransientWorldContainers();
             FindObjectOfType<GameStateMachine>()?.StartRun();
+            pendingNewRun = true;
         }
         else
         {
             FindObjectOfType<GameStateMachine>()?.ReturnShelterBeforeNight();
+            if (SaveGameService.Instance == null || !SaveGameService.Instance.CommitRunTransaction())
+            {
+                loading = false;
+                Debug.LogError("撤离进度写入永久存档失败，已停止返回基地。", this);
+                yield break;
+            }
+            pendingNewRun = false;
         }
-
-        SaveGameService.Instance?.Save(startsNewRun ? "before-raid" : "return-to-shelter");
 
         // if (logTransitions) Debug.Log($"正在切换场景：{SceneManager.GetActiveScene().name} -> {sceneName}", this);
         // var operation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
@@ -107,12 +126,13 @@ public sealed class SceneFlowController : MonoBehaviour
         // while (!operation.isDone) yield return null;
         // loading = false;
         
-        if(MyYooAsset.Instance == null){
-            loading = false;
-            Debug.LogError($"MyYooAsset 未加载，不能进入游戏场景", this);
-            yield break;
-        }
         yield return MyYooAsset.Instance.LoadYooAssetScene(sceneName,LoadSceneMode.Single);
+        if (SceneManager.GetActiveScene().name != sceneName && startsNewRun)
+        {
+            SaveGameService.Instance?.Load();
+            pendingNewRun = false;
+            Debug.LogError($"进入 {sceneName} 失败，已回滚到出击前存档。", this);
+        }
         loading = false;//场景加载完成，重置加载状态
     }
 }
